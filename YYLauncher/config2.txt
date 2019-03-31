@@ -1,0 +1,22 @@
+DeepBurner.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\DeepBurner1_Portable\DeepBurner.exe
+run_gimp.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\gimp-painter-\run_gimp.exe
+JoyToKey.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\jtk379\JoyToKey.exe
+VC++ Compiler2.1.exe/C:\VC\tools\VC++ Compiler\VC++ Compiler2.1.exe
+daemon.exe/C:\Program Files\DAEMON Tools Lite\daemon.exe
+SDMain.exe/C:\Program Files\Spybot - Search & Destroy\SDMain.exe
+spywareblaster.exe/C:\Program Files\SpywareBlaster\spywareblaster.exe
+SpoilerAL/C:\Documents and Settings\DeepBlueLemon\デスクトップ\MyP\CheatCustomizeSoftwares\spal61\SpoilerAL
+YYLauncher/C:\Documents and Settings\DeepBlueLemon\デスクトップ\MyP\projectC\eclipse\YYLauncher
+コマンド プロンプト.lnk/C:\Documents and Settings\DeepBlueLemon\スタート メニュー\プログラム\アクセサリ\コマンド プロンプト.lnk
+Stirling.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\stir131\Stirling.exe
+MClean.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\mclean3091\mclean\MClean.exe
+VCExpress.exe/C:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\VCExpress.exe
+splitflv.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\splitflv150\splitflv.exe
+unitemovie.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\unitemovie\unitemovie\unitemovie.exe
+dgca.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\dgca_v110\DGCA\dgca.exe
+3GP_Converter034/C:\Documents and Settings\DeepBlueLemon\My Documents\3GP_Converter034\3GP_Converter034
+DeskWrite.exe/C:\Program Files\DeskWrite\DeskWrite.exe
+flv2avi.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\Download-flv2avi-1.0\flv2avi.exe
+JKDefragGUI.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\JkDefragGUI104\JKDefragGUI.exe
+ShukuSen.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\Shukusen\ShukuSen.exe
+Themes/C:\Windows\resources\Themes

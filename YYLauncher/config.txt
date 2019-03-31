@@ -1,0 +1,12 @@
+DeepBurner.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\DeepBurner1_Portable\DeepBurner.exe
+run_gimp.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\gimp-painter-\run_gimp.exe
+JoyToKey.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\jtk379\JoyToKey.exe
+VC++ Compiler2.1.exe/C:\VC\VC++ Compiler\VC++ Compiler2.1.exe
+daemon.exe/C:\Program Files\DAEMON Tools Lite\daemon.exe
+SDMain.exe/C:\Program Files\Spybot - Search & Destroy\SDMain.exe
+spywareblaster.exe/C:\Program Files\SpywareBlaster\spywareblaster.exe
+SpoilerAL/C:\Documents and Settings\DeepBlueLemon\デスクトップ\MyP\CheatCustomizeSoftwares\spal61\SpoilerAL
+YYLauncher/C:\Documents and Settings\DeepBlueLemon\デスクトップ\MyP\projectC\eclipse\YYLauncher
+コマンド プロンプト.lnk/C:\Documents and Settings\DeepBlueLemon\スタート メニュー\プログラム\アクセサリ\コマンド プロンプト.lnk
+Stirling.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\stir131\Stirling.exe
+MClean.exe/C:\Documents and Settings\DeepBlueLemon\My Documents\mclean3091\mclean\MClean.exe

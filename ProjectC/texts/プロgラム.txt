@@ -1,0 +1,3 @@
+プリント[Hello, をrld！！]足す[10][3]
+結果をプリント
+system[pause]

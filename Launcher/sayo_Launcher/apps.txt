@@ -1,0 +1,6 @@
+ゲーム,C:\Users\nigahachi\Documents\ゲーム
+Leeyes,C:\Users\nigahachi\Documents\画像･動画ソフト\leeyes261b\Leeyes.exe
+Greenshot,C:\Program Files\Greenshot\Greenshot.exe
+SpoilerAL,C:\Users\nigahachi\Documents\Games\SpoilerAL\SpoilerAL.exe
+Stirling,C:\Users\nigahachi\Documents\ユーティリティ\stir131\Stirling.exe
+XMedia Recode,C:\Users\nigahachi\Documents\画像･動画ソフト\XMediaRecode3149\XMedia Recode.exe

@@ -1,0 +1,10 @@
+[load BS "cincity.bmp"]
+こんにちは[w];
+[page]
+;;;;;真ん中あたりに表示; [w]
+いい感じ？;
+[delay 1000];
+遅く表示;[w]
+[page]
+[load BG "back00.bmp"]
+さようなら[w];

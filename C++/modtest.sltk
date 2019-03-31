@@ -1,0 +1,4 @@
+foreach(10, def(i){
+	print(i)
+})
+os.execute"pause"
