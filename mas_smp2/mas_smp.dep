@@ -1,0 +1,11 @@
+# Microsoft Developer Studio Generated Dependency File, included by mas_smp.mak
+
+.\mas_smp.c : \
+	".\resource.h"\
+	
+
+.\mas_smp.rc : \
+	".\IMAGE_00.BMP"\
+	".\mas_smp.ico"\
+	".\resource.h"\
+	

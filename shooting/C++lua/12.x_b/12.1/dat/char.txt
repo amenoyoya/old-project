@@ -1,0 +1,3 @@
+flag, cnt, power, point, score, num, mutekicnt, shot_mode, money, img, slow, x, y
+//フラグ,カウンタ,パワー,ポイント,スコア,残機数,無敵状態とカウント,ショットモード,お金,画像,スローかどうか,座標
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0

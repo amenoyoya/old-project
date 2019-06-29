@@ -1,0 +1,18 @@
+#include "resource.h"
+#include "windows.h"
+
+
+// Icon
+IDI_ICON                ICON    DISCARDABLE     "MAS_SMP.ICO"
+
+// Menu
+IDC_MAINMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Exit",         IDM_EXIT
+    END
+END
+
+// Bitmap
+IDB_IMAGE_00            BITMAP  DISCARDABLE     "IMAGE_00.BMP"
