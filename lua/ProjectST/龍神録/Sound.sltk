@@ -1,0 +1,33 @@
+/*** 効果音・BGM管理テーブル ***/
+Game.Sound = :{
+	initialize = def(@){
+		// CHANNEL_MAX分のチャンネルを用意
+		CHANNEL_MAX = SDL.allocateChannels(CHANNEL_MAX)
+		
+		// 効果音準備
+		@.se = :{}
+		@.se[1] = SDL.Mixer(SDL.App->readFile"dat/se/enemy_shot.wav")
+		@.se[2] = SDL.Mixer(SDL.App->readFile"dat/se/enemy_death.wav")
+		@.se[3] = SDL.Mixer(SDL.App->readFile"dat/se/cshot.wav")
+		@.se[4] = SDL.Mixer(SDL.App->readFile"dat/se/char_death.wav")
+		@.se[9] = SDL.Mixer(SDL.App->readFile"dat/se/hit.wav")
+		@.se[15] = SDL.Mixer(SDL.App->readFile"dat/se/bom0.wav")
+		@.se[16] = SDL.Mixer(SDL.App->readFile"dat/se/bom1.wav")
+		// 各素材の再生ボリュームを設定
+		@.se[1]->setVolume(50)
+		@.se[2]->setVolume(128)
+		@.se[3]->setVolume(128)
+		@.se[4]->setVolume(80)
+		@.se[9]->setVolume(80)
+	},
+	
+	// 効果音・BGM再生
+	play = def(@){
+		for i = 1, SE_MAX {
+			if @[i] {
+				@.se[i]->play(-1) // 空いているチャンネルで効果音再生
+				@[i] = nil // 効果音再生フラグを折る
+			}
+		}
+	},
+}

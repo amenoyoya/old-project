@@ -1,0 +1,26 @@
+F1: 画像挿入（ファイル選択ダイアログ）
+F2: リンク作成
+TAB: インデント
+Shift + TAB: アウトデント
+Ctrl + "B": 太字
+Ctrl + "I": 斜体
+Ctrl + "U": 下線
+Ctrl + "T": 打ち消し線
+Ctrl + "E": 中央揃え
+Ctrl + "L": 左揃え
+Ctrl + "R": 右揃え
+Ctrl + "H": 区切り線挿入
+Ctrl + "-": 下付き文字
+Ctrl + ";": 上付き文字
+Ctrl + "0": 装飾なし
+Ctrl + Shift + "L": リスト
+Ctrl + Alt + "L": 数字付きリスト
+Ctrl + Shift + "R": 赤文字
+Ctrl + Shift + "G": 緑文字
+Ctrl + Shift + "B": 青文字
+Ctrl + Shift + "K": 黒文字
+Ctrl + Alt + "R": 赤背景
+Ctrl + Alt + "G": 緑背景
+Ctrl + Alt + "B": 青背景
+Ctrl + Alt + "K": 黒背景
+Ctrl + Alt + "N": 背景色なし

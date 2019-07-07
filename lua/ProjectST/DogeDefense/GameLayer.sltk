@@ -1,0 +1,178 @@
+/*** メインゲームレイヤー ***/
+GameLayer = class("GameLayer", def(){
+	return cc.LayerColor->create(ccc4(200,230,255,255))
+})
+
+
+/** コンストラクタ **/
+def GameLayer->ctor(){
+	@._running = false // ゲーム実行状態
+	
+	/* 太陽を貼り付ける */
+	local sun = cc.Sprite->create"res/sun.png"
+	sun->setAnchorPoint(ccp(1, 1))
+    sun->setPosition(ccp(GAME_SIZE.width, GAME_SIZE.height))
+    @->addChild(sun, 0)
+	
+	/* 草を貼り付ける */
+	local grasses = cc.Sprite->create"res/grasses.png"
+	grasses->setAnchorPoint(ccp(0, 0))
+	grasses->setPosition(ccp(0, 0))
+	@->addChild(grasses, 3)
+	
+	/* わんこ準備 */
+	local dogeNode = cc.SpriteBatchNode->create"res/doge.png"
+	@->addChild(dogeNode, 0)
+	@._doges = Array() // わんこ待機場
+	for i = 0, NUM_DOGES-1 {
+		local doge = cc.Sprite->createWithTexture(dogeNode->getTexture())
+		doge->setVisible(false)
+		doge->setScale(0.5)
+		dogeNode->addChild(doge, 1)
+		@._doges->append(doge)
+	}
+	
+	/* スタート画面 */
+	@._start = cc.Sprite->create"res/start.png"
+	@._start->setPosition(ccp(GAME_SIZE.width * 0.5, GAME_SIZE.height * 0.5))
+	@->addChild(@._start, 2)
+	
+	/* ゲームオーバー画面 */
+	@._gameOver = cc.Sprite->create"res/gameover.png"
+	@._gameOver->setPosition(ccp(GAME_SIZE.width * 0.5, GAME_SIZE.height * 0.5))
+	@._gameOver->setVisible(false)
+	@->addChild(@._gameOver, 2)
+	
+	/* スコア表示ラベル */
+	@._scoreLabel = cc.LabelBMFont->create("0", "res/font.fnt")
+	@._scoreLabel->setAnchorPoint(ccp(0, 1))
+	@._scoreLabel->setPosition((ccp(25, GAME_SIZE.height - 20)))
+	@->addChild(@._scoreLabel, 2)
+	
+	// タッチイベント有効化
+	coco.setTouchEnabled(@)
+	
+	// update関数が呼び出されるようにする
+	coco.scheduleUpdate(@)
+	
+	// BGM再生準備
+	AudioEngine.playMusic"res/bgm.mp3"
+	AudioEngine.pauseMusic()
+}
+
+
+/** ゲームリセット **/
+def GameLayer->reset(){
+	@._dogeTimer = 0
+	@._dogeInterval = 0
+	@._dogeIndex = 0
+	@._difficulty = 3.0 // 難易度
+	@._score = 0 // スコア
+	@._scoreLabel->setString"0"
+	@._running = true
+	for _, doge in each(@._doges) {
+		doge->setVisible(false)
+	}
+	@._start->setVisible(false)
+	@._gameOver->setVisible(false)
+	AudioEngine.playEffect"res/dog.mp3"
+	// BGMを最初から再生
+	AudioEngine.rewindMusic()
+	AudioEngine.resumeMusic()
+}
+
+
+/** ゲームメイン処理 **/
+def GameLayer->update(dt){
+	if !@._running {return}
+	
+	@._dogeTimer = @._dogeTimer + dt
+	if @._dogeTimer >= @._dogeInterval {
+		local doge = @._doges[@._dogeIndex] // インデックスのわんこを取得
+		
+		if doge->isVisible() { // 既に画面上にそのわんこが居たら何もしない
+			return
+		}
+		// インデックスの更新
+		@._dogeIndex = @._dogeIndex + 1
+		if @._dogeIndex == NUM_DOGES { @._dogeIndex = 0 }
+		
+		// 犬が出てくるx座標と犬の落下地点のx座標を決める
+		local x = toint(math.random(toint(GAME_SIZE.width * 0.8))-1
+			+ GAME_SIZE.width * 0.1)
+		local target_x = toint(math.random(toint(GAME_SIZE.width * 0.8))-1
+			+ GAME_SIZE.width * 0.1)
+		doge->stopAllActions() // 犬のアクションを止める
+		
+		//犬を画面のちょうど見えないところに設置
+		doge->setPosition(ccp(x,
+			GAME_SIZE.height + doge->boundingBox().height * 0.5))
+		
+		///// わんこのアクションを作成 /////
+		// わんこがくるくる回転するアクション
+		local rotateSpeed = (math.random(10)-1) * 0.1
+		local rotate = cc.RotateBy->create(rotateSpeed, -90)
+		local repeatRotate = cc.RepeatForever->create(rotate)
+		
+		// わんこが落ちていくアクション
+		local sequence = cc.Sequence->create(
+			cc.MoveTo->create(@._difficulty,
+				ccp(target_x, doge->boundingBox().height * 0.3)),
+			// hitGround呼び出し
+			cc.CallFunc->create(def(){@->hitGround()}, @),
+			nil
+		)
+		
+		doge->setVisible(true)
+		doge->runAction(repeatRotate)
+		doge->runAction(sequence)
+		
+		// reset Doge Timer
+		@._dogeTimer = 0
+		@._dogeInterval = 0.2 + (math.random(5)-1) * 0.1
+	}
+}
+
+
+/** タッチイベント **/
+def GameLayer->onTouchBegan(x, y){
+	if !@._running {
+		if @._start->isVisible() | @._gameOver->isVisible() {
+			// スタート、ゲームオーバー画面でタッチするとゲームリセット
+			@->reset()
+		}
+	}else{ // ゲーム実行中処理
+		for _, doge in each(@._doges) { // タッチされたわんこは消す
+			if doge->isVisible() & cc.rectContainsPoint(doge->boundingBox(), ccp(x, y)) {
+				doge->stopAllActions()
+				doge->setVisible(false)
+				AudioEngine.playEffect"res/touch.mp3"
+				// スコア更新
+				@._score = @._score + 1
+				@._scoreLabel->setString(string.format("%d", @._score))
+				// 難易度を上げる(落下速度を0.03上昇させる)
+				@._difficulty = @._difficulty - 0.03
+			}
+		}
+	}
+	return true
+}
+
+
+/** GAME OVER 処理 **/
+def GameLayer->gameOver(){
+	@._gameOver->setVisible(true)
+}
+
+def GameLayer->hitGround(){
+	// わんこのアクションを止める
+	for _, doge in each(@._doges) {
+		doge->stopAllActions()
+	}
+	AudioEngine.playEffect"res/dog.mp3"
+	// ゲームの更新を止める
+	@._running = false
+	AudioEngine.pauseMusic()
+	// 0.5秒後にゲームオーバー画面を描画
+	coco.scheduleOnce(@, def(){@->gameOver()}, 0.5)
+}

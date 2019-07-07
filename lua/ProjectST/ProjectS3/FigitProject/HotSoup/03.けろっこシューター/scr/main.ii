@@ -1,0 +1,41 @@
+require "scr/char"
+require "scr/enemy"
+
+/*** ƒQ[ƒ€ƒƒCƒ“ˆ— ***/
+
+def config(t){
+	t.width, t.height, t.title = 480, 320, "‚¯‚ë‚Á‚±ƒVƒ…[ƒ^["
+}
+
+def initialize(){
+	registerImage("char", "dat/flogs.bmp", Color(0,0,0))
+	registerImage("back", "dat/back2.bmp")
+	registerSound("bom", "dat/bom34.wav", 0, 2)
+}
+
+~event(0){
+	char = Chara()
+	enemies = ${Enemy(), Enemy(), Enemy()}
+	
+	::GAMEPLAY::
+	while(true){
+		IMG.back->draw() // ”wŒi•`‰æ
+		if(!char.m_alive) goto GAMEOVER
+		for(index, enemy in each(enemies)) enemy->draw() // “G•`‰æ
+		char->draw() // ŽålŒö•`‰æ
+		~update()
+	}
+	
+	::GAMEOVER::
+	local msg = sdl.TextLayer("\\f[nil,26]\\c[255,0,0]GAME OVER")
+	while(true){
+		IMG.back->draw()
+		msg->draw((480-msg->width())/2, (320-msg->height())/2)
+		if(sdl.getInput"shift" == 1){
+			char.x, char.y, char.m_alive, char.m_bullets = 240, 160, true, {}
+			for(index, enemy in each(enemies)) enemy.m_alive = false
+			goto GAMEPLAY
+		}
+		~update()
+	}
+}

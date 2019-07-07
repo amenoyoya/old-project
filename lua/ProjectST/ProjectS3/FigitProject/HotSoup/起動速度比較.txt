@@ -1,0 +1,21 @@
+at library: 104 kb --> ii_convert time: ~2 msec/kb
+
+Lua(require): 20 msec
+Lua(iirequire): 442 msec
+Figit: 776 msec
+Figit++(+iiMacro): 1162 msec
+Figit++(-iiMacro): 785 msec
+Figit++(require): 701 msec -> 467 msec
+Figit++(str.Analyzer‚ð‰ü‘P): 431 msec 
+Figit++(PathƒNƒ‰ƒX’Ç‰Á): 405 msec -> 382 msec (ArchiveFile.open‚ð‰ü‘P)
+Figit++(str.Analyzer‚Ì‹æØ‚è•¶ŽšŠÇ—‚ð”z—ñ‚É): 372 msec -> (ArchiveFile.archiveMode=false‚È‚ç) 227 msec
+
+--- loader compare ---
+** File load ** (iirequire -> require)
+str.Analyzer	378 msec -> 249 msec
+gsub			367 msec -> 249 msec
+
+** ArchiveFile load ** ¦UTF8->UTF16•ÏŠ·‚ÉÅ‚àŽžŠÔ‚ª‚©‚©‚Á‚Ä‚¢‚é -> splitArchivePath‚ÉÅ‚àŽžŠÔ‚ª‚©‚©‚Á‚Ä‚¢‚é
+iirequire		773 msec -> 467 msec
+str.Analyzer	596 msec -> 460 msec
+gsub			638 msec -> 469 msec

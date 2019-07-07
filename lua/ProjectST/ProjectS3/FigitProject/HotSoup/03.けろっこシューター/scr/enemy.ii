@@ -1,0 +1,55 @@
+/*** 敵キャラオブジェクト ***/
+class Enemy{
+	@.m_alive = false // 生死
+	@.x, @.y = 448, mt_rand(288) // 位置
+	@.m_vx, @.m_vy = -3, 0 // 移動速度
+	@.m_pattern = ${ // 移動パターン： パターン, 速度, ループ回数
+		{0, 4, 20}, {1, 3, 10}, {0, 2, 10}, {1, 2, 10}, {0, 3, 10}
+	}
+	@.m_curPattern = -1 // カレントパターン
+	@.m_loops = 0 // パターンループ回数
+	
+	// 描画メイン
+	def @->draw(){
+		if(!@.m_alive){ // 死んでいるなら新しく復活
+			@.m_alive = true
+			@.x, @.y = 448, mt_rand(288)
+		}else{ // 生きているなら描画
+			@->procPattern() // 移動パターン処理
+			+=(@.x)(@.m_vx)
+			+=(@.y)(@.m_vy)
+			IMG.char->setPos(@.x, @.y)
+			IMG.char->setSource(32, 0, 32, 32)
+			IMG.char->draw()
+			// 自キャラとの当たり判定
+			if(collision(Rect(@.x, @.y, 32, 32), Rect(char.x-4, char.y-4, 24, 24))) char.m_alive = false
+			// 画面外に出たら消滅
+			if(@.x < 0 || @.x > 448 || @.y < 0 || @.y > 288) @.m_alive = false
+		}
+	}
+	
+	// 現在の移動パターンを取得
+	def @->pattern() return @.m_pattern[@.m_curPattern]
+	
+	// 移動パターン処理
+	def @->procPattern(){
+		if(@.m_loops <= 0){ // 移動ループが終了したら次の移動パターンへ
+			++(@.m_curPattern)
+			if(@.m_curPattern > @.m_pattern->n()) @.m_curPattern = 0
+			local pat = @->pattern()
+			@.m_loops = pat[3] // ループ回数
+			// 移動パターン
+			if(pat[1] == 0){ // 直進
+				@.m_vx, @.m_vy = -pat[2], 0
+			}elseif(pat[1] == 1){ // 自キャラの方へ移動
+				local D = math.sqrt((char.x-@.x)^2 + (char.y-@.y)^2)
+				if(D != 0){
+					@.m_vx = toint((char.x-@.x) / D * pat[2])
+					@.m_vy = toint((char.y-@.y) / D * pat[2])
+				}
+			}
+		}else{ // ループ処理
+			--(@.m_loops)
+		}
+	}
+};

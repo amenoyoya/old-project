@@ -1,0 +1,313 @@
+/*** エフェクト管理テーブル ***/
+// エフェクトの登録空き番号を探す
+local def searchAvailableEffect(@){
+	for i = 1, EFFECT_MAX {
+		if !@[i] { return i }
+	}
+}
+
+// エフェクト種類
+local effects = :{
+	// 1: 敵消滅エフェクト
+	def(@, i){
+		local effect = @[i]
+		effect.cnt = effect.cnt + 1
+		effect.scale = effect.scale + 0.08 // エフェクトの大きさを段々大きくする
+		if effect.cnt > 10 { // 10カウント以上になったら
+			effect.bright = effect.bright - 25 // 明るさを少なくする
+			if effect.cnt > 20 { // 20カウント以上になったら
+				@[i] = nil // 消す
+			}
+		}
+	},
+	
+	// 2: ボムのエフェクト
+	def(@, i){
+		local effect = @[i]
+		// 座標計算
+		effect.x = effect.x + math.cos(effect.mvang) * effect.speed
+		effect.y = effect.y + math.sin(effect.mvang) * effect.speed
+		// スピード計算
+		if effect.cnt < 60 {
+			effect.speed = effect.speed - (0.2 + effect.cnt * effect.cnt / 3000)
+		}
+		if effect.cnt == 60 {
+			effect.speed = 0
+			Game.Sound[16] = true
+			@.bom.quake = :{
+				cnt = 0, size = 11, time = 20, x = 0, y = 0,
+			}
+		}
+		// 明るさと大きさ計算
+		effect.scale = effect.scale + 0.015
+		if effect.cnt < 51 { effect.bright = effect.bright + 5 }
+		if effect.cnt >= 60 {
+			effect.scale = effect.scale + 0.04
+			effect.bright = effect.bright - 255 / 30
+		}
+		// カウントアップと消去計算
+		effect.cnt = effect.cnt + 1
+		if effect.cnt >= 90 { @[i] = nil }
+	},
+	
+	// 3: ボムエフェクト（キャラ）
+	def(@, i){
+		local effect = @[i]
+		// 座標計算
+		effect.x = effect.x + math.cos(effect.mvang) * effect.speed
+		effect.y = effect.y + math.sin(effect.mvang) * effect.speed
+		// 明るさ計算
+		if effect.cnt < 51 { effect.bright = effect.bright + 4 }
+		if effect.cnt > 130-51 { effect.bright = effect.bright - 4 }
+		// カウントアップと消去計算
+		effect.cnt = effect.cnt + 1
+		if effect.cnt >= 130 { @[i] = nil }
+	},
+	
+    // 4: ボムのエフェクト（ライン）
+	def(@, i){
+		local effect = @[i]
+		// 座標計算
+		effect.x = effect.x + math.cos(effect.mvang) * effect.speed
+		effect.y = effect.y + math.sin(effect.mvang) * effect.speed
+		// 明るさ計算
+		if effect.cnt < 51 { effect.bright = effect.bright + 2 }
+		if effect.cnt > 130-51 { effect.bright = effect.bright - 2 }
+		// カウントアップと消去計算
+		effect.cnt = effect.cnt + 1
+		if effect.cnt >= 130 { @[i] = nil }
+	},
+	
+	// 5: 喰らいボムエフェクト
+	def(@, i){
+		local effect = @[i]
+		// 明るさ計算
+		if effect.cnt >= 6 { effect.bright = effect.bright - 255 / 6 }
+		effect.scale = effect.scale + 0.12
+		effect.cnt = effect.cnt + 1
+		if effect.cnt >= 12 or Game.Character.state != 1 { @[i] = nil }
+	},
+}
+
+// エフェクトを計算する
+local def updateEffect(@){
+	for i = 1, EFFECT_MAX {
+		local kind = @[i] and @[i].kind
+		if kind { // エフェクトが登録されていたら
+			effects[kind](@, i) // 種類に応じたエフェクト実行
+		}
+	}
+}
+
+// 消滅エフェクトの登録空き番号を探す
+local def searchAvailableDeleteEffect(@){
+	for i = 1, DEL_EFFECT_MAX {
+		if !@.del[i] { return i }
+	}
+}
+
+// 消滅エフェクトを計算・エフェクトを登録する
+local def updateDeleteEffect(@){
+	for i = 1, DEL_EFFECT_MAX {
+		local del = @.del[i]
+		if del {
+			if del.cnt % 2 == 0 { // 1/30秒ずつセット
+				local e = searchAvailableEffect(@)
+				if e {
+					@[e] = :{
+						cnt = 0, // カウンタ
+						bright = 255, // 輝度を最大値に
+						angle = getRandomAngle(math.pi), // 角度をランダムに
+						color = del.color, // 色をセット
+						effect = 1, // 1は光エフェクト。光エフェクトにセットする
+						img = @.del.images[del.color], // 消滅する画像をセット
+						kind = 1, // エフェクトの種類は1番(消滅エフェクトは1とする)
+						x = del.x, y = del.y, scale = 0,
+					}
+				}
+			}
+			if del.cnt > 8 { // カウンタが8より大きくなったら終了
+				@.del[i] = nil
+			}
+			del.cnt = del.cnt + 1
+		}
+	}
+}
+
+// ボムを登録
+local def enterBom(@){
+	@.bom.flag = true
+	@.bom.cnt = 0
+	@.bom.kind = 1
+	Game.Character.invicible = 1 // 無敵に
+	Game.Sound[15] = true // キュイーン音
+	// 縦線
+	local e = searchAvailableEffect(@)
+	if e {
+		@[e] = :{
+			cnt = 0,
+			kind = 4, // ボムの線のエフェクト
+			bright = 0, // α値
+			angle = math.pi / 2, // 画像の向き
+			mvang = -math.pi / 2, //エフェクトが進む方向
+			speed = 1, // スピード
+			scale = 1, // 大きさ
+			effect = 2, // αブレンド
+			img = @.bom.images[4], x = 70, y = 300,
+		}
+	}
+	// 横線
+	e = searchAvailableEffect(@)
+	if e {
+		@[e] = :{
+			cnt = 0,
+			kind = 4, // ボムの線のエフェクト
+			bright = 0, angle = 0, mvang = 0, speed = 1, scale = 1,
+			effect = 2, img = @.bom.images[4], x = 100, y = 350,
+		}
+	}
+	// キャラ
+	e = searchAvailableEffect(@)
+	if e {
+		@[e] = :{
+			cnt = 0, 
+			kind = 3, // ボムのキャラ・線のエフェクト
+			bright = 0, angle = 0, mvang = -math.pi / 2, speed = 0.7, scale = 1,
+			effect = 2, img = @.bom.images[3], x = 260, y = 300,
+		}
+	}
+}
+
+// ボム計算
+local def updateBom(@){
+	local shot_angle = :{0, math.pi, math.pi/2, math.pi*1.5} // 4発エフェクトが飛ぶ角度
+	
+	if Game.Character.state < 2 and !@.bom.flag { // キャラが通常状態か喰らいボム受付中で、ボムがオフなら
+		if SDL.getKey"CANCEL" == 1 { // ボムボタンが押されたら
+			enterBom(@)
+		}
+	}
+	if @.bom.flag { // ボムが登録されていたら
+		if @.bom.cnt % 10 == 0 { // 1/6秒に１回
+			local n, e = @.bom.cnt / 10, searchAvailableEffect(@)
+			if n < 4 and e {
+				@[e] = :{
+					cnt = 0, kind = 2, // エフェクト番号2：ボムのエフェクト
+					bright = 0, angle = getRandomAngle(math.pi), // 画像の向きはランダム
+					mvang = shot_angle[n + 1] - math.pi / 4, // 飛ぶ方向
+					speed = 13 + getRandomAngle(2), // スピード
+					scale = 0.5, // 大きさ
+					effect = 2, // αブレンド
+					img = @.bom.images[@.bom.cnt $ 10 $ 3 + 1], // 画像
+					x = Game.Character.x, y = Game.Character.y,
+				}
+			}
+		}
+		@.bom.cnt = @.bom.cnt + 1
+		if @.bom.cnt < 40 { @.bright = 255 - @.bom.cnt * 5 } // 画面の明るさ設定(暗く)
+		if @.bom.cnt > 90 { @.bright = 255 - 40 * 5 + (@.bom.cnt - 90) * 5 } // 画面の明るさ設定(明るく)
+		if @.bom.cnt > 130 {
+			@.bom.flag = nil
+			@.bright = 255
+		}
+	}
+}
+
+// ドガーンとゆれる画面の処理
+local def updateQuake(@){
+	local dn = @.bom.quake
+	if dn {
+		dn.x = math.floor(getRandomAngle(dn.size))
+		dn.y = math.floor(getRandomAngle(dn.size))
+		dn.cnt = dn.cnt + 1
+		if dn.cnt > dn.time { // 指定された時間がたつと終わる
+			@.bom.quake = nil
+		}
+	}
+}
+
+// 喰らいボムエフェクト登録
+local def enterHitBom(@){
+	local ch = Game.Character
+	if ch.state == 1 {
+		if ch.cnt % 2 == 0 {
+			local e = searchAvailableEffect(@)
+			if e {
+				@[e] = :{
+					cnt = 0, kind = 5, // 喰らいボムエフェクト
+					bright = 255, angle = getRandomAngle(math.pi), speed = 0, scale = 0, effect = 2,
+					img = @.del.images[getRandom(1, 5)], x = ch.x, y = ch.y,
+				}
+			}
+		}
+	}
+}
+
+/* Effectテーブル */
+Game.Effect = :{
+	initialize = def(@){
+		@.bright = 255 // 画面の輝度
+		@.del = :{
+			images =SDL.loadDivisionImage("dat/img/enemy/hit_effect.png", 5, 1, 140, 140) 
+		}
+		@.bom = :{
+			images = :{
+				SDL.Image"dat/img/effect/bom0.png",
+				SDL.Image"dat/img/effect/bom1.png",
+				SDL.Image"dat/img/char/body.png",
+				SDL.Image"dat/img/bullet/bom_title0.png",
+			},
+			quake = nil,  // 画面の揺れに関する情報
+		}
+	},
+	
+	// 消滅エフェクトを登録する
+	enterDeleteEffect = def(@, enemy){
+		local e = searchAvailableDeleteEffect(@)
+		if e {
+			@.del[e] = :{
+				cnt = 0,
+				color = enemy.bgcolor, // 敵の背景色を消滅色に設定する
+				x = enemy.x, // 敵の座標を消滅位置にセット
+				y = enemy.y,
+			}
+		}
+	},
+	
+	// エフェクト計算
+	update = def(@){
+		updateQuake(@) // 揺れる画面の処理
+		updateDeleteEffect(@) // 消滅エフェクトの計算
+		updateEffect(@) // エフェクトの計算
+		updateBom(@) // ボム計算
+		enterHitBom(@)
+	},
+	
+	// エフェクト描画
+	draw = def(@, kind){
+		for i = 1, EFFECT_MAX {
+			local effect = @[i]
+			if effect and effect.kind == kind {
+				local img = effect.img
+				if img {
+					if effect.effect == 2 { // αエフェクト
+						img->setAlpha(effect.bright)
+					}
+					
+					img->setAngle(effect.angle * 180 / math.pi)
+					img->drawCenter(effect.x + FIELD_X, effect.y + FIELD_Y,
+						img->getWidth() * effect.scale, img->getHeight() * effect.scale)
+					
+					if effect.effect == 1 { // 光らせる
+						img->setBlendMode(SDL.BLEND_ADD)
+						img->setColor(SDL.Color(255,0,0,effect.bright))
+						img->drawCenter(effect.x + FIELD_X, effect.y + FIELD_Y,
+							img->getWidth() * effect.scale, img->getHeight() * effect.scale)
+						img->setBlendMode(SDL.BLEND_ALPHA)
+						img->setColor(SDL.Color(255,255,255))
+					}
+				}
+			}
+		}
+	},
+}

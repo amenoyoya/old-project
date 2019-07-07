@@ -1,0 +1,3 @@
+flag,cnt,pattern,muki,knd,hp,hp_max,item1,item2,item3,item4,item5,item6,img,x,y,vx,vy,sp,ang,bltime,blknd,blknd2,col,state,wtime,wait
+//フラグ、カウンタ、移動パターン、向き、敵の種類、HP最大値、落とすアイテム、画像、座標、速度x成分、速度y成分、スピード、角度、弾幕開始時間、弾幕の種類、弾の種類、色、状態、待機時間、停滞時間,,,,,,,,,,,,,,,,,,,,,,,,,,
+0,0,0,1,0,1000,1000,0,0,0,0,0,0,0,0,0,0,0,0,0,150,0,0,0,0,0,0

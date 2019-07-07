@@ -1,0 +1,260 @@
+/*** sdl.DecoText用コマンド処理関数群 ***/
+// 変数埋め込みコマンド #{グローバルLua変数}
+local def DT_command_embed(self, a){
+	local start = a->tellb() - 1 // 見つかった位置を記憶しておく
+	
+	a->skipSpace()
+	// 引数部分{...}を取得
+	if(-1 == a->matchNest("{", "}")) error"[sdl.DecoText] #コマンドに{}がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	
+	// 引数部分の文字列をLuaとして実行
+	local str = iiloadstring("return "..a->nest())()
+	if(str == nil) str = ""
+	// start～現在位置までの部分をstrに置き換える
+	a->replaceb(start, a->tellb() - start, tostring(str))
+}
+
+// フォント変更コマンド \f[フォント名, フォントサイズ, ルビサイズ]
+local def DT_ecommand_f(self, a){
+	a->skipSpace()
+	// 引数部分[フォント名]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\fコマンドに[]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	// フォント変更
+	local name, size, ruby = iiloadstring("return "..a->nest())()
+	self->changeFont(name, size, ruby)
+}
+
+// フォントスタイル「太字」 \B+ \B-
+local def DT_ecommand_B(self, a){
+	local c = a->cur()
+	a->seekb(1)
+	self->changeFontStyle{bold = (c == "+"? true: false)}
+}
+
+// フォントスタイル「下線」 \U+ \U-
+local def DT_ecommand_U(self, a){
+	local c = a->cur()
+	a->seekb(1)
+	self->changeFontStyle{underLine = (c == "+"? true: false)}
+}
+
+// フォントスタイル「斜体」 \I+ \I-
+local def DT_ecommand_I(self, a){
+	local c = a->cur()
+	a->seekb(1)
+	self->changeFontStyle{italic = (c == "+"? true: false)}
+}
+
+// フォントスタイル「打ち消し線」 \S+ \S-
+local def DT_ecommand_S(self, a){
+	local c = a->cur()
+	a->seekb(1)
+	self->changeFontStyle{strikeThrough = (c == "+"? true: false)}
+}
+
+// アイコンを表示 \i[ファイル名] -> icon/ファイル名.pngを表示
+local def DT_ecommand_i(self, a){
+	a->skipSpace()
+	// 引数部分[ファイル名]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\iコマンドに[]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	// アイコンappend
+	self->appendImage("icon/"..a->nest()..".png")
+}
+
+// 画像を表示 \img["ファイル名", width, height] -> ファイル名の画像をwidth,height(省略可)に拡大して表示
+local def DT_ecommand_img(self, a){
+	a->skipSpace()
+	// 引数部分[ファイル名]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\imgコマンドに[]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	// 画像append
+	local imgfile, width, height = iiloadstring("return "..a->nest())()
+	self->appendImage(imgfile, width, height)
+}
+
+// 色変更コマンド \c[R,G,B,A]
+local def DT_ecommand_c(self, a){
+	a->skipSpace()
+	// 引数部分[R,G,B,A]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\cコマンドに[]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	local R, G, B, A = iiloadstring("return "..a->nest())()
+	// 色変更
+	self->changeColor(Color(R? R: 255, G? G: 255, B? B: 255, A? A: 255))
+}
+
+// エッジor影 色変更コマンド \cc[R,G,B,A]
+local def DT_ecommand_cc(self, a){
+	a->skipSpace()
+	// 引数部分[R,G,B,A]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\ccコマンドに[]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	local R, G, B, A = iiloadstring("return "..a->nest())()
+	// 色変更
+	self->changeColor(nil, Color(R? R: 255, G? G: 255, B? B: 255, A? A: 255))
+}
+
+// 描画タイプ変更コマンド \d[描画タイプ(0:normal, 1:edge, 2:shadow)]
+local def DT_ecommand_d(self, a){
+	a->skipSpace()
+	// 引数部分[描画タイプ]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\dコマンドに[]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	// 描画タイプ変更
+	self->changeDrawType(tonumber(a->nest()))
+}
+
+// ルビを振る \r[text][ruby]
+local def DT_ecommand_r(self, a){
+	a->skipSpace()
+	// 引数部分[text]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\rコマンドに[text]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	local text = a->nest()
+	
+	a->skipSpace()
+	// 引数部分[ruby]を取得
+	if(-1 == a->matchNest("[", "]")) error"[sdl.DecoText] \\rコマンドに[ruby]がありません"
+	a->seekb(a->nestByte()) // 入れ子部分を飛ばす
+	// ルビを振るテキストをappend
+	self->beginRuby()
+	self->_DecoString_appendText(text)
+	// ルビを振る
+	self->appendRuby(a->nest())
+}
+
+
+/* デフォルトのsdl.DecoText用コマンドを用意 */
+sdl.DecoText_commands = ${}
+sdl.DecoText_ecommands = ${}
+
+// +++ コマンド群 +++ //
+// \r無視
+sdl.DecoText_commands->append{name = "\r", func = def(self, a){}}
+// \n改行処理
+sdl.DecoText_commands->append{name = "\n", func = def(self, a){self->feedLine()}}
+// 左揃えコマンド <l>
+sdl.DecoText_commands->append{name = "<l>", func = def(self, a){self->changeAlignMode(0)}}
+// 中央揃えコマンド <c>
+sdl.DecoText_commands->append{name = "<c>", func = def(self, a){self->changeAlignMode(1)}}
+// 右揃えコマンド <r>
+sdl.DecoText_commands->append{name = "<r>", func = def(self, a){self->changeAlignMode(2)}}
+// 変数埋め込みコマンド #{グローバルLua変数}
+sdl.DecoText_commands->append{name = "#", func = DT_command_embed}
+
+
+// +++ \コマンド群 +++ //
+// フォント変更コマンド \f[フォント名, フォントサイズ, ルビサイズ]
+sdl.DecoText_ecommands->append{name = "f", func = DT_ecommand_f}
+// フォントスタイル「太字」 \B+ \B-
+sdl.DecoText_ecommands->append{name = "B", func = DT_ecommand_B}
+// フォントスタイル「下線」 \U+ \U-
+sdl.DecoText_ecommands->append{name = "U", func = DT_ecommand_U}
+// フォントスタイル「斜体」 \I+ \I-
+sdl.DecoText_ecommands->append{name = "I", func = DT_ecommand_I}
+// フォントスタイル「打ち消し線」 \S+ \S-
+sdl.DecoText_ecommands->append{name = "S", func = DT_ecommand_S}
+// アイコンを表示 \i[ファイル名] -> icon/ファイル名.pngを表示
+sdl.DecoText_ecommands->append{name = "i", func = DT_ecommand_i}
+// 画像を表示 \img["ファイル名", width, height] -> ファイル名の画像をwidth,height(省略可)に拡大して表示
+sdl.DecoText_ecommands->append{name = "img", func = DT_ecommand_img}
+// 色変更コマンド \c[R,G,B,A]
+sdl.DecoText_ecommands->append{name = "c", func = DT_ecommand_c}
+// エッジor影 色変更コマンド \cc[R,G,B,A]
+sdl.DecoText_ecommands->append{name = "cc", func = DT_ecommand_cc}
+// 描画タイプ変更コマンド \d[描画タイプ(0:normal, 1:edge, 2:shadow)]
+sdl.DecoText_ecommands->append{name = "d", func = DT_ecommand_d}
+// ルビを振るコマンド \r[text][ruby]
+sdl.DecoText_ecommands->append{name = "r", func = DT_ecommand_r}
+
+
+/* ===== sdl.DecoTextクラス ===== */
+// 特殊テキストを分解してDecoChar[]にappendする関数を追加したsdl.DecoString
+// optテーブル：opt.font={name="デフォルトフォント名", size=デフォルトサイズ, rubySize=デフォルトルビサイズ}
+// 		opt.alignSize=位置揃えを行うときの基準サイズ(nilならmaxWidth(縦書ならmaxHeight))
+// 		opt.commands, opt.ecommands = ${テキスト解析テーブルの配列}, ${〃(\コマンド名)}
+// 			「コマンド名」の場合：opt.commands[]={name="コマンド名", func=実行関数(self, str_Analyzer)}
+// 			「\コマンド名」の場合：opt.ecommands[]={name="コマンド名", func=実行関数(self, str_Analyzer)}
+class sdl.DecoText(text, opt): sdl.DecoString(opt) {
+	@._DecoString_appendText = @.appendText // sdl.DecoString::appendText
+	
+	// コンストラクタ
+	def @->__init__(text, opt){
+		if(type(text) == "string") @->open(text, opt)
+	}
+	
+	// sdl.DecoString:init()～sdl.DecoText:appendText()を一気に行う関数
+	def @->open(text, opt){
+		// 初期化
+		@.m_commands = (opt && type(opt.commands) == "table")? opt.commands: sdl.DecoText_commands
+		@.m_ecommands = (opt && type(opt.ecommands) == "table")? opt.ecommands: sdl.DecoText_ecommands
+		@->init(opt)
+		// appendText
+		@->appendText(text)
+		@->doAlign(2, (opt && opt.alignSize)? opt.alignSize: nil) // 位置揃え実行
+	}
+	
+	// コマンド付きテキストをDecoChar[]に追加する関数
+	def @->appendText(text){
+		local a = str_Analyzer(text)
+		/* テキスト解析 */
+		a->prepareSplits(2)
+		while(!a->eof()){
+			a->begin(false, false) // \削除も空白スキップも行わない
+			if(a->isEsc()){
+				// 「\コマンド」を解析
+				for(k, v in each(@.m_ecommands)){
+					if(a->matchWord(v.name)){
+						a->popEsc()
+						a->seekb(v.name->len())
+						v.func(@, a) // ecommandsの関数を実行
+						break;
+					}
+				}
+			}else{
+				local normal = true
+				// 「コマンド」を解析
+				for(k, v in each(@.m_commands)){
+					if(a->matchWord(v.name)){
+						normal = false
+						a->seekb(v.name->len())
+						v.func(@, a) // commandsの関数を実行
+						break
+					}
+				}
+				// コマンドでないならDecoString::appendTextする
+				if(normal){
+					@->_DecoString_appendText(a->cur())
+					a->next()
+				}
+			}
+		}
+	}
+}
+
+
+/*** DecoTextを書き込んだレイヤー ***/
+class sdl.TextLayer(text, opt): sdl.Texture() {
+	@.Texture_open = @.open
+	
+	def @->__init__(text, opt){
+		if(type(text) == "string") @->open(text, opt)
+	}
+	
+	def @->open(text, opt){
+		local dtext = sdl.DecoText(text, opt)
+		if(!@->Texture_open(dtext->maxWidth()+10, dtext->maxHeight()+2, TEXTURE_TARGET))
+			error "レイヤーの作成に失敗"
+		// DecoText書き込み
+		@->beginScene()
+		dtext->draw(5, 1)
+		@->endScene()
+		dtext->close()
+	}
+	
+	def @->beginScene() sdl.setRenderTarget(@)
+	def @->endScene() sdl.setRenderTarget()
+}

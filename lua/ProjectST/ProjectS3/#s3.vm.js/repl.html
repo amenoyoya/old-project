@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>s3.vm.js script example</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/codemirror.js"></script>
+	<link rel="stylesheet" href="css/codemirror.css">
+	<script src="js/s3.js"></script>
+	<script src="js/enchant.min.js"></script>
+</head>
+
+<body>
+<h2>Lua REPL</h2>
+<textarea id="mytext">
+print('hello' .. ' ' .. 'world!') // This is SmallScript!
+print(js.run('[0,1,2,3,4,5][3]')) // Run JS from Lua
+
+// Interact with the page using Lua
+
+local screen = js.global.screen
+print("you haz " .. (screen.width*screen.height) .. " pixels")
+
+local window = js.global // global object in JS is the window
+window.alert("hello from lua!")
+window.setTimeout(def(){
+	print('hello from lua callback')
+}, 2500)
+
+local document = js.global.document
+print("this window has title '" .. document.title .. "'")
+
+// call constructors (global, or as properties of other objects)
+print("i made an ArrayBuffer of size " .. js.new.ArrayBuffer(20).byteLength)
+// print("i made an ArrayBuffer of size " .. js.global.ArrayBuffer.new(20).byteLength)
+
+print("time iz " .. js.global.Date.now()) // call with no arguments
+
+print('done!')
+</textarea>
+
+<h4>output</h4>
+<pre id="output"></pre>
+
+<p><a href="#" class="btn btn-primary btn-large " onclick="executeLua(myCodeMirror.getValue(), true); return false" id="the_button">Execute &raquo;</a></p>
+
+<script>
+// CodeMirror
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('mytext'));
+//myCodeMirror.setSize(screen.width*0.6, screen.height*0.2);
+
+// Execution
+var outputElement = document.getElementById('output')
+var Module = {
+  print: function(x) {
+    outputElement.innerHTML = (outputElement.innerHTML ? outputElement.innerHTML + '<br>' : '') + x;
+  }
+};
+
+function executeLua(code, clear) {
+  if (clear) outputElement.innerHTML = '';
+  Lua.execute(code);
+}
+</script>
+
+<script src="s3.vm.js"></script>
+
+  </body>
+</html>
+

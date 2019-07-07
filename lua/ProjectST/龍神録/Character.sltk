@@ -1,0 +1,203 @@
+/*** キャラクター情報管理テーブル ***/
+local shotNum = :{2, 4}
+local shotPosX = :{-10, 10,-30, 30}
+local shotPosY = :{-30,-30,-10,-10}
+
+//自機ショットの登録可能番号を返す
+local def searchAvailableShot(@){
+	for i = 1, CSHOT_MAX {
+		if !@.shot[i] { return i }
+	}
+}
+
+// ショット登録
+local def enterShot(@){
+	// ショットボタンが押されていたら
+	if SDL.getKey"OK" > 0 {
+		@.shotcnt = @.shotcnt + 1
+		if @.shotcnt % 3 == 0 { // 3カウントに1回ショット登録
+			for i = 1, shotNum[@.power < 200 and 1 or 2] {
+				local s = searchAvailableShot(@)
+				if s {
+					@.shot[s] = :{
+						cnt = 0,
+						angle = -math.pi / 2,
+						speed = 20,
+						x = @.x + shotPosX[i],
+						y = @.y + shotPosY[i],
+						power = 23,
+						kind = 1,
+					}
+					if SDL.getKey"SHIFT" > 0 { // 低速中なら位置を中心側へ
+						@.shot[s].x = @.x + shotPosX[i] / 3
+						@.shot[s].y = @.y + shotPosY[i] / 2
+					}
+					Game.Sound[3] = true // 発射音オン
+				}
+			}
+		}
+	}else{
+		@.shotcnt = 0
+	}
+}
+
+// ショットの移動計算
+local def updateShot(@){
+	for i = 1, CSHOT_MAX {
+		local shot = @.shot[i]
+		if shot {
+			local dranx = shot.speed + 11 $ 2
+			local drany = shot.speed + 55 $ 2
+			shot.x = shot.x + math.cos(shot.angle) * shot.speed
+			shot.y = shot.y + math.sin(shot.angle) * shot.speed
+			shot.cnt = shot.cnt + 1
+			if shot.x < -dranx or shot.x > FIELD_MAX_X + dranx or
+				shot.y < -drany or shot.y > FIELD_MAX_Y + drany
+			{ //画面から外れたら
+				@.shot[i] = nil
+			}
+		}
+	}
+}
+
+/* Characterテーブル */
+Game.Character = :{
+	initialize = def(@){
+		@.cnt = 0					// カウンタ
+		@.state = 0					// 状態
+		@.power = 500				// パワー
+		@.point = 0					// ポイント
+		@.score = 0					// スコア
+		@.num = 0					// 残機数
+		@.invicible = 0				// 無敵状態カウンタ
+		@.shotMode = 0				// ショットモード
+		@.money = 0					// お金
+		@.img = 1					// 画像
+		@.x = FIELD_MAX_X / 2		// x座標
+		@.y = FIELD_MAX_Y * 3 / 4	// y座標
+		@.shotcnt = 0				// ショットのカウンタ
+		@.shot = :{}				// ショット配列
+		// 画像読み込み
+		@.images = SDL.loadDivisionImage("dat/img/char/0.png", 4, 3, 73, 73)
+		@.shotImages = :{
+			SDL.Image"dat/img/char/bl_00.png", SDL.Image"dat/img/char/bl_01.png"
+		}
+		@.etcImages = :{
+			[1] = SDL.Image"dat/img/char/atari.png", // 当たり判定
+			[3] = SDL.Image"dat/img/char/ball.png", // ボール
+		}
+	},
+	
+	update = def(@){
+		if @.state == 1 { // 喰らいボム受付中
+			Game.Effect.bright = 80 // 画面を暗く
+			if @.cnt > 20 { // 0.33秒喰らいボムを受け付ける
+				@.state            = 2 // 1:喰らいボム受付中　2:死んで浮き上がり中
+				@.cnt              = 0
+				Game.Effect.bright = 255
+			}
+		}
+		if @.cnt == 0 and @.state == 2 { // 今の瞬間死んだら
+			@.x = FIELD_MAX_X / 2 // 座標セット
+			@.y = FIELD_MAX_Y + 30
+			@.invicible = @.invicible + 1 // 無敵状態へ
+		}
+		if @.state == 2 { // 死んで浮上中なら
+			local push = SDL.getKey"LEFT" + SDL.getKey"RIGHT" + SDL.getKey"UP" + SDL.getKey"DOWN"
+			
+			@.y = @.y - 1.5 // キャラを上に上げる
+			// １秒以上か、キャラがある程度上にいて、何かおされたら
+			if @.cnt > 60 or (@.y < FIELD_MAX_Y - 20 and push > 0) {
+				@.cnt = 0
+				@.state = 0 // キャラステータスを元に戻す
+			}
+		}
+		if @.invicible > 0 { // 無敵カウントが0じゃなければ
+			@.invicible = @.invicible + 1
+			if @.invicible > 120 { // ２秒以上たったら
+				@.invicible = 0 // 戻す
+			}
+		}
+		
+		@.cnt = @.cnt + 1
+		@.img = (@.cnt % 24) $ 6 + 1 // 現在の画像決定
+		
+		updateShot(@) // ショットの軌道計算
+		enterShot(@) // ショット登録
+	},
+	
+	move = def(@){
+		if @.state == 1 { return } // 喰らいボム受付中は動かせない
+		
+		local lr, ud = false, false
+		local x, y, mx, my, slant = 0, 0, 0, 0, 1
+		local move_x, move_y = :{-4, 4, 0, 0}, :{0, 0, 4, -4} // {左,右,下,上}のスピード
+		local input = :{
+			SDL.getKey"LEFT", SDL.getKey"RIGHT", SDL.getKey"DOWN", SDL.getKey"UP"
+		}
+		
+		if input[1] > 0 { // 左キーが押されていたら画像を左向きに
+			@.img = @.img + 4 * 2
+		}elif input[2] > 0 { // 右キーが押されていたら画像を右向きに
+			@.img = @.img + 4 * 1
+		}
+		
+		for i = 1, 2 { // 左右分
+			if input[i] > 0 { lr = true }
+		}
+		for i = 3, 4 { // 上下分
+			if input[i] > 0 { ud = true }
+		}
+		if lr and ud { // 斜めフラグ：移動スピードを1/√2に
+			slant = math.sqrt(2)
+		}
+		
+		for i = 1, 4 {
+			if input[i] > 0 {
+				x, y = @.x, @.y // 現在座標
+				if SDL.getKey"SHIFT" > 0 { // 低速移動
+					mx, my = move_x[i] / 3, move_y[i] / 3
+				}else{ // 通常移動
+					mx, my = move_x[i], move_y[i]
+				}
+				x, y = x + mx / slant, y + my / slant // 現在座標に移動分加算
+				if x >= 10 and x <= FIELD_MAX_X - 10 and y >= 5 and y <= FIELD_MAX_Y - 5 { // 移動可能領域なら実際に移動させる
+					@.x, @.y = x, y
+				}
+			}
+		}
+	},
+	
+	draw = def(@){
+		local sx, sy
+		local ny = math.sin(2 * math.pi * (Game.stageCount % 50) / 50) * 3
+		local ang = 2 * math.pi * (Game.stageCount % 120) / 120
+		
+		if SDL.getKey"SHIFT" > 0 { // 低速移動中なら
+			sx, sy = 15, 15 + ny // 引き寄せる
+		}else{
+			sx, sy = 30, 30 + ny // 普通の位置に
+		}
+		@.etcImages[3]->setAngle(ang)
+		@.etcImages[3]->drawCenter(@.x - sx + FIELD_X, @.y + sy + FIELD_Y)
+		@.etcImages[3]->setAngle(-ang)
+		@.etcImages[3]->drawCenter(@.x - sx + FIELD_X, @.y + sy + FIELD_Y)
+		if @.invicible % 2 == 0 { // 無敵中なら点滅
+			@.images[@.img]->drawCenter(@.x + FIELD_X, @.y + FIELD_Y)
+			if SDL.getKey"SHIFT" > 0 { // 低速移動中なら当たり判定表示
+				@.etcImages[1]->setAngle(2 * math.pi * (Game.stageCount % 120) / 120)
+				@.etcImages[1]->drawCenter(@.x + FIELD_X, @.y + FIELD_Y)
+			}
+		}
+	},
+	
+	// 自機ショット描画
+	drawShot = def(@){
+		for i = 1, CSHOT_MAX {
+			local shot = @.shot[i]
+			if shot {
+				@.shotImages[shot.kind]->drawCenter(shot.x + FIELD_X, shot.y + FIELD_Y)
+			}
+		}
+	},
+}

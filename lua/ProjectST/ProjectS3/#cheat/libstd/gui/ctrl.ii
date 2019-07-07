@@ -1,0 +1,5 @@
+require "stdlib/gui/text"
+require "stdlib/gui/ctrl/button"
+require "stdlib/gui/ctrl/scroll"
+require "stdlib/gui/ctrl/panel"
+require "stdlib/gui/ctrl/editbox"

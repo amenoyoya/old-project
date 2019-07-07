@@ -1,0 +1,240 @@
+/*** DecoChar配列(複数行) ***/
+local text_Font = sdl.Font()
+local ruby_Font = sdl.Font()
+// opt: opt.font={name="デフォルトフォント名", size=デフォルトサイズ, rubySize=デフォルトルビサイズ}
+//		opt.vertical=縦書モード
+// sdl.DecoStringは全てappendし終わった後、描画する前に必ずdoAlignして位置を調整する必要がある
+class sdl.DecoString(opt){
+	@.m_lines = ${} // DecoCharaArray行の配列
+	@.m_texMan = sdl.TexManager() // 文字列テクスチャ管理オブジェクト
+	
+	// コンストラクタ
+	def @->__init__(opt) @->init(opt)
+	
+	/* 初期化関数 */
+	// メンバ変数準備
+	def @->init(opt){
+		@->close()
+		// デフォルトフォント情報
+		@.m_defFont = (opt && type(opt.font) == "table")? opt.font: {
+			name = sdl.Font->getFromSystem("msgothic"),
+			size = 13, rubySize = 10
+		}
+		@.m_vertical = ((opt && opt.vertical)? true: false) // 縦書モード
+		@.m_maxWidth, @.m_maxHeight = 0, 0 // 描画に必要なサイズ
+		@.m_cur = { // append時にDecoCharに付与する情報
+			x = 0, y = 0, drawType = 1, line = nil,
+			color = Color(255,255,255), edgeColor = Color(0, 0, 0),
+			fontInfo = {
+				// フォントスタイル
+				bold=true, underLine=false, italic=false, strikeThrough=false,
+				// フォント名、フォントサイズ
+				name = @.m_defFont.name, size = @.m_defFont.size, rubySize = @.m_defFont.rubySize
+			},
+			alignMode = 0 // 文字揃えモード 0:左揃え、 1:中央揃え、 2:右揃え
+		}
+		// デフォルトフォント作成
+		if(!text_Font->open(@.m_defFont.name, @.m_defFont.size)) error "[sdl.DecoString] フォントの作成に失敗"
+		if(!ruby_Font->open(@.m_defFont.name, @.m_defFont.rubySize)) error "[sdl.DecoString] ルビフォントの作成に失敗"
+		text_Font->setStyle(FONT_BOLD)
+	}
+	
+	/* オブジェクト削除関数 */
+	def @->close(){
+		if(@.m_texMan) @.m_texMan->close() // 文字列テクスチャ削除
+		if(type(@.m_lines) == "table"){ // 画像テクスチャ削除
+			for(k, v in each(@.m_lines)) v->close()
+			@.m_lines = ${}
+		}
+	}
+	
+	/* テキスト追加 */
+	def @->appendText(text){
+		if(!@.m_cur.line){
+			@.m_cur.line = @.m_lines->append(
+				sdl.DecoCharArray(@.m_vertical, @.m_cur.drawType, @.m_cur.color, @.m_cur.edgeColor))
+			@.m_cur.line.align = @.m_cur.alignMode
+		}
+		@.m_cur.line->appendText(@.m_texMan, text_Font, text)
+		if(@.m_vertical){
+			if(@.m_maxHeight < @.m_cur.line.m_height) @.m_maxHeight = @.m_cur.line.m_height
+		}else{
+			if(@.m_maxWidth < @.m_cur.line.m_width) @.m_maxWidth = @.m_cur.line.m_width
+		}
+	}
+	/* 画像追加 */
+	def @->appendImage(filename, width, height){
+		if(!@.m_cur.line){
+			@.m_cur.line = @.m_lines->append(
+				sdl.DecoCharArray(@.m_vertical, @.m_cur.drawType, @.m_cur.color, @.m_cur.edgeColor))
+			@.m_cur.line.align = @.m_cur.alignMode
+		}
+		@.m_cur.line->appendImage(filename, width, height)
+		if(@.m_vertical){
+			if(@.m_maxHeight < @.m_cur.line.m_height) @.m_maxHeight = @.m_cur.line.m_height
+		}else{
+			if(@.m_maxWidth < @.m_cur.line.m_width) @.m_maxWidth = @.m_cur.line.m_width
+		}
+	}
+	/* ルビ追加 */
+	def @->beginRuby(){
+		if(!@.m_cur.line){
+			@.m_cur.line = @.m_lines->append(
+				sdl.DecoCharArray(@.m_vertical, @.m_cur.drawType, @.m_cur.color, @.m_cur.edgeColor))
+			@.m_cur.line.align = @.m_cur.alignMode
+		}
+		@.m_cur.line->beginRuby()
+	}
+	def @->appendRuby(ruby){
+		if(!@.m_cur.line){
+			@.m_cur.line = @.m_lines->append(
+				sdl.DecoCharArray(@.m_vertical, @.m_cur.drawType, @.m_cur.color, @.m_cur.edgeColor))
+			@.m_cur.line.align = @.m_cur.alignMode
+		}
+		@.m_cur.line->appendRuby(@.m_texMan, ruby_Font, ruby)
+	}
+	/* ダミーデータ追加(ADV用) */
+	def @->appendData(param){
+		if(!@.m_cur.line){
+			@.m_cur.line = @.m_lines->append(
+				sdl.DecoCharArray(@.m_vertical, @.m_cur.drawType, @.m_cur.color, @.m_cur.edgeColor))
+			@.m_cur.line.align = @.m_cur.alignMode
+		}
+		@.m_cur.line->appendData(param)
+	}
+	
+	/* 各種設定変更 */
+	// フォントスタイル更新<private>
+	local def updateFontStyle(obj){
+		local style, rubystyle = 0, 0
+		for(key, val in pairs(obj.m_cur.fontInfo)){
+			if(key == "bold" && val){
+				style = b_or(style, FONT_BOLD)
+				rubystyle = b_or(style, FONT_BOLD)
+			}elseif(key == "underLine" && val){
+				style = b_or(style, FONT_UNDERLINE)
+			}elseif(key == "italic" && val){
+				style = b_or(style, FONT_ITALIC)
+				rubystyle = b_or(style, FONT_ITALIC)
+			}elseif(key == "strikeThrough" && val){
+				style = b_or(style, FONT_STRIKETHROUGH)
+			}
+		}
+		return text_Font->setStyle(style) && ruby_Font->setStyle(rubystyle)
+	}
+	// フォント変更
+	def @->changeFont(fontname, size, rubysize){
+		if(!fontname) fontname = @.m_cur.fontInfo.name
+		else @.m_cur.fontInfo.name = fontname
+		
+		if(!size) size = @.m_cur.fontInfo.size
+		else @.m_cur.fontInfo.size = size
+		
+		if(!rubysize) rubysize = @.m_cur.fontInfo.rubySize
+		else @.m_cur.fontInfo.rubySize = rubySize
+		
+		return text_Font->open(fontname, size)
+			&& ruby_Font->open(fontname, rubysize) && updateFontStyle(@)
+	}
+	// フォントスタイルをテーブルで設定
+	// styleTable: {bold=?, underLine=?, italic=?, strikeThrough=?}
+	def @->changeFontStyle(styleTable){
+		table_set(@.m_cur.fontInfo, styleTable)
+		return updateFontStyle(@)
+	}
+	// 色変更
+	def @->changeColor(color, edgecolor){
+		if(color) @.m_cur.color = color
+		if(edgecolor) @.m_cur.edgeColor = edgecolor
+		if(@.m_cur.line) @.m_cur.line->changeColor(@.m_cur.color, @.m_cur.edgeColor)
+	}
+	// 描画タイプ変更
+	def @->changeDrawType(mode){
+		@.m_cur.drawType = mode
+		if(@.m_cur.line) @.m_cur.line->changeDrawType(@.m_cur.drawType)
+	}
+	// 位置揃えモード変更
+	// mode = 0: 左揃え、 1: 中央揃え、 2: 右揃え
+	def @->changeAlignMode(mode){
+		@.m_cur.alignMode = mode
+		if(@.m_cur.line) @.m_cur.line.align = @.m_cur.alignMode
+	}
+	
+	/* 改行（sdl.DecoCharArrayを追加）*/
+	def @->feedLine(){
+		@.m_cur.line = @.m_lines->append(
+			sdl.DecoCharArray(@.m_vertical, @.m_cur.drawType, @.m_cur.color, @.m_cur.edgeColor))
+		@.m_cur.line.align = @.m_cur.alignMode
+	}
+	
+	/* 描画を行う前にDecoChar配列の位置を揃える */
+	// stand: 文字位置の基準。 0=左(上)、1=中央、2=右(下)
+	// baseSize: 行をbaseSize基準で寄せる。寄せ方は、changeAlignModeで指定したもの
+	def @->doAlign(stand, baseSize){
+		local x, y = 0, 0
+		if(!baseSize){ // baseSizeが指定されない場合は、行の最大サイズとする
+			if(@.m_vertical) baseSize = @.m_maxHeight
+			else baseSize = @.m_maxWidth
+		}
+		@.m_maxWidth, @.m_maxHeight = 0, 0 // 描画に必要なサイズをついでに計算
+		if(@.m_vertical){ // 縦書モードの場合後ろの列から計算
+			for(k, v in r_each(@.m_lines)){
+				if(v->str()->size() == 0){ // 空行
+					x = x + @.m_defFont.size
+					@.m_maxWidth = @.m_maxWidth + @.m_defFont.size
+				}else{
+					v->doAlign(x, y, stand, v.align, baseSize)
+					x = x + v->maxWidth() + 3
+					@.m_maxWidth = @.m_maxWidth + v->maxWidth() + 3
+					if(@.m_maxHeight < v->maxHeight()) @.m_maxHeight = v->maxHeight()
+				}
+			}
+		}else{ // 横書モード
+			for(k, v in each(@.m_lines)){
+				if(v->str()->size() == 0){ // 空行
+					y = y + @.m_defFont.size
+					@.m_maxHeight = @.m_maxHeight + @.m_defFont.size
+				}else{
+					v->doAlign(x, y, stand, v.align, baseSize)
+					y = y + v->maxHeight() + 3
+					@.m_maxHeight = @.m_maxHeight + v->maxHeight() + 3
+					if(@.m_maxWidth < v->maxWidth()) @.m_maxWidth = v->maxWidth()
+				}
+			}
+		}
+	}
+	
+	/* 描画 */
+	def @->draw(x, y, alpha){
+		for(k, v in each(@.m_lines)) v->draw(x, y, alpha)
+	}
+	
+	/* 描画に必要なサイズを取得 */
+	// doAlign()後でないと取得できない
+	def @->maxWidth() return @.m_maxWidth
+	def @->maxHeight() return @.m_maxHeight
+	
+	/* DecoChar配列取得 */
+	def @->str(){
+		local str = ${}
+		for(k, v in each(@.m_lines)) str->join(v->str())
+		return str
+	}
+	
+	/* プレーンテキストを取得 */
+	def @->text(){
+		local text = ""
+		for(k, v in each(@.m_lines)) text = text..v->text()
+		return text
+	}
+	
+	/* カーソル(ポインタ)位置 */
+	def @->curLine() return @.m_cur.line
+	def @->cur() return @.m_cur.line? @.m_cur.line->cur(): nil
+	def @->seek(mov, mode){ // 行内シーク
+		if(@.m_cur.line) @.m_cur.line->seek(mov, mode)
+	}
+	def @->erase(index, num){ // 行内削除
+		if(@.m_cur.line) @.m_cur.line->erase(index, num)
+	}
+}

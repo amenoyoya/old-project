@@ -1,0 +1,25 @@
+require "libutils@cocos2dx"
+require "libstd@cocos2dx/AudioEngine"
+require "GV"
+require "GameLayer"
+
+def coco.App.onStart(t){ // ƒQ[ƒ€İ’è
+	t.WinTitle = "Doge Defense"
+	t.GameSize = GAME_SIZE
+	t.DisplayStates = true
+	
+	// BGMƒvƒŠƒ[ƒh
+	AudioEngine.preloadMusic"res/bgm.mp3"
+	AudioEngine.preloadEffect"res/dog.mp3"
+	AudioEngine.preloadEffect"res/touch.mp3"
+	AudioEngine.setMusicVolume(5)
+	AudioEngine.setEffectsVolume(10)
+}
+
+def coco.App.onInit(scene){
+	// ƒƒCƒ“ƒQ[ƒ€ƒŒƒCƒ„[“o˜^
+	scene->addChild(GameLayer.new())
+}
+
+// openConsole()
+coco.App->run()

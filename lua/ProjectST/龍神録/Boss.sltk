@@ -1,0 +1,218 @@
+/*** ボス管理テーブル ***/
+local V0 = 10
+
+local def searchAvailableShot(@){ // 空き番号を返す
+	for i = 1, BOSS_BULLET_MAX {
+		if !@.shot.bullets[i] { return i }
+	}
+}
+
+local def getAtan2(@){ // 自機とボスとのなす角度
+	return math.atan2(Game.Character.y - @.y, Game.Character.x - @.x)
+}
+
+// 物理的計算をさせる登録をする(指定時間tで定位置に戻す)
+local def beginPhysicalOperation(@, t){ // t = 移動にかける時間
+	local max_x = @.x - BOSS_POS_X // 移動したい水平距離
+	local max_y = @.y - BOSS_POS_Y // 移動したい鉛直距離
+	
+	if t == 0 { t = 1 }
+	@.phy = :{
+		cnt = 0, // カウンタ
+		time = t, // 移動にかける時間
+		v0x = 2 * max_x / t, // 水平成分の初速度
+		ax = 2 * max_x / (t*t), // 水平成分の加速度
+		x0 = @.x, // 初期x座標
+		v0y = 2 * max_y / t, // 鉛直成分の初速度
+		ay = 2 * max_y / (t*t), // 鉛直成分の加速度
+		y0 = @.y, //初期y座標
+	}
+}
+
+// 物理的キャラクタ移動計算
+local def updatePhysicalOperation(@){
+	local t = @.phy.cnt
+	@.x = @.phy.x0 - ((@.phy.v0x * t) - 0.5 * @.phy.ax * t * t) // 現在いるべきx座標計算
+	@.y = @.phy.y0 - ((@.phy.v0y * t) - 0.5 * @.phy.ay * t * t) // 現在いるべきy座標計算
+	@.phy.cnt = @.phy.cnt + 1
+	if @.phy.cnt >= @.phy.time { // 移動にかける時間分になったら
+		@.phy = nil //オフ
+	}
+}
+
+// ボスの弾幕を計算する
+local def updateShot(@){
+	@.endtime = @.endtime - 1
+	if @.endtime < 0 { @.HP = 0 }
+	for i = 1, BOSS_BULLET_MAX {
+		local bullet = @.shot.bullets[i]
+		if bullet {
+			bullet.x = bullet.x + math.cos(bullet.angle) * bullet.speed
+			bullet.y = bullet.y + math.sin(bullet.angle) * bullet.speed
+			bullet.cnt = bullet.cnt + 1
+			if bullet.cnt > bullet.till {
+				if bullet.x < -50 or bullet.x > FIELD_MAX_X + 50 or
+					bullet.y < -50 or bullet.y > FIELD_MAX_Y + 50
+				{
+					@.shot.bullets[i] = nil
+				}
+			}
+		}
+	}
+	@.shot.cnt = @.shot.cnt + 1
+}
+
+// 弾幕をセット
+local def enterShot(@){
+	@.shot = :{
+		cnt = 0, bullets = :{}
+	}
+	@.wait = 0 // 待機時間0
+	@.state = 2 // 弾幕中状態に
+	@.HP = @.setHP[@.kind] // HP設定
+	@.maxHP = @.HP
+}
+
+// ボスをセット
+local def enterBoss(@, num){
+	if num == 0 { // 中ボス開始時の時は
+		for i = 1, ENEMY_MAX { // 雑魚敵を消す
+			Game.Enemy[i] = nil
+		}
+		for i = 1, SHOT_MAX { // 雑魚敵の弾幕を消す
+			Game.Shot[i] = nil
+		}
+		@.x = FIELD_MAX_X / 2 // ボスの初期座標
+		@.y = -30
+		@.kind = 0 // 弾幕の種類
+	}
+	@.flag = true
+	@.fan = false // 扇を広げるかどうかのフラグ
+	@.endtime = 99 * 60 // 残り時間
+	@.state = 1 // 待機中状態に
+	@.cnt = 0
+	@.drawflag = false // 描画フラグを戻す
+	@.kind = @.kind + 1
+	@.wait = 0 // 待機時間を初期化
+	@.shot = nil // ボスの弾幕情報を初期化
+	beginPhysicalOperation(@, 60) // 60カウントかけて物理的計算で定位置に戻す
+}
+
+// ボスの待機処理
+local def waitAndEnter(@){
+	@.wait = @.wait + 1
+	if @.wait > 140 { // 140カウント待機したら弾幕セット
+		enterShot(@)
+	}
+}
+
+/* Bossテーブル */
+Game.Boss = :{
+	initialize = def(@){
+		@.appearCount = :{ /*2000*/50 }
+		@.setHP = :{}
+		@.maxHP = :{}
+		@.backKind = :{}
+		for i = 1, DANMAKU_MAX {
+			@.setHP[i] = 10000
+			@.maxHP[i] = 10000
+			@.backKind[i] = 1
+		}
+		
+		// 画像ロード
+		@.images = SDL.loadDivisionImage("dat/img/char/riria.png", 8, 1, 100, 100)
+		@.imageHP = SDL.Image"dat/img/enemy/hp_boss.png"
+	},
+	
+	// ボスの弾幕メイン
+	update = def(@){
+		if Game.stageCount == @.appearCount[1] and !@.flag { // 開始時間なら
+			enterBoss(@, 0) // 開始
+		}
+		if !@.flag { // ボスが登録されて無ければ戻る
+			return
+		}
+		if @.phy { // 物理演算移動オンなら
+			updatePhysicalOperation(@) // 物理計算を
+		}
+		if @.state == 2 and (@.HP <= 0 or @.endtime <= 0) { // 弾幕中で体力が無くなったら
+			enterBoss(@, 1) // 次の弾幕を登録
+		}
+		if @.state == 1 { // 弾幕間の待機時間
+			waitAndEnter(@)
+		}
+		if @.state == 2 and @.kind and @.patterns[@.kind] { // 弾幕中なら
+			@.patterns[@.kind](@) // 弾幕関数へ
+			updateShot(@) // 弾幕計算
+		}
+		@.cnt = @.cnt + 1
+	},
+	
+	// 描画
+	draw = def(@){
+		if !@.flag or !@.HP { return }
+		@.images[1]->drawCenter(@.x + FIELD_X, @.y + FIELD_Y)
+		if @.maxHP == 0 {
+			error"Boss.maxHP is 0"
+		}
+		for i = 0, FIELD_MAX_X * 0.98 * @.HP / @.maxHP - 1 {
+			local img =  @.backKind[@.kind] == 1 and @.imageHP or Game.Enemy.imageHP
+			img->drawCenter(3 + FIELD_X + i, 2 + FIELD_Y)
+		}
+	},
+	
+	// 弾丸の描画
+	drawShot = def(@){
+		if @.shot { // 弾幕データがオンなら
+			for i = 1, BOSS_BULLET_MAX { // その弾幕が持つ弾の最大数分ループ
+				local bullet = @.shot.bullets[i]
+				if bullet { // 弾データがオンなら
+					local img = Game.Shot.images[bullet.kind][bullet.color]
+					
+					if img {
+						img->setAngle(bullet.angle * 180 / math.pi + 90)
+						img->drawCenter(bullet.x + FIELD_X, bullet.y + FIELD_Y)
+						if bullet.effect == 1 { // 光らせる
+							img->setBlendMode(SDL.BLEND_ADD)
+							img->setColor(SDL.Color(255,0,0,bullet.bright))
+							img->drawCenter(bullet.x + FIELD_X, bullet.y + FIELD_Y)
+							img->setBlendMode(SDL.BLEND_ALPHA)
+							img->setColor(SDL.Color(255,255,255))
+						}
+					}
+				}
+			}
+		}
+	},
+}
+
+/* 弾幕パターン */
+Game.Boss.patterns = :{
+	def(@){
+		local TM000 = 120
+		local t = @.shot.cnt % TM000
+		if t < 60 and t % 10 == 0 {
+			local angle = getAtan2(@)
+			for i = 0, 29 {
+				local s = searchAvailableShot(@)
+				if s {
+					@.shot.bullets[s] = :{
+						color = 1,
+						x     = @.x,
+						y     = @.y,
+						kind  = 9,
+						angle = angle + math.pi / 15 * i,
+						cnt   = 0,
+						speed = 3,
+						till  = 0,
+					}
+					Game.Sound[1] = true
+				}
+			}
+		}
+		for i = 1, BOSS_BULLET_MAX {
+			local bullet = @.shot.bullets[i]
+			if bullet {}
+		}
+	},
+}

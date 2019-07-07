@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html class=" overthrow-enabled" data-avail-langs="ja en" data-page="entry" data-admin-domain="http://blog.hatena.ne.jp" data-static-domain="http://hatenablog.com" data-blog="ottati.hatenablog.com" data-blogs-uri-base="http://ottati.hatenablog.com" data-globalheader-color="b" data-globalheader-type="pc" data-author="ottati" data-version="58b740ff6d2ca0103ed4915fee425be3" data-blog-comments-top-is-new="" data-device="pc" data-brand="hatenablog" data-has-touch-view="1" itemscope="" itemtype="http://schema.org/Article" lang="ja"><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/notices.txt" async=""></script>
+    
+    
+    
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7; IE=9; IE=10; IE=11">
+    <title>【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順 - あのねノート。</title>
+
+    
+
+    
+      <link rel="canonical" href="http://ottati.hatenablog.com/entry/2014/04/05/105100">
+    
+
+    <meta itemprop="name" content="【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順 - あのねノート。">
+    
+      <meta itemprop="image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/o/ottati/20140401/20140401115412.png">
+    
+
+    <meta property="og:title" content="【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順 - あのねノート。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://ottati.hatenablog.com/entry/2014/04/05/105100">
+    
+      <meta property="og:image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/o/ottati/20140401/20140401115412.png">
+    
+      <meta property="og:description" content="はじめに 「ゲームアプリ作りたい！」「お金も欲しい！」「スタミナうざい」 ...しかしどうしたら作れるのかわからない。 この記事がそんなあなたのゲーム作りのきっかけになればいいな、と思っています。 ちなみに僕は一ヶ月前まで持っている知識は「iOSはObjective-Cで、Androidが、Java?なんでしょ?」みたいな感じでした。つまり僕はまだ初心者中の初心者です。しかし初心者だからこそ初心者が躓くところもわかる、かな、とか勝手に思ってます。 このページだけのお付き合いになるかもしれませんが、何卒よろしくお願いします。 ちなみにWindows+Eclipseで作っていきます。 ※ 間違って…">
+    <meta property="og:site_name" content="http://ottati.hatenablog.com/">
+      <meta property="article:published_time" content="1396662660">
+
+        <meta property="article:tag" content="やり方">
+        <meta property="article:tag" content="コードレシピ">
+        <meta property="article:tag" content="作った">
+        <meta property="article:tag" content="ネタ">    <meta name="twitter:card" content="summary">      <meta name="twitter:app:name:iphone" content="はてなブログアプリ">
+      <meta name="twitter:app:id:iphone" content="583299321">
+      <meta name="twitter:app:url:iphone" content="hatenablog:///open?uri=http%3A%2F%2Fottati.hatenablog.com%2Fentry%2F2014%2F04%2F05%2F105100">      <meta name="twitter:site" content="@ottatiyarou2">        <meta name="google-site-verification" content="Ty771O3AuJ-pfzsAOCVkA_bCn57KfdfIs1_LiCLVPkA">
+      <link rel="author" href="https://plus.google.com/101088592671574383686/">
+    
+      <meta name="description" content="はじめに 「ゲームアプリ作りたい！」「お金も欲しい！」「スタミナうざい」 ...しかしどうしたら作れるのかわからない。 この記事がそんなあなたのゲーム作りのきっかけになればいいな、と思っています。 ちなみに僕は一ヶ月前まで持っている知識は「iOSはObjective-Cで、Androidが、Java?なんでしょ?」みた…">
+    
+<script src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/ca-pub-9425443345063631.js" type="text/javascript" async=""></script><script src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/ga.js" async="" type="text/javascript"></script><script async="" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/cbgapi.loaded_0"></script><script src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/analytics.js" async=""></script><script type="text/javascript">
+// <!--
+
+if (~navigator.userAgent.indexOf('Mac OS X')) {
+  document.write('<style type="text/css">html, body { font-family: \x27Helvetica\x27, \x27Arial\x27, \x27ヒラギノ角ゴ Pro W3\x27, \x27Hiragino Kaku Gothic Pro\x27, sans-serif; } </style>');
+} else {
+  document.write('<style type="text/css">html, body { font-family: \x27Helvetica\x27, \x27Arial\x27, \x27メイリオ\x27, \x27Meiryo\x27, \x27MS PGothic\x27, sans-serif; } </style>');
+}
+
+// -->
+</script><style type="text/css">html, body { font-family: 'Helvetica', 'Arial', 'メイリオ', 'Meiryo', 'MS PGothic', sans-serif; } </style>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript" src="/js/vendor/excanvas/excanvas.js"></script>
+<![endif]-->
+
+
+    <link rel="shortcut icon" href="http://cdn.image.st-hatena.com/image/favicon/67a9741c776609c10a9bea6362fca1e18de06150/version=1/http%3A%2F%2Fcdn.mogile.archive.st-hatena.com%2Fv1%2Fimage%2Fottati%2F171664730574374588.png">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="http://ottati.hatenablog.com/feed">
+    <link rel="alternate" type="application/rss+xml" title="RSS2.0" href="http://ottati.hatenablog.com/rss">
+    <link rel="alternate" type="application/json+oembed" href="http://hatenablog.com/oembed?url=http%3A%2F%2Fottati.hatenablog.com%2Fentry%2F2014%2F04%2F05%2F105100&amp;format=json" title="oEmbed Profile of 【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順">
+    <link rel="alternate" type="text/xml+oembed" href="http://hatenablog.com/oembed?url=http%3A%2F%2Fottati.hatenablog.com%2Fentry%2F2014%2F04%2F05%2F105100&amp;format=xml" title="oEmbed Profile of 【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順">    <link rel="author" href="http://www.hatena.ne.jp/ottati/">
+
+      <link rel="stylesheet" type="text/css" href="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/globalheader.css">
+      <link rel="stylesheet" type="text/css" href="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/a9489baba84b8e0f730d1172a89b2dedf7ad47e8.css">    <script>    </script>
+
+    
+    <style>
+      div#google_afc_user,
+      div#google_afc_user_container_0,
+      div#google_afc_user_container_1,
+      div#google_afc_user_container_2,
+      div#google_afc_user_container_3,
+      div#google_afc_user_container_4,
+      div#google_afc_user_container_5,
+      div.google_afc_image,
+      div.google_afc_blocklink {
+          display: block !important;
+      }
+    </style>
+
+    
+  <script type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/entries.json"></script></head>
+
+  <body data-twttr-rendered="true" class="page-entry header-image-only     category-やり方 category-コードレシピ category-作った category-ネタ  ">
+    <!-- Google Universal Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29716941-6', 'auto', {'name': 'HatenaBlogTracker'});
+  ga('HatenaBlogTracker.require', 'displayfeatures');
+  ga('HatenaBlogTracker.send', 'pageview');
+
+</script>
+<!-- End Google Universal Analytics -->
+
+    
+    <div id="header-container">
+     <div id="sp-suggest" style="display: none;"><a id="sp-suggest-link" href="#">スマートフォン用の表示で見る</a></div>
+    </div>
+
+    <div class="select_star_button_container" style="top: 33383px; left: 139.5px; display: none;">
+      <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/hatena-star-quote-box.png" title="引用スターをつける" class="select_star_button">
+      <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/hatena-star-quote-star.png" title="引用スターをつける" class="select_star_button select_star_star">
+    </div>
+
+    <div class="message-box" id="select-star-message-box" style="display: none;">
+      スターをつけました
+    </div>
+
+    <div id="globalheader-container">
+  <iframe id="globalheader" allowtransparency="true" height="37" frameborder="0"></iframe>
+</div>
+
+
+    <div id="container">
+      <div id="container-inner">
+        <header id="blog-title" data-brand="hatenablog">
+  <div id="blog-title-inner" style="background-image: url('http://cdn-ak.f.st-hatena.com/images/fotolife/o/ottati/20140917/20140917130338.png'); background-position: center 0px;">
+    <h1 id="title"><a href="http://ottati.hatenablog.com/">あのねノート。</a></h1>
+    
+      <h2 id="blog-description">学生です！楽しくウェブサービスをつくっています！</h2>
+    
+  </div>
+</header>
+
+        
+        
+
+
+
+
+<div id="content" class="hfeed">
+  <div id="content-inner">
+    <div id="wrapper">
+      <div id="main">
+        <div id="main-inner">
+          
+            
+            <!-- google_ad_section_start -->
+            <!-- rakuten_ad_target_begin -->
+            
+              
+                <article class="entry hentry js-entry-article date-first autopagerize_page_element chars-400 words-100 mode-markdown entry-odd" id="entry-12921228815721107481" data-keyword-campaign="" data-uuid="12921228815721107481">
+  <div class="entry-inner">
+    <header class="entry-header">
+      <div class="date first">
+        <a href="http://ottati.hatenablog.com/entries/2014/04/05" rel="nofollow">
+          <time pubdate="" datetime="2014-04-05T01:51:00Z" title="2014-04-05T01:51:00Z">
+            <span class="date-year">2014</span><span class="hyphen">-</span><span class="date-month">04</span><span class="hyphen">-</span><span class="date-day">05</span>
+          </time>
+        </a>
+      </div>
+      <h1 class="entry-title">
+        <a href="http://ottati.hatenablog.com/entry/2014/04/05/105100" class="entry-title-link bookmark">【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順</a>
+      </h1>
+      
+      <div class="categories ">
+        
+        <a href="http://ottati.hatenablog.com/category/%E3%82%84%E3%82%8A%E6%96%B9">やり方</a>
+        
+        <a href="http://ottati.hatenablog.com/category/%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AC%E3%82%B7%E3%83%94">コードレシピ</a>
+        
+        <a href="http://ottati.hatenablog.com/category/%E4%BD%9C%E3%81%A3%E3%81%9F">作った</a>
+        
+        <a href="http://ottati.hatenablog.com/category/%E3%83%8D%E3%82%BF">ネタ</a>
+        
+      </div>
+      
+    </header>
+    <div class="entry-content">
+
+      
+        <h2>はじめに</h2>
+
+<p><span style="font-size: 200%"><span style="color: #ff0000">「ゲームアプリ作りたい！」「お金も欲しい！」「スタミナうざい」</span></span></p>
+
+<p>...しかしどうしたら作れるのかわからない。</p>
+
+<p>この記事がそんなあなたのゲーム作りの<b>きっかけ</b>になればいいな、と思っています。</p>
+
+<p>ちなみに僕は一ヶ月前まで持っている知識は<span style="color: #008000">「iOSはObjective-Cで、Androidが、Java?なんでしょ?」</span>みたいな感じでした。つまり僕はまだ初心者中の初心者です。しかし初心者だからこそ初心者が躓くところもわかる、かな、とか勝手に思ってます。</p>
+
+<p>このページだけのお付き合いになるかもしれませんが、何卒よろしくお願いします。</p>
+
+<p><b>ちなみにWindows+Eclipseで作っていきます。</b></p>
+
+<p>※ 間違っている部分もあると思います。そんな時は<a href="https://twitter.com/ottatiyarou2">@ottatiyarou2</a>まで宜しくお願いします。</p>
+
+<h2>『ぴよ飛ばし』を作ってみた</h2>
+
+<p>では始めに、「どんなのが作れるか」ということで<span style="color: #ff0000">初心者</span>の僕が<span style="color: #ff0000">初めて</span>作ってリリースしたアプリを紹介しますね(宣伝)</p>
+
+<h4>ぴよ飛ばし ひよこを飛ばし続ける無料アクションゲーム！</h4>
+
+<p><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401115412.png" alt="f:id:ottati:20140401115412p:plain" title="f:id:ottati:20140401115412p:plain" class="hatena-fotolife" itemprop="image"></p>
+
+
+<p><a href="https://play.google.com/store/apps/details?id=com.otatin.flyingpiyo&amp;hl=ja" target="_blank" rel="nofollow"><img class="alignleft" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/kVjcRy87_uU_1m7h8h5_JIGB0VN32Ln682rVzAdeWpwym9gZBJWtw7jewIxP.png" style="margin:0px 10px 1px 5px;padding:0px;border:none;float:left" align="left" width="85"></a><a href="https://play.google.com/store/apps/details?id=com.otatin.flyingpiyo&amp;hl=ja" target="_blank" rel="nofollow">ぴよ飛ばし タップでひよこを飛ばし続けるお手軽無料アクション 1.12</a><br>カテゴリ: カジュアル<br><a href="https://play.google.com/store/apps/details?id=com.otatin.flyingpiyo&amp;hl=ja" target="_blank" rel="nofollow">Google Playで詳細を見る</a><br style="clear: both;"></p>
+
+<p>☆ 敵なし！<br>
+☆ 障害物なし！<br>
+☆ ひよこを飛ばし続けよう！！<br>
+☆ 地面に落ちたらゲームオーバー！！</p>
+
+<p>『ぴよ飛ばし』はひよこが地面に落ちないように飛ばし続けるお手軽アクションゲームです！！</p>
+
+<p>■ 操作は簡単！画面をタップするだけ！</p>
+
+<p>楽しんでください！ ☃</p>
+
+<p><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401120219.png" alt="f:id:ottati:20140401120219p:plain" title="f:id:ottati:20140401120219p:plain" class="hatena-fotolife" itemprop="image"></p>
+
+
+<h4>製作者のコメント</h4>
+
+<p><b>ぴよ飛ばしはひよこを地面に落とさないようにタップして飛ばすシンプルお手軽アクションゲームです。</b></p>
+
+<p>飛ぶ度に「<span style="color: #ffff00">ぴよ、ぴよ</span>」と、可愛らしい声で鳴くので、学校や職場でプレイすれば人気者間違い無し！</p>
+
+<p>「"ふら○っぴーばーど"と似ているような気がする...」「またパクリか」「パクリにしても遅れすぎだろ...」などとスクリーンショットだけを
+見ておっしゃる方もいるかと思います。確かに今回のゲーム制作にあたってほんのちょっとだけ参考にしましたが、"完全に"別ものです。Flappy 
+Birdには土管という障害物がありますが、ぴよ飛ばしには障害物がありません。そこが一番の違い...ですかね...</p>
+
+<p>それとゲーム内ではスコアによって<span style="color: #ffff00">イエロースター</span>、<span style="color: #00ff00">グリーンスター</span>、<span style="color: #ff0000">レッドスター</span>、<span style="color: #0000ff">ブルースター</span>、<span style="color: #800080">パープルスター</span>をもらうことができます。特定民族の主食です！！</p>
+
+<p><a href="https://play.google.com/store/apps/details?id=com.otatin.flyingpiyo&amp;hl=ja" target="_blank" rel="nofollow"><img class="alignleft" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/kVjcRy87_uU_1m7h8h5_JIGB0VN32Ln682rVzAdeWpwym9gZBJWtw7jewIxP.png" style="margin:0px 10px 1px 5px;padding:0px;border:none;float:left" align="left" width="85"></a><a href="https://play.google.com/store/apps/details?id=com.otatin.flyingpiyo&amp;hl=ja" target="_blank" rel="nofollow">ぴよ飛ばし タップでひよこを飛ばし続けるお手軽無料アクション 1.12</a><br>カテゴリ: カジュアル<br><a href="https://play.google.com/store/apps/details?id=com.otatin.flyingpiyo&amp;hl=ja" target="_blank" rel="nofollow">Google Playで詳細を見る</a><br style="clear: both;"></p>
+
+<p>※ iOS版はMacがちょっと手元にない状態だったので今はAndroid版だけ公開しています。iOSユーザの皆さんすみません。</p>
+
+<p>...はい。もう十分気持ちよくなってきたのでそろそろゲームアプリを作っていきましょう！</p>
+
+<h2>Cocos2d-xを使う</h2>
+
+<p>今回はCocos2d-xを使ってゲームを作っていきます。</p>
+
+<p><a href="http://www.cocos2d-x.org/">Cocos2d-x | Cross Platform Open Source 2D Game Engine</a><a href="http://b.hatena.ne.jp/entry/http://www.cocos2d-x.org/" class="http-bookmark"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/a.gif" alt="" class="http-bookmark"></a></p>
+
+<p>Cocos2d-xはスマホ向け2Dゲームを作るためのゲームエンジンで、今スマホ2Dゲーム界で熱いらしいです。</p>
+
+<p>有名どころだとドラクエのゲームがCocos2d-xで作られたらしいです。</p>
+
+<p><a href="http://www.dragonquest.jp/dqmsl/">ドラゴンクエストモンスターズ スーパーライト 公式プロモーションサイト | SQUARE ENIX</a><a href="http://b.hatena.ne.jp/entry/http://www.dragonquest.jp/dqmsl/" class="http-bookmark"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/a_004.gif" alt="" class="http-bookmark"></a></p>
+
+<p>他にもCocos2d-xで作られたゲームはこちらにあります</p>
+
+<p><a href="http://www.cocos2d-x.org/games">Games | Cocos2d-x</a></p>
+
+<p>めちゃめちゃあります。もちろんぴよ飛ばしもCocos2dxで作りました。</p>
+
+<p>僕が何より凄いと思ったのは、一つコードをかけば、AndroidにもiOSにも対応したアプリを作ることができること。わざわざコードをiOS用、Android用と２つ書くなんてやってられませんね。Cocos2d-x凄い。</p>
+
+<p>日本語の情報も多いのでこれでやっていきます。</p>
+
+<h2>手順１ 開発環境をつくってHello Worldする(1~3時間)</h2>
+
+<p>最初は開発環境を作りましょう。この記事ではWindows7 + Eclipseでやっていきます。</p>
+
+<p>実際にAndroidの実機で「Hello World」するところまでやりますね。(iOSで動かすにはMacが必要です。)</p>
+
+<p>しかし安心してください。コードは一行も書きません。</p>
+
+<h3>Eclipse(ADT)+Android SDK</h3>
+
+<p><a href="http://developer.android.com/sdk/index.html">Android SDK | Android Developers</a></p>
+
+<p>ここからダウンロードしてください。最初からAndroid開発用にカスタマイズされたEclipseを手に入れることができます。</p>
+
+<p>解凍して、適当なフォルダに突っ込んでください。</p>
+
+<p>僕はここに</p>
+
+<p>C:\Devel\adt-bundle-windows-x86_64-20140321</p>
+
+<h4>日本語化(オプション)</h4>
+
+<p>しなくてもいいのですが。</p>
+
+<p><a href="http://mergedoc.sourceforge.jp/">http://mergedoc.sourceforge.jp/</a></p>
+
+<p>上からプラグイン・ダウンロードから1.4.0をダウンロードして解凍してください。</p>
+
+<p>Eclipseを開いていたら閉じてください。</p>
+
+<p>feauresフォルダとpluginsフォルダ、eclipse.exe -clean.cmdファイルをEclipseのディレクトリへつっこんでください。はい、全部上書きしましょう。</p>
+
+<p>そしてeclipse.iniを右クリックから編集で開き、以下を最後の行にコピペしてください。</p>
+
+<pre class="code" data-unlink="">-javaagent:plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar</pre>
+
+
+<p>eclipse.exe -clean.cmdからeclipseを起動して、日本語化完了です。</p>
+
+<h3>Android NDK</h3>
+
+<p><a href="https://developer.android.com/tools/sdk/ndk/index.html">Android NDK | Android Developers</a></p>
+
+<p>問題があるようなのでダウンロードURLの「r9d」の部分を「r8e」に変更し、ダウンロードして適当なフォルダに解凍してください。</p>
+
+<p>C:\Devel\android-ndk-r8e</p>
+
+<h3>Cocos2d-x</h3>
+
+<p><a href="http://www.cocos2d-x.org/download">Download Cocos2d-x Cocos2d-html5 CocoStudio | Cocos2d-x</a></p>
+
+<p>ここから「Download v2.2.3」をダウンロードして解凍し、適当なフォルダに突っ込んでください。</p>
+
+<p>v3.xはまだ日本語情報があまりなく、初心者には厳しいものがありますので、v2.2.3をダウンロードしてください。</p>
+
+<p>C:\Devel\cocos2d-x-2.2.3</p>
+
+<h3>Pythonのインストール</h3>
+
+<p>こちらから2.7.6のインストーラをDLして実行してください。新しくゲームを作るときに必要にな、配布されたツールを動かすのに使います。</p>
+
+<p><a href="https://www.python.org/download/">Download Python | Python.org</a></p>
+
+<p>PATHも通してください</p>
+
+<p><a href="http://www.pythonweb.jp/install/setup/index1.html">環境変数PATHの設定 - 環境設定と動作確認 - Pythonインストールと環境設定</a></p>
+
+<p>コマンドプロントから(python --version)ができるようになったら成功です</p>
+
+<h3>Cygwin</h3>
+
+<p>ここからCygwinをDLしてインストールしてください</p>
+
+<p><a href="http://cygwin.com/install.html">Cygwin Installation</a></p>
+
+<p>インストーラの指示通りににDLすればいいです。</p>
+
+<p>途中でmakeと入力してインストールしましょう</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401143935.png" alt="f:id:ottati:20140401143935p:plain" title="f:id:ottati:20140401143935p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>そしてPythonと同じ手法で</p>
+
+<p>C:\cygwin\bin</p>
+
+<p>にパスを通してください(cygwinの部分は各自変更してください)</p>
+
+<h3>JDK</h3>
+
+<p>ここからインストールしてください</p>
+
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+
+<h3>Eclipseの設定</h3>
+
+<p>Eclipseの設定に入ります。</p>
+
+<h4>Cocos2dxのフォルダをリンクされたリソースに追加</h4>
+
+<p>ウィンドウ-&gt;設定-&gt;一般-&gt;ワークスペース-&gt;リンクされたリソース</p>
+
+<p>より新規ボタンを押してCocos2dxのフォルダを指定します</p>
+
+<ul>
+<li>名前: COCOS2DX</li>
+<li>ロケーション: C:\Devel\cocos2d-x-2.2.3</li>
+</ul>
+
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401185816.png" alt="f:id:ottati:20140401185816p:plain" title="f:id:ottati:20140401185816p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<h4>C++のビルド設定</h4>
+
+<p>ウィンドウ-&gt;設定 -&gt;C/C++-&gt;ビルド-&gt;環境</p>
+
+<p>より、追加ボタンを押して以下3つの値を入力します。</p>
+
+<ul>
+<li>変数: CYGWIN</li>
+<li><p>値: nodosfilewarning</p></li>
+<li><p>変数: NDK_ROOT</p></li>
+<li><p>値: C:\Devel\android-ndk-r8e</p></li>
+<li><p>変数: SHELLOPTS</p></li>
+<li>値: igncr</li>
+</ul>
+
+
+<h3>libcocos2dxをインポートする</h3>
+
+<p>環境構築も終盤です。</p>
+
+<p>ファイル-&gt;インポート-&gt;Android-&gt;Existing Android Code Into Workspace</p>
+
+<p>より</p>
+
+<p>C:\Devel\cocos2d-x-2.2.3\cocos2dx\platform\android\java</p>
+
+<p>をルートディレクトリに入力してください。</p>
+
+<p>「プロジェクトをワークスペースにコピー」にはチェックをいれないでください。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401190518.png" alt="f:id:ottati:20140401190518p:plain" title="f:id:ottati:20140401190518p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>そして完了ボタンを押してください。</p>
+
+<p>そうすると左側のプロジェクト・エクスプローラーと呼ばれる場所に"libcocos2dx"が表示されると思います。</p>
+
+<p>そしてコンソールには「<span style="color: #ff0000">Unable to resolve target 'android-8'</span>」と表示されると思います。これはandroid-8、つまり Android2.2のSDKがないということです。</p>
+
+<p>なのでウィンドウ-&gt;Android SDK マネージャーよりAndroid2.2のSDKをインストールしてください。</p>
+
+<p>以下のような感じでインストールしましょう。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401190932.png" alt="f:id:ottati:20140401190932p:plain" title="f:id:ottati:20140401190932p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>結構DLに時間がかかります。なので次にいきましょう。</p>
+
+<h3>プロジェクトを作成する</h3>
+
+<p>やっとゲームのプロジェクトを作成することができるところまできました。</p>
+
+<p>Windowsキーを押しながらRキーを押して「cmd」と入力してください。</p>
+
+<p>コマンドプロントが出てくると思います。黒くてなんだか嫌ですが安心してください。コマンドを使うのはこの時くらいです。</p>
+
+<p>cd C:\Devel\cocos2d-x-2.2.3\tools\project-creatorと入力してください。</p>
+
+<p>それかエクスプローラで上記フォルダまでいって何も無いところでシフトキーを押しながら右クリック、「コマンド ウィンドウをここで開く」をクリックしてください。</p>
+
+<p>そして以下を入力してください</p>
+
+<pre class="code" data-unlink="">python create_project.py</pre>
+
+
+<p>これでcreate_project.pyの使い方が出てきます。create_project.pyはゲームのプロジェクトを作成するものです。</p>
+
+<p>プロジェクト名、パッケージ名、言語名を指定してプロジェクトを作ります</p>
+
+<p>今回は</p>
+
+<ul>
+<li>プロジェクト名: MyGame</li>
+<li>パッケージ名: com.example.MyGame</li>
+<li>言語: cpp</li>
+</ul>
+
+
+<p>とします。cppはC++のことです。</p>
+
+<p>よって入力するコードは次のようになります</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401192642.png" alt="f:id:ottati:20140401192642p:plain" title="f:id:ottati:20140401192642p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>「Have Fun!」と言われたらプロジェクトが正常に作られたことになります。</p>
+
+<p>Have Funの前をよく見ると生成されたプロジェクトフォルダの位置が示されています</p>
+
+<p>今回は以下となります</p>
+
+<p>C:\Devel\cocos2d-x-2.2.3\projects\MyGame</p>
+
+<p>create_project.pyはprojectsフォルダにプロジェクトを生成するようになっているんですね。</p>
+
+<h3>MyGameをEclipseで読み込む</h3>
+
+<p>では早速読み込みましょう。<b>「Hello World」直前です。</b></p>
+
+<p>ファイル-&gt;新規-&gt;インポート-&gt;Android-&gt;Existing Android Code Into Workspace</p>
+
+<p>より先ほど作ったプロジェクトのフォルダにあるproj.androidを指定しましょう</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401193250.png" alt="f:id:ottati:20140401193250p:plain" title="f:id:ottati:20140401193250p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>完了ボタンを押すと、Eclipseが頑張り始めますので温かい目で見てあげましょう。なにかエラーがでましたらエラー内容をコピってググりましょう。</p>
+
+<h3>実際に実機で動かしてみる</h3>
+
+<p>USBケーブルでAndroidとPCをつないで実行してみましょう。</p>
+
+<p>Androidの設定から開発者向けオプションのUSBデバッグにチェックを入れてください。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401201006.png" alt="f:id:ottati:20140401201006p:plain" title="f:id:ottati:20140401201006p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>AndroidにMyGameという名前でアプリがインストールされました！</p>
+
+<p>Androidで自動的にアプリが立ち上がらない場合は手動でアイコンをタップして起動してください。</p>
+
+<p>こんな感じで表示されたら成功です！！</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140401202518.png" alt="f:id:ottati:20140401202518p:plain" title="f:id:ottati:20140401202518p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>準備はできました。あとはゲームを作るだけです。</p>
+
+<h3>番外編: よくわからないところでエラーが出て実行出来ない時</h3>
+
+<p>ウィンドウ-&gt;設定-&gt;C/C++-&gt;コード解析</p>
+
+<p>についてるチェックを適当に外しましょう。</p>
+
+<h2>手順2 HelloWorldを他の文字列に変えてみる。 (1分)</h2>
+
+<p>では実際にゲームの内容を変更してみます。</p>
+
+<p>MyGame内のClassesの中にあるC++ファイルを変更、作成することでゲームを作っていきます。</p>
+
+<p>とりあえずHelloWorldScene.cppを開いてみましょう。実機で表示されたものはHelloWorldScene.cppでプログラムされています。</p>
+
+<p>始めにAppDelegate.cppが呼ばれ、AppDelegate.cppからHelloWorldScene.cppを呼び出すような流れとなっています。</p>
+
+<h4>HelloWorld::init()</h4>
+
+<p>このメソッドでHelloWorldや画像の表示の処理をしています。</p>
+
+<p>この中から以下のコードを見つけてください</p>
+
+<pre class="code" data-unlink="">    CCLabelTTF* pLabel = CCLabelTTF::create(<span class="synConstant">"Hello World"</span>, <span class="synConstant">"Arial"</span>, <span class="synConstant">24</span>);
+</pre>
+
+
+<p>これでHelloWorldというラベルを生成しています。</p>
+
+<p>なのでちょこっと変えてみましょう。</p>
+
+<pre class="code" data-unlink="">    CCLabelTTF* pLabel = CCLabelTTF::create(<span class="synConstant">"Have a nice day"</span>, <span class="synConstant">"Arial"</span>, <span class="synConstant">24</span>);
+</pre>
+
+
+<p>保存したらF11を押して実行してみましょう。</p>
+
+<p>HelloWorldがHave a nice dayに変更されたと思います。</p>
+
+<p>このようにClassesの中をいじくってゲームを作っていく流れとなります。</p>
+
+<h2>手順3 C++の初心者になる(2~10日)</h2>
+
+<p>Cocos2d-xではC++を使います。なのでC++の基礎をやります。</p>
+
+<p><span style="color: #ff0000">しかし、やらなくてもこの記事に書いてある通りにコードを書いていけば一つのゲームアプリが完成します。とりあえず作っちゃおうという方は飛ばしてください。</span></p>
+
+<p>とりあえずこちらのサイトの項目を全て見たり書き写したりしてください。</p>
+
+<p><a href="http://www.asahi-net.or.jp/%7Eyf8k-kbys/newcpp0.html">C++入門</a><a href="http://b.hatena.ne.jp/entry/http://www.asahi-net.or.jp/%7Eyf8k-kbys/newcpp0.html" class="http-bookmark"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/newcpp0.gif" alt="" class="http-bookmark"></a></p>
+
+<p><b>「前提知識を必要としない」</b>がモットーの資料なので、初心者にぴったりなわけです。実際に僕もぴよ飛ばしを作る前までは<span style="color: #ff0000">C++のことを何一つ知らなかった</span>ので、このサイトを使って勉強しました。</p>
+
+<blockquote><p>人生における最大の才能は「おもしろい」と思う性格でしょう。</p></blockquote>
+
+<p>などと、面白いコメントも沢山あり、楽しめるでしょう...</p>
+
+<h2>手順4 クソゲーを作ってみる(0時間~3時間)</h2>
+
+<p>では実際にクソゲーを作っていきましょう！</p>
+
+<p>今回は今話題の「DOGECOIN」で有名な柴犬の「かぼすちゃん」を使ってゲームを作りたいと思います。</p>
+
+<p>Dogecoinって何？って方はこちら(楽しい動画もありますよXD)</p>
+
+<p><a href="http://dogecoin.com/">Dogecoin</a></p>
+
+<p>かわいい。</p>
+
+<p>ということで、以下のようなゲームを作ります。</p>
+
+<ol>
+<li>かぼすちゃんが次々と空から降ってくる</li>
+<li>かぼすちゃんが地面に付く前にタッチで消していく</li>
+<li>かぼすちゃんが一匹でも地面についたらゲームオーバー</li>
+</ol>
+
+
+<p>ちなみにゲーム名はDoge Defenseです。</p>
+
+<p>想像図。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404170806.png" alt="f:id:ottati:20140404170806p:plain" title="f:id:ottati:20140404170806p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>作りました。</p>
+
+<p><span style="font-size: 200%">タッチしてスタートだ！！</span></p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404145521.png" alt="f:id:ottati:20140404145521p:plain" title="f:id:ottati:20140404145521p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p><span style="font-size: 200%">かぼすちゃんが降ってくるのでタッチで消そう！！</span></p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404145333.png" alt="f:id:ottati:20140404145333p:plain" title="f:id:ottati:20140404145333p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p><span style="font-size: 200%">一匹でも落ちたらゲームオーバーだ！！
+</span></p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404145508.png" alt="f:id:ottati:20140404145508p:plain" title="f:id:ottati:20140404145508p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>これを手順1で作ったMyGameで作っていきます。</p>
+
+<h3>素材とかをDLする</h3>
+
+<p>githubにソースコードと一緒に素材もアップしました。ソースコードは完成されているので記事を見る上で参考にしてください。</p>
+
+<p><a href="https://github.com/ottatiyarou/DogeDefense">ottatiyarou/DogeDefense · GitHub</a></p>
+
+<p>画像(美的センスが合わないね！って場合は差し替えてください)とか、音楽ファイル(天下の魔王魂さんからお借りしました)とか入ってます。</p>
+
+<p>よくわからない方はページ右下の「Download ZIP」からdlしてください。</p>
+
+<p>「コードを一行も書きたくない」「よくわからない」って場合はMyGameフォルダ以下のClassesフォルダとResourcesフォルダを上書きして実行しちゃってください。すぐにかぼすちゃんまみれになれます。</p>
+
+<p>じゃあ早速作っていきましょう！</p>
+
+<h3>サンプルのお掃除</h3>
+
+<p>なんかHelloWorldScene.cppを開くと色々ごちゃごちゃしているので、綺麗にしましょう。</p>
+
+<p>init()の中身を以下を残して消しましょう。</p>
+
+<pre class="code" data-unlink=""><span class="synType">bool</span> HelloWorld::init()
+{
+    <span class="synComment">//////////////////////////////</span>
+    <span class="synComment">// 1. super init first</span>
+    <span class="synStatement">if</span> ( !CCLayer::init() )
+    {
+        <span class="synStatement">return</span> <span class="synConstant">false</span>;
+    }
+
+
+    <span class="synStatement">return</span> <span class="synConstant">true</span>;
+}
+
+</pre>
+
+
+<p>そしてmenuCloseCallbackも消しちゃいましょう</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> HelloWorld::menuCloseCallback(CCObject* pSender)
+{
+<span class="synPreProc">#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)</span>
+    CCMessageBox(<span class="synConstant">"You pressed the close button. Windows Store Apps do not implement a close button."</span>,<span class="synConstant">"Alert"</span>);
+<span class="synPreProc">#else</span>
+    CCDirector::sharedDirector()-&gt;end();
+<span class="synPreProc">#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)</span>
+    exit(<span class="synConstant">0</span>);
+<span class="synPreProc">#endif</span>
+<span class="synPreProc">#endif</span>
+}
+</pre>
+
+
+<p>最後にHelloWorldScene.hの</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// a selector callback</span>
+    <span class="synType">void</span> menuCloseCallback(CCObject* pSender);
+</pre>
+
+
+<p>を消して実行してみてください。</p>
+
+<p>ただの真っ暗の画面が表示されたら掃除成功です！</p>
+
+<h3>画面の設定をする</h3>
+
+<p>ゲーム内で使う画面サイズを決めます。</p>
+
+<p>AppDelegate.cppの</p>
+
+<pre class="code" data-unlink="">pDirector-&gt;setOpenGLView(pEGLView);
+</pre>
+
+
+<p>の直下に以下を描いてください</p>
+
+<pre class="code" data-unlink="">    CCSize designSize = CCSize(<span class="synConstant">480</span>, <span class="synConstant">320</span>);
+    CCEGLView::sharedOpenGLView()-&gt;setDesignResolutionSize(designSize.width,
+            designSize.height, kResolutionExactFit);
+</pre>
+
+
+<p>CCEGLView::sharedOpenGLView()-&gt;setDesignResolutionSizeはゲーム内で使う画面のサイズを決めます。</p>
+
+<p>実際に実機に表示するときにはこれを引き伸ばしたり縮めたりして調節します。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140402233759.png" alt="f:id:ottati:20140402233759p:plain" title="f:id:ottati:20140402233759p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>どう引き伸ばすか(縮めるか)は第三引数に指定します。kResolutionExactFitはアスペクト比を無視して画面一杯に引き伸ばす方法です。</p>
+
+<p>こちらが参考になると思います</p>
+
+<p><a href="http://hiratti41.blogspot.jp/2012/10/cocos2d-xsetdesignresolutionsize.html">GREEN WOOD: 【cocos2d-x】setDesignResolutionSizeのパラメーターによる表示の違い。</a></p>
+
+<p>今回は横幅480px, 縦幅320pxでいきます。例えば画面の横半分のサイズの画像を貼り付けたい場合は(240, 320)のサイズの画像を作ればいいわけです。</p>
+
+<h3>舞台を作る</h3>
+
+<p>画面のサイズ(480px, 320px)を考慮しつつ、かぼすちゃんが降ってくる舞台を創りましょう。</p>
+
+<ul>
+<li>ウィンドウのサイズを取得する</li>
+<li>太陽を貼っつける</li>
+<li>草を貼っつける</li>
+<li>背景を黒=&gt;青</li>
+</ul>
+
+
+<h5>ウィンドウのサイズを取得する</h5>
+
+<p>上で指定した値、480, 320は以下の関数で取得します。</p>
+
+<pre class="code" data-unlink="">CCDirector::sharedDirector()-&gt;getWinSize();
+</pre>
+
+
+<p>CCSizeオブジェクトが返ります。これはwidthとheightというメンバ変数を持っています。</p>
+
+<p>HelloWorldScene.hを開いて</p>
+
+<pre class="code" data-unlink=""><span class="synPreProc">#include </span><span class="synConstant">"cocos2d.h"</span>
+</pre>
+
+
+<p>の下に</p>
+
+<pre class="code" data-unlink="">USING_NS_CC;
+</pre>
+
+
+<p>と書きましょう。USING_NS_CCは</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">using</span> <span class="synType">namespace</span> cocos2d
+</pre>
+
+
+<p>を示すマクロで、CCPlatformMacros.hで宣言されています。</p>
+
+<p>そしてスプライトを貼っつけたりするときによく使うのでprivateに以下を宣言しましょう。</p>
+
+<pre class="code" data-unlink="">CCSize _winSize;
+</pre>
+
+
+<p>そして.cppのほうのinit()のreturn true;の前に以下を書きましょう。</p>
+
+<pre class="code" data-unlink="">_winSize = CCDirector::sharedDirector()-&gt;getWinSize();
+</pre>
+
+
+<p>これで<em>winSize.width, </em>winSize.heightで画面の横幅、縦幅を簡単に取得できるようになりました。</p>
+
+<h5>太陽を貼っつける</h5>
+
+<p>太陽を貼っつけましょう。Resourcesのsun.pngを使います。</p>
+
+<p>_winSizeを宣言した後に以下を書いて実行してください。</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// sun</span>
+    CCSprite * sun = CCSprite::create(<span class="synConstant">"sun.png"</span>);
+    sun-&gt;setAnchorPoint(ccp(<span class="synConstant">1</span>, <span class="synConstant">1</span>));
+    sun-&gt;setPosition(ccp(_winSize.width, _winSize.height));
+    <span class="synStatement">this</span>-&gt;addChild(sun, <span class="synConstant">0</span>);
+</pre>
+
+
+<p>画面右上になんとも可愛らしい太陽が現れました。</p>
+
+<p>画像を貼っつけるときはCCSpriteを生成してsprite-&gt;setPosition()で座標を決め、this-&gt;addChild()で画面にはっつけるという流れとなります。</p>
+
+<p>setAnchorPointはスプライトの中心点を決めるメンバ関数です。setPositionで座標を決めるときに参照されます。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404164701.png" alt="f:id:ottati:20140404164701p:plain" title="f:id:ottati:20140404164701p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>デフォルトではccp(0.5, 0.5)、つまり画像の真ん中です。</p>
+
+<p>ccpはCCPointを簡単に生成できるマクロです。</p>
+
+<p>setPosition()で座標を決めています。先ほど作った_winSizeを使っていますね。
+this-&gt;addChild(sun, 0)の0の部分は奥行きzの数値です。大きいほうが前にでてきます。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404165527.png" alt="f:id:ottati:20140404165527p:plain" title="f:id:ottati:20140404165527p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<h5>草を貼っつける</h5>
+
+<p>太陽と同じ流れで貼っつけます。草の画像はgrasses.pngです。</p>
+
+<p>太陽をaddChildした下に書いてください。</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// grasses</span>
+    CCSprite * grasses = CCSprite::create(<span class="synConstant">"grasses.png"</span>);
+    grasses-&gt;setAnchorPoint(ccp(<span class="synConstant">0</span>, <span class="synConstant">0</span>));
+    grasses-&gt;setPosition(ccp(<span class="synConstant">0</span>, <span class="synConstant">0</span>));
+    <span class="synStatement">this</span>-&gt;addChild(grasses, <span class="synConstant">3</span>);
+</pre>
+
+
+<p>実行すると美味しそうな草が貼っ付けられたことがわかります。</p>
+
+<h3>背景の色を黒から青へ</h3>
+
+<p>太陽があるのに空が黒いのは全くもって変なので、明るくしましょう。</p>
+
+<p>HelloWorldScene.hの</p>
+
+<pre class="code" data-unlink=""><span class="synType">class</span> HelloWorld: <span class="synStatement">public</span> cocos2d::CCLayer
+</pre>
+
+
+<p>を</p>
+
+<pre class="code" data-unlink=""><span class="synType">class</span> HelloWorld: <span class="synStatement">public</span> cocos2d::CCLayerColor
+</pre>
+
+
+<p>として、</p>
+
+<p>.cppの</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// 1. super init first</span>
+    <span class="synStatement">if</span> (!CCLayer::init()) {
+        <span class="synStatement">return</span> <span class="synConstant">false</span>;
+    }
+</pre>
+
+
+<p>を</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// 1. super init first</span>
+    <span class="synStatement">if</span> (!CCLayerColor::initWithColor(ccc4(<span class="synConstant">200</span>, <span class="synConstant">230</span>, <span class="synConstant">255</span>, <span class="synConstant">255</span>))) {
+        <span class="synStatement">return</span> <span class="synConstant">false</span>;
+    }
+</pre>
+
+
+<p>として実行してください。明るくなりましたね。</p>
+
+<p>CCLayerColorはCCLayerを継承したクラスで、色を指定することができます。
+ccc4はccColor4Bオブジェクトを返すマクロです。RGBαを引数にとっています。</p>
+
+<p><span style="font-size: 200%">これで舞台は完成しました！！</span></p>
+
+<h3>わんこを降らせる</h3>
+
+<p>さて、さっそくわんこを降らせましょう。わんこを降らせるロジックはこんな感じです。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404171726.png" alt="f:id:ottati:20140404171726p:plain" title="f:id:ottati:20140404171726p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>わんこを最初に大量につくっといて、順番にふらせます。しかしはてなブログのお絵描き機能、使いづらいですね。</p>
+
+<h5>わんこを降らす準備</h5>
+
+<p>では初めにわんこのプール(わんこ待機場)を作りましょう。</p>
+
+<p>.hのprivateに</p>
+
+<pre class="code" data-unlink="">CCArray * _doges;  // わんこ待機場</pre>
+
+
+<p>を宣言しましょう。CCArrayにはスプライトとかを突っ込むことができます。</p>
+
+<p>あとデストラクタが宣言されていないと思うのでpublicのほうに以下を宣言しておいてください。</p>
+
+<pre class="code" data-unlink="">~HelloWorld();
+</pre>
+
+
+<p>いよいよdogeを作ります。</p>
+
+<p>.cppのUSING_NS_CCの下に</p>
+
+<pre class="code" data-unlink=""><span class="synPreProc">#define NUM_DOGES </span><span class="synConstant">25</span>
+</pre>
+
+
+<p>と宣言してください。待機場にわんこは最大で25匹たまります。(つまり画面上に一度にでてくるわんこのMAXも25です)</p>
+
+<p>とりあえず待機場を作ります。</p>
+
+<p>init()の草を追加したコードの下に以下です。</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// doges</span>
+    _doges = CCArray::create();
+</pre>
+
+
+<p>さあわんこを25匹作ってCCArrayの中につっこみましょう。</p>
+
+<p>しかし待ってください。25匹も普通に作ると沢山わんこを描かなければならないので処理が重たくなってしまいます。</p>
+
+<p>なのでCCSpriteBatchNodeというのを使います。</p>
+
+<p>同じ画像(テクスチャ)のスプライトを大量生産する時は、そのテクスチャを持ったバッチノードを作り、そこにスプライトを追加していきます。これによって複数回しなければならなかった描画処理をたった一回で行うことができます。</p>
+
+<p>バッチノードは普通にthis-&gt;addChildではっつけてください。</p>
+
+<pre class="code" data-unlink="">    CCSpriteBatchNode * dogeNode = CCSpriteBatchNode::create(<span class="synConstant">"doge.png"</span>);
+    <span class="synStatement">this</span>-&gt;addChild(dogeNode, <span class="synConstant">0</span>);
+</pre>
+
+
+<p>それでは柴犬を25匹作りましょう。</p>
+
+<p>柴犬のスプライトを作る時はバッチノードからテクスチャを持ってきてcreate()の代わりにcreateWithTextureを使います。</p>
+
+<pre class="code" data-unlink="">    <span class="synStatement">for</span> (<span class="synType">int</span> i = <span class="synConstant">0</span>; i &lt; NUM_DOGES; i++) {
+        CCSprite * doge = CCSprite::createWithTexture(dogeNode-&gt;getTexture());
+        doge-&gt;setVisible(<span class="synConstant">false</span>);
+        doge-&gt;setScale(<span class="synConstant">0.5f</span>);
+        dogeNode-&gt;addChild(doge, <span class="synConstant">1</span>);
+        _doges-&gt;addObject(doge);
+    }
+</pre>
+
+
+<p>setVisible(false);では最初は画面から見えないようにしています。</p>
+
+<p>それとかぼすちゃんの顔をちょっとでかくしてしまいました。なのでsetScale(0.5f)でちっちゃくしています。</p>
+
+<p>あとは作ったスプライトをバッチノードに追加し、わんこ待機場にも追加しておきます。</p>
+
+<p>そして先ほどのコードの最後に以下を追加してretainしてください。</p>
+
+<pre class="code" data-unlink="">    _doges-&gt;retain();
+</pre>
+
+
+<p>最後に#define NUM_DOGES 25の下に以下を書いてください</p>
+
+<pre class="code" data-unlink="">HelloWorld::~HelloWorld() {
+    CC_SAFE_RELEASE(_doges);
+}
+</pre>
+
+
+<p>retain(), CC_SAFE_RELEASEなどについてはこちらの記事が詳しくまとめてらっしゃいます。</p>
+
+<p><a href="http://brbranch.jp/blog/201311/cocos2d-x/cocos2dx_memory_leak/">cocos2d-xのリファレンスカウンタを理解してクラッシュやメモリリークを防ぐ | たそがれブランチ</a><a href="http://b.hatena.ne.jp/entry/http://brbranch.jp/blog/201311/cocos2d-x/cocos2dx_memory_leak/" class="http-bookmark"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/a_002.gif" alt="" class="http-bookmark"></a></p>
+
+<p>実行してエラーがでなかったら多分成功です。よくわからない時は一回一回実行してみるといいかもしれません。</p>
+
+<h5>わんこを降らす</h5>
+
+<p><b>一応このゲームのメインな処理です。</b></p>
+
+<p>待機場から順番にわんこを降らせます。</p>
+
+<p>再掲(する価値はこれにあるのか...)</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404171726.png" alt="f:id:ottati:20140404171726p:plain" title="f:id:ottati:20140404171726p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>.hのほうのprivateに以下を宣言してください。</p>
+
+<pre class="code" data-unlink="">    <span class="synType">int</span> _dogeIndex;
+    <span class="synType">float</span> _dogeTimer;
+    <span class="synType">float</span> _dogeInterval;
+</pre>
+
+
+<p><em>dogeIntervalごとに</em>dogeIndex番目のわんこを降らせていきます。</p>
+
+<p><em>dogeTimerは時間を貯める変数です。</em>dogeTimerが<em>dogeIntervalを超えたら</em>dogeIndex番目のわんこを降らせて、_dogeTimerを0に戻します。</p>
+
+<p>あとpublicの方に</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> update(<span class="synType">float</span> dt);
+</pre>
+
+
+<p>を宣言してください。
+この関数は1フレーム毎に一回呼び出されます。デフォルトでは1秒間に60回呼び出されます。</p>
+
+<p>しかしそのままではupdate関数は呼び出されないのでinit()のreturn trueの前でthis-&gt;scheduleUpdate();しましょう。</p>
+
+<p>ついでに先ほど宣言した変数の初期化もしましょう。</p>
+
+<pre class="code" data-unlink=""><span class="synComment">// 初期化</span>
+_dogeTimer = <span class="synConstant">0</span>;
+_dogeInterval = <span class="synConstant">0</span>;
+_dogeIndex = <span class="synConstant">0</span>;
+
+<span class="synComment">// update関数が呼び出されるように</span>
+<span class="synStatement">this</span>-&gt;scheduleUpdate();
+</pre>
+
+
+<p>と書いてください。これでupdate関数が呼び出されるようになりました。</p>
+
+<p>update関数を宣言しましょう。少し長いですが、わかりやすさのために一気に書いたほうがよかったのです。</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> HelloWorld::update(<span class="synType">float</span> dt) {
+    _dogeTimer += dt;
+    <span class="synStatement">if</span> (_dogeTimer &gt;= _dogeInterval) {
+        <span class="synComment">// インデックスのわんこを取得</span>
+        CCSprite * doge = (CCSprite *) _doges-&gt;objectAtIndex(_dogeIndex);
+
+        <span class="synStatement">if</span> (doge-&gt;isVisible()) { <span class="synComment">// 既に画面上にそのわんこが居たら何もしない</span>
+            <span class="synStatement">return</span>;
+        }
+
+        <span class="synComment">// インデックスの更新</span>
+        _dogeIndex++;
+        <span class="synStatement">if</span> (_dogeIndex == NUM_DOGES) {
+            _dogeIndex = <span class="synConstant">0</span>;
+        }
+
+        <span class="synComment">// 犬が出てくるx座標と犬の落下地点のx座標を決める</span>
+        <span class="synType">int</span> x = arc4random() % (<span class="synType">int</span>) (_winSize.width * <span class="synConstant">0.8f</span>)
+                + _winSize.width * <span class="synConstant">0.1f</span>;
+        <span class="synType">int</span> target_x = rand() % (<span class="synType">int</span>) (_winSize.width * <span class="synConstant">0.8f</span>)
+                + _winSize.width * <span class="synConstant">0.1f</span>;
+        doge-&gt;stopAllActions();  <span class="synComment">// 犬のアクションを止める</span>
+        
+        <span class="synComment">//犬を画面のちょうど見えないところに設置</span>
+        doge-&gt;setPosition(
+                ccp(x,
+                        _winSize.height
+                                + doge-&gt;boundingBox().size.height * <span class="synConstant">0.5f</span>));
+
+        <span class="synComment">// わんこのアクションを作成</span>
+
+        <span class="synComment">// わんこがくるくる回転するアクション</span>
+        <span class="synType">float</span> rotateSpeed = (arc4random() % <span class="synConstant">10</span>) * <span class="synConstant">0.1f</span>;
+        CCActionInterval* rotate = CCRotateBy::create(rotateSpeed, -<span class="synConstant">90</span>);  
+        CCAction* repeatRotate = CCRepeatForever::create(rotate);
+
+        <span class="synComment">// わんこが落ちていくアクション</span>
+        CCFiniteTimeAction* sequence = CCSequence::create(
+                CCMoveTo::create(<span class="synConstant">3.0f</span>,
+                        ccp(target_x, doge-&gt;boundingBox().size.height * <span class="synConstant">0.3f</span>)),
+                <span class="synConstant">NULL</span>);
+
+        doge-&gt;setVisible(<span class="synConstant">true</span>);
+        doge-&gt;runAction(repeatRotate);
+        doge-&gt;runAction(sequence);
+
+        <span class="synComment">// reset Doge Timer</span>
+        _dogeTimer = <span class="synConstant">0</span>;
+        _dogeInterval = <span class="synConstant">0.2f</span> + (arc4random() % <span class="synConstant">5</span>) * <span class="synConstant">0.1f</span>;
+    }
+}
+</pre>
+
+
+<p>早速実行してみてください。わんこがくるくる回りながら落ちてきて下に溜まっていくと思います。なんて素晴らしい画なんでしょう♡</p>
+
+<p>スプライトのメンバ関数、boundingBox()はスプライト自身のwidth, heightを持ったオブジェクトを返すものです。</p>
+
+<p>以下のコードではわんこ置き場にある_dogeIndex番目のわんこを取り出しています。</p>
+
+<pre class="code" data-unlink="">CCSprite * doge = (CCSprite *) _doges-&gt;objectAtIndex(_dogeIndex);
+</pre>
+
+
+<p>25匹でてきてもう落ちてこないのは以下のコードでチェックしているからです。わんこを落とすときにsetVisible(true)の処理を与えているのでこのチェックが使えます。(あとでタッチした時にsetVisible(false)の処理を与えます。)</p>
+
+<pre class="code" data-unlink="">        <span class="synStatement">if</span> (doge-&gt;isVisible()) { <span class="synComment">// 既に画面上にそのわんこが居たら何もしない</span>
+            <span class="synStatement">return</span>;
+        }
+</pre>
+
+
+<p>ランダムを使うときはarc4random()を使うと楽です。</p>
+
+<pre class="code" data-unlink="">arc4random() % <span class="synConstant">4</span>
+</pre>
+
+
+<p>で0~3の値を取得できます。</p>
+
+<p>以下のコードではわんこのアクションを作っています。</p>
+
+<pre class="code" data-unlink="">        <span class="synComment">// わんこがくるくる回転するアクション</span>
+        <span class="synType">float</span> rotateSpeed = (arc4random() % <span class="synConstant">10</span>) * <span class="synConstant">0.1</span>;
+        CCActionInterval* rotate = CCRotateBy::create(rotateSpeed, -<span class="synConstant">90</span>);  <span class="synComment">// 回転アクション</span>
+        CCAction* repeatRotate = CCRepeatForever::create(rotate); <span class="synComment">// 無限リピートアクション</span>
+
+        <span class="synComment">// わんこが落ちていくアクション</span>
+        CCFiniteTimeAction* sequence = CCSequence::create(
+                CCMoveTo::create(<span class="synConstant">3.0f</span>,
+                        ccp(target_x, doge-&gt;boundingBox().size.height * <span class="synConstant">0.3f</span>)),
+                <span class="synConstant">NULL</span>);
+</pre>
+
+
+<p>CCActionはdoge-&gt;runAction();で使うことが出来ます。</p>
+
+<p>CCSequenceは複数のアクションを順番に実行していくアクションです。複数？一個しかアクション無いじゃん。と思ったあなたは正解です。実はこのあと落下時のアクションを足します。なのでCCSequenceを使っているのです。</p>
+
+<p>以下では落下地点(ccp内の座標)まで1秒かけて到達するように動かすというアクションを生成しています。</p>
+
+<pre class="code" data-unlink="">                CCMoveTo::create(<span class="synConstant">1.0f</span>,
+                        ccp(target_x, doge-&gt;boundingBox().size.height * <span class="synConstant">0.3f</span>)),
+</pre>
+
+
+<p>実行しているアクションはdoge-&gt;stopAllActions()で中止することができます。</p>
+
+<p>cocos2dxでは様々なアクションが用意されていて、簡単にスプライトを動かしたり点滅させたりジョジョに色を変えたりすることが出来ます。</p>
+
+<p>こちらの記事ではさまざまなアクションが画像付きで紹介されています。</p>
+
+<p><a href="http://brbranch.jp/blog/201309/cocos2d-x/cocos2d-x_animation/">cocos2dxのアクションまとめ | たそがれブランチ</a><a href="http://b.hatena.ne.jp/entry/http://brbranch.jp/blog/201309/cocos2d-x/cocos2d-x_animation/" class="http-bookmark"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/a_003.gif" alt="" class="http-bookmark"></a></p>
+
+<h5>タッチで消す処理</h5>
+
+<p>メイン2です。落ちてくるわんこをタッチして消す処理をします。</p>
+
+<p>とりあえずタッチした時にログを出してみましょう。</p>
+
+<p>.hのpublicに以下のコードを追加してください。</p>
+
+<pre class="code" data-unlink=""><span class="synType">bool</span> ccTouchBegan(CCTouch * touch, CCEvent * event);
+</pre>
+
+
+<p>そしてinit()のthis-&gt;scheduleUpdate();の上に以下のコードを追加してください。</p>
+
+<pre class="code" data-unlink="">    <span class="synStatement">this</span>-&gt;setTouchMode(kCCTouchesOneByOne);  <span class="synComment">// シングルタッチモード</span>
+    <span class="synStatement">this</span>-&gt;setTouchEnabled(<span class="synConstant">true</span>);  <span class="synComment">// タッチ機能の有効化</span>
+</pre>
+
+
+<p>そして.cppに以下の関数を追加してください。</p>
+
+<pre class="code" data-unlink=""><span class="synType">bool</span> HelloWorld::ccTouchBegan(CCTouch * touch, CCEvent * event) {
+    CCLOG(<span class="synConstant">"touched"</span>);
+    <span class="synStatement">return</span> <span class="synConstant">true</span>;
+}
+</pre>
+
+
+<p>実行してみてください。画面をタッチする度にLogCatにtouchedと表示されたと思います！</p>
+
+<p>ちゃんとタッチが認識されたので、今度はタッチしたところが犬の座標とぶつかるか見ていきます。ぶつかっていたら犬を消しましょう。</p>
+
+<p>ccTouchBeganの中身を以下のようにしましょう。</p>
+
+<pre class="code" data-unlink="">    CCSprite * doge;
+    CCObject * obj;
+
+    CCARRAY_FOREACH(_doges, obj) {
+        doge = (CCSprite *) obj;
+        <span class="synStatement">if</span> (!doge-&gt;isVisible()) {
+            <span class="synStatement">continue</span>;
+        }
+        <span class="synStatement">if</span> (doge-&gt;boundingBox().containsPoint(touch-&gt;getLocation())) { <span class="synComment">// タッチされた</span>
+            doge-&gt;stopAllActions();
+            doge-&gt;setVisible(<span class="synConstant">false</span>);
+        }
+    }
+    <span class="synStatement">return</span> <span class="synConstant">true</span>;
+</pre>
+
+
+<p>実行してみてください。降ってくるわんこをタッチするとわんこが消えたと思います。</p>
+
+<p>CCArrayは以下のようにして中身を取り出すことが出来ます。</p>
+
+<pre class="code" data-unlink="">    CCSprite * doge;
+    CCObject * obj;
+
+    CCARRAY_FOREACH(_doges, obj) {
+        doge = (CCSprite *) obj;
+    }
+</pre>
+
+
+<p>書いたコードでは、最初に犬のvisibleを見ています。消えていたらタッチしても意味ないのでcontinueします。</p>
+
+<p>そうでないならば、touch-&gt;getLocation()でタッチされた座標の情報をもったCCPointオブジェクトを取得し、doge-&gt;boundingBox().containsPoint()で座標がわんこと被っているかみています。</p>
+
+<p>もしかぶっていたらわんこのアクションを止め、setVisible(false)します。これでタッチでわんこを消すことが出来ました！</p>
+
+<h5>わんこが地面にぶつかった時の処理</h5>
+
+<p><span style="color: #ff0000">これは柴犬を地面に貯めていくゲームではありません！</span></p>
+
+<p>わんこが地面につくまでにタッチされなかったらゲームを終了させるべきです。</p>
+
+<p>privateに</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> hitGround();
+</pre>
+
+
+<p>を宣言してください。</p>
+
+<p>この関数はかぼすちゃんが地面についたら実行されるもので、全てのわんこの動きを止め、ゲームの更新を止める働きをします。</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> HelloWorld::hitGround() {
+    <span class="synComment">// わんこのアクションを止める</span>
+    CCSprite * doge;
+    CCObject * obj;
+    CCARRAY_FOREACH(_doges, obj) {
+        doge = (CCSprite *) obj;
+        doge-&gt;stopAllActions();
+    }
+
+    <span class="synComment">// ゲームの更新を止める</span>
+    _running = <span class="synConstant">false</span>;
+
+}
+</pre>
+
+
+<p>ところでまだ_runningを宣言していませんでしたね。</p>
+
+<p>privateに以下を宣言してください。</p>
+
+<pre class="code" data-unlink="">    <span class="synType">bool</span> _running;
+</pre>
+
+
+<p>init()のthis-&gt;setToucheModeの前に</p>
+
+<pre class="code" data-unlink="">_running = <span class="synConstant">true</span>;
+</pre>
+
+
+<p>を書いてください。</p>
+
+<p>そしてupdate()関数の一番上に以下を書いてください。</p>
+
+<pre class="code" data-unlink="">    <span class="synStatement">if</span> (!_running) {
+        <span class="synStatement">return</span>;
+    }
+</pre>
+
+
+<p>これで_runningがtrueの時にだけゲームの更新処理が行われるようになりました。</p>
+
+<p>次にかぼすちゃんの落下処理シーケンスを変更して、落下後にhitGroundを呼び出すようにします。</p>
+
+<pre class="code" data-unlink="">        CCFiniteTimeAction* sequence = CCSequence::create(
+                CCMoveTo::create(<span class="synConstant">3.0f</span>,
+                        ccp(target_x, doge-&gt;boundingBox().size.height * <span class="synConstant">0.3f</span>)),
+                <span class="synComment">// hitGround呼び出し</span>
+                CCCallFunc::create(<span class="synStatement">this</span>,
+                        callfunc_selector(HelloWorld::hitGround)),
+                <span class="synConstant">NULL</span>);
+</pre>
+
+
+<p>これで実行してみてください。かぼすちゃんが一匹でも地面に付いたらゲームが止まるようになりました。だんだんゲームらしさが出てきましたね。</p>
+
+<h3>スタート、ゲームオーバーを作る</h3>
+
+<p>だいたいゲームが完成してきました。</p>
+
+<p>ココらへんでスタート、ゲーム中、ゲームオーバーを作りましょう。</p>
+
+<p>遷移としてはこんな感じです。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140404185537.png" alt="f:id:ottati:20140404185537p:plain" title="f:id:ottati:20140404185537p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<p>スタートの時にタッチするとゲーム中になり、ゲームオーバ時にタッチするとゲーム中になります。</p>
+
+<h5>値をリセットする関数を作る</h5>
+
+<p>スタート時、ゲームオーバ時にゲーム中に使う、値を初期化する関数を作ります。</p>
+
+<p>void resetGame();を宣言し、.cppで以下を書いてください。</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> HelloWorld::resetGame() {
+    _dogeTimer = <span class="synConstant">0</span>;
+    _dogeInterval = <span class="synConstant">0</span>;
+    _dogeIndex = <span class="synConstant">0</span>;
+    _running = <span class="synConstant">true</span>;
+
+    CCSprite * doge;
+    CCObject * obj;
+    CCARRAY_FOREACH(_doges, obj) {
+        doge = (CCSprite *) obj;
+        doge-&gt;setVisible(<span class="synConstant">false</span>);
+    }
+}
+</pre>
+
+
+<h5>スタート画像、ゲームオーバ画像を貼っつける</h5>
+
+<p>スタート画像のスプライト、ゲームオーバ画像のスプライトをinit()で作ります。</p>
+
+<p>_doges-&gt;retain();の下に書きましょう。</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// start sprite</span>
+    _start = CCSprite::create(<span class="synConstant">"start.png"</span>);
+    _start-&gt;setPosition(ccp(_winSize.width * <span class="synConstant">0.5f</span>, _winSize.height * <span class="synConstant">0.5f</span>));
+    <span class="synStatement">this</span>-&gt;addChild(_start, <span class="synConstant">2</span>);
+
+    <span class="synComment">// game over sprite</span>
+    _gameOver = CCSprite::create(<span class="synConstant">"gameover.png"</span>);
+    _gameOver-&gt;setPosition(ccp(_winSize.width * <span class="synConstant">0.5f</span>, _winSize.height * <span class="synConstant">0.5f</span>));
+    _gameOver-&gt;setVisible(<span class="synConstant">false</span>);
+    <span class="synStatement">this</span>-&gt;addChild(_gameOver, <span class="synConstant">2</span>);
+</pre>
+
+
+<p>※ それぞれprivateで宣言してください。</p>
+
+<pre class="code" data-unlink="">    CCSprite * _start;
+    CCSprite * _gameOver;
+</pre>
+
+
+<p>そしてinit()内の_running = true; をfalseに変えてください。</p>
+
+<p>一緒にinit()内の以下のコードもどうせresetGame()初期化するので消しちゃいましょう</p>
+
+<pre class="code" data-unlink="">    _dogeTimer = <span class="synConstant">0</span>;
+    _dogeInterval = <span class="synConstant">0</span>;
+    _dogeIndex = <span class="synConstant">0</span>;
+</pre>
+
+
+<p>ちなみにここで実行するとスタート画像が出たままタッチしても何も反応しないようになっていると思います。</p>
+
+<h5>スタート時、ゲームオーバー時にタッチされたらresetGame()を呼ぶ</h5>
+
+<p>ccTouchBeganで今がゲームのどんな状態か判断して処理を分けます。</p>
+
+<p>ccTouchBegan関数の一番上に以下を追加してください。</p>
+
+<pre class="code" data-unlink="">    <span class="synStatement">if</span> (!_running) {
+        <span class="synStatement">if</span> (_start-&gt;isVisible() || _gameOver-&gt;isVisible()) {
+            <span class="synStatement">this</span>-&gt;resetGame();
+        }
+        <span class="synStatement">return</span> <span class="synConstant">true</span>;
+    }
+</pre>
+
+
+<p>そしてresetGame()に以下を追加してください。</p>
+
+<pre class="code" data-unlink="">    _start-&gt;setVisible(<span class="synConstant">false</span>);
+    _gameOver-&gt;setVisible(<span class="synConstant">false</span>);
+</pre>
+
+
+<p>コード通り、ゲーム中に入ったらスタートスプライトとゲームオーバスプライトのvisibleをfalseにする処理です。</p>
+
+<p>実行シてみてください！これでスタート画面でタッチするとresetGame()を呼び、ゲーム中へ遷移することが可能になりました。</p>
+
+<h5>わんこが墜落したらゲームオーバに移行する</h5>
+
+<p>しかしまだゲームオーバへ移行できていませんね。hitGround()でゲームオーバ画面を呼び出しましょう。</p>
+
+<p>void gameOver();を宣言して.cppに以下の関数を書いてください</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> HelloWorld::gameOver() {
+    _gameOver-&gt;setVisible(<span class="synConstant">true</span>);
+}
+</pre>
+
+
+<p>ただゲームオーバ画像のvisibleをtrueにしただけです。これによってタッチすることで再スタートすることができるようになりました。</p>
+
+<p>そしてhitGround()でこの関数を呼び出します。</p>
+
+<p>hitGround()内の_running = false;の直後に以下を書いてください</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">this</span>-&gt;scheduleOnce(schedule_selector(HelloWorld::gameOver), <span class="synConstant">0.5f</span>);
+</pre>
+
+
+<p>普通にthis-&gt;gameOver();で呼び出してもいいのです。しかしこのゲームはタッチしまくるゲームです。ゲームオーバになったことに気付かずにタッチしつづけていつの間にかゲームが再スタートされたなんてことになってしまいます。</p>
+
+<p>なので0.5秒後にgameOver関数を呼び出しています。</p>
+
+<p><b>実行してください!</b>かぼすちゃんが地面に落ちて画面が固まってから0.5f秒後にゲームオーバ画像が出てきて再スタート可能になっていることがわかると思います。</p>
+
+<p>それっぽくなってきましたね！！ much amaze!!</p>
+
+<h3>難易度を上げる</h3>
+
+<p>もうほぼゲーム自体は完成と言ってもいいくらいですが、このままだと簡単すぎて一生終わりません。なのでかぼすちゃんを消す度に難易度、つまり落下速度を上げていくことにします。</p>
+
+<p>float _difficulty;を宣言してresetGame()内で</p>
+
+<pre class="code" data-unlink="">_difficulty = <span class="synConstant">3.0f</span>;
+</pre>
+
+
+<p>と書き、</p>
+
+<pre class="code" data-unlink="">        <span class="synComment">// わんこが落ちていくアクション</span>
+        CCFiniteTimeAction* sequence = CCSequence::create(
+                CCMoveTo::create(_difficulty,
+                        ccp(target_x, doge-&gt;boundingBox().size.height * <span class="synConstant">0.3f</span>)),
+                CCCallFunc::create(<span class="synStatement">this</span>,
+                        callfunc_selector(HelloWorld::hitGround)),
+                <span class="synConstant">NULL</span>);
+</pre>
+
+
+<p>と変更してください。(3.0fの部分を_difficultyに)</p>
+
+<p>_difficultyの値を低くすればするほどわんこの落下速度は早くなります。</p>
+
+<p>そこで_difficultyを操作して難易度を上げる関数を作りましょう。</p>
+
+<p> void increaseDifficulty();を宣言して</p>
+
+<p>.cppの方に</p>
+
+<pre class="code" data-unlink=""><span class="synType">void</span> HelloWorld::increaseDifficulty() {
+    _difficulty -= <span class="synConstant">0.03f</span>;
+}
+</pre>
+
+
+<p>と書いてください。</p>
+
+<p>これでincreaseDifficulty()を呼ぶ度に難易度が上がります。</p>
+
+<p>ではこの関数は消す度に呼ぶようにしましょう。</p>
+
+<p>ccTouchBeganの</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">if</span> (doge-&gt;boundingBox().containsPoint(touch-&gt;getLocation())) {
+</pre>
+
+
+<p>ブロックの最後らへんにでも</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">this</span>-&gt;increaseDifficulty();
+</pre>
+
+
+<p>と書きましょう。</p>
+
+<p>これで実行してみてください。</p>
+
+<p>だんだんと早くなるようになったと思います。<b>難易度の実装ができましたね！</b></p>
+
+<h3>スコアを表示しよう</h3>
+
+<p>いくらかぼすちゃんを消したのかをカウントするスコアを作りましょう。</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140405104941.png" alt="f:id:ottati:20140405104941p:plain" title="f:id:ottati:20140405104941p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<h5>いくら消したか保持する変数を作る</h5>
+
+<p>とりあえず_scoreという整数を代入する変数を作ってタッチするたびにインクリメントしましょう。</p>
+
+<p> int _score;を宣言し、</p>
+
+<p>resetGame()内で以下を書き足し、</p>
+
+<pre class="code" data-unlink="">_score = <span class="synConstant">0</span>;
+</pre>
+
+
+<p>ccTouchBeganの</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">this</span>-&gt;increaseDifficulty();
+</pre>
+
+
+<p>の上あたりに_score++;と書きましょう。</p>
+
+<p>これでカウントできるようになりました。</p>
+
+<h5>スコアを表示するラベルを作る</h5>
+
+<p>では実際に画面上にスコアを表示してみましょう。</p>
+
+<p>ここで問題なのはCCLabelTTFでラベルを生成して更新していくとめちゃめちゃ重いってことです。</p>
+
+<p>なのでCCLabelBMFontを使います。CCLabelBMFontはCCLabelTTFとは違い、ttfファイルではなく、.fntファ
+イルを読み込み、文字が並んだ画像から文字を切り出していくというやり方でラベルを作ります。今回のようなスコアを頻繁に更新するような場合はこっちを使
+います。</p>
+
+<p>ここでやっかいなのは、その画像とか.fntファイルをどうやって作るかってことですが、Windowsなら<a href="http://www.angelcode.com/products/bmfont/">BMFont - AngelCode.com</a><a href="http://b.hatena.ne.jp/entry/http://www.angelcode.com/products/bmfont/" class="http-bookmark"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/a_005.gif" alt="" class="http-bookmark"></a>を使えばすぐにできます。無料です。</p>
+
+<p>ただ今回はこっちで作ってあるので新しく作る必要はありません。</p>
+
+<p>CCLabelBMFont * _scoreLabel;を宣言し、</p>
+
+<p>init()内のゲームオーバスプライトを作ったすぐ下に以下を書いてください</p>
+
+<pre class="code" data-unlink="">    <span class="synComment">// scoreLabel</span>
+    _scoreLabel = CCLabelBMFont::create(<span class="synConstant">"0"</span>, <span class="synConstant">"font.fnt"</span>);
+    _scoreLabel-&gt;setAnchorPoint(ccp(<span class="synConstant">0</span>, <span class="synConstant">1</span>));
+    _scoreLabel-&gt;setPosition((ccp(<span class="synConstant">20</span>, _winSize.height - <span class="synConstant">20</span>)));
+    <span class="synStatement">this</span>-&gt;addChild(_scoreLabel, <span class="synConstant">2</span>);
+</pre>
+
+
+<p>実行すると0と書かれたラベルが左上に見えると思います。今度はこれを更新していきましょう。</p>
+
+<h5>スコアラベルを操作する</h5>
+
+<p>スコアラベルを操作するタイミングは2つです。</p>
+
+<ul>
+<li>_scoreのインクリメント時に一緒に更新する</li>
+<li>resetGame時に0に戻す</li>
+</ul>
+
+
+<p>実装は簡単です。</p>
+
+<p>ccTouchBegan()の_score++;の下に</p>
+
+<pre class="code" data-unlink="">_scoreLabel-&gt;setString(
+                    CCString::createWithFormat(<span class="synConstant">"</span><span class="synSpecial">%d</span><span class="synConstant">"</span>, _score)-&gt;getCString());
+</pre>
+
+
+<p>と書きましょう。setStringではcharを引数にとるので変換して与えましょう。</p>
+
+<p>そしてresetGame()の _score = 0;の下に</p>
+
+<pre class="code" data-unlink="">_scoreLabel-&gt;setString(<span class="synConstant">"0"</span>);
+</pre>
+
+
+<p>と書きましょう。</p>
+
+<p><b>実行してみて遊んでください！</b></p>
+
+<p>いい感じにスコアが更新されるようになりました。</p>
+
+<h3>BGMと効果音をつける</h3>
+
+<p>ゲームがほぼ完成したので、最後にBGMと効果音を付けましょう！ぐっとゲームっっぽさが上がりますよ！</p>
+
+<p><span itemscope="" itemtype="http://schema.org/Photograph"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/20140405104900.png" alt="f:id:ottati:20140405104900p:plain" title="f:id:ottati:20140405104900p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+
+<h5>プリロード</h5>
+
+<p>AppDelegate.cppの頭のほうに以下と</p>
+
+<pre class="code" data-unlink=""><span class="synPreProc">#include </span><span class="synConstant">"SimpleAudioEngine.h"</span>
+</pre>
+
+
+<p>以下を</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">using</span> <span class="synType">namespace</span> CocosDenshion;
+</pre>
+
+
+<p>追記してください。</p>
+
+<p>そしてapplicationDidFinishLaunching()内の</p>
+
+<pre class="code" data-unlink="">CCEGLView::sharedOpenGLView()-&gt;setDesignResolutionSize(designSize.width,
+            designSize.height, kResolutionExactFit);
+</pre>
+
+
+<p>のすぐ下に以下を書いてください。</p>
+
+<pre class="code" data-unlink="">SimpleAudioEngine::sharedEngine()-&gt;preloadBackgroundMusic(
+            CCFileUtils::sharedFileUtils()-&gt;fullPathForFilename(<span class="synConstant">"bgm.mp3"</span>).c_str());
+    SimpleAudioEngine::sharedEngine()-&gt;preloadEffect(
+            CCFileUtils::sharedFileUtils()-&gt;fullPathForFilename(<span class="synConstant">"dog.mp3"</span>).c_str());
+    SimpleAudioEngine::sharedEngine()-&gt;preloadEffect(
+            CCFileUtils::sharedFileUtils()-&gt;fullPathForFilename(<span class="synConstant">"touch.mp3"</span>).c_str());
+</pre>
+
+
+<p>これでプリロード処理が自動で行われます。とても便利ですね！</p>
+
+<p>あと最後の方にあるバックグラウンドに回った時、戻った時の処理のSimpleAudioEngineの部分を以下のようにコメントアウトしてください。</p>
+
+<pre class="code" data-unlink=""><span class="synComment">// This function will be called when the app is inactive. When comes a phone call,it's be invoked too</span>
+<span class="synType">void</span> AppDelegate::applicationDidEnterBackground() {
+    CCDirector::sharedDirector()-&gt;stopAnimation();
+
+    <span class="synComment">// if you use SimpleAudioEngine, it must be pause</span>
+    SimpleAudioEngine::sharedEngine()-&gt;pauseBackgroundMusic();
+}
+
+<span class="synComment">// this function will be called when the app is active again</span>
+<span class="synType">void</span> AppDelegate::applicationWillEnterForeground() {
+    CCDirector::sharedDirector()-&gt;startAnimation();
+
+    <span class="synComment">// if you use SimpleAudioEngine, it must resume here</span>
+    SimpleAudioEngine::sharedEngine()-&gt;resumeBackgroundMusic();
+}
+</pre>
+
+
+<h5>BGMの再生、ストップ、再開</h5>
+
+<p>プリロードした音楽ファイルを実際にならしてみましょう。</p>
+
+<p>ゲーム中にBGMを鳴らすようにしてみます。</p>
+
+<p>HelloWorldScene.cppのinit()の頭の方に先ほどと同じように</p>
+
+<pre class="code" data-unlink=""><span class="synPreProc">#include </span><span class="synConstant">"SimpleAudioEngine.h"</span>
+</pre>
+
+
+<p>と</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">using</span> <span class="synType">namespace</span> CocosDenshion;
+</pre>
+
+
+<p>を書き、</p>
+
+<p> this-&gt;scheduleUpdate();の下に</p>
+
+<pre class="code" data-unlink="">SimpleAudioEngine::sharedEngine()-&gt;playBackgroundMusic(<span class="synConstant">"bgm.mp3"</span>, <span class="synConstant">true</span>);
+SimpleAudioEngine::sharedEngine()-&gt;pauseBackgroundMusic();
+</pre>
+
+
+<p>と書いてください。これでいつでも再生したり、停止したりすることができるようになりました。</p>
+
+<p>では鳴らす、停止するタイミングを考えましょう。</p>
+
+<ul>
+<li>resetGame()が呼ばれた時に再生</li>
+<li>かぼすが地面に落ちた時に停止</li>
+</ul>
+
+
+<p>よってresetGame()内に以下,</p>
+
+<pre class="code" data-unlink="">SimpleAudioEngine::sharedEngine()-&gt;rewindBackgroundMusic();
+SimpleAudioEngine::sharedEngine()-&gt;resumeBackgroundMusic();
+</pre>
+
+
+<p>hitGround()内に以下</p>
+
+<pre class="code" data-unlink="">SimpleAudioEngine::sharedEngine()-&gt;pauseBackgroundMusic();
+</pre>
+
+
+<p>を書いてください。</p>
+
+<p>実行するとゲーム中だけbgmが流れるようになったと思います。</p>
+
+<p>ちなみに</p>
+
+<pre class="code" data-unlink="">SimpleAudioEngine::sharedEngine()-&gt;rewindBackgroundMusic();
+</pre>
+
+
+<p>はBGMを始めからに戻す処理です。</p>
+
+<h5>効果音を付ける</h5>
+
+<p>では最後に効果音を付けてみましょう。付けるタイミングは</p>
+
+<ul>
+<li>かぼすちゃんを消すとき</li>
+<li>かぼすちゃんが落ちた時</li>
+<li>resetGame時</li>
+</ul>
+
+
+<p>とします。</p>
+
+<p>よってccTouchBeganの</p>
+
+<pre class="code" data-unlink=""><span class="synStatement">this</span>-&gt;increaseDifficulty();
+</pre>
+
+
+<p>の直後に</p>
+
+<pre class="code" data-unlink="">SimpleAudioEngine::sharedEngine()-&gt;playEffect(<span class="synConstant">"touch.mp3"</span>);
+</pre>
+
+
+<p>と書きましょう。</p>
+
+<p>次にresetGame()内、hitGround()内に</p>
+
+<pre class="code" data-unlink="">SimpleAudioEngine::sharedEngine()-&gt;playEffect(<span class="synConstant">"dog.mp3"</span>);
+</pre>
+
+
+<p>と書きましょう。</p>
+
+<p><b>実行すると効果音がなるようになりました。</b></p>
+
+<h3>完成！！！！</h3>
+
+<p><span style="color: #ff0000"><span style="font-size: 200%">遂にDoge Defenseの完成ですね！</span></span></p>
+
+<p>お疲れ様でした。かぼすちゃんかわい。</p>
+
+<p>このC++コード一本でiPhoneアプリにもAndroidアプリにもその他色々にも出来るのですから凄いですね。</p>
+
+<p>間違いがあったら<a href="https://twitter.com/ottatiyarou2" target="_blank">@ottatiyarou2</a>までお願いします。(その他文句もあれば...</p>
+
+<h2>おわりに</h2>
+
+<p>こんな感じで誰でも長くて1ヶ月もあればゲームアプリ作れますね！っていう記事でした。</p>
+
+<p><a href="https://play.google.com/store/apps/details?id=com.otatin.flyingpiyo">ぴよ飛ばし タップでひよこを飛ばし続けるお手軽無料アクション - Google Play の Android アプリ</a>もCocos2dxがなければ作ろうと思いませんでした。</p>
+
+<p>今ではこんな簡単にゲームアプリが作れるので、開いた時間をゲームアプリ開発に使ったら面白いんじゃないかと思います。</p>
+
+      
+    <div id="my-blog-description">
+<hr>
+<h2>『あのねノート。』はつくるブログです</h2>
+
+<p>学生のおっ立ち野郎です。ブログでは主に3つのことを書いています</p>
+
+<ol>
+    <li>つくったウェブサービスやアプリの紹介</li>
+    <li>これまでになかった新しいサービスの紹介</li>
+    <li>プログラミング関係</li>
+</ol>
+
+<p>特に興味・楽しさ・効率の良さを重視して書いています。</p>
+
+
+
+
+<h4>ツイッター</h4>
+
+<p>「プログラミングに興味のある方」や「ウェブサービスなどを作ってみたい方」は是非ともフォローお願い致します:)</p>
+<p>Twitter: <a href="https://twitter.com/ottatiyarou2" target="_blank">@ottatiyarou2</a></p>
+
+
+<h4>RSS登録</h4>
+<p>もしよろしければRSS登録よろしくお願い致します。。</p>
+
+<!-- feedly -->
+<a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fottati.hatenablog.com%2Ffeed" target="blank"><img id="feedlyFollow" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/feedly-follow-rectangle-flat-big_2x.png" alt="follow us in feedly" height="56" width="131"></a>
+
+<br>
+
+<h4>ここまで読んで頂きありがとうございました(；´Д｀)</h4>
+
+</div></div>
+    <div id="entry-footer-ad" style="text-align: left; margin-top: 30px;">
+<style>
+.my_adslot { width: 300px; height: 250px; }
+@media(min-width: 380px) { .my_adslot { width: 336px; height: 280px; } }
+@media(min-width: 660px) { .my_adslot { width: 300px; height: 300px; } }
+</style>
+<script async="" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/adsbygoogle.js"></script>
+<!-- あのねノート。 記事下2 -->
+<ins data-adsbygoogle-status="done" class="adsbygoogle my_adslot" style="display: inline-block; width: 300px; height: 300px;" data-ad-client="ca-pub-9425443345063631" data-ad-slot="8818760707"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:300px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:300px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" height="300" width="300" frameborder="0"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div><footer class="entry-footer">
+      <p class="entry-footer-section">
+        <span class="author vcard"><span class="fn" data-load-nickname="1" data-user-name="ottati"><span class="user-name-nickname">おっ立ち野郎</span> <span class="user-name-paren">(</span><span class="user-name-hatena-id">id:ottati</span><span class="user-name-paren">)</span></span></span>
+        <span class="entry-footer-time"><a href="http://ottati.hatenablog.com/entry/2014/04/05/105100"><time data-relative="" datetime="2014-04-05T01:51:00Z" title="2014-04-05T01:51:00Z" pubdate="" class="updated">170日前</time></a></span>
+      </p>
+      <div class="hatena-star-container">
+      <span class="hatena-star-comment-container"><img class="hatena-star-comment-button" style="cursor: pointer; margin: 0px; padding: 0px; border: medium none; vertical-align: middle; display: none;" title="Comments" alt="Comments" tabindex="0" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/comment.gif"></span><span class="hatena-star-star-container"><img class="hatena-star-add-button" style="cursor: pointer; margin: 0px 3px; padding: 0px; border: medium none; vertical-align: middle;" title="Add Star" alt="Add Star" tabindex="0" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/hatena-star-add-button.png"></span></div>
+      <div class="hatena-star-metadata" style="display: none">
+        <a class="hatena-star-permalink" href="http://ottati.hatenablog.com/entry/2014/04/05/105100">【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順</a>
+      </div>
+      
+
+      <div class="customized-footer">
+        <div class="social-buttons">
+  
+  
+    <iframe style="width: 124px; height: 20px;" src="javascript:false" scrolling="no" title="この記事をはてなブックマークに追加" class="hatena-bookmark-button-frame" height="20" width="130" frameborder="0"></iframe>
+  
+  
+    <iframe src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/like.htm" class="facebook-like-button" scrolling="no" style="border:none; overflow:hidden; width:130px; height:21px;" allowtransparency="true" frameborder="0"></iframe>
+  
+  
+    <iframe allowtransparency="true" scrolling="no" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/tweet_button.htm" class="twitter-share-button" style="width:130px; height:20px;" frameborder="0"></iframe>
+  
+  
+    <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/fastbutton.htm" name="I0_1411398757053" id="I0_1411398757053" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" width="100%" frameborder="0"></iframe></div>
+  
+  
+    
+    <a href="http://www.tumblr.com/share" data-hatenablog-tumblr-share-button="" data-share-url="http://ottati.hatenablog.com/entry/2014/04/05/105100" data-share-title="【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順 - あのねノート。" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('http://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent; vertical-align: top;">Share on Tumblr</a>
+  
+  
+    <div class="pocket-btn"><iframe id="pocket-button-0" allowtransparency="true" scrolling="NO" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/button.htm" height="22" width="135" frameborder="0"></iframe></div>
+  
+  
+</div>
+
+
+          
+
+          
+
+          
+            <div class="entry-footer-html">
+
+<!-- move ad script -->
+<script>
+var myAd = document.getElementById('entry-footer-ad');
+var copiedAd = myAd.cloneNode(true);
+myAd.parentNode.removeChild(myAd);
+var entryFooter = document.getElementsByClassName('entry-footer')[0];
+entryFooter.parentNode.insertBefore(copiedAd, entryFooter);
+</script>
+
+
+
+<!-- move #my-blog-description script -->
+<script>
+  var src = document.getElementById('my-blog-description');
+  var dest = document.getElementsByClassName('entry-content')[0];
+
+  dest.appendChild(src.cloneNode(true));
+  src.parentNode.removeChild(src);
+</script>
+
+
+</div>
+          
+        
+      </div>
+
+      <div class="comment-box">
+        
+        <ul class="comment">
+          
+        </ul>
+        
+          <a style="display: none;" class="leave-comment-title">コメントを書く</a>
+        
+      </div>
+    </footer>
+  </div>
+</article>
+
+                
+
+                
+                  
+                  
+                  <div class="permalink pager">
+                    
+                      
+                      <span class="pager-prev">
+                        <a href="http://ottati.hatenablog.com/entry/2014/04/07/144415" rel="prev">
+                          <span class="pager-arrow">« </span>
+                          アンドロイダーに入隊申請した
+                        </a>
+                      </span>
+                    
+                    
+                      
+                      <span class="pager-next">
+                        <a href="http://ottati.hatenablog.com/entry/2014/04/04/001139" rel="next">
+                          解説用クソゲーの完成
+                          <span class="pager-arrow"> »</span>
+                        </a>
+                      </span>
+                    
+                  </div>
+                
+
+              
+            
+            <!-- rakuten_ad_target_end -->
+            <!-- google_ad_section_end -->
+
+            
+          
+        </div>
+      </div>
+
+      
+      <aside id="box1">
+        <div id="box1-inner">
+        </div>
+      </aside>
+
+    </div><!-- #wrapper -->
+
+    <aside id="box2">
+  <div id="box2-inner">
+    
+      
+
+<div class="hatena-module hatena-module-profile">
+  <div class="hatena-module-title">
+    プロフィール
+  </div>
+  <div class="hatena-module-body">
+    
+    <a href="http://ottati.hatenablog.com/about" class="profile-icon-link">
+      <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/profile.gif" alt="id:ottati" class="profile-icon">
+    </a>
+    
+
+    
+    <span class="id">
+      <a href="http://ottati.hatenablog.com/about" class="hatena-id-link"><span data-load-nickname="1" data-user-name="ottati"><span class="user-name-nickname">おっ立ち野郎</span> <span class="user-name-paren">(</span><span class="user-name-hatena-id">id:ottati</span><span class="user-name-paren">)</span></span></a>
+      
+  
+    
+      
+      <a href="http://blog.hatena.ne.jp/guide/pro" title="はてなブログPro"><i class="icon-pro"></i></a>
+    
+  
+
+
+    </span>
+    
+
+    
+    <div class="profile-description">
+      <p>学生です！プログラミング学習者向けウェブサービスをつくっています！</p>
+
+    </div>
+    
+
+    
+    <div class="hatena-follow-button-box btn-subscribe">
+      <a href="#" class="hatena-follow-button unsubscribing">
+        <span class="subscribing">
+          <span class="foreground">購読中です</span>
+          <span class="background">読者をやめる</span>
+        </span>
+        <span class="unsubscribing" data-track-name="profile-widget-subscribe-button" data-track-once="">
+          <span class="foreground">読者になる</span>
+          <span class="background">読者になる</span>
+        </span>
+      </a>
+      <div style="display: block;" class="subscription-count-box">
+        <i></i>
+        <u></u>
+        <span class="subscription-count">453</span>
+      </div>
+    </div>
+    
+
+    
+
+    
+
+    
+    <div class="hatena-follow-button-box btn-twitter">
+      <iframe style="width: 165px; height: 20px;" data-twttr-rendered="true" title="Twitter Follow Button" class="twitter-follow-button twitter-follow-button" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/follow_button.htm" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe>
+    </div>
+    
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-search-box">
+  <div class="hatena-module-title">
+    検索
+  </div>
+  <div class="hatena-module-body">
+    <form class="search-form" role="search" action="http://ottati.hatenablog.com/search" method="get">
+      <input name="q" class="search-module-input" placeholder="ブログ内検索" required="" type="text">
+      <input value="検索" class="search-module-button" type="submit">
+    </form>
+  </div>
+</div>
+
+    
+      
+<div class="hatena-module hatena-module-entries-access-ranking" data-count="5" data-display_entry_category="0" data-display_entry_image="1" data-display_entry_image_size_width="100" data-display_entry_image_size_height="100" data-display_entry_body_length="0" data-display_entry_date="0" data-display_bookmark_count="1" data-source="access">
+  <div class="hatena-module-title">
+    
+      注目記事
+    
+  </div>
+  <div class="hatena-module-body">
+    
+  <ul class="entries-access-ranking hatena-urllist urllist-with-thumbnails">
+  
+    
+    <li class="urllist-item entries-access-ranking-item rank-1">
+      <div class="urllist-item-inner entries-access-ranking-item-inner">
+                  <a class="urllist-image-link entries-access-ranking-image-link" href="http://ottati.hatenablog.com/entry/2014/04/05/105100">            <img alt="【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/httpcdn-ak_002.png" class="urllist-image entries-access-ranking-image" title="【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順" width="100">
+          </a>
+        
+        <a href="http://ottati.hatenablog.com/entry/2014/04/05/105100" class="urllist-title-link entries-access-ranking-title-link          urllist-title entries-access-ranking-title        ">【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順        </a>
+                  <a href="http://b.hatena.ne.jp/entry/http://ottati.hatenablog.com/entry/2014/04/05/105100" class="bookmark-widget-counter">
+            <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/105100.gif" alt="はてなブックマーク - 【実際に作ってみよう！】初心者が1ヶ月でiOS・Android対応のクソゲームアプリを作るための手順">
+          </a>
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item entries-access-ranking-item rank-2">
+      <div class="urllist-item-inner entries-access-ranking-item-inner">
+                  <a class="urllist-image-link entries-access-ranking-image-link" href="http://ottati.hatenablog.com/entry/2013/08/31/130519">            <img alt="久しぶりにChromeを掃除して生き残った18の拡張機能【おすすめ】" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/httpcdn-ak_003.png" class="urllist-image entries-access-ranking-image" title="久しぶりにChromeを掃除して生き残った18の拡張機能【おすすめ】" width="100">
+          </a>
+        
+        <a href="http://ottati.hatenablog.com/entry/2013/08/31/130519" class="urllist-title-link entries-access-ranking-title-link          urllist-title entries-access-ranking-title        ">久しぶりにChromeを掃除して生き残った18の拡張機能【おすすめ】        </a>
+                  <a href="http://b.hatena.ne.jp/entry/http://ottati.hatenablog.com/entry/2013/08/31/130519" class="bookmark-widget-counter">
+            <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/130519.gif" alt="はてなブックマーク - 久しぶりにChromeを掃除して生き残った18の拡張機能【おすすめ】">
+          </a>
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item entries-access-ranking-item rank-3">
+      <div class="urllist-item-inner entries-access-ranking-item-inner">
+                  <a class="urllist-image-link entries-access-ranking-image-link" href="http://ottati.hatenablog.com/entry/2013/09/09/183848">            <img alt="シンプルで汎用性が高くてめちゃ軽いJQueryプラグイン『Glide.js』を使ってスライダーを作ろう" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/httpcapture.jpg" class="urllist-image entries-access-ranking-image" title="シンプルで汎用性が高くてめちゃ軽いJQueryプラグイン『Glide.js』を使ってスライダーを作ろう" width="100">
+          </a>
+        
+        <a href="http://ottati.hatenablog.com/entry/2013/09/09/183848" class="urllist-title-link entries-access-ranking-title-link          urllist-title entries-access-ranking-title        ">シンプルで汎用性が高くてめちゃ軽いJQueryプラグイン『Glide.js』を使ってスライダーを作ろう        </a>
+                  <a href="http://b.hatena.ne.jp/entry/http://ottati.hatenablog.com/entry/2013/09/09/183848" class="bookmark-widget-counter">
+            <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/183848.gif" alt="はてなブックマーク - シンプルで汎用性が高くてめちゃ軽いJQueryプラグイン『Glide.js』を使ってスライダーを作ろう">
+          </a>
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item entries-access-ranking-item rank-4">
+      <div class="urllist-item-inner entries-access-ranking-item-inner">
+                  <a class="urllist-image-link entries-access-ranking-image-link" href="http://ottati.hatenablog.com/entry/2014/09/20/155003">            <img alt="はてなスターを大量に送る『爆撃★はてなスター』をつくりました" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/httpcdn-ak.png" class="urllist-image entries-access-ranking-image" title="はてなスターを大量に送る『爆撃★はてなスター』をつくりました" width="100">
+          </a>
+        
+        <a href="http://ottati.hatenablog.com/entry/2014/09/20/155003" class="urllist-title-link entries-access-ranking-title-link          urllist-title entries-access-ranking-title        ">はてなスターを大量に送る『爆撃★はてなスター』をつくりました        </a>
+                  <a href="http://b.hatena.ne.jp/entry/http://ottati.hatenablog.com/entry/2014/09/20/155003" class="bookmark-widget-counter">
+            <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/155003.gif" alt="はてなブックマーク - はてなスターを大量に送る『爆撃★はてなスター』をつくりました">
+          </a>
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item entries-access-ranking-item rank-5">
+      <div class="urllist-item-inner entries-access-ranking-item-inner">
+                  <a class="urllist-image-link entries-access-ranking-image-link" href="http://ottati.hatenablog.com/entry/2013/09/08/113258">            <img alt="Chromeユーザなら知っておくべき、Chromeがフリーズした時の最もスマートな解決法" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/httpi.jpg" class="urllist-image entries-access-ranking-image" title="Chromeユーザなら知っておくべき、Chromeがフリーズした時の最もスマートな解決法" width="100">
+          </a>
+        
+        <a href="http://ottati.hatenablog.com/entry/2013/09/08/113258" class="urllist-title-link entries-access-ranking-title-link          urllist-title entries-access-ranking-title        ">Chromeユーザなら知っておくべき、Chromeがフリーズした時の最もスマートな解決法        </a>
+                  <a href="http://b.hatena.ne.jp/entry/http://ottati.hatenablog.com/entry/2013/09/08/113258" class="bookmark-widget-counter">
+            <img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/113258.gif" alt="はてなブックマーク - Chromeユーザなら知っておくべき、Chromeがフリーズした時の最もスマートな解決法">
+          </a>
+        
+
+              </div>
+    </li>
+  
+</ul>
+</div>
+</div>
+
+    
+      
+
+<div class="hatena-module hatena-module-category">
+  <div class="hatena-module-title">
+    カテゴリー
+  </div>
+  <div class="hatena-module-body">
+    <ul class="hatena-urllist">
+      
+        <li>
+          <a href="http://ottati.hatenablog.com/archive/category/%E3%81%BE%E3%81%A8%E3%82%81">
+            まとめ (10)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://ottati.hatenablog.com/archive/category/%E3%83%8D%E3%82%BF">
+            ネタ (15)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://ottati.hatenablog.com/archive/category/%E4%BD%9C%E3%81%A3%E3%81%9F">
+            作った (15)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://ottati.hatenablog.com/archive/category/%E3%82%84%E3%82%8A%E6%96%B9">
+            やり方 (16)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://ottati.hatenablog.com/archive/category/%E9%9B%91%E8%A8%98">
+            雑記 (35)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://ottati.hatenablog.com/archive/category/%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AC%E3%82%B7%E3%83%94">
+            コードレシピ (6)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://ottati.hatenablog.com/archive/category/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF">
+            ライフハック (3)
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+    
+    
+  </div>
+</aside>
+
+  </div>
+</div>
+
+
+
+
+
+
+        
+      </div>
+    </div>
+
+    
+      <footer id="footer" data-brand="hatenablog">
+  <div id="footer-inner">
+    <address>
+      
+      <a href="http://ottati.hatenablog.com/about"><img src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/profile.gif" alt="" height="16" width="16">
+        <span data-load-nickname="1" data-user-name="ottati"><span class="user-name-nickname">おっ立ち野郎</span> <span class="user-name-paren">(</span><span class="user-name-hatena-id">id:ottati</span><span class="user-name-paren">)</span></span>
+      </a>
+    </address>
+    <p class="services"><a href="http://hatenablog.com/">Hatena Blog</a> / <a href="http://d.hatena.ne.jp/">Hatena::Diary</a></p>
+  </div>
+</footer>
+
+    
+
+    
+      <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script><script src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/btn.js" id="pocket-btn-js"></script>
+    
+
+    
+      <script src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/HatenaStar.js"></script>
+    
+
+    <script type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/widgets.js"></script>
+<script gapi_processed="true" type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/plusone.js">
+  {"parsetags": "explicit"}
+</script>
+<script type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+<script type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/js"></script>
+
+<script type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/texts-ja.js"></script>
+
+
+  <script type="text/javascript">Hatena.Diary.loadGlobalHeader()</script>
+
+
+
+
+
+    
+       <script id="google-analytics-script" type="text/javascript">
+var _gaq = _gaq || [];
+
+(function($){
+
+  // 現在のドメイン
+  
+    
+    
+      
+      var current_domain = "hatenablog.com".split(":")[0];
+    
+  
+
+  
+    _gaq.push(['_setAccount', 'UA-9547391-7']);
+    _gaq.push(['_trackPageview']);
+  
+
+  
+
+   
+   _gaq.push(['all._setAccount', 'UA-7855606-1']);
+   _gaq.push(['all._setDomainName', current_domain]);
+   _gaq.push(['all._setSampleRate', '10']);
+   _gaq.push(['all._trackPageview']);
+
+  
+    _gaq.push(['a._setAccount', 'UA-29716941-5']);
+    _gaq.push(['a._setDomainName', current_domain]);
+    _gaq.push(['a._setCustomVar', 1, 'PageId', document.documentElement.getAttribute('data-page'), 3 /* page-level */]);
+      var keywordCampaigns = [];
+      $('.js-entry-article').each(function (index, element) {
+        var keywords = $(element).data('keywordCampaign').split(' ');
+        keywords = _.filter(keywords, function (keyword) { return keyword.length > 0 });
+        keywordCampaigns = keywordCampaigns.concat(keywords);
+      });
+      if (keywordCampaigns.length > 0) {
+        _gaq.push(['a._setCustomVar', 3, 'KeywordCampaign', keywordCampaigns[0], 3 /* page-level */]);
+      }
+      _gaq.push(['a._trackPageview']);
+  
+    _gaq.push(['b._setAccount', 'UA-29716941-2']);
+    _gaq.push(['b._setDomainName', current_domain]);
+    _gaq.push(['b._setCustomVar', 1, 'PageId', document.documentElement.getAttribute('data-page'), 3 /* page-level */]);
+      var keywordCampaigns = [];
+      $('.js-entry-article').each(function (index, element) {
+        var keywords = $(element).data('keywordCampaign').split(' ');
+        keywords = _.filter(keywords, function (keyword) { return keyword.length > 0 });
+        keywordCampaigns = keywordCampaigns.concat(keywords);
+      });
+      if (keywordCampaigns.length > 0) {
+        _gaq.push(['b._setCustomVar', 3, 'KeywordCampaign', keywordCampaigns[0], 3 /* page-level */]);
+      }
+      _gaq.push(['b._trackPageview']);
+  
+
+  $(function () {
+      $(document).delegate('[data-track-event="click"]', 'click', function () {
+          
+          _gaq.push([ 'a._trackEvent', 'Blogs', 'Click', this.getAttribute('data-track-key') ]);
+          
+          _gaq.push([ 'b._trackEvent', 'Blogs', 'Click', this.getAttribute('data-track-key') ]);
+          
+      });
+  });
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  var available_domains = ["blog.hatena.ne.jp"];
+  
+    available_domains.push("hatenablog.com".split(":")[0]);
+  
+    available_domains.push("hatenablog.jp".split(":")[0]);
+  
+    available_domains.push("hateblo.jp".split(":")[0]);
+  
+    available_domains.push("hatenadiary.com".split(":")[0]);
+  
+    available_domains.push("hatenadiary.jp".split(":")[0]);
+  
+  $('a').on('click', function() {
+    // 同じドメインならスキップ
+    if ( !this.hostname || this.hostname.indexOf(current_domain) != -1 ) return;
+
+    var cross_domain = false;
+    for (var i = 0, len = available_domains.length; i < len; i++) {
+      if (this.hostname.indexOf(available_domains[i]) != -1) cross_domain = true;
+    }
+    if ( cross_domain ) {
+      
+      _gaq.push(['a._link', this.href]);
+      
+      _gaq.push(['b._link', this.href]);
+      
+    }
+  });
+
+})(jQuery);
+</script>
+
+       
+  <script id="hatena-counter-script" type="text/javascript"><!--
+      hatena_counter_name = "ottati";
+      hatena_counter_id = "101";
+      hatena_counter_ref = document.referrer+"";
+      hatena_counter_screen = screen.width + "x" + screen.height+","+screen.colorDepth;
+  //--></script>
+  <script type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/counter.js"></script><script type="text/javascript" src="%E3%80%90%E5%AE%9F%E9%9A%9B%E3%81%AB%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86%EF%BC%81%E3%80%91%E5%88%9D%E5%BF%83%E8%80%85%E3%81%8C1%E3%83%B6%E6%9C%88%E3%81%A7iOS%E3%83%BBAndroid%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%82%AF%E3%82%BD%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E6%89%8B%E9%A0%86%20-%20%E3%81%82%E3%81%AE%E3%81%AD%E3%83%8E%E3%83%BC%E3%83%88%E3%80%82_files/101.js"></script><span class="hatena-counter"></span>
+  <noscript><img src="http://counter.hatena.ne.jp/ottati/101" border="0" alt="counter"></noscript>
+
+
+    
+
+  
+
+
+<div style="display: none;" id="cboxOverlay"></div><div style="display: none;" tabindex="-1" role="dialog" class="" id="colorbox"><div id="cboxWrapper"><div><div style="float: left;" id="cboxTopLeft"></div><div style="float: left;" id="cboxTopCenter"></div><div style="float: left;" id="cboxTopRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxMiddleLeft"></div><div style="float: left;" id="cboxContent"><div style="float: left;" id="cboxTitle"></div><div style="float: left;" id="cboxCurrent"></div><button id="cboxPrevious"></button><button id="cboxNext"></button><button id="cboxSlideshow"></button><div style="float: left;" id="cboxLoadingOverlay"></div><div style="float: left;" id="cboxLoadingGraphic"></div><button id="cboxClose"></button></div><div style="float: left;" id="cboxMiddleRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxBottomLeft"></div><div style="float: left;" id="cboxBottomCenter"></div><div style="float: left;" id="cboxBottomRight"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div style="color: rgb(0, 0, 0); position: absolute; display: none; z-index: 10002; left: 0px; top: 0px; background-color: rgb(255, 255, 255); border: 0px none; padding: 0px; text-align: center;"><div style="text-align: left; margin: 0px; padding: 0px;"></div></div></body></html>

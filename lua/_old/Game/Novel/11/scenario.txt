@@ -1,0 +1,5 @@
+ABCDEFGabcdefgあいうえお
+[:delay(2000):]
+漢字カンジいいカンジ♪(爆死)
+[:msgbox("Hello"):]
+EOF

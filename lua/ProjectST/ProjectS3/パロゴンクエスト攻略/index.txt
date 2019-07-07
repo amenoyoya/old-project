@@ -1,0 +1,147 @@
+-+-------------------------+-
+-+- bootstrap用マクロ定義 -+-
+-+-------------------------+-
+[navbar function = {
+	return"<nav class=\"navbar navbar-fixed-top navbar-inverse\">\n"
+		.."<div class=\"navber-inner\">\n"
+		.."<div class=\"container\">\n"
+		..(@.brand & ("<p class=\"navbar-brand\">"..@.brand.."</p>\n") | "")
+		..content.."</div>\n</div>\n</nav>"
+} couple = "/navbar"]-+-
+[navbar-group function = {
+	return"<div class=\"nav-collapse\">\n"
+		.."<ul class=\"nav navbar-nav "..(@.right & "navbar-right" | "navbar-left").."\">"
+		..content.."</ul>\n</div>"
+} couple = "/navbar-group"]-+-
+[navbar-elem function = {
+	return"<li"..(@.active & " class=\"active\"" | "").."><a href=\""..(@.href | "#").."\">"..(@.str | "").."</a></li>"
+}]-+-
+[navbar-dropdown function = {
+	return"<li class=\"dropdown\">\n"
+		.."<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"..(@.str | "").." <b class=\"caret\"></b></a>\n"
+		.."<ul class=\"dropdown-menu\">"
+		..content.."</ul>\n</li>"
+} couple = "/navbar-dropdown"]-+-
+-+-------------------------+-
+-+-- 各種便利マクロ定義 ---+-
+-+-------------------------+-
+[item function = {
+	return "【★"..(@.src | "アイテム").."入手】"
+}]-+-
+[shop function = {
+	return "【★"..(@.src | "アイテム").."購入"..(@.num & ("×"..@.num) | "").."】"
+}]-+-
+-+-
+[column function = {
+	local str = ""
+	for _, line in each(content->getTokens(nil, Array("\r","\n"))){
+		if line != "" {str = str.."<pre class=\"alert alert-success\">"..line.."</pre>\n"}
+	}
+	return str
+} couple = "/column"]-+-
+-+-
+[warning function = {
+	return "<span class=\"text-danger\">※"..(@[1] | @.str).."</span>"
+}]-+-
+[comment function = {
+	return "<pre class=\"alert alert-info\">☆"..(@[1] | @.str).."</pre>"
+}]-+-
+[cl function = {
+	local c, color = @.str->u8sub(0, 1), ""
+	if c == "緑" {color = "#06FC03"}
+	elif c == "赤" {color = "#F70203"}
+	elif c == "黄" {color = "#FFFE01"}
+	elif c == "紫" {color = "#9F98FD"}
+	return "<span style=\"background-color: "..color.."\">"..@.str->u8sub(1).."</span>"
+}]-+-
+[L function = {
+	return "<span class=\"lead\">"..(@.str | @[1]).."</span>"
+}]-+-
+-+-
+[my-navbar string = [==[
+<navbar brand="パロゴンクエスト攻略">
+	<navbar-group>
+		<navbar-elem href="./index.txt" str="INDEX">
+		<navbar-dropdown str="攻略チャート">
+			<navbar-elem href="./conquest1.txt" str="その1　冒険開始～「とびらのかぎ」入手まで">
+			<navbar-elem href="./conquest2.txt" str="その2　「とびらのかぎ」活用～「せいなるつるはし」入手まで">
+			<navbar-elem href="./conquest3.txt" str="その3　「せいなるつるはし」活用～ヒロイン救出まで">
+			<navbar-elem href="./conquest4.txt" str="その4　りゅうおうじ討伐">
+		</navbar-dropdown>
+		<navbar-dropdown str="ダンジョン">
+			<navbar-elem href="./dungeon.txt" str="ダンジョン情報">
+			<navbar-elem href="./elf_cave.txt" str="南西の洞窟（エルフの洞窟）">
+			<navbar-elem href="./cave.txt" str="毒の沼の洞窟">
+			<navbar-elem href="./grave.txt" str="カライの墓">
+			<navbar-elem href="./tower.txt" str="蜃気楼の塔">
+			<navbar-elem href="./dragon.txt" str="まりゅうのすみか">
+		</navbar-dropdown>
+		<navbar-dropdown str="ネタ集">
+			<navbar-elem href="./H.txt" str="Hイベント">
+			<navbar-elem href="./armor.txt" str="おすすめ装備">
+			<navbar-elem href="./topic.txt" str="小ネタ集">
+		</navbar-dropdown>
+	</navbar-group>
+</navbar>
+<br/><br/><br/>
+]==]]-+-
+-+-------------------------+-
+-+-- tableタグ飾りつけ用 --+-
+-+-------------------------+-
+[table string = "<table class=\"table-bordered table-condensed\">" skip = true]-+-
+[th string = "<th bgcolor=#D9EDF7>" skip = true]-+-
+-+-
+-+- 横テーブル -+-
+[T function = {
+	local str, head, a = "", true, content->Analyzer()
+	while !a->eof() {
+		local tok = a->token(Array"|")
+		if tok != "" & tok != "\n" {
+			if head {
+				head = false
+				str = str.."<tr><td bgcolor=#D9EDF7>"..tok->gsub("\t", "").."</td><td>"
+			}else{
+				head = true
+				str = str..tok->gsub("\n", "<br/>")->gsub("\t", "").."</td></tr>\n"
+			}
+		}
+	}
+	return"<table><tbody>"..str.."</tbody></table>"
+} couple = "/T"]-+-
+-+-------------------------+-
+<html5 header="<bootstrap>">
+<my-navbar>
+<markdown>
+## パロゴンクエスト -トロの勇者と運命の花嫁-
+* **「子供じゃ遊べない、大人の為のエロRPG！」**
+	+ 魔物たちを倒して経験値を稼ぎ、レベルを上げろ！
+	+ 世界を旅して伝説のアイテムを集め、竜王子をやっつけよう！
+	+ 全てが懐かしいあの頃の想い出が、まさかの18禁になって蘇る！
+* **ストーリー**
+	+ この世は、竜王子によって闇に閉ざされてしまいました
+	+ アナタは、トロの勇者の末裔となって
+	+ 　竜王子を倒すため、世界に光を取り戻すため
+	+ 　冒険の旅へと出かけるのです！
+* **ヒロインセレクトシステム**
+	+ ラダトムの王女ムーン、異国の冒険者アリ〇ナ、マーラ温泉の看板娘ビア〇カ
+	+ この3人の花嫁候補から自由にヒロインを選択出来る！
+	+ もちろん、世界中にはヒロイン以外にも可愛い女の子達が沢山！
+* **一度クリアすると**
+	+ ゲームを一度クリアすると、
+	+ 　特別な呪文「メダパニック」を覚える事ができる！
+	+ この呪文を唱えてエッチをすれば、女の子はたちまちキミにメロメロっ
+	+ キミの前で大胆にアヘ顔を晒して、イキまくっちゃうんだ！
+* **それ以外にも2週目以降は、**
+	+ クリア毎に経験値が2倍3倍と増えて(最高9倍)冒険もラクラク！
+	+ アイテム、装備品、ゴールドの引継ぎも！
+	+ 更に2週目以降では、強力な宝物が世界のどこかに出現！
+* **ギャラリーモード**
+	+ 冒険中に一度みたエッチシーンはギャラリーモードで
+	+ 　いつでも好きな時に見る事ができる！
+	+ 全27シーンを集め、ギャラリーモードを埋め尽くせ！
+* **安心のセーブ引継ぎシステム**
+	+ 体験版の旅の記録は、製品版に引き継げる！
+	+ やり方などは、取扱い説明書に書いてあるぞ
+	+ まずは体験版をダウンロードだ！ (※尚、中断のデータは引継げません)
+</markdown>
+</html>

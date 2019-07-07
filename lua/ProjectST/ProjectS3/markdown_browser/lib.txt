@@ -1,0 +1,26 @@
+[html5 function = {
+	return"<!DOCTYPE HTML>\n"
+		.."<html lang=\"ja\">\n"
+		.."<head>\n"
+		.."<meta charset=\"utf-8\">\n"
+		.."<title>"..(@.title | "–³‘è").."</title>\n"
+		..(@.header | "")
+		.."</head>\n"
+		.."<body>\n"
+		..content.."\n"
+		.."</body>\n"
+		.."</html>"
+} couple = "/html"]--
+--
+[bootstrap function = {
+	return"<link rel=\"stylesheet\" href=\""..(@.bootstrap_css | "./css/bootstrap.min.css").."\">\n"
+		.."<link rel=\"stylesheet\" href=\""..(@.boostrap_theme_css | "./css/bootstrap-theme.min.css").."\">\n"
+		.."<script src=\""..(@.jquery | "./js/jquery-1.11.1.min.js").."\"></script>\n"
+		.."<script src=\""..(@.bootstrap_js | "./js/bootstrap.min.js").."\"></script>\n"
+}]
+--
+[markdown function = {
+	return markdown(content, @.nest & tonumber(@.nest),
+		@.html_option & loadstring("return "..@.html_option)(),
+		@.mkd_option & loadstring("return "..@.mkd_option)())
+} couple = "/markdown"]--

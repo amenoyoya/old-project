@@ -1,0 +1,10 @@
+#require "stdlib/game"
+require "scr/main"
+
+~app{
+	def @->config(t){
+		t.width, t.height = 480, 320
+		t.title = "格闘チャイナ地獄変"
+		t.fps = 100
+	}
+}

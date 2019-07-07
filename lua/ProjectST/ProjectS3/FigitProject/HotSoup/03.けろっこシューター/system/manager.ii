@@ -1,0 +1,52 @@
+/*** ƒf[ƒ^ŠÇ— ***/
+IMG = {} // ‰æ‘œƒf[ƒ^ƒx[ƒX
+SND = {} // Œø‰Ê‰¹ƒf[ƒ^ƒx[ƒX
+
+// ‰æ‘œ“o˜^
+def registerImage(name, filename, colorKey){
+	if(IMG[name]) unregisterImage(name)
+	IMG[name] = sdl.Sprite(filename, colorKey)
+}
+
+// ‰æ‘œ“o˜^‰ðœ
+def unregisterImage(name){
+	if(IMG[name]){
+		IMG[name]->close()
+		IMG[name] = nil
+		collectgarbage"collect"
+	}
+}
+
+// Œø‰Ê‰¹“o˜^
+def registerSound(name, filename, channel, volume){
+	if(!channel) channel = -1
+	if(!volume) volume = 100
+	
+	if(SND[name]) unregisterSound(name)
+	local obj = sdl.Sound(Path(filename))
+	
+	if(obj->failed()) error("Œø‰Ê‰¹w"..filename.."x‚Ì“Ç‚Ýž‚Ý‚ÉŽ¸”s")
+	// sdl.Sound‚ðŠg’£
+	obj.m_filename, obj.m_channel = filename, channel
+	obj.Sound_play = obj.play
+	def obj->play(loops) return self->Sound_play(self.m_channel, loops? loops: 0)
+	obj->setVolume(volume)
+	// “o˜^
+	SND[name] = obj
+}
+
+// Œø‰Ê‰¹“o˜^‰ðœ
+def unregisterSOund(name){
+	if(SND[name]){
+		SND[name]->close()
+		SND[name] = nil
+		collectgarbage"collect"
+	}
+}
+
+
+// “–‚½‚è”»’è
+def Rect(x,y,w,h) return {x=x, y=y, w=w, h=h}
+def collision(a, b){
+	return b.x+b.w > a.x && a.x+a.w > b.x && b.y+b.h > a.y && a.y+a.h > b.y
+}

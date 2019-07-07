@@ -1,0 +1,79 @@
+require "stdlib/ext"
+local ffi = require "ffi"
+
+ffi.cdef[[
+typedef long s32;
+
+bool iiMatchNum(const char *str);
+bool iiMatchList(const char *str, const char *tbl);
+const char *iiStrShift(const char *str, int i);
+
+void *openAnalyzer(const char *source);
+void closeAnalyzer(void *handle);
+const char *Analyzer_str(void *handle);
+const char *Analyzer_curStr(void *handle);
+void Analyzer_seekb(void *handle, s32 mov);
+bool Analyzer_eof(void *handle);
+bool Analyzer_isNum(void *handle);
+bool Analyzer_matchChar(void *handle, const char *chars);
+]]
+
+local file = File(Path"ret.txt", "w")
+
+/*def analyze(str){
+	local size = str->len();
+	
+	for(i = 0, size-2){
+		if(figit.str.matchnum(figit.str.shift(str, i))
+			&& figit.str.matchlist(figit.str.shift(str, i+1), "AoSiPuNe"))
+		{
+			file->puts(str->sub(i+1, i+2).."\n")
+		}
+	}
+}*/
+
+def analyze(str){
+	local size = str->len();
+	
+	for(i = 0, size-2){
+		if(ffi.C.iiMatchNum(ffi.C.iiStrShift(str, i))
+			&& ffi.C.iiMatchList(ffi.C.iiStrShift(str, i+1), "AoSiPuNe"))
+		{
+			file->puts(str->sub(i+1, i+2).."\n")
+		}
+	}
+}
+
+/*def analyze(str){
+	local a = ffi.gc(ffi.C.openAnalyzer(str), ffi.C.closeAnalyzer)
+	
+	while(!ffi.C.Analyzer_eof(a)){
+		if(ffi.C.Analyzer_isNum(a)){
+			ffi.C.Analyzer_seekb(a, 1)
+			if(ffi.C.Analyzer_matchChar(a, "AoSiPuNe")){
+				ffi.C.Analyzer_seekb(a, -1)
+				file->puts(ffi.string(ffi.C.Analyzer_curStr(a))->sub(1, 2).."\n")
+				ffi.C.Analyzer_seekb(a, 2)
+			}
+		}else{
+			ffi.C.Analyzer_seekb(a, 1)
+		}
+	}
+}*/
+
+local fi = FileIterator(Path"RandomChars/texts")
+local timer = Timer()
+
+while(true){
+	local path = fi->get()
+	
+	if(path->str() == "") break
+	analyze(File->load(path))
+}
+
+print(timer->passage())
+shell "pause"
+
+// tolua++: 6926 msec
+// ffi: 33 msec
+// ffi str_Analyzer: 188 msec

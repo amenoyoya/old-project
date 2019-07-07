@@ -1,0 +1,57 @@
+:{
+	cnt = 60, pattern = 1, kind = 1,		// 出現カウンタ,移動パターン,敵の種類
+	x = 180, y = -20, speed = 0,			// x座標,y座標,スピード
+	shotcnt = 60, shotkind = 1, blkind = 1,	// 発射時間,弾幕種類,弾丸種類
+	blcolor = 1, HP = 300, wait = 180,		// 弾の色,体力,待機時間
+	items = :{1, 0, 0, 0, 0, 0},			// ドロップアイテム1,2,3,4,5,6
+},
+:{
+	cnt = 200, pattern = 2, kind = 1, x = 200, y = -20, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 2, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 340, pattern = 3, kind = 1, x = 180, y = -20, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 3, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 480, pattern = 4, kind = 1, x = 200, y = -20, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 4, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 620, pattern = 5, kind = 1, x = 180, y = -20, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 5, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 760, pattern = 6, kind = 1, x = 200, y = -20, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 6, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 900, pattern = 7, kind = 1, x = 180, y = -20, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 7, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 1040, pattern = 8, kind = 1, x = 200, y = 100, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 8, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 1180, pattern = 9, kind = 1, x = 180, y = 100, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 9, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 1320, pattern = 10, kind = 1, x = 200, y = 100, speed = 0,
+	shotcnt = 60, shotkind = 1, blkind = 10, blcolor = 1,
+	HP = 300, wait = 180, items = :{1, 0, 0, 0, 0, 0},
+},
+:{
+	cnt = 1460, pattern = 11, kind = 1, x = 180, y = -20, speed = 0,
+	shotcnt = 240, shotkind = 1, blkind = 1, blcolor = 1,
+	HP = 300, wait = 360, items = :{1, 0, 0, 0, 0, 0},
+},

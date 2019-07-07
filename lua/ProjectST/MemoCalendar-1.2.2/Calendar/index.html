@@ -1,0 +1,53 @@
+<!doctype html>
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset='utf-8'>
+<script type="text/javascript" src="./js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="./js/calendar.js"></script>
+<script type="text/javascript" src="./js/editor.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/calendar.css" />
+</head>
+
+<body>
+
+<div id="myCalendar"></div>
+<div id="leftButton" onclick="window.location.href='about:backCalendar'"><img src="./css/images/left.gif" /></div>
+<div id="rightButton" onclick="window.location.href='about:nextCalendar'"><img src="./css/images/right.gif" /></div>
+
+<div id="myCalendarMemoTitle"></div>
+<div id="myCalendarMemoBox"><div id="myCalendarMemo" contenteditable="true"></div></div>
+
+<div id="myMemoBox"><div id="myMemo" contenteditable="true"></div></div>
+
+<script>
+function onCalendarClick(id){
+	window.location.href = "about:clickCalendar:" + id;
+}
+
+function getCalendarData(offset){
+	var cal = createCalendar(offset);
+	return cal.year + ":" + cal.month + ":" + cal.html;
+}
+
+/* エディターの準備 */
+setEditorShortcuts("#myCalendarMemo");
+setEditorShortcuts("#myMemo");
+
+/* 各コントロールのサイズ設定 */
+$(document).ready(function(){
+	$("#myCalendarMemoBox").css("height", (window.innerHeight-300) + "px");
+	$("#myMemoBox").css("width", (window.innerWidth-350) + "px");
+	$("#myMemoBox").css("height", (window.innerHeight-80) + "px");
+});
+
+$(window).resize(function(){
+	$("#myCalendarMemoBox").css("height", (window.innerHeight-300) + "px");
+	$("#myMemoBox").css("width", (window.innerWidth-350) + "px");
+	$("#myMemoBox").css("height", (window.innerHeight-80) + "px");
+});
+</script>
+
+</body>
+
+</html>

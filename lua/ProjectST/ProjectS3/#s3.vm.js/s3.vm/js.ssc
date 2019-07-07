@@ -1,0 +1,109 @@
+// JS<-->Lua glue
+//
+// Horribly hackish, this is not the right way to do it
+
+js.number = 1
+js.string = 2
+js.object = 3
+js.func = 4
+
+js.lua_table = ${}
+js.lua_index = 1
+
+js.to_js = def(x){
+	if type(x) == 'number' {
+		return tostring(x)
+	}elif type(x) == 'string' {
+		return '"' .. x .. '"'
+	}elif type(x) == 'function' {
+		local lua_index = js.lua_index
+		js.lua_index = js.lua_index + 1
+		js.lua_table[lua_index] = x
+		return 'Lua.funcWrapper(' .. lua_index .. ')'
+	}else{
+		return '<{[Unsupported]}>'
+	}
+}
+
+js.convert_args = def(args){
+	local js_args = ''
+	for i, v in ipairs(args) {
+		if i > 1 { js_args = js_args .. ',' }
+		js_args = js_args .. js.to_js(v)
+	}
+	return js_args
+}
+
+js.wrapper_index = 1
+
+js.wrapper = ${}
+
+js.wrapper.__index = def(table, key){
+	if key == 'new' {
+		local ret = ${ what = 'Lua.wrappers[' .. table.index .. ']' }
+		setmetatable(ret, js.new.property)
+		return ret
+	}
+	return js.get('Lua.wrappers[' .. table.index .. '].' .. key, table)
+}
+
+js.wrapper.__newindex = def(table, key, v){
+	js.run('Lua.wrappers[' .. table.index .. '].'..key.."="..js.to_js(v))
+}
+
+js.wrapper.__call = def(table, ...){
+	if rawget(table, 'parent') {
+		local suffix = js.convert_args(${...})
+		if string.len(suffix) > 0 { suffix = ',' .. suffix }
+		return js.get('(tempFunc = Lua.wrappers[' .. table.index .. '], tempFunc).call(Lua.wrappers[' .. table.parent.index .. ']' .. suffix .. ')') // tempFunc needed to work around js invalid call issue FIXME
+	}else{
+		return js.get('(tempFunc = Lua.wrappers[' .. table.index .. '], tempFunc)(' .. js.convert_args(${...}) .. ')') // tempFunc needed to work around js invalid call issue FIXME
+	}
+}
+
+js.wrapper.__gc = def(table){
+	js.run('delete Lua.reverseWrappers[Lua.wrappers['..table.index..']]')
+	js.run('delete Lua.wrappers['..table.index..']')
+}
+
+local wrapper_store = ${}
+setmetatable(wrapper_store, ${__mode='v'})
+
+js.getWrapperStore = def(){return wrapper_store}
+js.storeGet = def(idx){return wrapper_store[idx]}
+
+js.get = def(what, parent){
+	local ret = ${ index = js.wrapper_index, parent=false }
+	js.wrapper_index = js.wrapper_index + 1
+	local return_type = js.run("Lua.test('" .. what .. "', "..(js.wrapper_index-1)..")")
+	if return_type < 0 {
+		return wrapper_store[-return_type]
+	}elif return_type == js.number {
+		return js.run('Lua.last')
+	}elif return_type == js.string {
+		return js.run_string('Lua.last')
+	}elif return_type == js.object | return_type == js.func {
+		js.run('Lua.wrappers[' .. ret.index .. '] = Lua.last')
+		ret.parent = parent
+		setmetatable(ret, js.wrapper)
+		wrapper_store[js.wrapper_index-1] = ret
+		return ret
+	}else{
+		return '!Unsupported!'
+	}
+}
+
+js.global = js.get('Lua.theGlobal')
+
+js.new = ${}
+setmetatable(js.new, js.new)
+js.new.__index = def(table, key){
+	local ret = ${ what = key }
+	setmetatable(ret, js.new.property)
+	return ret
+}
+
+js.new.property = ${}
+js.new.property.__call = def(table, ...){
+	return js.get('new ' .. table.what .. '(' .. js.convert_args(${...}) .. ')') // )
+}

@@ -1,0 +1,38 @@
+local def load(file){
+	local ret, path = iiFindFile(file)
+	if(!ret) return "[iirequire] モジュール『"..file.."』が存在しません\n"..figit.getEnv("FIGIT_PATH")
+	// ファイル読み込み
+	local afile = figit.ArchiveFile(path)
+	local bin = figit.Binary()
+	if(afile->failed()) return "[iirequire] ファイル『"..path.."』の読み込みに失敗"
+	bin->resize(afile->size())
+	afile->read(bin->ptr(), bin->size())
+	if(figit.File->getExt(path) == ".ii"){
+		// FigitScriptの場合
+		local script = iiconvert(figit.strCast(bin->ptr()), path)
+		local func, err = loadstring(script, path)
+		if(!func){
+			// デバッグモードならコンバート済みファイルを出力
+			if(_DEBUG_MODE) figit.File->write(figit.str.sub(path, 0, path->len()-2).."error.lua", script)
+			return err
+		}else{
+			return func
+		}
+	}else{
+		// Luaの場合
+		return loadstring(figit.strCast(bin->ptr()), path)
+	}
+}
+
+// Install the loader so that it's called just before the normal binary loader
+table.insert(package.loaders, 2, load)
+
+local timer = figit.Timer()
+require "lib/gui"
+msgbox(timer->passage())
+
+local app = interface: sdl.GUIApplication{
+	def @->config(t){
+		t.title = "load test"
+	}
+}()->run()

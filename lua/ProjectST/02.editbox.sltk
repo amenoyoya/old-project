@@ -1,0 +1,20 @@
+require "libutils@cocos2dx"
+
+coco.App.settings.DisplayStates = true // î•ñ•\¦
+
+def coco.App.onInit(scene){
+	local size = coco.App.settings.GameSize
+	local editBox = cc.EditBox->create(cc.size(200, 50),
+		cc.Scale9Sprite->create"tetra_dl010/dl010_textfield_default.9.png")
+	editBox->setPosition(ccp(size.width/2, size.height/4))
+	editBox->setFontName"MS Mincho"
+	editBox->setFontSize(32)
+	editBox->setFontColor(cc.BLUE)
+	editBox->setPlaceHolder"Name:"
+	editBox->setMaxLength(8)
+	editBox->setReturnType(cc.KEYBOARD_RETURNTYPE_DONE)
+	//editBox->setDelegate(scene)
+	scene->addChild(editBox)
+}
+
+coco.App->run()

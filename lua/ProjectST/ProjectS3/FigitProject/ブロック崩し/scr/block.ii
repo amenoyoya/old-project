@@ -1,0 +1,86 @@
+/*** Blockオブジェクト(sdl.Sprite継承) ***/
+class Block: sdl.Sprite("img/block.png"){
+	@.breakFlag = 0 // 破壊フラグ
+	
+	// ブロックが壊れる時の効果音を読み込み
+	if(!sound_Demolish){
+		sound_Demolish = sdl.Object->newSound("sound/demolish.ogg")
+		if(sound_Demolish->failed()) error "sound/demolish.oggがありません"
+		sound_Demolish->setVolume(5)
+	}
+	
+	/* Blockオブジェクトを指定位置にセットしてルーチンをセット */
+	def @->set(id, x, y){
+		@.x, @.y = x, y
+		sdl.App.routine->append(id, def(){
+			while(GameState == GAMEPLAY){
+				if(@.breakFlag == 0){
+					// ブロックが壊れてないときだけ描画
+					@->draw()
+					
+					/* 当たり判定 */
+					if(@->collision(ball)){
+						// ボールが当たったら破壊フラグON
+						@.breakFlag = 1
+						// ボールが当たったら効果音を鳴らす(チャンネル1)
+						sound_Demolish->play(1)
+						
+						/* ボールの跳ね返り */
+						if(ball.y + ball->height()/2 < @.y + @->height()/2){
+							// ボールがブロックの上でぶつかった場合はボールは上に跳ね返る
+							ball.dy = -math.abs(ball.dy)
+						}else{
+							// ボールがブロックの下でぶつかった場合はボールは下に跳ね返る
+							ball.dy = math.abs(ball.dy)
+						}
+						
+						if(ball.x + ball->width()/2 < @.x + @->width()/2*2/3){
+							// ボールがブロックの左端でぶつかった場合はボールは左に跳ね返る
+							ball.dx = -math.abs(ball.dx)
+						}elseif(ball.x + ball->width()/2 > @.x + @->width()*2/3){
+							// ボールがブロックの左端でぶつかった場合はボールは左に跳ね返る
+							ball.dx = math.abs(ball.dx)
+						}else{
+							// ボールがブロックの真ん中でぶつかった場合はボールのdxはそのまま
+						}
+					}
+				}elseif(@.breakFlag == 1){
+					// ブロック破壊フラグが立ったら40フレームかけて徐々に消す
+					@->fadeOut(40)
+					@.breakFlag = 2 // 破壊終了
+				}
+				sdl.App.routine->update()
+			}
+		})
+	}
+}
+
+
+// ブロックオブジェクトを16個作成
+def loadBlocks(){
+	local blocks = $[]
+	
+	for(i = 0, 15){
+		blocks->append(Block())
+		// ブロックをセット
+		blocks[i]->set(i+3, 40+(i%4)*150, 50+(toint(i/4))*50)
+	}
+	
+	// ゲームクリア判定ルーチンを追加
+	sdl.App.routine->append(50, def(){
+		while(GameState == GAMEPLAY){
+			// 16個のブロックの破壊フラグを調べる
+			local clear = true
+			for(i = 0, 15){
+				if(blocks[i].breakFlag == 0){
+					// 壊れていないブロックがあったらNOT CLEAR
+					clear = false
+					break
+				}
+			}
+			// clear状態ならばゲームクリアにする
+			if(clear) GameState = GAMECLEAR
+			sdl.App.routine->update()
+		}
+	})
+}

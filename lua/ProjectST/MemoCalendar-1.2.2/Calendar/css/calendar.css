@@ -1,0 +1,79 @@
+div#leftButton {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+    }
+div#rightButton {
+    position: absolute;
+    left: 245px;
+    top: 20px;
+    cursor: pointer;
+    }
+.calendar {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    border-collapse:collapse;
+    text-align:center;
+    width:250px;
+    }
+div#myCalendarMemoTitle {
+    position: absolute;
+    left: 20px;
+    top: 230px;
+    }
+div#myCalendarMemoBox {
+    overflow: scroll;
+    position: absolute;
+    left: 20px;
+    top: 250px;
+    width: 230px;
+    border: solid 1px #00680c;
+    padding: 10px;
+    background: #f0e68c;
+    }
+div#myCalendarMemo p{
+    margin: 0.25em;
+    }
+div#myMemoBox {
+    overflow: scroll;
+    position: absolute;
+    left: 300px;
+    top: 30px;
+    border: solid 1px #00680c;
+    padding: 10px;
+    background: #f0e68c;
+    }
+div#myMemo p{
+    margin: 0.25em;
+    }
+.calendar td {
+    border:solid 1px #ccc;
+    height:22px;
+    }
+.calendarTitle td {
+    font-weight:bold;
+    font-size:18px;
+    color:#0395e1;
+    border:none;
+    }
+.calendarWeek {
+    background:#efe;
+    }
+.calendarWeekSunday,.calendarSunday {
+    color:#f00;
+    }
+.calendarSunday {
+    background:#fee;
+    }
+.calendarWeekSaturday,.calendarSaturday {
+    color:#00f;
+    }
+.calendarSaturday {
+    background:#eef;
+    }
+.calendarToday {
+    background:#ff8;
+    font-weight:bold;
+    }

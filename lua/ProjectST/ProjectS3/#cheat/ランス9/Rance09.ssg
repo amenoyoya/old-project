@@ -1,0 +1,1079 @@
+SSG for SpoilerAL ver 6.1
+
+[script]
+[title]ランス９
+[distinction]五十音順=ら
+[process]Rance9.exe
+[maker]アリスソフト
+[note]wordwrap
+-- 動作環境 --
+Win7 64bit
+パッケージ版　Ver1.01
+
+◆SSG使用について
+・自己責任でお願いします。
+・書き換えると問題がありそうか、あまり意味のないものはコメントアウトしてあります
+・アイテムの追加や変更が上手くいかなかったので、アイテム入手判定をいじって入手して下さい。
+◆アイテム入手判定について
+・CurrentPosの番号のところが次に出るものです。
+・チュートリアルの宝箱団子はしいたけ固定？
+・レアは通常入手3回以上かレア入手履歴ありでないと出ない
+・激レアはレア入手5回以上でないと出ない？、同じものは出ない
+・他にも例外あり？
+・Posが範囲外になるとテーブル再作成(激レアは再作成しない)
+◆ドロップ率
+・千分率です。50=5%。if((RAND%1000+1)<=ドロップ率)アイテム当たり。外れたらドロップ率三倍で聖魔石抽選。
+[/note]
+
+[involve]ssl
+
+[group]Main
+ [replace]_0x3C8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Misc
+ [replace]_0x3F8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->SaruDama
+ [replace]_0x3F8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x4:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->KaniDama
+
+[subject]ランスモード:dir
+ [repeat]ssl->RanceModeRep,1,8
+[back]
+
+[subject]味方ステータス:dir
+ [repeat]ssl->CharStatus,0,21
+[back]
+
+[subject]戦闘敵ステータス:dir
+//[subject]最大nMonsterNo[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x04,4,num,-,%d '+' ]/現在値/:trace
+//size可変
+ [repeat]ssl->EnemyRep,0,0x190,4
+[back]
+ [replace]0x00, Rance09_RICK->戦闘敵ステータス（一括）
+
+[subject]戦闘天然敵ステータス:dir
+ [subject]label:split,label,0,※上の方が最新
+// [subject]label:split,label,0,※倒さずに戦闘終了するとメモリに残る？
+//[subject]最大nMonsterNo[ '+' _mem,_0x032C=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x04,4,num,-,%d '+' ]/現在値/:trace
+//size可変 ループ回数は少なめに設定してあります。ループ終了値＝回数×4
+ [repeat]ssl->NatureRep,0,0x20,4
+[back]
+
+[subject]アイテム入手関係:dir
+  [repeat]ssl->ドロップ判定一覧,0,0x10,4
+  [repeat]ssl->ドロップ一覧,0,0x0C,4
+  [replace]0x00,ssl->強化版ドロップ一覧
+ [subject]アイテム入手履歴:dir
+  [repeat]ssl->アイテム入手回数,0,0x190,4
+ [back]
+
+[back]
+
+//[subject]アイテム(確認用)値を変更するとおかしくなる:dir
+// [repeat]ssl->ItemDefine,0,0x015C,4
+//[back]
+
+[/group]
+
+[group]Misc
+[size]4
+ //[subject]0x00[ '+' _mem,0x00,4,num,<error>,%d '+' ]/現在値/:calc,0x00,0x00,0x7FFFFFFF
+ [subject]ＧＯＬＤ[ '+' _mem,0x04,4,num,<error>,%d '+' ]/現在値/:calc,0x04,0,999999999
+ [subject]聖魔Ｐ[ '+' _mem,0x08,4,num,<error>,%d '+' ]/現在値/:calc,0x08,0,999999999
+ [subject]聖魔石：現在[ '+' _mem,0x0C,4,num,<error>,%d '+' ]/現在値/:calc,0x0C,0,99999
+ [subject]聖魔石：累計[ '+' _mem,0x10,4,num,<error>,%d '+' ]/現在値/:calc,0x10,0,99999
+ 
+ //これでモード変更して引き継ぎなどに影響あるかは調べていません
+ //[subject]周回モード[ '+' _mem,0x20,4,list,<error>,ssl->ModeList,1,1 '+' ]:list,0x20,ssl->ModeList,1,1
+ 
+[/size]
+[/group]
+
+[group]SaruDama
+[size]4
+// [subject]所持最大数[ '+' _mem,0x00,4,num,<error>,%d '+' ]/現在値/:calc,0x00,0,10
+ [subject]猿玉[ '+' _mem,0x04,4,num,<error>,%d '+' ]/現在値/:calc,0x04,0,7
+// [subject]追加数[ '+' _mem,0x08,4,num,<error>,%d '+' ]/現在値/:calc,0x08,0,7
+[/size]
+[/group]
+[group]KaniDama
+[size]4
+// [subject]所持最大数[ '+' _mem,0x00,4,num,<error>,%d '+' ]/現在値/:calc,0x00,0,10
+ [subject]蟹玉[ '+' _mem,0x04,4,num,<error>,%d '+' ]/現在値/:calc,0x04,0,4
+// [subject]追加数[ '+' _mem,0x08,4,num,<error>,%d '+' ]/現在値/:calc,0x08,0,4
+[/size]
+[/group]
+
+[group]RanceModeRep
+[size]4
+[subject][!@ssl->RanceModeCharNameList,$Val!]:dir
+//名前文字列
+//[subject]_mem,_0x2CC=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>Idx;[\:[\:$base+$idx*4\:]+0x8\:],31,00,-:trace
+ [subject]出現フラグ[ '+' _mem,_0x2D0=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!],4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,_0x2D0=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],01000000,00000000
+ [subject]エロ段階[ '+' _mem,_0x2D4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!],4,num,<error>,%d '+' ]/現在値/:calc,_0x2D4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],0,5
+ [subject]エロ回数[ '+' _mem,_0x2D8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!],4,num,<error>,%d '+' ]/現在値/:calc,_0x2D8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],0,999
+ [subject]進展可[ '+' _mem,_0x2DC=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!],4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,_0x2DC=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],01000000,00000000
+ [subject]汎用可[ '+' _mem,_0x2E0=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!],4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,_0x2E0=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],01000000,00000000
+ [subject]次の段階発生制限[ '+' _mem,_0x2E4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!],4,list,<error>,ssl->RanceModeLockList '+' ]:list,_0x2E4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],ssl->RanceModeLockList,0,1
+
+[back]
+[/size]
+[/group]
+
+[group]CharStatus
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+
+[subject]_mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,free_list,<error>,Rance09List->CharNameList_f:dir
+
+ [replace]0x[!$Val*4!],[!@ssl->ステータス一括処理List,$Val!]
+
+ [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->MainStatus
+
+ [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->SubStatus
+
+[subject]戦闘中:dir
+ [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->BattleStatus
+
+ [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x14:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->BattleMisc
+[back]
+
+[subject]装備アイテム:dir
+ [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->ItemSlot
+ [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->ItemEquip
+[back]
+
+[subject]武器・防具強化:dir
+
+ [subject]武器強化Upテーブル:dir
+  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x1C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],ssl->強化テーブル一括UP
+  
+  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x1C:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->強化判定
+  [subject]テーブル:dir
+   [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x1C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->強化テーブル
+  [back]
+ [back]
+
+ [subject]武器強化3Upテーブル:dir
+  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x20:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],ssl->強化テーブル一括UP
+  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x20:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->強化判定
+  [subject]テーブル:dir
+   [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x20:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->強化テーブル
+  [back]
+ [back]
+ 
+ [subject]防具強化Upテーブル:dir
+  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x24:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],ssl->強化テーブル一括UP
+  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x24:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->強化判定
+  [subject]テーブル:dir
+   [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x24:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->強化テーブル
+  [back]
+ [back]
+[back]
+
+//[subject]不明:dir
+// [subject]CharStatus0x00->0x04->…->:dir
+//  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Rep0x20
+// [back]
+
+// [subject]CharStatus0x10:dir
+//  [replace]_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Rep0x20
+// [back]
+//[back]
+
+[back]
+[/enabled]
+[/group]
+
+[group]MainStatus
+[size]4
+[subject]体力・現在[ '+' _mem,0x040,4,num,<error>,%d '+' ]/現在値/:calc,0x040,0,99999
+[subject]ステータス:dir
+// [subject]UnitId[ '+' _mem,0x000,4,num,<error>,%d '+' ]/_:d_list,0x000,Rance09List->CharNameList,1000,1999,Rance09List->CharNameList_ad
+// [subject]味方1敵2?[ '+' _mem,0x004,4,num,<error>,%d '+' ]/現在値/:calc,0x004,0,99
+ [subject]体力：現在[ '+' _mem,0x040,4,num,<error>,%d '+' ]/現在値/:calc,0x040,0,99999
+ [subject]体力：最大[ '+' _mem,0x044,4,num,<error>,%d '+' ]/現在値/:calc,0x044,0,99999
+ [subject]回避：現在[ '+' _mem,0x028,4,num,<error>,%d '+' ]/現在値/:calc,0x028,0,99999
+ [subject]回避：最大[ '+' _mem,0x02C,4,num,<error>,%d '+' ]/現在値/:calc,0x02C,0,99999
+ [subject]受流し：現在[ '+' _mem,0x030,4,num,<error>,%d '+' ]/現在値/:calc,0x030,0,99999
+ [subject]受流し：最大[ '+' _mem,0x034,4,num,<error>,%d '+' ]/現在値/:calc,0x034,0,99999
+ [subject]装甲：現在[ '+' _mem,0x038,4,num,<error>,%d '+' ]/現在値/:calc,0x038,0,99999
+ [subject]装甲：最大[ '+' _mem,0x03C,4,num,<error>,%d '+' ]/現在値/:calc,0x03C,0,99999
+ [subject]魔抵[ '+' _mem,0x084,4,num,<error>,%d '+' ]/現在値/:calc,0x084,0,9999
+ [subject]ねばり：現在[ '+' _mem,0x050,4,num,<error>,%d '+' ]/現在値/:calc,0x050,0,99999
+ [subject]ねばり：最大[ '+' _mem,0x054,4,num,<error>,%d '+' ]/現在値/:calc,0x054,0,99999
+ [subject]攻撃力：最小[ '+' _mem,0x078,4,num,<error>,%d '+' ]/現在値/:calc,0x078,0,99999
+ [subject]攻撃力：最大[ '+' _mem,0x07C,4,num,<error>,%d '+' ]/現在値/:calc,0x07C,0,99999
+ [subject]魔法力[ '+' _mem,0x080,4,num,<error>,%d '+' ]/現在値/:calc,0x080,0,99999
+ [subject]クリティカル量[ '+' _mem,0x090,4,num,<error>,%d '+' ]/現在値/:calc,0x090,0,99999
+ [subject]必殺技回数：現在[ '+' _mem,0x048,4,num,<error>,%d '+' ]/現在値/:calc,0x048,0,999
+ [subject]必殺技回数：最大[ '+' _mem,0x04C,4,num,<error>,%d '+' ]/現在値/:calc,0x04C,0,999
+ [subject]移動[ '+' _mem,0x088,4,num,<error>,%d '+' ]/現在値/:calc,0x088,0,99
+ [subject]射程[ '+' _mem,0x08C,4,num,<error>,%d '+' ]/現在値/:calc,0x08C,0,99
+ [subject]素早さ[ '+' _mem,0x094,4,num,<error>,%d '+' ]/現在値/:calc,0x094,0,99999
+ //[subject]nBattleNo(敵用?)[ '+' _mem,0x188,4,num,<error>,%d '+' ]/現在値/:calc,0x188,0x0,0x7FFFFFFF
+ //[subject]018C[ '+' _mem,0x18C,4,num,<error>,%d '+' ]/現在値/:calc,0x18C,0x0,0x7FFFFFFF
+[back]
+[/size]
+[/group]
+
+[group]SubStatus
+[size]4
+// [subject]UnitNo.[ '+' _mem,0x000,4,num,<error>,%d '+' ]:trace
+// [subject]一時離脱イベント等で使用[ '+' _mem,0x004,4,num,<error>,%d '+' ]/現在値/:calc,0x004,0,9999
+// [subject]ステータス表示可???[ '+' _mem,0x008,4,num,<error>,%d '+' ]/ON\/OFF/:toggle,0x008,01000000,00000000
+
+[subject]熟練Ｐ：現在[ '+' _mem,0x00C,4,num,<error>,%d '+' ]/現在値/:calc,0x00C,0,999999999
+[subject]熟練Ｐ：累計[ '+' _mem,0x010,4,num,<error>,%d '+' ]/現在値/:calc,0x010,0,999999999
+//[subject]減らした敵の体力累計[ '+' _mem,0x014,4,num,<error>,%d '+' ]/現在値/:calc,0x014,0,999999999
+
+[subject]ユニット状態[ '+' _mem,0x018,4,free_list,<error>,Rance09List->CharFlagList_f '+' ]/_:d_list,0x018,Rance09List->CharFlagList,0,99,Rance09List->CharFlagList_ad
+[subject]コスト[ '+' _mem,0x078,4,num,<error>,%d '+' ]/現在値/:calc,0x078,1,999
+[subject]狙われ度[ '+' _mem,0x024,4,num,<error>,%d '+' ]/現在値/:calc,0x024,0,100
+
+[subject]熟練度・武器装甲:dir
+ [subject]熟練度：体力[ '+' _mem,0x028,4,num,<error>,%d '+' ]/現在値/:calc,0x028,0,9999
+ [subject]熟練度：回避[ '+' _mem,0x02C,4,num,<error>,%d '+' ]/現在値/:calc,0x02C,0,9999
+ [subject]熟練度：受流し[ '+' _mem,0x030,4,num,<error>,%d '+' ]/現在値/:calc,0x030,0,9999
+ [subject]熟練度：魔抵[ '+' _mem,0x034,4,num,<error>,%d '+' ]/現在値/:calc,0x034,0,9999
+ [subject]熟練度：ねばり[ '+' _mem,0x038,4,num,<error>,%d '+' ]/現在値/:calc,0x038,0,9999
+ [subject]熟練度：攻撃力[ '+' _mem,0x03C,4,num,<error>,%d '+' ]/現在値/:calc,0x03C,0,9999
+ [subject]熟練度：クリティカル量[ '+' _mem,0x040,4,num,<error>,%d '+' ]/現在値/:calc,0x040,0,9999
+ [subject]熟練度：素早さ[ '+' _mem,0x044,4,num,<error>,%d '+' ]/現在値/:calc,0x044,0,9999
+ 
+ [subject]☆ボーナス段階[ '+' _mem,0x04C,4,num,<error>,%d '+' ]/現在値/:calc,0x04C,0,4
+
+ [subject]武器補正[ '+' _mem,0x01C,4,num,<error>,%d '+' ]/現在値/:calc,0x01C,0,99999
+ [subject]装甲補正[ '+' _mem,0x020,4,num,<error>,%d '+' ]/現在値/:calc,0x020,0,99999
+
+ //武器は基本値＋9999以上だとUPしない。
+ [subject]武器強化：基本値＋[ '+' _mem,0x050,4,num,<error>,%d '+' ]/現在値/:calc,0x050,0,9999
+ [subject]武器強化：挑戦回数[ '+' _mem,0x054,4,num,<error>,%d '+' ]/現在値/:calc,0x054,0,99999
+ //防具は基本値＋999以上だとUPしない。
+ [subject]防具増装：基本値＋[ '+' _mem,0x058,4,num,<error>,%d '+' ]/現在値/:calc,0x058,0,999
+ [subject]防具増装：基本値増加回数[ '+' _mem,0x05C,4,num,<error>,%d '+' ]/現在値/:calc,0x05C,0,9999
+ [subject]防具増装：挑戦回数[ '+' _mem,0x060,4,num,<error>,%d '+' ]/現在値/:calc,0x060,0,99999
+[back]
+
+[subject]確率系・技ゲージ:dir
+ [subject]反撃率[ '+' _mem,0x07C,4,num,<error>,%d '+' ]％/現在値/:calc,0x07C,0,100
+ [subject]再行動発動率[ '+' _mem,0x080,4,num,<error>,%d '+' ]％/現在値/:calc,0x080,0,100
+ [subject]強撃／範囲拡大発動率[ '+' _mem,0x084,4,num,<error>,%d '+' ]％/現在値/:calc,0x084,0,100
+ [subject]自動回復：発動率[ '+' _mem,0x088,4,num,<error>,%d '+' ]％/現在値/:calc,0x088,0,100
+ [subject]自動回復：回復率[ '+' _mem,0x08C,4,num,<error>,%d '+' ]％/現在値/:calc,0x08C,0,100
+ [subject]熟練度Ｐ入手倍率[ '+' _mem,0x090,4,num,<error>,%d '+' ]％/現在値/:calc,0x090,0,1000
+ [subject]狂戦士：体力が[ '+' _mem,0x094,4,num,<error>,%d '+' ]減ると/現在値/:calc,0x094,0,1000
+ [subject]狂戦士：破壊力が[ '+' _mem,0x098,4,num,<error>,%d '+' ]上昇/現在値/:calc,0x098,0,1000
+ [subject]瞬殺発動率[ '+' _mem,0x09C,4,num,<error>,%d '+' ]％/現在値/:calc,0x09C,0,100
+ [subject]溜める破壊値倍率[ '+' _mem,0x0A0,4,num,<error>,%d '+' ]％/現在値/:calc,0x0A0,0,1000
+ [subject]挑発成功率[ '+' _mem,0x0A4,4,num,<error>,%d '+' ]％/現在値/:calc,0x0A4,0,999
+ [subject]援護発動率[ '+' _mem,0x0A8,4,num,<error>,%d '+' ]％/現在値/:calc,0x0A8,0,100
+ [subject]守護発動率[ '+' _mem,0x0AC,4,num,<error>,%d '+' ]％/現在値/:calc,0x0AC,0,100
+ [subject]ＧＯＬＤドロップ率加算[ '+' _mem,0x0B0,4,num,<error>,%d '+' ]％/現在値/:calc,0x0B0,0,100
+ [subject]バリア必要ゲージ[ '+' _mem,0x0B4,4,num,<error>,%d '+' ]/現在値/:calc,0x0B4,0,20
+ [subject]援護必要ゲージ[ '+' _mem,0x0B8,4,num,<error>,%d '+' ]/現在値/:calc,0x0B8,0,20
+ [subject]必殺技必要ゲージ[ '+' _mem,0x0BC,4,num,<error>,%d '+' ]/現在値/:calc,0x0BC,0,20
+[back]
+ //[replace]0x00,ssl->SubStatusTest
+[/size]
+[/group]
+
+[group]SubStatusTest
+[size]4
+[subject]不明(SubStatus):dir
+  [subject]0x048[ '+' _mem,0x048,4,num,<error>,%d '+' ]/現在値/:calc,0x048,0,1000
+  
+  [subject]0x064[ '+' _mem,0x064,4,num,<error>,%d '+' ]/現在値/:calc,0x064,0,1000
+  [subject]0x068[ '+' _mem,0x068,4,num,<error>,%d '+' ]/現在値/:calc,0x068,0,1000
+  [subject]0x06C[ '+' _mem,0x06C,4,num,<error>,%d '+' ]/現在値/:calc,0x06C,0,1000
+  [subject]0x070[ '+' _mem,0x070,4,num,<error>,%d '+' ]/現在値/:calc,0x070,0,1000
+  [subject]0x074[ '+' _mem,0x074,4,num,<error>,%d '+' ]/現在値/:calc,0x074,0,1000
+
+//[subject]0x0C0前衛1後衛3？[ '+' _mem,0x0C0,4,num,<error>,%d '+' ]/現在値/:calc,0x0C0,0,99
+  [subject]0x0C4[ '+' _mem,0x0C4,4,num,<error>,%d '+' ]/現在値/:calc,0x0C4,0,1000
+  [subject]0x0C8[ '+' _mem,0x0C8,4,num,<error>,%d '+' ]/現在値/:calc,0x0C8,0,1000
+  [subject]0x0CC[ '+' _mem,0x0CC,4,num,<error>,%d '+' ]/現在値/:calc,0x0CC,0,1000
+  [subject]0x0D0[ '+' _mem,0x0D0,4,num,<error>,%d '+' ]/現在値/:calc,0x0D0,0,1000
+  [subject]0x0D4[ '+' _mem,0x0D4,4,num,<error>,%d '+' ]/現在値/:calc,0x0D4,0,1000
+  [subject]0x0D8[ '+' _mem,0x0D8,4,num,<error>,%d '+' ]/現在値/:calc,0x0D8,0,1000
+  [subject]0x0DC[ '+' _mem,0x0DC,4,num,<error>,%d '+' ]/現在値/:calc,0x0DC,0,1000
+  [subject]0x0E0[ '+' _mem,0x0E0,4,num,<error>,%d '+' ]/現在値/:calc,0x0E0,0,1000
+  [subject]0x0E4[ '+' _mem,0x0E4,4,num,<error>,%d '+' ]/現在値/:calc,0x0E4,0,1000
+  [subject]0x0E8[ '+' _mem,0x0E8,4,num,<error>,%d '+' ]/現在値/:calc,0x0E8,0,1000
+  [subject]0x0EC[ '+' _mem,0x0EC,4,num,<error>,%d '+' ]/現在値/:calc,0x0EC,0,1000
+  [subject]0x0F0[ '+' _mem,0x0F0,4,num,<error>,%d '+' ]/現在値/:calc,0x0F0,0,1000
+  [subject]0x0F4[ '+' _mem,0x0F4,4,num,<error>,%d '+' ]/現在値/:calc,0x0F4,0,1000
+  [subject]0x0F8[ '+' _mem,0x0F8,4,num,<error>,%d '+' ]/現在値/:calc,0x0F8,0,1000
+  [subject]0x0FC[ '+' _mem,0x0FC,4,num,<error>,%d '+' ]/現在値/:calc,0x0FC,0,1000
+  [subject]0x100[ '+' _mem,0x100,4,num,<error>,%d '+' ]/現在値/:calc,0x100,0,1000
+  [subject]0x104[ '+' _mem,0x104,4,num,<error>,%d '+' ]/現在値/:calc,0x104,0,1000
+  [subject]0x108[ '+' _mem,0x108,4,num,<error>,%d '+' ]/現在値/:calc,0x108,0,1000
+  [subject]0x10C[ '+' _mem,0x10C,4,num,<error>,%d '+' ]/現在値/:calc,0x10C,0,1000
+  [subject]0x110[ '+' _mem,0x110,4,num,<error>,%d '+' ]/現在値/:calc,0x110,0,1000
+  [subject]0x114[ '+' _mem,0x114,4,num,<error>,%d '+' ]/現在値/:calc,0x114,0,1000
+  [subject]0x118[ '+' _mem,0x118,4,num,<error>,%d '+' ]/現在値/:calc,0x118,0,1000
+  [subject]0x11C[ '+' _mem,0x11C,4,num,<error>,%d '+' ]/現在値/:calc,0x11C,0,1000
+  [subject]0x120[ '+' _mem,0x120,4,num,<error>,%d '+' ]/現在値/:calc,0x120,0,1000
+  [subject]0x124[ '+' _mem,0x124,4,num,<error>,%d '+' ]/現在値/:calc,0x124,0,1000
+  [subject]0x128[ '+' _mem,0x128,4,num,<error>,%d '+' ]/現在値/:calc,0x128,0,1000
+  [subject]0x12C[ '+' _mem,0x12C,4,num,<error>,%d '+' ]/現在値/:calc,0x12C,0,1000
+  [subject]0x130[ '+' _mem,0x130,4,num,<error>,%d '+' ]/現在値/:calc,0x130,0,1000
+  [subject]0x134[ '+' _mem,0x134,4,num,<error>,%d '+' ]/現在値/:calc,0x134,0,1000
+  [subject]0x138[ '+' _mem,0x138,4,num,<error>,%d '+' ]/現在値/:calc,0x138,0,1000
+  [subject]0x13C[ '+' _mem,0x13C,4,num,<error>,%d '+' ]/現在値/:calc,0x13C,0,1000
+  [subject]0x140[ '+' _mem,0x140,4,num,<error>,%d '+' ]/現在値/:calc,0x140,0,1000
+  [subject]0x144[ '+' _mem,0x144,4,num,<error>,%d '+' ]/現在値/:calc,0x144,0,1000
+  [subject]0x148[ '+' _mem,0x148,4,num,<error>,%d '+' ]/現在値/:calc,0x148,0,1000
+  [subject]0x14C[ '+' _mem,0x14C,4,num,<error>,%d '+' ]/現在値/:calc,0x14C,0,1000
+  [subject]0x150[ '+' _mem,0x150,4,num,<error>,%d '+' ]/現在値/:calc,0x150,0,1000
+  [subject]0x154[ '+' _mem,0x154,4,num,<error>,%d '+' ]/現在値/:calc,0x154,0,1000
+  [subject]0x158[ '+' _mem,0x158,4,num,<error>,%d '+' ]/現在値/:calc,0x158,0,1000
+  [subject]0x15C[ '+' _mem,0x15C,4,num,<error>,%d '+' ]/現在値/:calc,0x15C,0,1000
+  [subject]0x160[ '+' _mem,0x160,4,num,<error>,%d '+' ]/現在値/:calc,0x160,0,1000
+  [subject]0x164[ '+' _mem,0x164,4,num,<error>,%d '+' ]/現在値/:calc,0x164,0,1000
+  [subject]0x168[ '+' _mem,0x168,4,num,<error>,%d '+' ]/現在値/:calc,0x168,0,1000
+  [subject]0x16C[ '+' _mem,0x16C,4,num,<error>,%d '+' ]/現在値/:calc,0x16C,0,1000
+  [subject]0x170[ '+' _mem,0x170,4,num,<error>,%d '+' ]/現在値/:calc,0x170,0,1000
+  [subject]0x174[ '+' _mem,0x174,4,num,<error>,%d '+' ]/現在値/:calc,0x174,0,1000
+  [subject]0x178[ '+' _mem,0x178,4,num,<error>,%d '+' ]/現在値/:calc,0x178,0,1000
+  [subject]0x17C[ '+' _mem,0x17C,4,num,<error>,%d '+' ]/現在値/:calc,0x17C,0,1000
+  [subject]0x180[ '+' _mem,0x180,4,num,<error>,%d '+' ]/現在値/:calc,0x180,0,1000
+  [subject]0x184[ '+' _mem,0x184,4,num,<error>,%d '+' ]/現在値/:calc,0x184,0,1000
+  [subject]0x188[ '+' _mem,0x188,4,num,<error>,%d '+' ]/現在値/:calc,0x188,0,1000
+  [subject]0x18C[ '+' _mem,0x18C,4,num,<error>,%d '+' ]/現在値/:calc,0x18C,0,1000
+[back]
+[/size]
+[/group]
+
+[group]BattleMisc
+[size]4
+//[subject]攻撃された回数[ '+' _mem,0x000,4,num,<error>,%d '+' ]/現在値/:calc,0x000,0,100
+//[subject]再行動状態：2[ '+' _mem,0x004,4,num,<error>,%d '+' ]/ON\/OFF/:toggle,0x004,02000000,00000000
+//猿玉入手番号だけでは入手できない
+//[subject]猿玉入手番号[ '+' _mem,0x008,4,num,<error>,%d '+' ]/現在値/:calc,0x008,0,7
+//魔球は1にしても使用できるが、何か問題あるかもしれないのでコメントアウト。
+//[subject]魔球番号[ '+' _mem,0x00C,4,num,<error>,%08d '+' ]/現在値/:calc,0x00C,0,3006099
+ [subject]獲得熟練Ｐ(補正前)[ '+' _mem,0x010,4,num,<error>,%d '+' ]/現在値/:calc,0x010,0,999999
+//[replace]0x00,ssl->BattleMiscTest
+[/size]
+[/group]
+
+[group]BattleMiscTest
+[subject]不明:dir
+ [subject]0x014[ '+' _mem,0x014,4,num,<error>,%d '+' ]/現在値/:calc,0x014,0x0,0x7FFFFFFF
+ //[subject]必殺技使用前：-1[ '+' _mem,0x018,4,num,<error>,%d '+' ]/現在値/:calc,0x018,-1,0x7FFFFFFF
+ [subject]攻撃不可？[ '+' _mem,0x01C,4,num,<error>,%d '+' ]/現在値/:calc,0x01C,0x0,0x7FFFFFFF
+ [subject]0x020[ '+' _mem,0x020,4,num,<error>,%d '+' ]/現在値/:calc,0x020,0x0,0x7FFFFFFF
+ [subject]0x024[ '+' _mem,0x024,4,num,<error>,%d '+' ]/現在値/:calc,0x024,0x0,0x7FFFFFFF
+ [subject]0x028[ '+' _mem,0x028,4,num,<error>,%d '+' ]/現在値/:calc,0x028,0x0,0x7FFFFFFF
+// [subject]ピグ分裂関係？[ '+' _mem,0x02C,4,num,<error>,%d '+' ]/現在値/:calc,0x02C,0x0,0x7FFFFFFF
+// [subject]ピグ分裂関係？[ '+' _mem,0x030,4,num,<error>,%d '+' ]/現在値/:calc,0x030,0x0,0x7FFFFFFF
+ [subject]0x034[ '+' _mem,0x034,4,num,<error>,%d '+' ]/現在値/:calc,0x034,0x0,0x7FFFFFFF
+ [subject]0x038[ '+' _mem,0x038,4,num,<error>,%d '+' ]/現在値/:calc,0x038,0x0,0x7FFFFFFF
+ [subject]0x03C[ '+' _mem,0x03C,4,num,<error>,%d '+' ]/現在値/:calc,0x03C,0x0,0x7FFFFFFF
+[back]
+[/group]
+
+[group]BattleStatus
+[size]4
+ [subject]溜め中[ '+' _mem,0x000,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x000,01000000,00000000
+ [subject]パス済[ '+' _mem,0x004,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x004,01000000,00000000
+ [subject]バリア中[ '+' _mem,0x008,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x008,01000000,00000000
+ [subject]援護中[ '+' _mem,0x00C,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x00C,01000000,00000000
+//[subject]守護の判定で使用？[ '+' _mem,0x010,4,num,<error>,%d '+' ]/ON\/OFF/:toggle,0x010,01000000,00000000
+// 戦闘不能の解除はできない
+ [subject]戦闘不能[ '+' _mem,0x014,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x014,01000000,00000000
+ [subject]麻痺状態[ '+' _mem,0x018,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x018,01000000,00000000
+ [subject]混乱状態[ '+' _mem,0x01C,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x01C,01000000,00000000
+ [subject]蟹玉投入中[ '+' _mem,0x020,4,list,<error>,ssl->isOnList '+' ]/ON\/OFF/:toggle,0x020,01000000,00000000
+ //[replace]0x00,ssl->BattleStatusTest
+[/size]
+[/group]
+
+[group]BattleStatusTest
+ [subject]不明:dir
+  [subject]0x024[ '+' _mem,0x024,4,num,<error>,%d '+' ]/現在値/:calc,0x024,0x0,0x7FFFFFFF
+  [subject]0x028[ '+' _mem,0x028,4,num,<error>,%d '+' ]/現在値/:calc,0x028,0x0,0x7FFFFFFF
+  [subject]0x02C[ '+' _mem,0x02C,4,num,<error>,%d '+' ]/現在値/:calc,0x02C,0x0,0x7FFFFFFF
+  [subject]0x030[ '+' _mem,0x030,4,num,<error>,%d '+' ]/現在値/:calc,0x030,0x0,0x7FFFFFFF
+  [subject]0x034[ '+' _mem,0x034,4,num,<error>,%d '+' ]/現在値/:calc,0x034,0x0,0x7FFFFFFF
+  [subject]0x038[ '+' _mem,0x038,4,num,<error>,%d '+' ]/現在値/:calc,0x038,0x0,0x7FFFFFFF
+  [subject]0x03C[ '+' _mem,0x03C,4,num,<error>,%d '+' ]/現在値/:calc,0x03C,0x0,0x7FFFFFFF
+ [back]
+[/group]
+
+[group]強化判定
+[size]4
+ //[subject]TableIdx[0x '+' _mem,0x000,4,num,<error>,%X '+' ]/現在値/:calc,0x000,0x0,0x7FFFFFFF
+ //[subject]UP配置cnt?[ '+' _mem,0x004,4,num,<error>,%d '+' ]/現在値/:trace
+ [subject]CurrentPos[ '+' _mem,0x008,4,num,<error>,%d '+' ](Maxで次回テーブル再生成)/現在値/:calc,0x008,0,100
+[/size]
+[/group]
+
+[group]強化テーブル
+[size]4
+ [repeat]ssl->強化テーブルRep,0,0x190,4
+[/size]
+[/group]
+
+[group]強化テーブルRep
+ [subject][!L$Val/4!][ '+' _mem,0x[!$Val!],4,list,<error>,ssl->UpList '+' ]/UPする\/しない/:toggle,0x[!$Val!],01000000,00000000
+[/group]
+
+[group]強化テーブル一括UP
+// [subject]TablePo[0x '+' _mem,0x08,4,num,-,%08X '+' ]:trace
+// [subject]TableSize[0x '+' _mem,0x0C,4,num,-,%X '+' ]:trace
+ [subject]全てUpにする/実行/_:toggle,_[:[.0x08.]:],*[ _[:[.0x0C.]:] :: 01000000 *],????????
+[/group]
+
+
+[group]ステータス一括処理物理
+[subject]一括強化(物理系)/実行/:b_toggle,0x00,ssl->ステータス一括処理物理_bt,offset
+[/group]
+[group]ステータス一括処理魔法
+[subject]一括強化(魔法系)/実行/:b_toggle,0x00,ssl->ステータス一括処理魔法_bt,offset
+[/group]
+
+[group]ステータス一括処理List
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理魔法
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理魔法
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理魔法
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理物理
+ssl->ステータス一括処理魔法
+[/group]
+
+[group]ItemSlot
+[size]4
+ //[subject]装備アイテムIdx[ '+' _mem,0x000,4,num,<error>,%d '+' ]/現在値/:calc,0x000,0x0,0x7FFFFFFF
+ //[subject]装備アイテム枠：現在[ '+' _mem,0x004,4,num,<error>,%d '+' ]/現在値/:calc,0x004,1,0x6
+ [subject]装備アイテム枠：デフォ[ '+' _mem,0x008,4,num,<error>,%d '+' ]/現在値/:calc,0x008,1,6
+ //[subject]最大枠[ '+' _mem,0x00C,4,num,<error>,%d '+' ]/現在値/:calc,0x00C,1,6
+[/size]
+[/group]
+
+[group]ItemEquip
+[size]4
+[subject]装備(装備アイテム枠0からの変更用):dir
+ [subject]label:split,label,0,※装備中のアイテムは変更しないこと。
+ [subject]label:split,label,0,※5999…装備不可　0…空き
+ [subject]label:split,label,0,※8桁数値上四桁…装備中のアイテムId
+ [subject]label:split,label,0,※8桁数値下四桁…サブId(同種何個目か)
+ [repeat]ssl->ItemEquipRep,0x00,0x18,4
+[back]
+[/size]
+[/group]
+
+[group]ItemEquipRep
+ [subject][!L$Val/4+1!][ '+' _mem,0x[!$Val!],4,num,<error>,%d '+' ]/現在値/:calc,0x[!$Val!],0x0,0x7FFFFFFF
+[/group]
+
+[group]ItemDefine
+[size]4
+[subject]_mem,_0x3F0=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:],4,free_list,<error>,Rance09List->ItemList_f:dir
+
+//[subject]Id[ '+' _mem,_0x3F0=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:],4,num,<error>,%d '+' ]/_:d_list,_0x3F0=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x00,Rance09List->ItemList,0x0,0x7FFFFFFF,Rance09List->ItemList_ad
+
+  [subject]Id[ '+' _mem,_0x3F0=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:],4,num,<error>,%d '+' ]/現在値/:trace
+
+  [subject]所持数[ '+' _mem,_0x3F0=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x4,4,num,<error>,%d '+' ](数値変えても増えたりしない)/現在値/:trace
+
+  //[subject]0x00:dir
+   //[replace]_0x3F0=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Rep0x40
+  //[back]
+
+  //[subject]0x04:dir
+   //[replace]_0x3F0=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Rep0x20
+  //[back]
+
+  [subject]状態(装備変えて変になった時の復帰用):dir
+   [replace]_0x3F0=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->ItemFlag
+  [back]
+
+[back]
+[/size]
+[/group]
+
+[group]ItemFlag
+[size]4
+ [repeat]ssl->ItemFlagRep,0,10
+[/size]
+[/group]
+
+
+[group]ItemFlagRep
+[subject][!L$Val+1!]個目:dir
+[enabled][:[:0x00767D7C:]+0x1EC:]=>base;[:[.0x008.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+
+ [subject]サブId[ '+' _mem,_[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[.0x008.]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val*4!]=>bool;[\:$tmp+0x8\:]+0x[!$Val*4!]=>tmp;$tmp*$bool,4,num,<error>,%04d '+' ]/現在値/:trace
+
+ [subject]装備者[ '+' _mem,_[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[.0x00C.]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val*4!]=>bool;[\:$tmp+0x8\:]+0x[!$Val*4!]=>tmp;$tmp*$bool,4,free_list,<error>,Rance09List->CharNoList_f '+' ]/_:d_list,_[:[:0x00767D7C:]+0x1EC:]=>base;[:[.0x00C.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],Rance09List->CharNameList,0,21,Rance09List->CharNoList_ad
+
+ [subject]所持状態[ '+' _mem,_[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[.0x010.]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val*4!]=>bool;[\:$tmp+0x8\:]+0x[!$Val*4!]=>tmp;$tmp*$bool,4,list,<error>,Rance09List->Item所持状態List '+' ]:list,_[:[:0x00767D7C:]+0x1EC:]=>base;[:[.0x010.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!],Rance09List->Item所持状態List,0,1
+
+[/enabled]
+[back]
+[/group]
+
+[group]EnemyRep
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject]No. '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x04\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,num,<範囲外>,%d '+' 　 '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x04\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;([\:[\:$base+$idx*4\:]+0x8\:]+0x8)*$bool,4,free_list,-,Rance09List->EnFlagList_f '+' [ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,<UnknownName>,Rance09List->EnName_f '+' ：HP '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;([\:[\:$base+$idx*4\:]+0x8\:]+0x40)*$bool,4,num,???,%d '+' ]:dir
+
+ [replace]_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->EnemyMainStatus
+ [replace]_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->EnemySubStatus
+
+// [subject]0x00->0x04:dir
+//  [replace]_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Rep0x20
+// [back]
+
+// [subject]0x8:dir
+//  [replace]_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Rep0x20
+// [back]
+
+// [replace]_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Enemy0x0CStatus
+
+// [replace]_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->Enemy0x10Status
+
+[back]
+[/enabled]
+[/group]
+
+[group]EnemyMainStatus
+[size]4
+[subject]体力：現在[ '+' _mem,0x040,4,num,<error>,%d '+' ]/現在値/_:calc,0x040,0,99999
+[subject]ステータス:dir
+ //[subject]nMonsterID[ '+' _mem,0x000,4,num,<error>,%d '+' ]/現在値/_:calc,0x000,0,99999
+ [subject]nMonsterID[ '+' _mem,0x000,4,num,<error>,%d '+' ]/_:d_list,0x000,Rance09List->EnName_f,0,9999,Rance09List->EnName_ad
+// [subject]0x04[ '+' _mem,0x004,4,num,<error>,%d '+' ]/現在値/_:calc,0x004,0,2
+ [subject]体力：現在[ '+' _mem,0x040,4,num,<error>,%d '+' ]/現在値/_:calc,0x040,0,99999
+ [subject]体力：最大[ '+' _mem,0x044,4,num,<error>,%d '+' ]/現在値/_:calc,0x044,0,99999
+ [subject]回避：現在[ '+' _mem,0x028,4,num,<error>,%d '+' ]/現在値/_:calc,0x028,0,99999
+ [subject]回避：最大[ '+' _mem,0x02C,4,num,<error>,%d '+' ]/現在値/_:calc,0x02C,0,99999
+ [subject]受流し：現在[ '+' _mem,0x030,4,num,<error>,%d '+' ]/現在値/_:calc,0x030,0,99999
+ [subject]受流し：最大[ '+' _mem,0x034,4,num,<error>,%d '+' ]/現在値/_:calc,0x034,0,99999
+ [subject]装甲：現在[ '+' _mem,0x038,4,num,<error>,%d '+' ]/現在値/_:calc,0x038,0,99999
+ [subject]装甲：最大[ '+' _mem,0x03C,4,num,<error>,%d '+' ]/現在値/_:calc,0x03C,0,99999
+ [subject]魔抵[ '+' _mem,0x084,4,num,<error>,%d '+' ]/現在値/_:calc,0x084,0,9999
+ [subject]ねばり：現在[ '+' _mem,0x050,4,num,<error>,%d '+' ]/現在値/_:calc,0x050,0,99999
+ [subject]ねばり：最大[ '+' _mem,0x054,4,num,<error>,%d '+' ]/現在値/_:calc,0x054,0,99999
+ [subject]破壊値：最小[ '+' _mem,0x078,4,num,<error>,%d '+' ]/現在値/_:calc,0x078,0,99999
+ [subject]破壊値：最大[ '+' _mem,0x07C,4,num,<error>,%d '+' ]/現在値/_:calc,0x07C,0,99999
+ [subject]魔法力[ '+' _mem,0x080,4,num,<error>,%d '+' ]/現在値/_:calc,0x080,0,99999
+ [subject]クリティカル量[ '+' _mem,0x090,4,num,<error>,%d '+' ]/現在値/_:calc,0x090,0,99999
+ [subject]必殺技回数：現在[ '+' _mem,0x048,4,num,<error>,%d '+' ]/現在値/_:calc,0x048,0,999
+ [subject]必殺技回数：最大[ '+' _mem,0x04C,4,num,<error>,%d '+' ]/現在値/_:calc,0x04C,0,999
+ [subject]移動[ '+' _mem,0x088,4,num,<error>,%d '+' ]/現在値/_:calc,0x088,0,99
+ [subject]射程[ '+' _mem,0x08C,4,num,<error>,%d '+' ]/現在値/_:calc,0x08C,0,99
+ [subject]素早さ[ '+' _mem,0x094,4,num,<error>,%d '+' ]/現在値/_:calc,0x094,0,99999
+[back]
+[/size]
+[/group]
+
+[group]EnemySubStatus
+[size]4
+// [subject]nMonsterNo[ '+' _mem,0x000,4,num,<error>,%d '+' ]/現在値/_:trace
+ [subject]ＧＯＬＤ[ '+' _mem,0x050,4,num,<error>,%d '+' ]/現在値/_:calc,0x050,0,999999
+ [subject]ドロップ率[ '+' _mem,0x054,4,num,<error>,%d '+' \/1000]/現在値/_:calc,0x054,0,1000
+ [subject]熟練Ｐ[ '+' _mem,0x058,4,num,<error>,%d '+' ]/現在値/_:calc,0x058,0,999999
+ [subject]聖魔Ｐ[ '+' _mem,0x05C,4,num,<error>,%d '+' ]/現在値/_:calc,0x05C,0,999999
+// [subject]004[ '+' _mem,0x004,4,num,<error>,%d '+' ]/現在値/_:trace
+// [subject]出現状態[ '+' _mem,0x008,4,free_list,<error>,Rance09List->EnFlagList_f '+' ]:trace
+
+ [subject]行動確率等:dir
+  [subject]準備率[ '+' _mem,0x028,4,num,<error>,%d '+' ]/現在値/_:calc,0x028,0,100
+  [subject]逃走率[ '+' _mem,0x02C,4,num,<error>,%d '+' ]/現在値/_:calc,0x02C,0,100
+  [subject]特定逃走追加率[ '+' _mem,0x030,4,num,<error>,%d '+' ]/現在値/_:calc,0x030,0,100
+  [subject]挑発成功減少率[ '+' _mem,0x040,4,num,<error>,%d '+' ]/現在値/_:calc,0x040,0,100
+ [back]
+ 
+ //[replace]0x00,ssl->EnemySubStatusTest
+ 
+[/size]
+[/group]
+
+[group]EnemySubStatusTest
+[size]4
+[subject]不明(EnemySubStatus):dir
+ [subject]00C[ '+' _mem,0x00C,4,num,<error>,%d '+' ]/現在値/_:calc,0x00C,0,1000
+ [subject]010[ '+' _mem,0x010,4,num,<error>,%d '+' ]/現在値/_:calc,0x010,0,1000
+ [subject]014[ '+' _mem,0x014,4,num,<error>,%d '+' ]/現在値/_:calc,0x014,0,1000
+ [subject]018[ '+' _mem,0x018,4,num,<error>,%d '+' ]/現在値/_:calc,0x018,0,1000
+ [subject]01C[ '+' _mem,0x01C,4,num,<error>,%d '+' ]/現在値/_:calc,0x01C,0,1000
+ [subject]020[ '+' _mem,0x020,4,num,<error>,%d '+' ]/現在値/_:calc,0x020,0,1000
+ [subject]024[ '+' _mem,0x024,4,num,<error>,%d '+' ]/現在値/_:calc,0x024,0,1000
+ 
+ [subject]034[ '+' _mem,0x034,4,num,<error>,%d '+' ]/現在値/_:calc,0x034,0,1000
+ [subject]038[ '+' _mem,0x038,4,num,<error>,%d '+' ]/現在値/_:calc,0x038,0,1000
+ [subject]03C[ '+' _mem,0x03C,4,num,<error>,%d '+' ]/現在値/_:calc,0x03C,0,1000
+
+ [subject]044[ '+' _mem,0x044,4,num,<error>,%d '+' ]/現在値/_:calc,0x044,0,1000
+ [subject]048[ '+' _mem,0x048,4,num,<error>,%d '+' ]/現在値/_:calc,0x048,0,1000
+ [subject]04C[ '+' _mem,0x04C,4,num,<error>,%d '+' ]/現在値/_:calc,0x04C,0,1000
+ 
+ [subject]060[ '+' _mem,0x060,4,num,<error>,%d '+' ]/現在値/_:calc,0x060,0,1000
+ [subject]064[ '+' _mem,0x064,4,num,<error>,%d '+' ]/現在値/_:calc,0x064,0,1000
+ [subject]068[ '+' _mem,0x068,4,num,<error>,%d '+' ]/現在値/_:calc,0x068,0,1000
+ [subject]06C[ '+' _mem,0x06C,4,num,<error>,%d '+' ]/現在値/_:calc,0x06C,0,1000
+ [subject]070[ '+' _mem,0x070,4,num,<error>,%d '+' ]/現在値/_:calc,0x070,0,1000
+ [subject]074[ '+' _mem,0x074,4,num,<error>,%d '+' ]/現在値/_:calc,0x074,0,1000
+ [subject]078[ '+' _mem,0x078,4,num,<error>,%d '+' ]/現在値/_:calc,0x078,0,1000
+ [subject]07C[ '+' _mem,0x07C,4,num,<error>,%d '+' ]/現在値/_:calc,0x07C,0,1000
+ [subject]080[ '+' _mem,0x080,4,num,<error>,%d '+' ]/現在値/_:calc,0x080,0,1000
+ [subject]084[ '+' _mem,0x084,4,num,<error>,%d '+' ]/現在値/_:calc,0x084,0,1000
+ [subject]088[ '+' _mem,0x088,4,num,<error>,%d '+' ]/現在値/_:calc,0x088,0,1000
+ [subject]08C[ '+' _mem,0x08C,4,num,<error>,%d '+' ]/現在値/_:calc,0x08C,0,1000
+ [subject]090[ '+' _mem,0x090,4,num,<error>,%d '+' ]/現在値/_:calc,0x090,0,1000
+ [subject]094[ '+' _mem,0x094,4,num,<error>,%d '+' ]/現在値/_:calc,0x094,0,1000
+ [subject]098[ '+' _mem,0x098,4,num,<error>,%d '+' ]/現在値/_:calc,0x098,0,1000
+ [subject]09C[ '+' _mem,0x09C,4,num,<error>,%d '+' ]/現在値/_:calc,0x09C,0,1000
+ [subject]0A0[ '+' _mem,0x0A0,4,num,<error>,%d '+' ]/現在値/_:calc,0x0A0,0,1000
+ [subject]0A4[ '+' _mem,0x0A4,4,num,<error>,%d '+' ]/現在値/_:calc,0x0A4,0,1000
+ [subject]0A8[ '+' _mem,0x0A8,4,num,<error>,%d '+' ]/現在値/_:calc,0x0A8,0,1000
+ [subject]0AC[ '+' _mem,0x0AC,4,num,<error>,%d '+' ]/現在値/_:calc,0x0AC,0,1000
+ [subject]0B0[ '+' _mem,0x0B0,4,num,<error>,%d '+' ]/現在値/_:calc,0x0B0,0,1000
+ [subject]0B4[ '+' _mem,0x0B4,4,num,<error>,%d '+' ]/現在値/_:calc,0x0B4,0,1000
+ [subject]0B8[ '+' _mem,0x0B8,4,num,<error>,%d '+' ]/現在値/_:calc,0x0B8,0,1000
+ [subject]0BC[ '+' _mem,0x0BC,4,num,<error>,%d '+' ]/現在値/_:calc,0x0BC,0,1000
+ [subject]0C0[ '+' _mem,0x0C0,4,num,<error>,%d '+' ]/現在値/_:calc,0x0C0,0,1000
+ [subject]0C4[ '+' _mem,0x0C4,4,num,<error>,%d '+' ]/現在値/_:calc,0x0C4,0,1000
+ [subject]0C8[ '+' _mem,0x0C8,4,num,<error>,%d '+' ]/現在値/_:calc,0x0C8,0,1000
+ [subject]0CC[ '+' _mem,0x0CC,4,num,<error>,%d '+' ]/現在値/_:calc,0x0CC,0,1000
+ [subject]0D0[ '+' _mem,0x0D0,4,num,<error>,%d '+' ]/現在値/_:calc,0x0D0,0,1000
+ [subject]0D4[ '+' _mem,0x0D4,4,num,<error>,%d '+' ]/現在値/_:calc,0x0D4,0,1000
+ [subject]0D8[ '+' _mem,0x0D8,4,num,<error>,%d '+' ]/現在値/_:calc,0x0D8,0,1000
+ [subject]0DC[ '+' _mem,0x0DC,4,num,<error>,%d '+' ]/現在値/_:calc,0x0DC,0,1000
+ [subject]0E0[ '+' _mem,0x0E0,4,num,<error>,%d '+' ]/現在値/_:calc,0x0E0,0,1000
+ [subject]0E4[ '+' _mem,0x0E4,4,num,<error>,%d '+' ]/現在値/_:calc,0x0E4,0,1000
+ [subject]0E8[ '+' _mem,0x0E8,4,num,<error>,%d '+' ]/現在値/_:calc,0x0E8,0,1000
+ [subject]0EC[ '+' _mem,0x0EC,4,num,<error>,%d '+' ]/現在値/_:calc,0x0EC,0,1000
+ [subject]0F0[ '+' _mem,0x0F0,4,num,<error>,%d '+' ]/現在値/_:calc,0x0F0,0,1000
+ [subject]0F4[ '+' _mem,0x0F4,4,num,<error>,%d '+' ]/現在値/_:calc,0x0F4,0,1000
+ [subject]0F8[ '+' _mem,0x0F8,4,num,<error>,%d '+' ]/現在値/_:calc,0x0F8,0,1000
+ [subject]0FC[ '+' _mem,0x0FC,4,num,<error>,%d '+' ]/現在値/_:calc,0x0FC,0,1000
+ [subject]100[ '+' _mem,0x100,4,num,<error>,%d '+' ]/現在値/_:calc,0x100,0,1000
+ [subject]104[ '+' _mem,0x104,4,num,<error>,%d '+' ]/現在値/_:calc,0x104,0,1000
+ [subject]108[ '+' _mem,0x108,4,num,<error>,%d '+' ]/現在値/_:calc,0x108,0,1000
+ [subject]10C[ '+' _mem,0x10C,4,num,<error>,%d '+' ]/現在値/_:calc,0x10C,0,1000
+ [subject]110[ '+' _mem,0x110,4,num,<error>,%d '+' ]/現在値/_:calc,0x110,0,1000
+ [subject]114[ '+' _mem,0x114,4,num,<error>,%d '+' ]/現在値/_:calc,0x114,0,1000
+ [subject]118[ '+' _mem,0x118,4,num,<error>,%d '+' ]/現在値/_:calc,0x118,0,1000
+ [subject]11C[ '+' _mem,0x11C,4,num,<error>,%d '+' ]/現在値/_:calc,0x11C,0,1000
+ [subject]120[ '+' _mem,0x120,4,num,<error>,%d '+' ]/現在値/_:calc,0x120,0,1000
+ [subject]124[ '+' _mem,0x124,4,num,<error>,%d '+' ]/現在値/_:calc,0x124,0,1000
+ [subject]128[ '+' _mem,0x128,4,num,<error>,%d '+' ]/現在値/_:calc,0x128,0,1000
+ [subject]12C[ '+' _mem,0x12C,4,num,<error>,%d '+' ]/現在値/_:calc,0x12C,0,1000
+ [subject]130[ '+' _mem,0x130,4,num,<error>,%d '+' ]/現在値/_:calc,0x130,0,1000
+ [subject]134[ '+' _mem,0x134,4,num,<error>,%d '+' ]/現在値/_:calc,0x134,0,1000
+ [subject]138[ '+' _mem,0x138,4,num,<error>,%d '+' ]/現在値/_:calc,0x138,0,1000
+ [subject]13C[ '+' _mem,0x13C,4,num,<error>,%d '+' ]/現在値/_:calc,0x13C,0,1000
+ [subject]140[ '+' _mem,0x140,4,num,<error>,%d '+' ]/現在値/_:calc,0x140,0,1000
+ [subject]144[ '+' _mem,0x144,4,num,<error>,%d '+' ]/現在値/_:calc,0x144,0,1000
+ [subject]148[ '+' _mem,0x148,4,num,<error>,%d '+' ]/現在値/_:calc,0x148,0,1000
+ [subject]14C[ '+' _mem,0x14C,4,num,<error>,%d '+' ]/現在値/_:calc,0x14C,0,1000
+ [subject]150[ '+' _mem,0x150,4,num,<error>,%d '+' ]/現在値/_:calc,0x150,0,1000
+ [subject]154[ '+' _mem,0x154,4,num,<error>,%d '+' ]/現在値/_:calc,0x154,0,1000
+ [subject]158[ '+' _mem,0x158,4,num,<error>,%d '+' ]/現在値/_:calc,0x158,0,1000
+ [subject]15C[ '+' _mem,0x15C,4,num,<error>,%d '+' ]/現在値/_:calc,0x15C,0,1000
+ [subject]160[ '+' _mem,0x160,4,num,<error>,%d '+' ]/現在値/_:calc,0x160,0,1000
+ [subject]164[ '+' _mem,0x164,4,num,<error>,%d '+' ]/現在値/_:calc,0x164,0,1000
+ [subject]168[ '+' _mem,0x168,4,num,<error>,%d '+' ]/現在値/_:calc,0x168,0,1000
+ [subject]16C[ '+' _mem,0x16C,4,num,<error>,%d '+' ]/現在値/_:calc,0x16C,0,1000
+ [subject]170[ '+' _mem,0x170,4,num,<error>,%d '+' ]/現在値/_:calc,0x170,0,1000
+ [subject]174[ '+' _mem,0x174,4,num,<error>,%d '+' ]/現在値/_:calc,0x174,0,1000
+ [subject]178[ '+' _mem,0x178,4,num,<error>,%d '+' ]/現在値/_:calc,0x178,0,1000
+ [subject]17C[ '+' _mem,0x17C,4,num,<error>,%d '+' ]/現在値/_:calc,0x17C,0,1000
+ [subject]180[ '+' _mem,0x180,4,num,<error>,%d '+' ]/現在値/_:calc,0x180,0,1000
+ [subject]184[ '+' _mem,0x184,4,num,<error>,%d '+' ]/現在値/_:calc,0x184,0,1000
+ [subject]188[ '+' _mem,0x188,4,num,<error>,%d '+' ]/現在値/_:calc,0x188,0,1000
+ [subject]18C[ '+' _mem,0x18C,4,num,<error>,%d '+' ]/現在値/_:calc,0x18C,0,1000
+[back]
+[/size]
+[/group]
+
+[group]Enemy0x0CStatus
+[size]4
+[subject]いろいろ:dir
+ [subject]挑発した人[ '+' _mem,0x000,4,num,<error>,%d '+' ]/現在値/_:calc,0x000,0,20
+ [subject]挑発の何か[ '+' _mem,0x004,4,num,<error>,%d '+' ]/現在値/_:calc,0x004,0,1000
+ [subject]0x008[ '+' _mem,0x008,4,num,<error>,%d '+' ]/現在値/_:calc,0x008,0x80000000,0x7FFFFFFF
+ [subject]0x00C[ '+' _mem,0x00C,4,num,<error>,%d '+' ]/現在値/_:calc,0x00C,0x80000000,0x7FFFFFFF
+ [subject]0x010[ '+' _mem,0x010,4,num,<error>,%d '+' ]/現在値/_:calc,0x010,0x80000000,0x7FFFFFFF
+ [subject]0x014[ '+' _mem,0x014,4,num,<error>,%d '+' ]/現在値/_:calc,0x014,0x80000000,0x7FFFFFFF
+ [subject]0x018[ '+' _mem,0x018,4,num,<error>,%d '+' ]/現在値/_:calc,0x018,0x80000000,0x7FFFFFFF
+ [subject]0x01C[ '+' _mem,0x01C,4,num,<error>,%d '+' ]/現在値/_:calc,0x01C,0x80000000,0x7FFFFFFF
+ [subject]0x020[ '+' _mem,0x020,4,num,<error>,%d '+' ]/現在値/_:calc,0x020,0x80000000,0x7FFFFFFF
+ [subject]0x024[ '+' _mem,0x024,4,num,<error>,%d '+' ]/現在値/_:calc,0x024,0x80000000,0x7FFFFFFF
+ [subject]0x028[ '+' _mem,0x028,4,num,<error>,%d '+' ]/現在値/_:calc,0x028,0x80000000,0x7FFFFFFF
+ [subject]0x02C[ '+' _mem,0x02C,4,num,<error>,%d '+' ]/現在値/_:calc,0x02C,0x80000000,0x7FFFFFFF
+ [subject]0x030[ '+' _mem,0x030,4,num,<error>,%d '+' ]/現在値/_:calc,0x030,0x80000000,0x7FFFFFFF
+ [subject]団子が行動した回数[ '+' _mem,0x034,4,num,<error>,%d '+' ]/現在値/_:calc,0x034,0,10
+ [subject]0x038[ '+' _mem,0x038,4,num,<error>,%d '+' ]/現在値/_:calc,0x038,0x80000000,0x7FFFFFFF
+ [subject]0x03C[ '+' _mem,0x03C,4,num,<error>,%d '+' ]/現在値/_:calc,0x03C,0x80000000,0x7FFFFFFF
+[back]
+[/size]
+[/group]
+
+[group]Enemy0x10Status
+[size]4
+[subject]状態:dir
+ [subject]準備中[ '+' _mem,0x000,4,num,<error>,%d '+' ]/現在値/_:calc,0x000,0,1000
+ //[subject]ワープ中1ワープ終わると0[ '+' _mem,0x004,4,num,<error>,%d '+' ]:trace
+ [subject]0x008[ '+' _mem,0x008,4,num,<error>,%d '+' ]/現在値/_:calc,0x008,0x80000000,0x7FFFFFFF
+ [subject]0x00C[ '+' _mem,0x00C,4,num,<error>,%d '+' ]/現在値/_:calc,0x00C,0x80000000,0x7FFFFFFF
+ [subject]0x010[ '+' _mem,0x010,4,num,<error>,%d '+' ]/現在値/_:calc,0x010,0x80000000,0x7FFFFFFF
+ [subject]0x014[ '+' _mem,0x014,4,num,<error>,%d '+' ]/現在値/_:calc,0x014,0x80000000,0x7FFFFFFF
+ [subject]0x018[ '+' _mem,0x018,4,num,<error>,%d '+' ]/現在値/_:calc,0x018,0x80000000,0x7FFFFFFF
+ [subject]0x01C[ '+' _mem,0x01C,4,num,<error>,%d '+' ]/現在値/_:calc,0x01C,0x80000000,0x7FFFFFFF
+[back]
+[/size]
+[/group]
+
+[group]NatureRep
+[size]4
+[enabled]0x032C=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>=0x[!$Val!]+0x4
+
+
+//_mem,_0x032C=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]=>size;0x[!$Val!]+0x4<=$size=>bool;[\:[\:$tmp+0x8\:]+$size-0x[!$Val!]-0x4\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x04\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;([\:[\:$base+$idx*4\:]+0x8\:]+0x8)*$bool,4,free_list,-,Rance09List->EnFlagList_f
+
+[subject]No. '+' _mem,_0x032C=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]=>size;0x[!$Val!]+0x4<=$size=>bool;[\:[\:$tmp+0x8\:]+$size-0x[!$Val!]-0x4\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x04\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,num,<範囲外>,%d '+' [ '+' _mem,_0x032C=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]=>size;0x[!$Val!]+0x4<=$size=>bool;[\:[\:$tmp+0x8\:]+$size-0x[!$Val!]-0x4\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,<UnknownName>,Rance09List->EnName_f '+' ：HP '+' _mem,_0x032C=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]=>size;0x[!$Val!]+0x4<=$size=>bool;[\:[\:$tmp+0x8\:]+$size-0x[!$Val!]-0x4\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;([\:[\:$base+$idx*4\:]+0x8\:]+0x40)*$bool,4,num,???,%d '+' ]:dir
+
+
+_0x032C=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:$base+$idx*4:]=>tmp;[:$tmp+0xC:]=>size;[:[:$tmp+0x8:]+$size-0x[!$Val!]-0x4:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]
+
+
+ [replace]_0x032C=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:$base+$idx*4:]=>tmp;[:$tmp+0xC:]=>size;[:[:$tmp+0x8:]+$size-0x[!$Val!]-0x4:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->EnemyMainStatus
+
+ [replace]_0x032C=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:$base+$idx*4:]=>tmp;[:$tmp+0xC:]=>size;[:[:$tmp+0x8:]+$size-0x[!$Val!]-0x4:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->EnemySubStatus
+
+[back]
+[/enabled]
+[/size]
+[/group]
+
+[group]ドロップ判定一覧
+ [subject][!@ssl->ドロップ判定DirList,$Val/4!]:dir
+
+//ランク一覧
+ [subject]入手ランク判定:dir
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],ssl->ドロップランク判定一括
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->ドロップ判定
+  [subject]テーブル:dir
+   [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->ドロップ判定テーブル
+  [back]
+ [back]
+
+//換金アイテム一覧
+[subject]換金アイテム:dir
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],ssl->ドロップアイテム一括
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->ドロップ判定
+  [subject]テーブル:dir
+   [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->ドロップアイテムテーブル通常
+  [back]
+[back]
+
+[back]
+[/group]
+
+
+
+[group]ドロップ判定
+[size]4
+// [subject]危険：いじると配列サイズがおかしくなる[ '+' _mem,0x00,4,num,<error>,%d '+' ]:trace
+// [subject]文字列Idx[0x '+' _mem,0x4,4,num,<error>,%04X '+' ]/現在値/:trace
+// [subject]文字列Idx[0x '+' _mem,0x8,4,num,<error>,%04X '+' ]/現在値/:trace
+ [subject]CurrentPos[ '+' _mem,0x0C,4,num,<error>,%d '+' ](Maxで次回テーブル再生成)/現在値/:calc,0x0C,0,100
+// [subject]TableIdx[0x '+' _mem,0x10,4,num,<error>,%04X '+' ]/現在値/:trace
+[/size]
+[/group]
+
+[group]ドロップ判定テーブル
+[size]4
+ [repeat]ssl->ドロップ判定Rep,0,0x190,4
+[/size]
+[/group]
+
+[group]ドロップ判定Rep
+ [subject][!L$Val/4!][ '+' _mem,0x[!$Val!],4,free_list,<error>,Rance09List->アイテムランクList_f '+' ]:d_list,0x[!$Val!],Rance09List->アイテムランクList,0,5,Rance09List->アイテムランクList_ad
+[/group]
+
+[group]ドロップ一覧
+[size]4
+[subject][!@ssl->ドロップ一覧DirList,$Val/4!]:dir
+
+ [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],ssl->ドロップアイテム一括
+ 
+ [subject]CurrentPos[ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x04\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x4,4,num,<error>,%d '+' ][!@ssl->ドロップ一覧PosTextList,$Val/4!]/現在値/:calc,_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x4,0,[!@ssl->ドロップ一覧MaxValList,$Val/4!]
+ 
+ [subject]テーブル:dir
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],[! @ssl->ドロップアイテムテーブルroopList, $Val !]
+ [back]
+
+[back]
+[/size]
+[/group]
+
+[group]強化版ドロップ一覧
+[subject]強化版:dir
+ [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],ssl->強化版判定一括
+ [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:$base+$idx*4:]+0x8:],ssl->強化版ドロップ判定
+[back]
+[/group]
+
+[group]強化版ドロップ判定
+[size]4
+// [subject]TableIdx[0x '+' _mem,0x00,4,num,<error>,%04X '+' ]/現在値/:trace
+// [subject]配置時cnt?[ '+' _mem,0x04,4,num,<error>,%d '+' ]/現在値/:trace
+ [subject]CurrentPos[ '+' _mem,0x08,4,num,<error>,%d '+' ](Maxで次回テーブル再生成)/現在値/:calc,0x08,0,100
+ [subject]テーブル:dir
+  [repeat]ssl->強化版ドロップテーブルRep,0,0x190,4
+ [back]
+[/size]
+[/group]
+
+[group]強化版ドロップテーブルRep
+ [subject][!L$Val/4!][ '+' _mem,_[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[.0x00.]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!],4,list,<error>,ssl->強化版List '+' ]/強化版\/外れ/:toggle,_[:[.0x00.]:]=>idx;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val!],01000000,00000000
+[/group]
+
+[group]ドロップアイテム一括
+// [subject]TablePo[0x '+' _mem,0x08,4,num,-,%08X '+' ]:trace
+// [subject]TableSize[0x '+' _mem,0x0C,4,num,-,%X '+' ]:trace
+ [subject]全て変更/_:d_list,0x00,Rance09List->ItemList,0,9999,Rance09List->アイテム一括List_dl2,real
+[/group]
+
+[group]ドロップランク判定一括
+// [subject]TablePo[0x '+' _mem,0x08,4,num,-,%08X '+' ]:trace
+// [subject]TableSize[0x '+' _mem,0x0C,4,num,-,%X '+' ]:trace
+ [subject]全て変更/_:d_list,0x00,Rance09List->アイテムランクList,1,5,Rance09List->アイテムランク一括List_dl2,real
+[/group]
+
+[group]強化版判定一括
+// [subject]TablePo[0x '+' _mem,0x08,4,num,-,%08X '+' ]:trace
+// [subject]TableSize[0x '+' _mem,0x0C,4,num,-,%X '+' ]:trace
+ [subject]全て強化版にする/実行/_:toggle,_[:[.0x08.]:],*[ _[:[.0x0C.]:] :: 01000000 *],????????
+[/group]
+
+[group]ドロップ判定DirList
+通常敵ドロップ
+イベント戦闘ボーナス
+自由戦闘ボーナス
+宝箱だんごドロップ
+[/group]
+
+[group]ドロップ一覧DirList
+通常
+レア
+激レア
+[/group]
+
+[group]ドロップ一覧PosTextList
+(Maxで次回テーブル再生成)
+(Maxで次回テーブル再生成)
+(テーブル再生成されない)
+[/group]
+
+[group]ドロップ一覧MaxValList
+100
+100
+17
+[/group]
+
+[group]ドロップアイテムテーブルroopList
+ssl->ドロップアイテムテーブル通常
+ssl->ドロップアイテムテーブル通常
+ssl->ドロップアイテムテーブル激レア
+[/group]
+
+[group]ドロップアイテムテーブル通常
+
+[size]4
+ [repeat]ssl->ドロップアイテムRep,0,0x190,4
+[/size]
+[/group]
+
+[group]ドロップアイテムテーブル激レア
+
+[size]4
+ [repeat]ssl->ドロップアイテムRep,0,0x44,4
+[/size]
+[/group]
+
+[group]ドロップアイテムRep
+ [subject][! L$Val/4 !][ '+' _mem,0x[!$Val!],4,free_list,<error>,Rance09List->ItemList_f '+' ]:d_list,0x[!$Val!],Rance09List->ItemList,0x0,0x7FFFFFFF,Rance09List->ItemList_ad
+[/group]
+
+
+
+[group]アイテム入手回数
+[size]4
+[enabled][:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+0x3F4:]=>idx;[:[:[:$base+$idx*4:]+0x08:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x08:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject]_mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x0C\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!],4,free_list,<error>,Rance09List->ItemList_f '+' [ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x10\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:$base+$idx*4\:]+0x8=>tmp;[\:$tmp+0x4\:]>0x[!$Val!]=>bool;([\:$tmp\:]+0x[!$Val!])*$bool,4,num,<error>,%d '+' ]:dir
+
+ [subject]Id[ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x0C\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:$base+$idx*4\:]+0x8=>tmp;[\:$tmp+0x4\:]>0x[!$Val!]=>bool;([\:$tmp\:]+0x[!$Val!])*$bool,4,free_list,<error>,Rance09List->ItemList_f '+' ]/_:d_list,_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x08:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x08:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val!],Rance09List->ItemList,0x0,0x7FFFFFFF,Rance09List->ItemList_ad
+
+ [subject]個数[ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x10\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:$base+$idx*4\:]+0x8=>tmp;[\:$tmp+0x4\:]>0x[!$Val!]=>bool;([\:$tmp\:]+0x[!$Val!])*$bool,4,num,<error>,%d '+' ]/現在値/:calc,_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x08:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x08:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val!],0,99
+[back]
+[/enabled]
+[/size]
+[/group]
+
+[group]Rep0x08
+[size]4
+ [repeat]ssl->HexCalcRep,0,0x08,4
+[/size]
+[/group]
+
+
+[group]Rep0x20
+[size]4
+ [repeat]ssl->HexCalcRep,0,0x20,4
+[/size]
+[/group]
+
+[group]Rep0x40
+[size]4
+ [repeat]ssl->HexCalcRep,0,0x40,4
+[/size]
+[/group]
+
+[group]HexCalcRep
+ [subject]0x[!$Val!] '+' [0x '+' _mem,0x[!$Val!],4,num,<error>,%04X '+' ( '+' _mem,0x[!$Val!],4,num,<error>,%d '+' )]/現在値/_:calc,0x[!$Val!],0x0,0x7FFFFFFF
+[/group]
+
+///////////bundle
+[group]ステータス一括処理物理_bt
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x040,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x044,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x028,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x02C,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x030,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x034,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x038,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x03C,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x084,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x050,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x054,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x078,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x07C,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x080,00000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x090,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x048,E7030000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x04C,E7030000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x088,63000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x08C,63000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x094,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x01C,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x020,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x028,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x02C,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x030,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x034,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x038,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x03C,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x040,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x044,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x050,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x058,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x080,64000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x084,64000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x0BC,00000000,????????
+[/group]
+
+[group]ステータス一括処理魔法_bt
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x040,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x044,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x028,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x02C,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x030,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x034,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x038,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x03C,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x084,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x050,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x054,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x078,00000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x07C,00000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x080,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x090,64000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x048,E7030000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x04C,E7030000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x088,63000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x08C,63000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x094,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x01C,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x020,9F860100,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x028,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x02C,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x030,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x034,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x038,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x03C,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x040,00000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x044,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x050,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x058,0F270000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x080,64000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x084,64000000,????????
+_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+[.0x00.]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x0BC,00000000,????????
+[/group]
+
+
+
+//////////////////////////リスト
+[group]ModeList
+通常
+×２
+×４
+ＳＰ
+[/group]
+
+
+[group]RanceModeLockList
+0
+なし
+あり
+[/group]
+
+[group]RanceModeCharNameList
+0
+ルシアン
+かなみ
+志津香
+チルディ
+戦姫
+ピグ
+ミラクル
+[/group]
+
+[group]強化版List
+0
+★強化版
+[/group]
+
+[group]UpList
+0
+★UP
+[/group]
+
+[group]isOnList
+OFF
+ON
+2
+[/group]
+
+[/involve]
+
+//////////////////////////////
+
+[replace]0x00,ssl->Main
+[/script]
+

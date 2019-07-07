@@ -1,0 +1,255 @@
+/*** ドラッガブルオブジェクトクラス ***/
+class sdl.Draggable(normal, active, press): sdl.Clickable() {
+	@.m_drag = false // ドラッグ状態
+	@.m_out = false // カーソルがobjの外側にあるか
+	@.m_pressPos = {x=0, y=0} // クリックした時のカーソル位置(objの左上からの座標)
+	@.m_mov = {x=0, y=0} // クリックした時の位置からどれだけカーソルが動いたか
+	@._Clickable_draw = @.draw // Clickable::draw
+	
+	// コンストラクタ
+	def @->__init__(normal, active, press) @->open(normal, active, press)
+	
+	/* クリッカブルオブジェクト作成 */
+	// normal, active, press: 各状態における表示形式を指定するテーブル
+	// テーブル形式: image=表示する画像(sdl.Texture), color=表示時の色,
+	// 				x,y=本来の位置からのズレ, frameExt: drawEasyWindow時の枠の拡大率
+	def @->open(normal, active, press){
+		@.m_format = { // デフォルトの表示形式
+			normal = {
+				image = img_SystemButton, color = Color(255,255,255), x = 0, y = 0, frameExt = 0.5
+			}, active = {
+				image = img_SystemButton, color = Color(0,200,55), x = 0, y = 0, frameExt = 0.5
+			}, press = {
+				image = img_SystemButton, color = Color(255,100,0), x = 0, y = 0, frameExt = 0.5
+			}
+		}
+		// 表示形式指定
+		if(type(normal) == "table") table_set(@.m_format.normal, normal)
+		if(type(active) == "table") table_set(@.m_format.active, active)
+		if(type(press) == "table") table_set(@.m_format.press, press)
+	}
+	
+	/* 押下時、ドラッグ状態をtrueにする */
+	def @->onPressFunc(x, y){
+		@.m_drag = true
+		@.m_pressPos.x = sdl.Mouse.x - x
+		@.m_pressPos.y = sdl.Mouse.y - y
+	}
+	
+	/* ドロップ時実行関数 */
+	def @->onDropFunc(x, y, w, h){}
+	
+	/* 描画 */
+	def @->draw(x, y, w, h){
+		if(@.m_drag){
+			if(sdl.getInput(MOUSE_LEFT) == 0){
+				@->onDropFunc(x, y, w, h) // ドロップされた！
+				@.m_drag = false; @.m_out = false
+				@.m_pressPos = {x=0, y=0}; @.m_mov = {x=0, y=0}
+			}else{
+				@.m_mov.x = sdl.Mouse.x - x - @.m_pressPos.x
+				@.m_mov.y = sdl.Mouse.y - y - @.m_pressPos.y
+				if(sdl.isMouseInRect(x, y, w, h)) @.m_out = false
+				else @.m_out = true
+			}
+			@->pressDrawFunc(x, y, w, h) // ドラッグ中はPressDraw
+		}else{
+			@->_Clickable_draw(x, y, w, h)
+		}
+	}
+	
+	/* ドラッグ中か */
+	def @->isDragging() return @.m_drag
+	
+	/* ドラッグ中でカーソルがオブジェクトの外側にあるか */
+	def @->isOut() return @.m_out
+	
+	/* ドラッグ開始時の位置とカーソルが動いた量を取得 */
+	def @->pressPos() return @.m_pressPos
+	def @->mov() return @.m_mov
+}
+
+
+/*** スクロールバークラス ***/
+/* ～バーの移動量の算出～
+バーの移動量をS、バーサイズをB、レールサイズ(スクロールバーサイズ-矢印サイズ*2)をL、
+そしてスクロール回数をNとする。この時、これらの関係は S = (L-B)/N となる。 */
+
+/** local スクロールバー矢印ボタン用クラス **/
+local img_UP, img_DOWN, img_LEFT, img_RIGHT = nil, nil, nil, nil
+// Type: 0=UP, 1=DOWN, 2=LEFT, 3=RIGHT
+local class ArrowButton(Type): sdl.Clickable() {
+	def @->__init__(Type){
+		local normal = {color = Color(255,255,255), x = 0, y = 0, frameExt = 0.2}
+		local active = {color = Color(55,255,200), x = 0, y = 0, frameExt = 0.2}
+		local press = {color = Color(255,200,55), x = 0, y = 0, frameExt = 0.2}
+		
+		if(Type == 0){
+			if(!img_UP) img_UP = sdl.Image(getModuleDir()->str().."/system/arrowU.png")
+			normal.image, active.image, press.image = img_UP, img_UP, img_UP
+		}elseif(Type == 1){
+			if(!img_DOWN) img_DOWN = sdl.Image(getModuleDir()->str().."/system/arrowD.png")
+			normal.image, active.image, press.image = img_DOWN, img_DOWN, img_DOWN
+		}elseif(Type == 2){
+			if(!img_LEFT) img_LEFT = sdl.Image(getModuleDir()->str().."/system/arrowL.png")
+			normal.image, active.image, press.image = img_LEFT, img_LEFT, img_LEFT
+		}else{
+			if(!img_RIGHT) img_RIGHT = sdl.Image(getModuleDir()->str().."/system/arrowR.png")
+			normal.image, active.image, press.image = img_RIGHT, img_RIGHT, img_RIGHT
+		}
+		@->open(normal, active, press)
+	}
+}
+
+/** local スクロールバー用バークラス **/
+local img_Vert = nil
+// Type: 0=Vertical, 1=Horizon
+local class Bar(Type): sdl.Draggable() {
+	def @->__init__(Type){
+		local normal = {color = Color(255,255,255), x = 0, y = 0, frameExt = 0.2}
+		local active = {color = Color(55,255,200), x = 0, y = 0, frameExt = 0.2}
+		local press = {color = Color(255,200,55), x = 0, y = 0, frameExt = 0.2}
+		
+		if(Type == 0){
+			if(!img_Vert) img_Vert = sdl.Image(getModuleDir()->str().."/system/btn_baseV.png")
+			normal.image, active.image, press.image = img_Vert, img_Vert, img_Vert
+		}
+		@->open(normal, active, press)
+	}
+}
+
+/*** 縦スクロールバー ***/
+// height: 高さ,  numScroll: 何回スクロール可能か
+// myBar, myUp, myDown: 独自のバー、ボタンオブジェクトにする場合指定
+class sdl.ScrollbarV(height, numScroll, myBar, myUp, myDown){
+	@.m_arrow = {width = 16, height = 14, up = nil, down = nil} // 矢印情報
+	@.m_size = 0 // スクロールバーサイズ
+	@.m_bar = {pos = 0, shift = 0, size = 0, maxScroll = 0, obj = nil} // バー情報
+	
+	// コンストラクタ
+	def @->__init__(height, numScroll, myBar, myUp, myDown){
+		if(height && numScroll) @->open(height, numScroll, myBar, myUp, myDown)
+	}
+	
+	/* レール部分のカスタム描画関数 */
+	def @->drawRailFunc(x, y, w, h){
+		sdl.fillRect(x, y, w, h, Color(200,200,200))
+	}
+	
+	/* スクロールバーのサイズとスクロールの最大回数を設定 */
+	def @->open(height, numScroll, myBar, myUp, myDown){
+		@.m_size, @.m_bar.pos, @.m_bar.maxScroll = height, 0, numScroll
+		// レールサイズ = スクロールバーサイズ - 矢印サイズ*2
+		local L = (height-@.m_arrow.height*2)
+		// スクロールの最大回数に応じてバーのサイズを変える
+		if(numScroll < 5){
+			// スクロール回数が4以下なら単純にレールサイズを
+			// (回数+1)で割ったサイズをバーサイズとする
+			// ※例えばスクロール回数が1回だけなら、バーサイズはレールサイズの半分になる
+			@.m_bar.size = L / (numScroll+1)
+		}elseif(numScroll < 10){
+			// スクロール回数が9以下なら(レールサイズ/(回数/2+1))をバーサイズとする
+			@.m_bar.size = L / (numScroll/2 + 1)
+		}else{
+			// スクロール回数が10以上なら(レールサイズ/10[固定])をバーサイズとする
+			@.m_bar.size = L / 10
+		}
+		// バーサイズからバーの移動量を求める
+		@.m_bar.shift = (L-@.m_bar.size) / numScroll
+		// 各種バー、ボタンオブジェクトを変更
+		@.m_bar.obj = myBar? myBar: Bar(0)
+		@.m_arrow.up = myUp? myUp: ArrowButton(0)
+		@.m_arrow.down = myDown? myDown: ArrowButton(1)
+		/* 各種ボタン挙動 */
+		def @.m_arrow.up.onClickFunc() @->scroll(-1)
+		def @.m_arrow.down.onClickFunc() @->scroll(1)
+	}
+	
+	/* 描画 */
+	def @->draw(x, y){
+		@->drawRailFunc(x, y+@.m_arrow.height, @.m_arrow.width, @.m_size-@.m_arrow.height*2)
+		@.m_arrow.up->draw(x, y, @.m_arrow.width, @.m_arrow.height)
+		@.m_arrow.down->draw(x, y+@.m_size-@.m_arrow.height, @.m_arrow.width, @.m_arrow.height)
+		// バーの位置はレールの上端(y+m_arrow.height)から(Bar.pos*Bar.shift)の位置
+		local barPos = y+@.m_arrow.height+@.m_bar.pos*@.m_bar.shift
+		@.m_bar.obj->draw(x+1, barPos, @.m_arrow.width-2, @.m_bar.size)
+		
+		// ボタン押しっぱなし処理
+		if(@.m_arrow.up->isPressingKeep()) @->scroll(-1)
+		elseif(@.m_arrow.down->isPressingKeep()) @->scroll(1)
+		
+		// バーのドラッグ処理
+		if(@.m_bar.obj->isDragging()) @->scroll(@.m_bar.obj->mov().y / @.m_bar.shift)
+	}
+	
+	/* スクロール実行 */
+	def @->scroll(n){
+		@.m_bar.pos = @.m_bar.pos + toint(n)
+		if(@.m_bar.pos < 0) @.m_bar.pos = 0
+		if(@.m_bar.pos > @.m_bar.maxScroll) @.m_bar.pos = @.m_bar.maxScroll
+	}
+}
+
+
+/*** 横スクロールバー ***/
+// width: 幅,  numScroll: 何回スクロール可能か
+// myBar, myLeft, myRight: 独自のバー、ボタンオブジェクトにする場合指定
+class sdl.ScrollbarH(width, numScroll, myBar, myLeft, myRight){
+	@.m_arrow = {width = 14, height = 16, left = nil, right = nil} // 矢印情報
+	@.m_size = 0 // スクロールバーサイズ
+	@.m_bar = {pos = 0, shift = 0, size = 0, maxScroll = 0, obj = nil} // バー情報
+	
+	// コンストラクタ
+	def @->__init__(width, numScroll, myBar, myLeft, myRight){
+		if(width && numScroll) @->open(width, numScroll, myBar, myLeft, myRight)
+	}
+	
+	/* レール部分のカスタム描画関数 */
+	def @->drawRailFunc(x, y, w, h){
+		sdl.fillRect(x, y, w, h, Color(200,200,200))
+	}
+	
+	/* スクロールバーのサイズとスクロールの最大回数を設定 */
+	def @->open(width, numScroll, myBar, myLeft, myRight){
+		@.m_size, @.m_bar.pos, @.m_bar.maxScroll = width, 0, numScroll
+		// レールサイズ = スクロールバーサイズ - 矢印サイズ*2
+		local L = (width-@.m_arrow.width*2)
+		// スクロールの最大回数に応じてバーのサイズを変える
+		if(numScroll < 5) @.m_bar.size = L / (numScroll+1)
+		elseif(numScroll < 10) @.m_bar.size = L / (numScroll/2 + 1)
+		else @.m_bar.size = L / 10
+		// バーサイズからバーの移動量を求める
+		@.m_bar.shift = (L-@.m_bar.size) / numScroll
+		// 各種バー、ボタンオブジェクトを変更
+		@.m_bar.obj = myBar? myBar: Bar(1)
+		@.m_arrow.left = myLeft? myLeft: ArrowButton(2)
+		@.m_arrow.right = myRight? myRight: ArrowButton(3)
+		/* 各種ボタン挙動 */
+		def @.m_arrow.left.onClickFunc() @->scroll(-1)
+		def @.m_arrow.right.onClickFunc() @->scroll(1)
+	}
+	
+	/* 描画 */
+	def @->draw(x, y){
+		@->drawRailFunc(x+@.m_arrow.width, y, @.m_size-@.m_arrow.width*2, @.m_arrow.height)
+		@.m_arrow.left->draw(x, y, @.m_arrow.width, @.m_arrow.height)
+		@.m_arrow.right->draw(x+@.m_size-@.m_arrow.width, y, @.m_arrow.width, @.m_arrow.height)
+		// バーの位置はレールの左端(x+m_arrow.width)から(m_bar.pos*m_bar.shift)の位置
+		local barPos = x+@.m_arrow.width+@.m_bar.pos*@.m_bar.shift
+		@.m_bar.obj->draw(barPos, y+1, @.m_bar.size, @.m_arrow.height-2)
+		
+		// ボタン押しっぱなし処理
+		if(@.m_arrow.left->isPressingKeep()) @->scroll(-1)
+		elseif(@.m_arrow.right->isPressingKeep()) @->scroll(1)
+		
+		// バーのドラッグ処理
+		if(@.m_bar.obj->isDragging()) @->scroll(@.m_bar.obj->mov().x / @.m_bar.shift)
+	}
+	
+	/* スクロール実行 */
+	def @->scroll(n){
+		@.m_bar.pos = @.m_bar.pos + toint(n)
+		if(@.m_bar.pos < 0) @.m_bar.pos = 0
+		if(@.m_bar.pos > @.m_bar.maxScroll) @.m_bar.pos = @.m_bar.maxScroll
+	}
+}

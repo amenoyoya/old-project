@@ -1,0 +1,21 @@
+local timer = figit.Timer()
+
+#require "stdlib/game"
+require "system/manager"
+
+def config(t){} // システムコンフィグ関数
+def initialize(){} // 各種データ読み込み用初期化関数
+
+require "scr/main" // ゲームメイン処理読み込み
+
+msgbox("figit convert time: "..timer->passage().." msec")
+
+~app{
+	def self->config(t){
+		config(t)
+	}
+	
+	def self->main(){
+		initialize()
+	}
+}

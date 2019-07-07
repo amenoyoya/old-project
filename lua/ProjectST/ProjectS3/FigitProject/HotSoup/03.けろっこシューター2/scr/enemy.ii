@@ -1,0 +1,63 @@
+/*** 敵キャラオブジェクト ***/
+
+// 空いている画像オブジェクトIDを検索
+local def searchIMG(){
+	local id = 20 // 敵キャラは20番以降を使用
+	while(sdl.IMG[id]) ++(id)
+	return id
+}
+
+class Enemy{
+	def @->__init__(){
+		@.m_pattern = ${ // 移動パターン： パターン, 速度, ループ回数
+			{0, 4, 20}, {1, 3, 10}, {0, 2, 10}, {1, 2, 10}, {0, 3, 10}
+		}
+		@.m_curPattern = -1 // カレントパターン
+		@.m_loops = 0 // パターンループ回数
+		@.m_id = searchIMG()
+		local e = sdl.IMG_append(@.m_id, sdl.IMG[10])
+		e->setSource(32, 0, 32, 32)
+		e->alive(0)
+	}
+	
+	def @->get() return sdl.IMG[@.m_id] // 画像オブジェクト取得
+	
+	// メイン処理
+	def @->proc(){
+		if(@->get()->alive() == 0){ // 死んでいるなら新しく復活
+			@->get()->alive(1)
+			@->get().x, @->get().y = 448, mt_rand(288)
+		}else{ // 生きているなら描画
+			@->procPattern() // 移動パターン処理
+			// 自キャラとの当たり判定
+			if(@->get()->collision(char().x+4, char().y+4, 24, 24)) GAMESTATE = GAMEOVER
+			// 画面外に出たら消滅
+			if(@->get().x < 0 || @->get().x > 448 || @->get().y < 0 || @->get().y > 288) @->get()->alive(0)
+		}
+	}
+	
+	// 現在の移動パターンを取得
+	def @->pattern() return @.m_pattern[@.m_curPattern]
+	
+	// 移動パターン処理
+	def @->procPattern(){
+		if(@.m_loops <= 0){ // 移動ループが終了したら次の移動パターンへ
+			++(@.m_curPattern)
+			if(@.m_curPattern > @.m_pattern->n()) @.m_curPattern = 0
+			local pat = @->pattern()
+			@.m_loops = pat[3] // ループ回数
+			// 移動パターン
+			if(pat[1] == 0){ // 直進
+				@->get().dx, @->get().dy = -pat[2], 0
+			}elseif(pat[1] == 1){ // 自キャラの方へ移動
+				local D = math.sqrt((char().x-@->get().x)^2 + (char().y-@->get().y)^2)
+				if(D != 0){
+					@->get().dx = toint((char().x-@->get().x) / D * pat[2])
+					@->get().dy = toint((char().y-@->get().y) / D * pat[2])
+				}
+			}
+		}else{ // ループ処理
+			--(@.m_loops)
+		}
+	}
+};

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>s3.vm.js script example</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/codemirror.js"></script>
+	<link rel="stylesheet" href="css/codemirror.css">
+	<script src="js/s3.js"></script>
+	<script src="js/enchant.min.js"></script>
+</head>
+
+<body>
+<pre id="output"></pre>
+
+<style type="text/css">
+#id_canvas1 {
+ position:absolute;
+ top: 0px;
+ left: 0px;
+ z-index: 1;
+}
+#id_canvas2 {
+ position:absolute;
+ top: 0px;
+ left: 0px;
+ z-index: 2;
+}
+</style>
+
+<canvas id="id_canvas1" width="320" height="240"></canvas>
+<canvas id="id_canvas2" width="320" height="240"></canvas>
+
+<script type="text/s3">
+local data = tostring(js.global.Module.read('./test.sml'))
+assert(loadstring(data, './test.sml'))()
+</script>
+
+<script>
+var outputElement = document.getElementById('output')
+var Module = {
+  print: function(x) {
+    outputElement.innerHTML = (outputElement.innerHTML ? outputElement.innerHTML + '<br>' : '') + x;
+  }
+};
+</script>
+
+<script src="s3.vm.js"></script>
+
+</body>
+</html>

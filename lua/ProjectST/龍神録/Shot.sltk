@@ -1,0 +1,362 @@
+/*** 弾幕管理テーブル ***/
+// 指定弾幕を発射した敵と自機との角度を返す
+local def getAtan2(shot){
+	local enemy = Game.Enemy[shot.enemy]
+	return math.atan2(Game.Character.y - enemy.y, Game.Character.x - enemy.x)
+}
+
+// 指定弾幕内の空いている弾番号を探す
+local def searchAvailableBullet(shot){
+	for i = 1, SHOT_BULLET_MAX {
+		if !shot.bullets[i] { return i }
+	}
+}
+
+// 弾道計算
+local def updateBullets(shotID){
+	local shot, bullet_flag = Game.Shot[shotID], false
+	
+	for i = 1, SHOT_BULLET_MAX { // 各弾幕データの弾を計算
+		local bullet = shot.bullets[i]
+		if bullet { // その弾が登録されていたら
+			bullet_flag = true
+			bullet.x = bullet.x + math.cos(bullet.angle) * bullet.speed
+			bullet.y = bullet.y + math.sin(bullet.angle) * bullet.speed
+			bullet.cnt = bullet.cnt + 1
+			if bullet.x < -50 or bullet.x > FIELD_MAX_X+50 or
+				bullet.y < -50 or bullet.y > FIELD_MAX_Y+50
+			{ // 画面から外れたら
+				if bullet.till < bullet.cnt { // 最低消えない時間より長ければ
+					shot.bullets[i] = nil // 消す
+				}
+			}
+		}
+	}
+	// 現在表示中の弾が一つもなく，弾幕した敵もいなくなっている場合
+	if !bullet_flag and !Game.Enemy[shot.enemy] {
+		Game.Shot[shotID] = nil // 弾幕終了
+	}
+}
+
+/* Shotテーブル */
+Game.Shot = :{
+	// 準備
+	initialize = def(@){
+		//弾画像のファイルを読み込む
+		@.images = :{}
+		@.images[1]  = SDL.loadDivisionImage("dat/img/bullet/b0.png", 5 , 1 , 76, 76 )
+		@.images[2]  = SDL.loadDivisionImage("dat/img/bullet/b1.png", 6 , 1 , 22, 22 )
+		@.images[3]  = SDL.loadDivisionImage("dat/img/bullet/b2.png", 10, 1 , 5 , 120)
+		@.images[4]  = SDL.loadDivisionImage("dat/img/bullet/b3.png", 5 , 1 , 19, 34 )
+		@.images[5]  = SDL.loadDivisionImage("dat/img/bullet/b4.png", 10, 1 , 38, 38 )
+		@.images[6]  = SDL.loadDivisionImage("dat/img/bullet/b5.png", 3 , 1 , 14, 16 )
+		@.images[7]  = SDL.loadDivisionImage("dat/img/bullet/b6.png", 3 , 1 , 14, 18 )
+		@.images[8]  = SDL.loadDivisionImage("dat/img/bullet/b7.png", 9 , 1 , 16, 16 )
+		@.images[9]  = SDL.loadDivisionImage("dat/img/bullet/b8.png", 10, 1 , 12, 18 )
+		@.images[10] = SDL.loadDivisionImage("dat/img/bullet/b9.png", 3 , 1 , 13, 19 )
+		// 各弾の情報(サイズ，色数，当たり範囲)を設定
+		@.bullets = :{}
+		@.bullets[1]  = :{width = 76, height = 76 , color = 5 , range = 17 }
+		@.bullets[2]  = :{width = 22, height = 22 , color = 6 , range = 4  }
+		@.bullets[3]  = :{width = 5 , height = 120, color = 10, range = 2.5}
+		@.bullets[4]  = :{width = 19, height = 34 , color = 5 , range = 2  }
+		@.bullets[5]  = :{width = 38, height = 38 , color = 10, range = 2  }
+		@.bullets[6]  = :{width = 14, height = 16 , color = 3 , range = 3.5}
+		@.bullets[7]  = :{width = 14, height = 18 , color = 3 , range = 2  }
+		@.bullets[8]  = :{width = 16, height = 16 , color = 9 , range = 2.5}
+		@.bullets[9]  = :{width = 12, height = 18 , color = 10, range = 1.5}
+		@.bullets[10] = :{width = 13, height = 19 , color = 3 , range = 2  }
+	},
+	
+	// 弾幕の登録
+	enter = def(@, enemyID){
+		for i = 1, SHOT_MAX {
+			if !@[i] { // 未使用の弾幕データがあれば弾幕登録
+				@[i] = :{
+					kind = Game.Enemy[enemyID].shotkind, // 弾幕の種類
+					enemy = enemyID, // どの敵indexから発射されたものか
+					cnt = 0, // カウンタ
+					bullets = :{}, // 弾丸データ
+				}
+				return
+			}
+		}
+	},
+	
+	// 弾幕実行
+	update = def(@){
+		for i = 1, SHOT_MAX {
+			local shot = @[i]
+			if shot { // 弾幕実行中なら
+				@.patterns[shot.kind](shot) // 設定された弾幕パターンを呼ぶ
+				updateBullets(i) // 弾道を計算
+				shot.cnt = shot.cnt + 1
+			}
+		}
+	},
+	
+	// 弾幕の描画
+	draw = def(@){
+		for i = 1, SHOT_MAX {
+			local shot = @[i]
+			
+			if shot { // 弾幕実行中なら
+				for j = 1, SHOT_BULLET_MAX { // その弾幕が持つ弾の最大数分ループ
+					local bullet = shot.bullets[j]
+					
+					if bullet { // 弾データがオンなら
+						local img = @.images[bullet.kind][bullet.color]
+						
+						if img {
+							img->setAngle(bullet.angle * 180 / math.pi + 90)
+							img->drawCenter(bullet.x + FIELD_X, bullet.y + FIELD_Y)
+							if bullet.effect == 1 { // 光らせる
+								img->setBlendMode(SDL.BLEND_ADD)
+								img->drawCenter(bullet.x + FIELD_X, bullet.y + FIELD_Y)
+								img->setBlendMode(SDL.BLEND_ALPHA)
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+}
+
+/* 弾幕パターン */
+Game.Shot.patterns = :{
+	// パターン1: 1発だけ、自機に向かって直線移動
+	def(shot){
+		local enemy = Game.Enemy[shot.enemy]
+		if shot.cnt == 0 and enemy { // 弾幕開始時に敵が存在していれば
+			local b = searchAvailableBullet(shot)
+			if b { // 空いている弾丸があれば
+				shot.bullets[b] = :{
+					kind   = enemy.blkind,
+					angle  = getAtan2(shot),
+					x      = enemy.x,
+					y      = enemy.y,
+					color  = enemy.blcolor,
+					cnt    = 0,
+					speed  = 3,
+					till   = 0,
+				}
+				Game.Sound[1] = true // 効果音1を再生するフラグを立てる
+			}
+		}
+	},
+	
+	// パターン2: 100カウント中に10発、自機に向かって直線発射(常に自機狙い)
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t < 100 and t % 10 == 0 and enemy { // 100カウント中10カウントに1回
+			local b = searchAvailableBullet(shot)
+			if b { // 登録可能なら
+				shot.bullets[b] = :{
+					kind   = enemy.blkind,
+					angle  = getAtan2(shot),
+					x      = enemy.x,
+					y      = enemy.y,
+					color  = enemy.blcolor,
+					cnt    = 0,
+					speed  = 3,
+					till   = 0,
+				}
+				Game.Sound[1] = true
+			}
+		}
+	},
+	
+	// パターン3: 100カウント中に10発、自機に向かって直線発射(角度記憶)
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t < 100 and t % 10 == 0 and enemy {
+			if t == 0 {
+				shot.baseAngle = getAtan2(shot)
+			}
+			
+			local b = searchAvailableBullet(shot)
+			if b {
+				shot.bullets[b] = :{
+					kind   = enemy.blkind,
+					angle  = shot.baseAngle,
+					x      = enemy.x,
+					y      = enemy.y,
+					color  = enemy.blcolor,
+					cnt    = 0,
+					speed  = 3,
+					till   = 0,
+				}
+				Game.Sound[1] = true
+			}
+		}
+	},
+	
+	// パターン4: 100カウント中に10発、自機に向かってスピード変化直線発射
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t < 100 and t % 10 == 0 and enemy {
+			local b = searchAvailableBullet(shot)
+			if b {
+				shot.bullets[b] = :{
+					kind   = enemy.blkind,
+					angle  = getAtan2(shot),
+					x      = enemy.x,
+					y      = enemy.y,
+					color  = enemy.blcolor,
+					cnt    = 0,
+					speed  = 1 + 5 / 100 * t,
+					till   = 0,
+				}
+				Game.Sound[1] = true
+			}
+		}
+	},
+	
+	// パターン5: 0.5秒に1回ずつ円形発射
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t < 120 and t % 20 == 0 and enemy {
+			local angle = getAtan2(shot)
+			for i = 0, 19 {
+				local b = searchAvailableBullet(shot)
+				if b {
+					shot.bullets[b] = :{
+						kind   = enemy.blkind,
+						angle  = angle + math.pi / 10 * i,
+						x      = enemy.x,
+						y      = enemy.y,
+						color  = enemy.blcolor,
+						cnt    = 0,
+						speed  = 4,
+						till   = 0,
+					}
+					Game.Sound[1] = true
+				}
+			}
+		}
+	},
+	
+	// パターン6: ばらまきショット
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t < 120 and t % 2 == 0 and enemy {
+			local b = searchAvailableBullet(shot)
+			if b {
+				shot.bullets[b] = :{
+					kind   = enemy.blkind,
+					angle  = getAtan2(shot) + getRandomAngle(math.pi / 4),
+					x      = enemy.x,
+					y      = enemy.y,
+					color  = enemy.blcolor,
+					cnt    = 0,
+					speed  = 3 + getRandomAngle(1.5),
+					till   = 0,
+				}
+				Game.Sound[1] = true
+			}
+		}
+	},
+	
+	// パターン7: ばらまきショット(減速)
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t < 120 and t % 2 == 0 and enemy {
+			local b = searchAvailableBullet(shot)
+			if b {
+				shot.bullets[b] = :{
+					kind   = enemy.blkind,
+					angle  = getAtan2(shot) + getRandomAngle(math.pi / 4),
+					x      = enemy.x,
+					y      = enemy.y,
+					color  = enemy.blcolor,
+					cnt    = 0,
+					speed  = 4 + getRandomAngle(2),
+					till   = 0,
+				}
+				Game.Sound[1] = true
+			}
+		}
+		for i = 1, SHOT_BULLET_MAX { // 全弾分ループ
+			local bullet = shot.bullets[i]
+			if bullet and bullet.speed > 1.5 { // 速度が1.5より大きいものがあれば
+				bullet.speed = bullet.speed - 0.04 // 減速
+			}
+		}
+	},
+	
+	// パターン8: みょん弾幕
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t <= 150 and t % 10 == 0 and enemy {
+			for i = 0, 19 {
+				local b = searchAvailableBullet(shot)
+				if b {
+					shot.bullets[b] = :{
+						kind   = 8,
+						angle  = math.pi / 10 * i,
+						x      = enemy.x + math.cos(math.pi / 2 + math.pi / 150 * t) * 100,
+						y      = enemy.y + math.sin(math.pi / 2 + math.pi / 150 * t) * 100,
+						color  = 3,
+						cnt    = 0,
+						speed  = 1.2,
+						till   = 0,
+					}
+				}
+			}
+			for i = 0, 19 {
+				local b = searchAvailableBullet(shot)
+				if b {
+					shot.bullets[b] = :{
+						kind   = 8,
+						angle  = math.pi / 10 * i,
+						x      = enemy.x + math.cos(math.pi / 2 - math.pi / 150 * t) * 100,
+						y      = enemy.y + math.sin(math.pi / 2 - math.pi / 150 * t) * 100,
+						color  = 5,
+						cnt    = 0,
+						speed  = 1.2,
+						till   = 0,
+					}
+					Game.Sound[1] = true
+				}
+			}
+		}
+	},
+	
+	// パターン9: ミシャグジさま
+	def(shot){
+		local t, enemy = shot.cnt, Game.Enemy[shot.enemy]
+		if t >= 0 and t < 1200 and t % 90 == 0 and enemy {
+			local angle = getRandomAngle(math.pi)
+			for j = 0, 1 { // 途中から２分裂する分
+				for i = 0, 59 { // 一度に60個
+					local b = searchAvailableBullet(shot)
+					if b {
+						shot.bullets[b] = :{
+							kind   = 9,
+							angle  = angle + math.pi / 30 * i, // 円形60個
+							x      = enemy.x,
+							y      = enemy.y,
+							color  = enemy.blcolor,
+							cnt    = 0,
+							state  = j, // ステータス．0か1かで回転が変化
+							speed  = 2,
+							till   = 0,
+						}
+					}
+				}
+			}
+			Game.Sound[1] = true
+		}
+		for i = 1, SHOT_BULLET_MAX { // 全弾分
+			local bullet = shot.bullets[i]
+			if bullet {//登録されている弾があれば
+				local state, cnt = bullet.state, bullet.cnt
+				if 30 < cnt and cnt < 120 { // 30～120カウントなら
+					bullet.speed = bullet.speed - 1.2 / 90 // 90カウントかけて1.2減らす
+					bullet.angle = bullet.angle + (math.pi / 2) / 90 * (state == 1 and -1 or 1) // 90カウントかけて90°傾ける
+				}
+			}
+		}
+	},
+}

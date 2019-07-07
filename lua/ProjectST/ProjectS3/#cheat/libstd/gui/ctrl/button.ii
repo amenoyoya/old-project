@@ -1,0 +1,243 @@
+/* ウディタのお手軽ウィンドウみたいなもの */
+// 角の大きさが辺の1/6になっている、下のような画像を綺麗に拡大(縮小)して表示する
+/*   ■■■■■■
+     ■　　　　■
+     ■　　　　■
+     ■　　　　■
+     ■　　　　■
+     ■■■■■■ */
+// img| sdl.Textureオブジェクト,  ext| 枠の倍率(=1)
+def sdl.drawEasyWindow(img, x, y, w, h, ext){
+	local iw , ih = img->width(), img->height()
+	
+	if(ext == nil){ext = 1}
+	// 中身
+	img->draw(x+iw/6*ext, y+iw/6*ext, w-iw/3*ext+1, h-ih/3*ext+1, iw/6+1, ih/6+1, iw*2/3-2, ih*2/3-2)
+	// 左枠
+	img->draw(x, y+ih/6*ext, iw/6*ext, h-ih/3*ext, 0, ih/6, iw/6, ih*2/3)
+	// 上枠
+	img->draw(x+iw/6*ext, y, w-iw/3*ext, ih/6*ext, iw/6, 0, iw*2/3, ih/6)
+	// 右枠
+	img->draw(x+w-iw/6*ext, y+ih/6*ext, iw/6*ext, h-ih/3*ext, iw*5/6, ih/6, iw/6, ih*2/3)
+	// 下枠
+	img->draw(x+iw/6*ext, y+h-ih/6*ext, w-iw/3*ext, ih/6*ext, iw/6, ih*5/6, iw*2/3, ih/6)
+	// 左上角
+	img->draw(x, y, iw/6*ext, ih/6*ext, 0, 0, iw/6, ih/6)
+	// 左下角
+	img->draw(x, y+h-ih/6*ext, iw/6*ext, ih/6*ext, 0, ih*5/6, iw/6, ih/6)
+	// 右上角
+	img->draw(x+w-iw/6*ext, y, iw/6*ext, ih/6*ext, iw*5/6, 0, iw/6, ih/6)
+	// 右下角
+	img->draw(x+w-iw/6*ext, y+h-ih/6*ext, iw/6*ext, ih/6*ext, iw*5/6, ih*5/6, iw/6, ih/6)
+}
+
+
+/*** クリック可能オブジェクト ***/
+img_SystemButton = nil
+
+class sdl.Clickable(normal, active, press){
+	@.m_pressed = 0 // ボタン押下状態
+	@.m_active = false // ボタンがアクティブか
+	@.m_format = { // 表示形式
+		normal = {}, active = {}, press = {}
+	}
+	
+	// コンストラクタ
+	def @->__init__(normal, active, press) @->open(normal, active, press)
+	
+	/* クリッカブルオブジェクト作成 */
+	// normal, active, press: 各状態における表示形式を指定するテーブル
+	// テーブル形式: image=表示する画像(sdl.Texture), color=表示時の色,
+	// 				x,y=本来の位置からのズレ, frameExt: drawEasyWindow時の枠の拡大率
+	def @->open(normal, active, press){
+		if(!img_SystemButton) img_SystemButton = sdl.Image(getModuleDir()->str().."/system/btn_baseH.png")
+		@.m_format = { // デフォルトの表示形式
+			normal = {
+				image = img_SystemButton, color = Color(255,255,255), x = 0, y = 0, frameExt = 0.5
+			}, active = {
+				image = img_SystemButton, color = Color(0,200,55), x = 0, y = 0, frameExt = 0.5
+			}, press = {
+				image = img_SystemButton, color = Color(255,100,0), x = 2, y = 2, frameExt = 0.5
+			}
+		}
+		// 表示形式指定
+		if(type(normal) == "table") table_set(@.m_format.normal, normal)
+		if(type(active) == "table") table_set(@.m_format.active, active)
+		if(type(press) == "table") table_set(@.m_format.press, press)
+	}
+	
+	// 各状態を形式に従って描画
+	def @->drawFormat(format, x, y, w, h){
+		format.image->setColor(format.color)
+		sdl.drawEasyWindow(format.image, x + format.x, y + format.y, w, h, format.frameExt)
+	}
+	
+	// 通常描画関数
+	def @->drawFunc(x, y, w, h){
+		@->drawFormat(@.m_format.normal, x, y, w, h)
+	}
+	
+	// アクティブ時描画関数
+	def @->activeDrawFunc(x, y, w, h){
+		@->drawFormat(@.m_format.active, x, y, w, h)
+	}
+	
+	// 押下時描画関数
+	def @->pressDrawFunc(x, y, w, h){
+		@->drawFormat(@.m_format.press, x, y, w, h)
+	}
+	
+	/* 描画実行 */
+	def @->draw(x, y, w, h){
+		if(sdl.isMouseInRect(x, y, w, h)){
+			if(!@.m_active){
+				@.m_active = true; @->onEnterFunc(x, y, w, h) // ボタンにフォーカス！
+			}
+			
+			if(sdl.getInput(MOUSE_LEFT) == 1){
+				@.m_pressed = 1; @->onPressFunc(x, y, w, h) // ボタンが押下！
+			}elseif(sdl.getInput("ok") == 1){
+				@.m_pressed = 2; @->onPressFunc(x, y, w, h) // ボタンが押下！
+			}
+			
+			if(@.m_pressed > 0){
+				// 押下状態描画
+				@->pressDrawFunc(x, y, w, h)
+				
+				if(@.m_pressed == 1 && sdl.getInput(MOUSE_LEFT) == 0){
+					@.m_pressed = 0; @->onClickFunc(x, y, w, h) // ボタンが押された！
+				}elseif(@.m_pressed == 2 && sdl.getInput("ok") == 0){
+					@.m_pressed = 0; @->onClickFunc(x, y, w, h) // ボタンが押された！
+				}
+			}else{
+				@->activeDrawFunc(x, y, w, h) // アクティブ描画
+			}
+		}else{
+			if(@.m_active){
+				@.m_active = false; @->onLeaveFunc(x, y, w, h) // フォーカスが外れた！
+			}
+			@.m_pressed = 0; @->drawFunc(x, y, w, h) // 通常描画
+		}
+	}
+	
+	/* 仮想関数 */
+	// ボタンクリック時実行関数
+	def @->onClickFunc(x, y, w, h){}
+	// ボタン押下時実行関数
+	def @->onPressFunc(x, y, w, h){}
+	// カーソルがボタンにフォーカスした時実行する関数
+	def @->onEnterFunc(x, y, w, h){}
+	// カーソルがボタンから外れた時実行する関数
+	def @->onLeaveFunc(x, y, w, h){}
+	
+	/* ボタンが押されているか */
+	def @->isPressing() return (@.m_pressed == 1 && sdl.getInput(MOUSE_LEFT) > 0) || (@.m_pressed == 2 && sdl.getInput("ok") > 0)
+	def @->isPressingKeep() return (@.m_pressed == 1 && sdl.getInput(MOUSE_LEFT) == 3) || (@.m_pressed == 2 && sdl.getInput("ok") == 3)
+}
+
+
+/*** ボタンクラス ***/
+class sdl.Button(text, marginX, marginY, normal, active, press): sdl.Clickable() {
+	@.m_textLayer = nil
+	@.m_marginX, @.m_marginY = 0, 0
+	@.m_width, @.m_height = 0, 0
+	@._Clickable_open = @.open // Clickable::open
+	@._Clickable_draw = @.draw // Clickable::draw
+	
+	// コンストラクタ
+	def @->__init__(text, marginX, marginY, normal, active, press){
+		if(type(text) == "string")
+			@->open(text, marginX, marginY, normal, active, press)
+	}
+	
+	/* テキストボタンを作成 */
+	// text: 表示テキスト。sdl.DecoTextコマンド使用可能
+	// marginX(Y): ボタンとテキストの隙間サイズを指定
+	// normal, active, press: 各状態における表示形式を指定するテーブル
+	def @->open(text, marginX, marginY, normal, active, press){
+		if(!marginX) marginX = 12
+		if(!marginY) marginY = 6
+		
+		@->close()
+		@->_Clickable_open(normal, active, press)
+		@.m_textLayer = sdl.TextLayer(text)
+		@.m_marginX = marginX
+		@.m_marginY = marginY + 1 // DecoTextは元々少し上に描かれているので1pixel下に配置するようにする
+		@.m_width = @.m_textLayer->width() + marginX * 2
+		@.m_height = @.m_textLayer->height() + marginY * 2
+	}
+	
+	/* テキストレイヤー削除 */
+	def @->close(){
+		if(tolua.type(@.m_textLayer) == "figit::sdl::Texture") @.m_textLayer->close()
+	}
+	
+	/* 描画 */
+	def @->draw(x, y){
+		@->_Clickable_draw(x, y, @.m_width, @.m_height)
+	}
+	
+	def @->width() return @.m_width
+	def @->height() return @.m_height
+	
+	// テキストレイヤー描画関数
+	def @->drawText(x, y){
+		@.m_textLayer->draw(x + @.m_marginX, y + @.m_marginY)
+	}
+	
+	/* 各種仮想関数を設定 */
+	def @->drawFunc(x, y, w, h){
+		@->drawFormat(@.m_format.normal, x, y, w, h)
+		@->drawText(x + @.m_format.normal.x, y + @.m_format.normal.y)
+	}
+	def @->activeDrawFunc(x, y, w, h){
+		@->drawFormat(@.m_format.active, x, y, w, h)
+		@->drawText(x + @.m_format.active.x, y + @.m_format.active.y)
+	}
+	def @->pressDrawFunc(x, y, w, h){
+		@->drawFormat(@.m_format.press, x, y, w, h)
+		@->drawText(x + @.m_format.press.x, y + @.m_format.press.y)
+	}
+}
+
+
+/*** チェックボタンクラス ***/
+img_Uncheck = nil
+img_Check = nil
+
+class sdl.CheckButton(text, marginX, marginY, normal, active, press): sdl.Button() {
+	@.m_checked = false // チェックされているか
+	@._Button_open = @.open // Button::open
+	
+	// コンストラクタ
+	def @->__init__(text, marginX, marginY, normal, active, press){
+		if(type(text) == "string")
+			@->open(text, marginX, marginY, normal, active, press)
+	}
+	
+	/* ボタン作成 */
+	def @->open(text, marginX, marginY, normal, active, press){
+		// 画像ファイルが読み込まれていない場合は読み込む
+		if(!img_Uncheck) img_Uncheck = sdl.Image(getModuleDir()->str().."/system/check_off.png")
+		if(!img_Check) img_Check = sdl.Image(getModuleDir()->str().."/system/check_on.png")
+		// Button::open
+		@->_Button_open(text, marginX, marginY, normal, active, press)
+		// チェックボックスの分だけ大きさを拡張する
+		@.m_width = @.m_width + img_Check->width() + 4
+		if(img_Check->height() > @.m_height) @.m_height = img_Check->height() + marginY * 2
+	}
+	
+	// テキストレイヤー描画関数
+	def @->drawText(x, y, w, h){
+		@.m_textLayer->draw(x + @.m_marginX + img_Check->width() + 4,
+			y + @.m_marginY + (img_Check->height() > @.m_textLayer->height()? (img_Check->height()-@.m_textLayer->height())/2: 0))
+		if(@.m_checked) img_Check->draw(x + @.m_marginX, y + @.m_marginY + (img_Check->height() < @.m_textLayer->height()? (@.m_textLayer->height()-img_Check->height())/2: 0))
+		else img_Uncheck->draw(x + @.m_marginX, y + @.m_marginY + (img_Uncheck->height() < @.m_textLayer->height()? (@.m_textLayer->height()-img_Uncheck->height())/2: 0))
+	}
+	
+	/* クリック時の動作を設定 */
+	def @->onClickFunc() @.m_checked = !@.m_checked
+	
+	/* チェックされているか */
+	def @->isChecked() return @.m_checked
+}

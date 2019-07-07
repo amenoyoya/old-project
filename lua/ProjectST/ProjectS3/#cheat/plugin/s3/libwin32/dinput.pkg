@@ -1,0 +1,61 @@
+namespace s3{
+	namespace win32{
+		/*struct DXIMouseState{
+			s8		button[8];
+			Point	rel, abs;
+			s32		lx, ly, lz;
+		};
+		
+		struct DXIJoypadState{
+			s8		button[32];
+			s32		lx, ly;
+		};*/
+		
+		class DirectInput{
+		public:
+			DirectInput();
+			DirectInput(u32 hwnd);
+			~DirectInput();
+			
+			bool failed() const;
+			
+			bool open(u32 hwnd);
+			void close();
+			
+			// 監視開始・終了
+			bool acquire();
+			bool unacquire();
+			
+			// 全キー・マウス・Joypad入力取得
+			bool get();
+			// 全キー・マウス・Joypad入力クリア
+			void clear();
+			
+			/* 押されたキーから文字列を得る */
+			string getStr();
+			
+			// 指定キー(DIK_***)が押されているか
+			s8 key(u32 id) const;
+			
+			// マウス状態を返す
+			//const DXIMouseState &mouse() const;
+			/*
+			 button[0] : 左ボタンが押されているか
+			 button[1] : 右ボタンが押されているか
+			 rel : クライアント領域内でのマウス座標
+			 abs : マウスの絶対座標
+			 lx, ly : マウスの座標の移動量
+			 lz : ホイールの回転量
+			*/
+			
+			// Joypad状態を返す
+			//const DXIJoypadState &pad() const;
+			/*
+			 button[0～31]: 0～31ボタンが押されているか
+			 lx, ly: 十字キー(スティック)が入力されている方向
+			*/
+			
+			u32 hwnd() const;
+		};
+	}
+}

@@ -1,0 +1,8 @@
+require "stdlib/game"
+require "scr/main" // ゲームメイン処理読み込み
+
+def sdl.App->config(t){
+	t.width, t.height, t.title = 480, 320, "けろっこシューター"
+}
+
+sdl.App->run()

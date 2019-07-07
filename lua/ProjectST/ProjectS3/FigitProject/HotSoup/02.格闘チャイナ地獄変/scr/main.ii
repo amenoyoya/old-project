@@ -1,0 +1,97 @@
+/*** ゲームメイン処理 ***/
+
+local ANIM = 0 // 待機アニメーション用
+local MATONUM = mt_rand(6) // 表示する敵キャラID
+local MATOTIME = 0 // 敵キャラ待機時間
+local GAMETIME = 1000 // 1ゲームの時間(100FPS*1000frame*3WAIT = 30sec)
+local STAGE = 1 // 攻略中ステージ
+local WAITTIME = 50 // ステージ毎の敵キャラ待機時間
+local HIT = 0 // ヒット数
+
+
+~event(0){ // 画像表示
+	local bg = sdl.Sprite() // 背景画像
+	local char = sdl.Sprite() // キャラクター画像
+	local bom = sdl.Sound(Path"dat/bom34.wav") // 効果音
+	
+	if(bom->failed()) error "効果音ファイル[dat/bom34.wav]の読み込みに失敗"
+	bom->setVolume(5)
+	bg->open(Path"dat/back.bmp")
+	char->open(Path"dat/kakutou.bmp", Color(0,0,0))
+	
+	// ステージ開始
+	::GAMESTART::
+	GAMETIME = 1050 - 50 * STAGE // ステージクリアごとに1.5秒ずつ時間を減らす
+	if(GAMETIME < 500) GAMETIME = 500
+	HIT = 0
+	local timer = 300
+	while(timer > 0){
+		sdl.fillRect(0, 0, 480, 320, Color(255,255,255))
+		sdl.drawEdgeTextEx(100, 100, "ステージ"..STAGE..
+			"\n反応速度"..(WAITTIME*0.03).."秒", Color(0,0,123))
+		--(timer)
+		~update()
+	}
+	
+	// ゲームメイン
+	while(true){
+		bg->draw()
+		
+		/* 敵キャラ表示 */
+		if(MATOTIME <= 0){ // 待機時間を過ぎたら新しい敵を表示
+			MATOTIME = WAITTIME
+			MATONUM = mt_rand(6)
+		}else{ // 敵キャラ待機
+			if(MATONUM < 3){
+				char->setPos(80, 80)
+				char->setSource(384+MATONUM*64, 384, 64, 192)
+			}else{
+				char->setPos(336, 80)
+				char->setSource(384+(MATONUM-3)*64, 384, 64, 192)
+			}
+			char->draw()
+		}
+		
+		/* キャラクター画像を領域を指定して表示 */
+		local l, u, r, d = sdl.getInput("left"), sdl.getInput("up"), sdl.getInput("right"), sdl.getInput("down")
+		if(l > 0 || r > 0){ // 左右キーが押されている場合
+			local sx, sy = 0, 192 // 表示元位置
+			local KYMATO = 0 // 当たり判定用
+			if(l > 0) sx = 0; KYMATO = 1
+			if(r > 0) sx = 192; KYMATO = 4
+			if(u > 0) sy = 0; KYMATO = KYMATO - 1
+			if(d > 0) sy = 384; KYMATO = KYMATO + 1
+			char->setSource(sx, sy, 192, 192)
+			if(KYMATO == MATONUM){ // 攻撃が当たった
+				++(HIT)
+				bom->play(0) // HIT音
+				MATOTIME = 0 // 次の敵を表示
+			}
+		}else{ // 待機アニメーション
+			char->setSource(384, 192 * toint(ANIM/8), 192, 192)
+		}
+		char->setPos(144, 80)
+		char->draw()
+		
+		// スコア表示
+		sdl.drawEdgeText(5, 5, "HIT:"..HIT, Color(255,0,0))
+		
+		if(GAMETIME <= 0){ // ステージクリア
+			msgbox("倒した数: "..HIT, "ステージクリア")
+			++(STAGE) // Next Stage
+			WAITTIME = WAITTIME - 2 // 敵キャラ待機時間を減らす
+			if(WAITTIME < 8) WAITTIME = 8
+			goto GAMESTART // ステージ開始
+		}
+		~update()
+	}
+}
+
+~event(-1){ // 時間経過
+	while(true){
+		ANIM = (ANIM+1) % 16 // 待機アニメーション更新
+		--(GAMETIME) // 1ゲーム時間経過
+		--(MATOTIME) // 敵キャラ待機時間経過
+		~wait(3)
+	}
+}

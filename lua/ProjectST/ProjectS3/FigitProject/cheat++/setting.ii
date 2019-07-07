@@ -1,0 +1,6 @@
+CheatSetting = {
+	name = "神採りアルケミーマイスター",
+	path = "C:/Program Files (x86)/Eushully/神採りアルケミーマイスター",
+	process = "AGE.EXE",
+	script = "cheat/神採りアルケミーマイスター.ii"
+}

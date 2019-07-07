@@ -1,0 +1,58 @@
+/*** éÂêlåˆÉIÉuÉWÉFÉNÉg ***/
+def char() return sdl.IMG[10]
+
+local rensha = 0 // ìØéûî≠éÀÇñhÇÆÇΩÇﬂÇÃÉJÉEÉìÉ^
+local current = 50 // êVãKíeä€ID
+
+// íeä€î≠éÀ
+local def shot(){
+	if(rensha == 0){
+		local obj = sdl.IMG_append(current, sdl.IMG[11]) // 50î‘à»ç~Ç…êVãKíeä€Çìoò^
+		obj.x, obj.y = char().x + 24, char().y + 12
+		obj->setScale(12/8, 4/8)
+		obj->setColor(0,255,255)
+		++(current)
+		if(current == 100) current = 50
+		rensha = 20 // éüÇÃî≠éÀÇ‹Ç≈20ÉtÉåÅ[ÉÄë“Ç¬
+	}
+}
+
+// íeä€ï`âÊ
+local def drawBullets(){
+	for(index = 50, 99){
+		local bullet = sdl.IMG[index]
+		
+		if(bullet){
+			+=(bullet.x)(10)
+			for(k, e in each(enemies)){// ìGÉLÉÉÉâÇ∆ÇÃìñÇΩÇËîªíË
+				if(bullet->collision(e->get())){
+					sdl.MIX_play("bom", 1)
+					sdl.IMG_erase(index)
+					++(POINT)
+					e->get()->alive(0)
+				}
+			}
+			if(bullet.x > 474) sdl.IMG_erase(index) // âÊñ í[Ç…çsÇ¡ÇΩÇÁíeä€è¡ãé
+			++(index)
+		}
+	}
+	if(rensha > 0) --(rensha)
+}
+
+// ÉLÉÉÉâà⁄ìÆÅïï`âÊÉÅÉCÉì
+def procChar(){
+	if(char()->alive() == 1){
+		if(sdl.getInput"left" > 0){-=(char().x)(6)} if(char().x < 0){char().x = 0}
+		if(sdl.getInput"right" > 0){+=(char().x)(6)} if(char().x > 448){char().x = 448}
+		if(sdl.getInput"up" > 0){-=(char().y)(6)} if(char().y < 0){char().y = 0}
+		if(sdl.getInput"down" > 0){+=(char().y)(6)} if(char().y > 288){char().y = 288}
+		// ÉVÉáÉbÉg
+		if(sdl.getInput"ok" > 0) shot()
+		drawBullets() // íeä€ï`âÊ
+	}
+}
+
+// ëSíeä€è¡ãé
+def clearBullets(){
+	for(i = 50, 99) sdl.IMG_erase(i)
+}

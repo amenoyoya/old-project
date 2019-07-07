@@ -1,0 +1,254 @@
+/* ウィンドウ位置・サイズ復元 */
+local winrect
+
+if Path.isFile"Calendar.ini" {
+	winrect = assert(loadstring(loadFile"Calendar.ini"))()
+}else{
+	winrect = ${x = 50, y = 50, width = 640, height = 480}
+}
+
+/* ウィンドウ作成 */
+local title = "MemoCalendar - ver.1.2.2"
+local win = Win32.BrowserWindow(0, title, winrect.x, winrect.y, winrect.width, winrect.height)
+local cur = 0 // 現在表示しているカレンダーのオフセット
+local prevID // 直前まで選択されていた日付ID
+local prevSchedule = "" // 予定メモ更新確認用
+local prevMemo = "" // 通常メモ更新確認用
+
+local color = ${ // 背景色
+	schedule = "#C299FF", // 予定がある場合
+	selected = "#FF9872", // 選択中の場合
+	schedule_selected = "#FF97C2", // 予定がある日付を選択中の場合
+}
+
+/* 直前まで選択されていた日付の予定と通常メモを保存 */
+local def saveMemo(){
+	if prevID {
+		/* 予定メモの保存 */
+		local elem = win->getElementByID("myCalendarMemo")
+		local memo = elem->getInnerHTML()
+		
+		if memo != prevSchedule {
+			local path = "memo/"..prevID->gsub("_", "/")
+			
+			if lpeg.match(lpeg.space^0 * lpeg.P(-1), elem->getInnerText()) {
+				// 予定内容が空白ならファイル削除
+				removeFile(path)
+				println("removeSchedule")
+			}else{ // 予定ファイル保存
+				createDirectory(Path.getParent(path))
+				saveFile(path, memo)
+				println("saveSchedule > "..memo)
+			}
+			// prevSchedule更新
+			prevSchedule = memo
+		}
+		
+		/* 通常メモの保存 */
+		elem = win->getElementByID("myMemo")
+		memo = elem->getInnerHTML()
+		
+		if memo != prevMemo {
+			if lpeg.match(lpeg.space^0 * lpeg.P(-1), elem->getInnerText()) {
+				// 内容が空白ならファイル削除
+				removeFile"memo/memo"
+				println("removeMemo")
+			}else{ // メモファイル保存
+				saveFile("memo/memo", memo)
+				println("saveMemo > "..memo)
+			}
+			// prevMemo更新
+			prevMemo = memo
+		}
+	}
+}
+
+/* カレンダークリック時イベント */
+local def clickCalendar(id){
+	saveMemo() // 直前まで編集していた予定を保存
+	
+	local elem = win->getElementByID(id)
+	local date = lpeg.split(id, "_")
+	local schedule = loadFile("memo/"..date[1].."/"..date[2].."/"..date[3]) // 選択中の日付の予定読み込み
+	
+	// メモタイトル設定
+	win->getElementByID("myCalendarMemoTitle")->setInnerHTML(date[1].."年"..date[2].."月"..date[3].."日の予定")
+	// メモへの既存スケジュールの書き込み
+	if schedule != "" { // 予定が入っている場合
+		elem->setInnerHTML("<span style='background:"..color.schedule_selected.."'>"..date[3].."</span>")
+		// テキストボックスにスケジュール書き込み
+		win->getElementByID("myCalendarMemo")->setInnerHTML(schedule)
+	}else{ // 予定が入っていない場合
+		elem->setInnerHTML("<span style='background:"..color.selected.."'>"..date[3].."</span>")
+		// テキストボックスをクリア
+		win->getElementByID("myCalendarMemo")->setInnerHTML("")
+	}
+	// 直前まで選択されていた日付がある場合，選択を解除
+	if prevID & prevID != id {
+		date = lpeg.split(prevID, "_")
+		elem = win->getElementByID(prevID)
+		if getStatus(elem) == Object.ACTIVE {
+			if Path.isFile("memo/"..prevID->gsub("_", "/")) { // 予定が入っている場合
+				elem->setInnerHTML("<span style='background:"..color.schedule.."'>"..date[3].."</span>")
+			}else{ // 予定が入っていない場合
+				elem->setInnerHTML(date[3])
+			}
+		}
+	}
+	// prevID, prevSchedule更新
+	prevID = id
+	prevSchedule = win->getElementByID("myCalendarMemo")->getInnerHTML()
+}
+
+/* カレンダー表示 */
+local def showCalendar(){
+	local val = win->executeScript("getCalendarData", cur)
+	if val.vType != Win32.VT_STRING { return }
+	
+	local data = lpeg.split(val.strVal, ":")
+	win->getElementByID("myCalendar")->setInnerHTML(data[3])
+	
+	// 予定のある日の色を変える
+	local f = FileEnumerator("memo/"..data[1].."/"..data[2])
+	while getStatus(f) == Object.ACTIVE { // 表示中の月の予定を列挙
+		if Path.isFile(f->getPath()) {
+			local elem = win->getElementByID(data[1].."_"..data[2].."_"..f->getName())
+			if getStatus(elem) == Object.ACTIVE {
+				elem->setInnerHTML("<span style='background:"..color.schedule.."'>"..f->getName().."</span>")
+			}
+		}
+		f->toNext()
+	}
+	// 表示中の月の1日を選択
+	clickCalendar(data[1].."_"..data[2].."_1")
+}
+
+/* 前の月へ */
+local def backCalendar(){
+	cur = cur - 1
+	showCalendar()
+}
+
+/* 次の月へ */
+local def nextCalendar(){
+	cur = cur + 1
+	showCalendar()
+}
+
+local about = ${ // about:～ コマンド
+	showCalendar = showCalendar,
+	backCalendar = backCalendar,
+	nextCalendar = nextCalendar,
+	clickCalendar = clickCalendar,
+}
+
+/* GetWindowRect */
+local user32 = ffi.load"user32.dll"
+
+ffi.cdef[[
+typedef struct{
+	int left, top, right, bottom;
+}RECT;
+
+int GetWindowRect(int hwnd, RECT *lpRect);
+int GetClientRect(int hwnd, RECT *lpRect);
+]]
+
+local def getWindowRectangle(hwnd){
+	local rc, crc = ffi.new"RECT[1]", ffi.new"RECT[1]"
+	if 0 != user32.GetWindowRect(hwnd, rc) & 0 != user32.GetClientRect(hwnd, crc) {
+		return ${x = rc[0].left, y = rc[0].top, width = crc[0].right, height = crc[0].bottom}
+	}
+}
+
+/* ShellExecute */
+local shell32 = ffi.load"shell32.dll"
+ffi.cdef[[
+int ShellExecuteW(unsigned int hwnd, const wchar_t *lpVerb, const wchar_t *lpFile,
+	const wchar_t *lpParameters, const wchar_t *lpDirectory, int nShowMode);
+]]
+
+local def shellExecute(verb, file, param, dir, showMode, hwnd){
+	return shell32.ShellExecuteW(
+		hwnd | 0, Sltk.Encoding.utf8ToWideString(verb),
+		Sltk.Encoding.utf8ToWideString(file),
+		param & Sltk.Encoding.utf8ToWideString(param) | nil,
+		dir & Sltk.Encoding.utf8ToWideString(dir) | nil,
+		showMode | 0
+	)
+}
+
+/* 編集モード変更 */
+local def switchContentEditable(id){
+	local elem = win->getElementByID(id)
+	
+	if getStatus(elem) == Object.ACTIVE {
+		if elem->getAttribute("contentEditable").strVal == "true" {
+			Win32.setWindowText(win->getHandle(), title.." <閲覧モード>")
+			elem->setAttribute("contentEditable", Win32.Variant(Win32.VT_STRING, "false"))
+		}else{
+			Win32.setWindowText(win->getHandle(), title.." <編集モード>")
+			elem->setAttribute("contentEditable", Win32.Variant(Win32.VT_STRING, "true"))
+		}
+	}
+}
+
+/* Windowプロシージャ */
+win->setProcedure(def(hwnd, msg, wp, lp){
+	if msg == Win32.WM_KEYDOWN {
+		if wp == Win32.VK_F5 { // メモを保存してからページ更新
+			saveMemo()
+			win->navigate(Path.complete"Calendar\\index.html")
+			return false
+		}elif wp == Win32.VK_F3 { // 編集モード変更
+			switchContentEditable"myCalendarMemo"
+			switchContentEditable"myMemo"
+			return false
+		}
+	}elif msg == Win32.WM_ACTIVATE & Win32.getLowWord(wp) == 0 {
+		// プログラムからフォーカスが外れた時，直前まで編集していたメモを保存
+		saveMemo()
+	}elif msg == Win32.WM_CLOSE {
+		// プログラム終了時，直前まで編集していたメモを保存
+		saveMemo()
+		// ウィンドウ作成・サイズ保存
+		local rect = getWindowRectangle(win->getHandle())
+		if rect {
+			saveFile("Calendar.ini", string.format("return ${x = %d, y = %d, width = %d, height = %d}",
+				rect.x, rect.y, rect.width, rect.height))
+		}
+	}
+	return win->defaultProcedure(hwnd, msg, wp, lp)
+})
+
+/* beforeNavigateイベントでjavascriptとやり取りする */
+win->setFunction_beforeNavigate(def(url){
+	local cmd = lpeg.split(url, ":")
+	
+	if cmd[1] == "about" & about[cmd[2]] {
+		about[cmd[2]](cmd[3])
+		return false
+	}elif url != Path.complete"Calendar\\index.html" {
+		shellExecute("open", url)
+		return false
+	}
+	return true
+})
+
+/* プログラム開始時イベント */
+win->setFunction_documentComplete(def(){
+	// 通常メモ復元
+	local elem = win->getElementByID("myMemo")
+	if getStatus(elem) == Object.ACTIVE {
+		elem->setInnerHTML(loadFile"memo/memo")
+	}
+	cur, prevID, prevSchedule, prevMemo = 0
+	// カレンダー表示
+	about.showCalendar()
+	Win32.setWindowText(win->getHandle(), title.." <編集モード>")
+})
+
+win->navigate(Path.complete"Calendar\\index.html")
+win->show()
+
+return Win32.processMainLoop()

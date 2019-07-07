@@ -1,0 +1,56 @@
+require "ii_win32"
+iirequire "std/eval" // 標準ライブラリのevalモジュールを読み込む
+iirequire "setting" // 設定
+
+win32.Process->getAll()
+proc = win32.Process()
+
+// プロセスオープンor起動
+if(!proc->open(CheatSetting.process)){
+	local dir = getCurrentDir()
+	
+	setCurrentDir(CheatSetting.path)
+	if(!proc->exec(CheatSetting.process)){
+		error("プロセス『"..CheatSetting.process.."』が見つかりませんでした")
+	}
+	setCurrentDir(dir)
+}
+
+// DirectInput生成
+print("HWND: "..tostring(proc->hwnd()))
+input = win32.DirectInput(proc->hwnd())
+
+if(input->failed()){
+	error"DirectInputの生成に失敗しました"
+}
+
+// ハッキング関数呼び出し
+local hack = iiloadstring(File->read(CheatSetting.script), CheatSetting.script)
+
+// 説明
+win32.setConsColor(win32.H_YELLOW)
+u8print"cheat++ ver.1.10\tby FigitShell ver.1.26"
+win32.setConsColor(win32.H_GREEN)
+u8print("ハッキング対象…… "..CheatSetting.name)
+win32.setConsColor(win32.H_RED)
+u8print"終了する場合は、ハッキング対象プロセスを終了してください"
+win32.setConsColor(win32.L_CYAN)
+u8print"\nなおハッキング対象プロセス上で"
+u8print"\t「4」キーを押すとcheat++のみを終了できます"
+u8print"\t「5」キーを押すとチートスクリプトをリロード出来ます\n"
+u8print"\t「6」キーを押すとチートスクリプトの実行を一時停止/再開出来ます\n"
+// 開始
+local run = true
+win32.setConsColor()
+while(!proc->isExit()){
+	input->get()
+	if(input->key(DIK_6) == 1) run = !run
+	if(run){
+		if(input->key(DIK_4) == 1) break
+		elseif(input->key(DIK_5) == 1) hack = iiloadstring(File->read(CheatSetting.script), CheatSetting.script)
+		else hack()
+	}
+	sleep(10)
+}
+
+input->close()

@@ -1,0 +1,62 @@
+/*** ゲームメイン処理 ***/
+
+require "stdlib/eval"
+require "scr/char"
+require "scr/enemy"
+
+POINT = 0 // 倒した数
+
+/* ゲームメインイベント */
+local mainEvent = sdl.EventManager()
+
+mainEvent->append(GAMESTART, def(){ // ゲーム準備
+	sdl.IMG_append(10, "dat/flogs.bmp", Color(0,0,0))->setSource(0, 0, 32, 32)
+	sdl.IMG_append(11, "dat/bullet.bmp")->alive(0) // 弾丸の元データ
+	sdl.IMG_append(0, "dat/back2.bmp")
+	sdl.IMG_append(100, "text:\\f[nil,26]\\c[255,0,0]GAME OVER")->alive(0) // GAME OVER 画像
+	sdl.MIX_append("bom", "dat/bom34.wav")
+	//sdl.MIX_append("BGM", "dat/千本桜.ogg")
+	//sdl.MIX_play("BGM", 0, -1)
+	enemies = ${Enemy(), Enemy(), Enemy()} // 敵は3体
+	GAMESTATE = GAMEPLAY // ゲームプレイ状態へ
+})
+
+mainEvent->appendLoop(GAMEPLAY, def(){ // ゲームプレイ
+	for(index, enemy in each(enemies)) enemy->proc() // 敵処理
+	if(sdl.getInput(KEY_S) == 1){
+		local bin = sdl.IMG_pack()
+		File->write(Path"save.bin", bin->ptr(), bin->size())
+	}elseif(sdl.getInput(KEY_L) == 1 && isFile("save.bin")){
+		local bin = Binary(File->getSize(Path"save.bin"))
+		File->read(bin->ptr(), Path"save.bin")
+		sdl.IMG_unpack(bin)
+	}
+	procChar() // 主人公操作
+	sdl.drawEdgeText(5, 5, POINT, Color(255,0,0))
+})
+
+mainEvent->append(GAMEOVER, def(){ // ゲームオーバー時
+	char()->alive(0) // 主人公非表示
+	for(k, v in each(enemies)) v->get()->alive(0) // 敵非表示
+	clearBullets() // 弾丸消去
+	// GAME OVER を画面中央に表示
+	sdl.IMG[100].x = (480-sdl.IMG[100]->width())/2
+	sdl.IMG[100].y = (320-sdl.IMG[100]->height())/2
+	sdl.IMG[100]->alive(1)
+})
+
+mainEvent->appendLoop(GAMEOVER, def(){ // ゲームオーバー中
+	if(sdl.getInput"shift" == 1){ // shiftボタンでリプレイ
+		char().x, char().y = 240, 160
+		char()->alive(1)
+		sdl.IMG[100]->alive(0)
+		POINT = 0
+		GAMESTATE = GAMEPLAY
+	}
+})
+
+mainEvent->appendLoop(GAMESTART+GAMEPLAY+GAMEOVER, def(){ // FPSは常に表示
+	sdl.drawEdgeText(380, 5, "FPS:"..sdl.App.fpsMan->get(), Color(0,200,0))
+})
+
+mainEvent->set(1000) // ルーチン1000番で実行

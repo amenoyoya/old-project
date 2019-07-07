@@ -1,0 +1,31 @@
+local timer = figit.Timer()
+#require "stdlib/gui"
+msgbox(timer->passage().." msec")
+
+~event(0){
+	local img = sdl.Image(getModuleDir()->str().."/system/win_base.png")
+	local msg = sdl.TextLayer("\\f[nil,18]特殊武器\\c[255,155,0]『アーライナの肉壷』\\c[]を手に入れた\\c[255,0,0]！")
+	local btn = sdl.Button("\\f[nil,20]OK", 12, 6, nil, nil, {x=0, y=0})
+	local edt = sdl.EditBox->append(320, 20)
+	
+	while(true){
+		sdl.drawEasyWindow(img, 50, 50, 540, 380)
+		msg->draw((540-msg->width())/2+50, (380-msg->height())/2+50)
+		edt->draw(160, 80)
+		sdl.fillRect((540-btn->width())/2+48, 380-btn->height()-24+48,
+			btn->width()+4, btn->height()+4, Color(0,24,36))
+		btn->draw((540-btn->width())/2+50, 380-btn->height()-24+50)
+		~update()
+	}
+}
+
+~app{
+	def @->config(t){
+		t.title = "メッセージボックス"
+	}
+	
+	def @->main(){
+		sdl.Music->volume(5)
+		for(i = 1, 2) sdl.Sound->volume(i, 5)
+	}
+}

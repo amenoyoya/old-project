@@ -1,0 +1,30 @@
+/*** バーを表示＆操作 ***/
+
+def loadBar(){
+	// バーの画像読み込み
+	bar = sdl.Sprite("img/bar.png")
+	bar.x, bar.y = 280, 450
+	
+	// バーの表示ルーチン
+	sdl.App.routine->append(1, def(){
+		while(true){
+			if(GameState == GAMEPLAY){
+				// GAMEPLAY中のみバーの表示を行う
+				bar->draw()
+				
+				// バーの操作を行う
+				if(sdl.getInput("left") > 0){
+					// 左キーを押されたらbar.xを-4
+					bar.x = bar.x - 4
+				}elseif(sdl.getInput("right") > 0){
+					// 右キーを押されたらbar.xを+4
+					bar.x = bar.x + 4
+				}
+				// 画面のはみ出し処理
+				if(bar.x < 0) bar.x = 0
+				elseif(bar.x + bar->width() > 640) bar.x = 640 - bar->width()
+			}
+			sdl.App.routine->update()
+		}
+	})
+}

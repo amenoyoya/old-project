@@ -1,0 +1,100 @@
+require "stdlib/ext"
+
+local file = File(Path"ret.txt", "w")
+
+/*def analyze(str){
+	local a = str_Analyzer(str)
+	local num = {'0','1','2','3','4','5','6','7','8','9'}
+	local chr = {'A','o','S','i','P','u','N', 'e'}
+	
+	while(!a->eof()){
+		if(a->matchList(10, num)){
+			local n = a->word1()
+			
+			a->seekb(1)
+			if(a->matchList(8, chr)){
+				file->puts(n..a->word1().."\n")
+				a->seekb(1)
+			}
+		}else{
+			a->seekb(1)
+		}
+	}
+}*/
+
+def analyze(str){
+	//for(ret in string.gmatch(str, "[0|1|2|3|4|5|6|7|8|9][A|o|S|i|P|u|N|e]")) file->puts(ret.."\n")
+	for(ret in str->gmatch"[0-9][AoSiPuNe]") file->puts(ret.."\n")
+}
+
+/*def matchlist(str, tbl){
+	for(k, v in pairs(tbl)) if(strncmp(str, v)) return v
+	return nil
+}
+
+def analyze(str){
+	local size = str->len()
+	local num = {'0','1','2','3','4','5','6','7','8','9'}
+	local chr = {'A','o','S','i','P','u','N', 'e'}
+	local i = 0
+	
+	while(i < size-2){
+		local n = matchlist(str_ptr(str, i), num)
+		if(n){
+			++(i)
+			local c = matchlist(str_ptr(str, i), chr)
+			if(c){
+				file->puts(n..c.."\n")
+				++(i)
+			}
+		}else{
+			++(i)
+		}
+	}
+}*/
+
+/*def matchlist(str, tbl){
+	for(k, v in pairs(tbl)) if(str->sub(1, v->len()) == v) return v
+	return nil
+}
+
+def analyze(str){
+	local size = str->len()
+	local num = {'0','1','2','3','4','5','6','7','8','9'}
+	local chr = {'A','o','S','i','P','u','N', 'e'}
+	local i = 1
+	
+	while(i < size-1){
+		local n = matchlist(str->sub(i), num)
+		if(n){
+			++(i)
+			local c = matchlist(str->sub(i), chr)
+			if(c){
+				file->puts(n..c.."\n")
+				++(i)
+			}
+		}else{
+			++(i)
+		}
+	}
+}*/
+
+local fi = FileIterator(Path"RandomChars/texts")
+local timer = Timer()
+
+while(true){
+	local path = fi->get()
+	
+	if(path->str() == "") break
+	analyze(File->load(path))
+}
+
+print(timer->passage())
+shell "pause"
+
+// str_Analyzer: 3060 msec
+// string.gmatch: 50 msec
+// strncmp: 7760 msec
+// string.sub: 4450 msec
+// C++ strncmp: 110 msec
+// C++ str::Analyzer: 130 msec

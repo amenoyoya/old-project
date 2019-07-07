@@ -1,0 +1,152 @@
+/*** 各種定数定義 ***/
+FIELD_MAX_X = 384
+FIELD_MAX_Y = 448
+
+FIELD_X = 32
+FIELD_Y = 16
+
+// 敵の同時表示最大数
+ENEMY_MAX = 30
+
+// 弾幕の同時表示最大数
+SHOT_MAX = 30
+
+// 敵１匹が持つ弾の最大数
+SHOT_BULLET_MAX = 1000
+
+// 自機ショットの最大数
+CSHOT_MAX = 200
+
+// ボスの定位置
+BOSS_POS_X = FIELD_MAX_X / 2
+BOSS_POS_Y = 100
+
+// ボスが持つ弾の最大数
+BOSS_BULLET_MAX = 3000
+
+// 弾幕最大数
+DANMAKU_MAX = 50
+
+// 効果音の種類の最大数
+SE_MAX = 100
+
+// 音楽再生チャンネルの最大数
+CHANNEL_MAX = 10
+
+// エフェクト登録最大数
+EFFECT_MAX = 100
+
+// 消滅エフェクト登録最大数
+DEL_EFFECT_MAX = 30
+
+
+/*** 乱数関連 ***/
+local rnd = Randomizer()
+
+def getRandom(...){ return rnd->get(...) }
+
+// -angle～angleまでのランダムな角度を返す
+def getRandomAngle(angle){
+	return -angle + angle * 2 * rnd->get(10000) / 10000
+}
+
+
+/*** ゲーム管理テーブル ***/
+Game = :{
+	// ゲームステージ準備
+	initialize = def(@){
+		@.layers = :{
+			SDL.Layer(SDL.App.window->getWidth(), SDL.App.window->getHeight()),
+			SDL.Layer(SDL.App.window->getWidth(), SDL.App.window->getHeight()),
+			SDL.Layer(SDL.App.window->getWidth(), SDL.App.window->getHeight()),
+		}
+		
+		@.board = :{}
+		@.board[10] = SDL.Image"dat/img/board/10.png"
+		@.board[11] = SDL.Image"dat/img/board/11.png"
+		@.board[12] = SDL.Image"dat/img/board/12.png"
+		@.board[20] = SDL.Image"dat/img/board/20.png"
+		
+		@.back = SDL.Image"dat/img/back/0/back0.png"
+		@->reset()
+	},
+	
+	// ゲーム初期化
+	reset = def(@){
+		@.stageCount = 0
+		@.backCount = 0
+		@.Character->initialize()
+		@.Boss->initialize()
+		@.Enemy->initialize()
+		@.Shot->initialize()
+		@.Sound->initialize()
+		@.Effect->initialize()
+		@->loadStory"2"
+	},
+	
+	// 敵の出現情報の読み込み
+	loadStory = def(@, story){
+		@.Enemy.orders = assert(loadstring("return :{"..SDL.App->loadFile("dat/story/"..story..".sltk").."}"))()
+	},
+	
+	// 各種計算
+	update = def(@){
+		@.Effect->update()
+		@.Character->update()
+		@.Character->move()
+		@.Enemy->update()
+		@.Boss->update()
+		@.Shot->update()
+		// 当たり判定
+		@->collision()
+		// ステージカウンタ更新
+		if !@.Boss.flag {
+			@.stageCount = @.stageCount + 1
+		}
+		@.backCount = @.backCount + 1
+	},
+	
+	// メイン描画・サウンド再生
+	play = def(@){
+		@.layers[1]->beginScene()
+		{
+			// 背景描画
+			@.back->draw(FIELD_X, @.backCount % 700 + FIELD_Y - 700)
+			@.back->draw(FIELD_X, @.backCount % 700 + FIELD_Y)
+			// エフェクト描画
+			@.Effect->draw(1) // 敵消滅エフェクト
+			@.Effect->draw(5) // 喰らいボムエフェクト
+			// 自機・敵描画
+			@.Character->draw()
+			@.Enemy->draw()
+			@.Boss->draw()
+			// 弾幕描画
+			@.Character->drawShot()
+			@.Shot->draw()
+			@.Boss->drawShot()
+		}
+		@.layers[1]->endScene()
+		
+		@.layers[2]->beginScene()
+		{
+			// ボムエフェクト描画
+			@.Effect->draw(2) // ボムのエフェクト
+			@.Effect->draw(3) // ボム線のエフェクト
+			@.Effect->draw(4) // ボムキャラのエフェクト
+		}
+		@.layers[2]->endScene()
+		
+		@.layers[3]->beginScene()
+		{
+			// ボード描画
+			@.board[10]->draw(0, 0)
+			@.board[11]->draw(0, 16)
+			@.board[12]->draw(0, 464)
+			@.board[20]->draw(416, 0)
+		}
+		@.layers[3]->endScene()
+		
+		// サウンド再生
+		@.Sound->play()
+	},
+}

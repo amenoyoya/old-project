@@ -1,0 +1,138 @@
+/*** 当たり判定関連 ***/
+local ENEMY_RANGE_MAX = 4
+local CSHOT_RANGE_MAX = 2
+local CRANGE = 2
+local BRANGE = 40
+
+// 敵の当たり判定範囲
+local enemyRange = :{16,30,16,50}
+// 自機ショットの当たり判定範囲
+local cshotRange = :{6,0}
+
+// AとBが当たったかどうかを判定する
+local def judgeCollision(A, B, A_range, B_range){
+	if A.cnt > 0 { // Aの軌道が１度でも計算されていたら
+		local x = A.x - B.x // AとBとの距離
+		local y = A.y - B.y
+		// Aの当たり判定とBの当たり判定の合計範囲
+		local r = A_range + B_range
+		
+		if A.speed > r { // 中間を計算する必要があれば
+			//１フレーム前にいた位置を格納する
+			local pre_x = A.x + math.cos(A.angle + math.pi) * A.speed
+			local pre_y = A.y + math.sin(A.angle + math.pi) * A.speed
+			
+			for j = 1, A.speed / r { // 進んだ分÷当たり判定分ループ
+				local px = pre_x - B.x
+				local py = pre_y - B.y
+				if px * px + py * py < r*r { return true }
+				pre_x = pre_x + math.cos(A.angle) * r
+				pre_y = pre_y + math.sin(A.angle) * r
+			}
+		}
+		if x*x + y*y < r*r { return true } // 当たり
+	}
+	return false
+}
+
+// 敵が死ぬかどうかの決定
+local def judgeEnemyDeath(enemyID){
+	Game.Sound[9] = true // 敵に当たった音
+	if Game.Enemy[enemyID].HP <= 0 { // 敵のHPが0以下になったら
+		Game.Sound[2] = true // 敵のピチュり音
+		Game.Effect->enterDeleteEffect(Game.Enemy[enemyID])
+		Game.Enemy[enemyID] = nil // 敵を消滅させる
+	}
+}
+
+// 指定したenemyIDの敵にダメージを与える
+local def hitEnemy(enemyID, power){
+	local enemy = Game.Enemy[enemyID]
+	if enemy {
+		enemy.HP = enemy.HP - power
+		judgeEnemyDeath(enemyID)
+	}
+}
+
+// ボスにpower食らわす
+local def hitBoss(power){
+	Game.Boss.HP = Game.Boss.HP - power
+}
+
+/* 当たり判定メイン */
+def Game->collision(){
+	local ch = @.Character
+	
+	/* ボムと敵，ボスとの処理 */
+	if @.Effect.bom.flag { // ボムフラグが立っていれば
+		for n = 1, ENEMY_MAX { // 敵総数
+			hitEnemy(n, ch.power/20) // 敵にCharacter.power/20ほど喰らわす
+		}
+		// ボスがいて、描画しないフラグがオフで、ショット中なら
+		if @.Boss.flag and !@.Boss.drawflag and @.Boss.state == 2 {
+			hitBoss(ch.power/20)
+		}
+	}
+	
+	/* 自機ショットと敵，ボスとの処理 */
+	for i = 1, CSHOT_MAX { // 自機ショット総数
+		local cshot = ch.shot[i]
+		if cshot {
+			/* 敵との当たり判定 */
+			for n = 0, ENEMY_MAX {
+				local enemy = @.Enemy[n]
+				if enemy {
+					if judgeCollision(cshot, enemy, cshotRange[cshot.kind], enemyRange[enemy.kind]) { // 自機ショットと敵が当たっていれば
+						ch.shot[i] = nil // その自機ショットを消す
+						hitEnemy(n, cshot.power) // 弾の持つパワー分敵にダメージ
+					}
+				}
+			}
+			/* ボスとの当たり判定 */
+			// ボスが出現していて、描画しないフラグがオフで、ショット中なら
+			if @.Boss.flag and !@.Boss.drawflag and @.Boss.state == 2 {
+				if judgeCollision(cshot, @.Boss, cshotRange[cshot.kind], BRANGE) {
+					ch.shot[i] = nil
+					hitBoss(cshot.power)
+				}
+			}
+		}
+	}
+	
+	/* 敵ショットと自機との処理 */
+	for i = 1, SHOT_MAX { // 敵ショット総数
+		local shot = @.Shot[i]
+		if shot {
+			for n = 1, SHOT_BULLET_MAX { // 弾総数
+				local bullet = shot.bullets[n]
+				if bullet {
+					if judgeCollision(bullet, ch, @.Shot.bullets[bullet.kind].range, CRANGE) { // 自機にその弾が接触していたら
+						shot.bullets[n] = nil // 弾をオフ
+						if ch.state == 0 and ch.invicible == 0 { // ステータスが通常で、無敵じゃなかったら
+							ch.state   = 1 // 1:喰らいボム受付中　2:死んで浮き上がり中
+							ch.cnt     = 0
+							@.Sound[4] = true // ピチュり音
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/* ボスショットと自機との処理 */
+	if @.Boss.shot {
+		for i = 1, BOSS_BULLET_MAX {
+			local bullet = @.Boss.shot.bullets[i]
+			if bullet {
+				if judgeCollision(bullet, ch, @.Shot.bullets[bullet.kind].range, CRANGE) {
+					@.Boss.shot.bullets[i] = nil
+					if ch.state == 0 and ch.invicible == 0 {
+						ch.state   = 1
+						ch.cnt     = 0
+						@.Sound[4] = true
+					}
+				}
+			}
+		}
+	}
+}

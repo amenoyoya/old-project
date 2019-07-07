@@ -1,0 +1,3 @@
+ABCDEFGabcdefgあいうえお漢字カンジいいカンジ♪(爆死)
+[:msgbox("Hello"):]
+EOF

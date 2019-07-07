@@ -1,0 +1,2177 @@
+[group]戦闘敵ステータス（一括）
+[child_rw]
+[subject]味方ステータス（一括）:dir
+  [subject]ステータス:dir  
+   [subject]体力・現在:dir
+    [repeat]Rance09_RICK->味方・体力・現在REP,0,21,1
+   [back]
+   [subject]体力・最大:dir
+    [repeat]Rance09_RICK->味方・体力・最大REP,0,21,1
+   [back]
+   [subject]回避・現在:dir
+    [repeat]Rance09_RICK->味方・回避・現在REP,0,21,1
+   [back]
+   [subject]回避・最大:dir
+    [repeat]Rance09_RICK->味方・回避・最大REP,0,21,1
+   [back]
+   [subject]受流し・現在:dir
+    [repeat]Rance09_RICK->味方・受流し・現在REP,0,21,1
+   [back]
+   [subject]受流し・最大:dir
+    [repeat]Rance09_RICK->味方・受流し・最大REP,0,21,1
+   [back]
+   [subject]装甲・現在:dir
+    [repeat]Rance09_RICK->味方・装甲・現在REP,0,21,1
+   [back]
+   [subject]装甲・最大:dir
+    [repeat]Rance09_RICK->味方・装甲・最大REP,0,21,1
+   [back]
+   [subject]魔抵:dir
+    [repeat]Rance09_RICK->味方・魔抵REP,0,21,1
+   [back]
+   [subject]ねばり・現在:dir
+    [repeat]Rance09_RICK->味方・ねばり・現在REP,0,21,1
+   [back]
+   [subject]ねばり・最大:dir
+    [repeat]Rance09_RICK->味方・ねばり・最大REP,0,21,1
+   [back]
+   [subject]攻撃力・最小:dir
+    [repeat]Rance09_RICK->味方・攻撃力・最小REP,0,21,1
+   [back]
+   [subject]攻撃力・最大:dir
+    [repeat]Rance09_RICK->味方・攻撃力・最大REP,0,21,1
+   [back]
+   [subject]魔法力:dir
+    [repeat]Rance09_RICK->味方・魔法力REP,0,21,1
+   [back]
+   [subject]クリティカル量:dir
+    [repeat]Rance09_RICK->味方・クリティカル量REP,0,21,1
+   [back]
+   [subject]必殺技使用回数・現在:dir
+    [repeat]Rance09_RICK->味方・必殺技使用回数・現在REP,0,21,1
+   [back]
+   [subject]必殺技使用回数・最大:dir
+    [repeat]Rance09_RICK->味方・必殺技使用回数・最大REP,0,21,1
+   [back]
+   [subject]移動:dir
+    [repeat]Rance09_RICK->味方・移動REP,0,21,1
+   [back]
+   [subject]射程:dir
+    [repeat]Rance09_RICK->味方・射程REP,0,21,1
+   [back]
+   [subject]素早さ:dir
+    [repeat]Rance09_RICK->味方・素早さREP,0,21,1
+   [back]
+  [back]
+  [subject]熟練Ｐ・現在:dir
+   [repeat]Rance09_RICK->味方・熟練Ｐ・現在REP,0,21,1
+  [back]
+  [subject]熟練Ｐ・累計:dir
+   [repeat]Rance09_RICK->味方・熟練Ｐ・累計REP,0,21,1
+  [back]
+  [subject]ユニット状態:dir
+   [repeat]Rance09_RICK->味方・ユニット状態REP,0,21,1
+  [back]
+  [subject]コスト:dir
+   [repeat]Rance09_RICK->味方・コストREP,0,21,1
+  [back]
+  [subject]狙われ度:dir
+   [repeat]Rance09_RICK->味方・狙われ度REP,0,21,1
+  [back]
+  [subject]熟練度:dir
+   [subject]熟練度：体力:dir
+    [repeat]Rance09_RICK->味方・熟練度：体力REP,0,21,1
+   [back]
+   [subject]熟練度：回避:dir
+    [repeat]Rance09_RICK->味方・熟練度：回避REP,0,21,1
+   [back]
+   [subject]熟練度：受流し:dir
+    [repeat]Rance09_RICK->味方・熟練度：受流しREP,0,21,1
+   [back]
+   [subject]熟練度：魔抵:dir
+    [repeat]Rance09_RICK->味方・熟練度：魔抵REP,0,21,1
+   [back]
+   [subject]熟練度：ねばり:dir
+    [repeat]Rance09_RICK->味方・熟練度：ねばりREP,0,21,1
+   [back]
+   [subject]熟練度：攻撃力:dir
+    [repeat]Rance09_RICK->味方・熟練度：攻撃力REP,0,21,1
+   [back]
+   [subject]熟練度：クリティカル量:dir
+    [repeat]Rance09_RICK->味方・熟練度：クリティカル量REP,0,21,1
+   [back]
+   [subject]熟練度：素早さ:dir
+    [repeat]Rance09_RICK->味方・熟練度：素早さREP,0,21,1
+   [back]
+   [subject]☆ボーナス段階:dir
+    [repeat]Rance09_RICK->味方・☆ボーナス段階REP,0,21,1
+   [back]
+  [back]
+  [subject]武器:dir
+   [subject]武器補正:dir
+    [repeat]Rance09_RICK->味方・武器補正REP,0,21,1
+   [back]
+   [subject]武器強化：基本値＋:dir
+    [repeat]Rance09_RICK->味方・武器強化：基本値＋REP,0,21,1
+   [back]
+   [subject]武器強化：挑戦回数:dir
+    [repeat]Rance09_RICK->味方・武器強化：挑戦回数REP,0,21,1
+   [back]
+  [back]
+  [subject]装甲:dir
+   [subject]装甲補正:dir
+    [repeat]Rance09_RICK->味方・装甲補正REP,0,21,1
+   [back]
+   [subject]防具増装：基本値＋:dir
+    [repeat]Rance09_RICK->味方・防具増装：基本値＋REP,0,21,1
+   [back]
+   [subject]防具増装：基本値増加回数:dir
+    [repeat]Rance09_RICK->味方・防具増装：基本値増加回数REP,0,21,1
+   [back]
+   [subject]防具増装：挑戦回数:dir
+    [repeat]Rance09_RICK->味方・防具増装：挑戦回数REP,0,21,1
+   [back]
+  [back]
+  [subject]確率系:dir
+   [subject]反撃率:dir
+    [repeat]Rance09_RICK->味方・反撃率REP,0,21,1
+   [back]
+   [subject]再行動発動率:dir
+    [repeat]Rance09_RICK->味方・再行動発動率REP,0,21,1
+   [back]
+   [subject]強撃／範囲拡大率:dir
+    [repeat]Rance09_RICK->味方・強撃／範囲拡大率REP,0,21,1
+   [back]
+   [subject]自動回復：発生率:dir
+    [repeat]Rance09_RICK->味方・自動回復：発生率REP,0,21,1
+   [back]
+   [subject]自動回復：回復率:dir
+    [repeat]Rance09_RICK->味方・自動回復：回復率REP,0,21,1
+   [back]
+   [subject]熟練度Ｐ入手倍率:dir
+    [repeat]Rance09_RICK->味方・熟練度Ｐ入手倍率REP,0,21,1
+   [back]
+   [subject]狂戦士：発動ダメージ:dir
+    [repeat]Rance09_RICK->味方・狂戦士：発動ダメージREP,0,21,1
+   [back]
+   [subject]狂戦士：破壊力上昇率:dir
+    [repeat]Rance09_RICK->味方・狂戦士：破壊力上昇率REP,0,21,1
+   [back]
+   [subject]瞬殺発生率:dir
+    [repeat]Rance09_RICK->味方・瞬殺発生率REP,0,21,1
+   [back]
+   [subject]溜める破壊値倍率:dir
+    [repeat]Rance09_RICK->味方・溜める破壊値倍率REP,0,21,1
+   [back]
+   [subject]挑発成功率:dir
+    [repeat]Rance09_RICK->味方・挑発成功率REP,0,21,1
+   [back]
+   [subject]援護発動率:dir
+    [repeat]Rance09_RICK->味方・援護発動率REP,0,21,1
+   [back]
+   [subject]守護率:dir
+    [repeat]Rance09_RICK->味方・守護率REP,0,21,1
+   [back]
+   [subject]ＧＯＬＤドロップ率加算:dir
+    [repeat]Rance09_RICK->味方・ＧＯＬＤドロップ率加算REP,0,21,1
+   [back]
+  [back]
+  [subject]技ゲージ:dir
+   [subject]バリア必要ゲージ:dir
+    [repeat]Rance09_RICK->味方・バリア必要ゲージREP,0,21,1
+   [back]
+   [subject]援護必要ゲージ:dir
+    [repeat]Rance09_RICK->味方・援護必要ゲージREP,0,21,1
+   [back]
+   [subject]必殺技必要ゲージ:dir
+    [repeat]Rance09_RICK->味方・必殺技必要ゲージREP,0,21,1
+   [back]
+  [back]
+  [subject]戦闘中いろいろ:dir
+   [subject]再行動状態:dir
+    [repeat]Rance09_RICK->味方・再行動状態REP,0,21,1
+   [back]
+   [subject]魔球所持:dir
+    [repeat]Rance09_RICK->味方・魔球所持REP,0,21,1
+   [back]
+   [subject]獲得熟練Ｐ(補正前):dir
+    [repeat]Rance09_RICK->味方・獲得熟練Ｐ(補正前)REP,0,21,1
+   [back]
+  [back]
+  [subject]戦闘中状態:dir
+   [subject]溜める:dir
+    [repeat]Rance09_RICK->味方・溜めるREP,0,21,1
+   [back]
+   [subject]パス:dir
+    [repeat]Rance09_RICK->味方・パスREP,0,21,1
+   [back]
+   [subject]バリア:dir
+    [repeat]Rance09_RICK->味方・バリアREP,0,21,1
+   [back]
+   [subject]援護射撃:dir
+    [repeat]Rance09_RICK->味方・援護射撃REP,0,21,1
+   [back]
+   [subject]戦闘不能:dir
+    [repeat]Rance09_RICK->味方・戦闘不能REP,0,21,1
+   [back]
+   [subject]麻痺:dir
+    [repeat]Rance09_RICK->味方・麻痺REP,0,21,1
+   [back]
+   [subject]蟹玉付与:dir
+    [repeat]Rance09_RICK->味方・蟹玉付与REP,0,21,1
+   [back]
+  [back]
+[back]
+[subject]敵ステータス（一括）:dir
+  [subject]ステータス:dir 
+   [subject]体力・現在:dir
+    [repeat]Rance09_RICK->敵・体力・現在REP,0,400,4
+   [back]
+    [subject]体力・最大:dir
+   [repeat]Rance09_RICK->敵・体力・最大REP,0,400,4
+   [back]
+   [subject]回避・現在:dir
+    [repeat]Rance09_RICK->敵・回避・現在REP,0,400,4
+   [back]
+   [subject]回避・最大:dir
+    [repeat]Rance09_RICK->敵・回避・最大REP,0,400,4
+   [back]
+   [subject]受流し・現在:dir
+    [repeat]Rance09_RICK->敵・受流し・現在REP,0,400,4
+   [back]
+   [subject]受流し・最大:dir
+    [repeat]Rance09_RICK->敵・受流し・最大REP,0,400,4
+   [back]
+   [subject]装甲・現在:dir
+    [repeat]Rance09_RICK->敵・装甲・現在REP,0,400,4
+   [back]
+   [subject]装甲・最大:dir
+    [repeat]Rance09_RICK->敵・装甲・最大REP,0,400,4
+   [back]
+   [subject]魔抵:dir
+    [repeat]Rance09_RICK->敵・魔抵REP,0,400,4
+   [back]
+   [subject]ねばり・現在:dir
+    [repeat]Rance09_RICK->敵・ねばり・現在REP,0,400,4
+   [back]
+   [subject]ねばり・最大:dir
+    [repeat]Rance09_RICK->敵・ねばり・最大REP,0,400,4
+   [back]
+   [subject]攻撃力・最小:dir
+    [repeat]Rance09_RICK->敵・攻撃力・最小REP,0,400,4
+   [back]
+   [subject]攻撃力・最大:dir
+    [repeat]Rance09_RICK->敵・攻撃力・最大REP,0,400,4
+   [back]
+   [subject]魔法力:dir
+    [repeat]Rance09_RICK->敵・魔法力REP,0,400,4
+   [back]
+   [subject]クリティカル量:dir
+     [repeat]Rance09_RICK->敵・クリティカル量REP,0,400,4
+   [back]
+   [subject]必殺技使用回数・現在:dir
+    [repeat]Rance09_RICK->敵・必殺技使用回数・現在REP,0,400,4
+   [back]
+   [subject]必殺技使用回数・最大:dir
+    [repeat]Rance09_RICK->敵・必殺技使用回数・最大REP,0,400,4
+   [back]
+   [subject]移動:dir
+    [repeat]Rance09_RICK->敵・移動REP,0,400,4
+   [back]
+   [subject]射程:dir
+    [repeat]Rance09_RICK->敵・射程REP,0,400,4
+   [back]
+   [subject]素早さ:dir
+    [repeat]Rance09_RICK->敵・素早さREP,0,400,4
+   [back]
+  [back]
+  [subject]ＧＯＬＤ:dir
+   [repeat]Rance09_RICK->敵・ＧＯＬＤREP,0,400,4
+  [back]
+  [subject]ドロップ率:dir
+   [repeat]Rance09_RICK->敵・ドロップ率REP,0,400,4
+  [back]
+  [subject]熟練Ｐ:dir
+   [repeat]Rance09_RICK->敵・熟練ＰREP,0,400,4
+  [back]
+  [subject]聖魔Ｐ:dir
+   [repeat]Rance09_RICK->敵・聖魔ＰREP,0,400,4
+  [back]
+  [subject]行動確率等:dir
+   [subject]準備率:dir
+    [repeat]Rance09_RICK->敵・準備率REP,0,400,4
+   [back]
+   [subject]逃走率:dir
+    [repeat]Rance09_RICK->敵・逃走率REP,0,400,4
+   [back]
+   [subject]特定逃走追加率:dir
+    [repeat]Rance09_RICK->敵・特定逃走追加率REP,0,400,4
+   [back]
+   [subject]挑発成功減少率:dir
+    [repeat]Rance09_RICK->敵・挑発成功減少率REP,0,400,4
+   [back]
+  [back]
+[back]
+[/child_rw]
+[subject]浮要塞関連:dir
+ [replace]0x00Rance09_RICK->fuyousai
+[back]
+[subject]アイテム入手関係（改）:dir
+ [repeat]Rance09_RICK->ドロップ判定一覧,0,0x10,4
+ [repeat]Rance09_RICK->ドロップ一覧,0,0x0C,4
+ [replace]0x00,Rance09_RICK->強化版ドロップ一覧
+ [subject]アイテム入手履歴:dir
+  [repeat]Rance09_RICK->アイテム入手回数,0,0x190,4
+ [back]
+[back]
+[/group]
+
+[group]fuyousai
+[subject]動力部:dir
+ [subject]小型化回数:calc,_[:[:[:[:0x00767D7C:]+0x1EC:]+0x4190:]+0x08:]+0x0C,-1,6
+[back]
+[subject]魔砲:dir
+ [subject]強化回数:calc,_[:[:[:[:0x00767D7C:]+0x1EC:]+0x4DB0:]+0x08:]+0x0C,-1,6
+[back]
+[subject]魔壁:dir
+ [subject]小型化回数:calc,_[:[:[:[:0x00767D7C:]+0x1EC:]+0x5898:]+0x08:]+0x0C,-1,4
+[back]
+[subject]魔手:dir
+ [subject]小型化回数:calc,_[:[:[:[:0x00767D7C:]+0x1EC:]+0x58C4:]+0x08:]+0x0C,-1,6
+[back]
+[subject]魔活:dir
+ [subject]小型化回数:calc,_[:[:[:[:0x00767D7C:]+0x1EC:]+0x58F0:]+0x08:]+0x0C,-1,6
+[back]
+[subject]魔球:dir
+ [subject]強化回数:calc,_[:[:[:[:0x00767D7C:]+0x1EC:]+0x591C:]+0x08:]+0x0C,-1,6
+[back]
+[/group]
+
+[group]味方・体力・現在REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x40
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・体力・最大REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x44
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・回避・現在REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x28
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・回避・最大REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x2C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・受流し・現在REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x30
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・受流し・最大REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x34
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・装甲・現在REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x38
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・装甲・最大REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x3C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・魔抵REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x84
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・ねばり・現在REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x50
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・ねばり・最大REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x54
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・攻撃力・最小REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x78
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・攻撃力・最大REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x7C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・魔法力REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x80
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・クリティカル量REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x90
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・必殺技使用回数・現在REP
+[e_with],0,999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x48
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・必殺技使用回数・最大REP
+[e_with],0,999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x4C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・移動REP
+[e_with],0,99
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x88
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・射程REP
+[e_with],0,99
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x8C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・素早さREP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x94
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練Ｐ・現在REP
+[e_with],0,999999999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x0C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練Ｐ・累計REP
+[e_with],0,999999999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x10
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・ユニット状態REP
+[e_with],Rance09_RICK->CharFlagList,0,1
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ： '+' _mem, _0x03E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x0C\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x08\:]+0x18,4,list,<error>,Rance09_RICK->CharFlagList,0,1 '+' ]:list,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x18
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・コストREP
+[e_with],0,999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x78
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・狙われ度REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x24
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：体力REP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x28
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：回避REP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x2C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：受流しREP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x30
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：魔抵REP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x34
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：ねばりREP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x38
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：攻撃力REP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x3C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：クリティカル量REP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x40
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度：素早さREP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x44
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・☆ボーナス段階REP
+[e_with],0,4
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x4C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・武器補正REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x1C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・武器強化：基本値＋REP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x50
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・武器強化：挑戦回数REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x54
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・装甲補正REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x20
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・防具増装：基本値＋REP
+[e_with],0,999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x58
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・防具増装：基本値増加回数REP
+[e_with],0,9999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x5C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・防具増装：挑戦回数REP
+[e_with],0,99999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x60
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・反撃率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x7C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・再行動発動率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x80
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・強撃／範囲拡大率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x84
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・自動回復：発生率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x88
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・自動回復：回復率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x8C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・熟練度Ｐ入手倍率REP
+[e_with],0,1000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x90
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・狂戦士：発動ダメージREP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x94
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・狂戦士：破壊力上昇率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x98
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・瞬殺発生率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x9C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・瞬殺発生率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x9C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・溜める破壊値倍率REP
+[e_with],0,1000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xA0
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・挑発成功率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xA4
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・援護発動率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xA8
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・守護率REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xAC
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・ＧＯＬＤドロップ率加算REP
+[e_with],0,100
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xB0
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・バリア必要ゲージREP
+[e_with],0,20
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xB4
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・援護必要ゲージREP
+[e_with],0,20
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xB8
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・必殺技必要ゲージREP
+[e_with],0,20
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x03E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0xBC
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・再行動状態REP
+[e_with],02000000,0000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x14:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x04
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・魔球所持REP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x14:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x0C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・獲得熟練Ｐ(補正前)REP
+[e_with],0,999999
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:calc,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x14:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x10
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・溜めるREP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x00
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・パスREP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x04
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・バリアREP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x08
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・援護射撃REP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x0C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・戦闘不能REP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x14
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・麻痺REP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x18
+[/enabled]
+[/e_with]
+[/group]
+
+[group]味方・蟹玉付与REP
+[e_with],01000000,00000000
+[enabled]0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val*4!]
+[subject][!L$Val+1!]番目[ '+' _mem,_0x3E8=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val*4!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x00,4,list,<error>,Rance09_RICK->CharNameList,1000,1 '+' ]:toggle,_0x3E8=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val*4!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x18:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x20
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・体力・現在REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x40
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・体力・最大REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x44
+[/enabled]
+[/e_with]
+[/group]
+
+
+[group]敵・回避・現在REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x28
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・回避・最大REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x2C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・受流し・現在REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x30
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・受流し・最大REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x34
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・装甲・現在REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x38
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・装甲・最大REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x3C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・ねばり・現在REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x50
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・ねばり・最大REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x54
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・魔抵REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x84
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・攻撃力・最小REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x78
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・攻撃力・最大REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x7C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・魔法力REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x80
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・クリティカル量REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x90
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・必殺技使用回数・現在REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x48
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・必殺技使用回数・最大REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x4C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・移動REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x88
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・射程REP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x8C
+[/enabled]
+[/e_with]
+[/group]
+
+
+
+[group]敵・素早さREP
+[e_with],0,9999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x94
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・ＧＯＬＤREP
+[e_with],0,99999999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x50
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・ドロップ率REP
+[e_with],0,1000
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x54
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・熟練ＰREP
+[e_with],0,99999999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x58
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・聖魔ＰREP
+[e_with],0,99999999
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x5C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・準備率REP
+[e_with],0,100
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x28
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・逃走率REP
+[e_with],0,100
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x2C
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・特定逃走追加率REP
+[e_with],0,100
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+'  '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x30
+[/enabled]
+[/e_with]
+[/group]
+
+[group]敵・挑発成功減少率REP
+[e_with],0,1000
+[enabled]0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject][!L$Val/4+1!]番目[ '+' _mem,_0x0320=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:$base+$idx*4\:]=>tmp;[\:$tmp+0xC\:]>0x[!$Val!]=>bool;[\:[\:$tmp+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x00\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]*$bool,4,free_list,Error,Rance09_RICK->EnName_f '+' ]:calc,_0x0320=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x08:]+0x40
+[/enabled]
+[/e_with]
+[/group]
+
+[group]ドロップ判定一覧
+[subject][!@Rance09_RICK->ドロップ判定DirList,$Val/4!]:dir
+ [subject]入手ランク判定:dir
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:$base+$idx*4:]+0x8:],Rance09_RICK->ドロップ判定
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],Rance09_RICK->ドロップ判定テーブル
+ [back]
+ [subject]換金アイテム:dir
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:$base+$idx*4:]+0x8:],Rance09_RICK->ドロップ判定
+  [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],Rance09_RICK->ドロップアイテムテーブル通常
+ [back]
+[back]
+[/group]
+
+[group]ドロップ判定
+ [subject]CurrentPos[ '+' _mem,0x0C,4,num,<error>,%d '+' ]/現在値/:calc,0x0C,0,100
+[/group]
+
+[group]ドロップ判定テーブル
+[child_rw]
+[subject]ドロップ判定テーブル:dir
+ [repeat]Rance09_RICK->ドロップ判定Rep,0,0x190,4
+[back]
+[/child_rw]
+[/group]
+
+[group]ドロップ判定Rep
+ [subject][!L$Val/4!][ '+' _mem,0x[!$Val!],4,list,<error>,Rance09_RICK->アイテムドロップランクList '+' ]:list,0x[!$Val!],Rance09_RICK->アイテムドロップランクList,0,1
+[/group]
+
+[group]ドロップ一覧
+[subject][!@Rance09_RICK->ドロップ一覧DirList,$Val/4!]:dir
+ [subject]CurrentPos[ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x04\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x4,4,num,<error>,%d '+' ]/現在値/:calc,_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x4,0,100
+ [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x04:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x[!$Val!]:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:],[! @Rance09_RICK->ドロップアイテムテーブルroopList, $Val !]
+[back]
+[/group]
+
+[group]ドロップ判定DirList
+通常敵ドロップ
+イベント戦闘ボーナス
+自由戦闘ボーナス
+宝箱だんごドロップ
+[/group]
+
+[group]ドロップ一覧DirList
+通常
+レア
+激レア
+[/group]
+
+[group]アイテムドロップランクList
+0テーブル再作成?
+通常
+○レア
+★激レア
+4なし？
+換金アイテム
+[/group]
+
+[group]ドロップアイテムテーブルroopList
+Rance09_RICK->ドロップアイテムテーブル通常
+Rance09_RICK->ドロップアイテムテーブル通常
+Rance09_RICK->ドロップアイテムテーブル激レア
+[/group]
+
+[group]ドロップアイテムテーブル通常
+[child_rw]
+[subject]アイテムテーブル:dir
+ [repeat]Rance09_RICK->ドロップアイテムRep,0,0x190,4
+[back]
+[subject]アイテムテーブル最上位種化:dir
+ [repeat]Rance09_RICK->ドロップアイテム最上位種化Rep,0,0x190,4
+[back]
+[/child_rw]
+[/group]
+
+
+
+[group]ドロップアイテムテーブル激レア
+[child_rw]
+[subject]アイテムテーブル:dir
+ [repeat]Rance09_RICK->ドロップアイテムRep,0,0x44,4
+[back]
+[subject]アイテムテーブル最上位種化:dir
+ [repeat]Rance09_RICK->ドロップアイテム最上位種化Rep,0,0x44,4
+[back]
+[/child_rw]
+[/group]
+
+[group]ドロップアイテムRep
+ [subject][! L$Val/4 !][ '+' _mem,0x[!$Val!],4,free_list,<error>,Rance09_RICK->ItemList_f '+' ]:d_list,0x[!$Val!],Rance09_RICK->ItemList,0x0,0x7FFFFFFF,Rance09_RICK->ItemList_ad
+[/group]
+
+[group]ドロップアイテム最上位種化Rep
+ [subject][! L$Val/4 !][ '+' _mem,0x[!$Val!],4,free_list,<error>,Rance09_RICK->ItemList_f '+' ]:b_toggle,0x[!$Val!],Rance09_RICK->ドロップアイテム最上位種化chn,offset
+[/group]
+
+[group]ドロップアイテム最上位種化chn
+0x00,*{ 8913 :: EE13 *}
+0x00,*{ 8A13 :: EE13 *}
+0x00,*{ 8B13 :: EE13 *}
+0x00,*{ ED13 :: EE13 *}
+0x00,*{ 9013 :: F313 *}
+0x00,*{ 9113 :: F413 *}
+0x00,*{ 8C13 :: EF13 *}
+0x00,*{ 8D13 :: F013 *}
+0x00,*{ 8E13 :: F113 *}
+0x00,*{ 8F13 :: F213 *}
+0x00,*{ 9213 :: F713 *}
+0x00,*{ F613 :: 5414 *}
+0x00,*{ F513 :: 5114 *}
+0x00,*{ 9313 :: FF13 *}
+0x00,*{ FE13 :: FF13 *}
+0x00,*{ 5514 :: 5614 *}
+[/group]
+
+[group]強化版ドロップ一覧
+[subject]強化版:dir
+ [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x00:]=>idx;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:$base+$idx*4:],Rance09_RICK->強化版判定一括
+ [replace]_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x8:]+0x08:]=>idx;[:[:$base+$idx*4:]+0x8:],Rance09_RICK->強化版ドロップ判定
+[back]
+[/group]
+
+[group]強化版ドロップ判定
+ [subject]CurrentPos[ '+' _mem,0x08,4,num,<error>,%d '+' ](Maxで次回テーブル再生成)/現在値/:calc,0x08,0,100
+ [child_rw]
+ [subject]ドロップテーブル:dir
+  [repeat]Rance09_RICK->強化版ドロップテーブルRep,0,0x190,4
+ [back]
+ [/child_rw]
+[/group]
+
+[group]強化版ドロップテーブルRep
+ [subject][!L$Val/4!][ '+' _mem,_[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[.0x00.]\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x8\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!],4,list,<error>,Rance09_RICK->強化版List '+' ]/強化版\/外れ/:toggle,_[:[.0x00.]:]=>idx;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base+$idx*4:]+0x8:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val!],01000000,00000000
+[/group]
+
+[group]アイテム入手回数
+[enabled][:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+0x3F4:]=>idx;[:[:[:$base+$idx*4:]+0x08:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x08:]:]=>idx;[:[:$base+$idx*4:]+0xC:]>0x[!$Val!]
+[subject]_mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x0C\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:[\:$base+$idx*4\:]+0x8\:]+0x[!$Val!],4,free_list,<error>,Rance09_RICK->ItemList_f '+' [ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x10\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:$base+$idx*4\:]+0x8=>tmp;[\:$tmp+0x4\:]>0x[!$Val!]=>bool;([\:$tmp\:]+0x[!$Val!])*$bool,4,num,<error>,%d '+' ]:dir
+ [subject]種類[ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x0C\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:$base+$idx*4\:]+0x8=>tmp;[\:$tmp+0x4\:]>0x[!$Val!]=>bool;([\:$tmp\:]+0x[!$Val!])*$bool,4,free_list,<error>,Rance09_RICK->ItemList_f '+' ]:d_list,_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x08:]+0x0C:]=>idx;[:[:[:$base+$idx*4:]+0x08:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val!],Rance09_RICK->ItemList,0x0,0x7FFFFFFF,Rance09_RICK->ItemList_ad
+ [subject]個数[ '+' _mem,_0x3F4=>offset;[\:[\:0x00767D7C\:]+0x1EC\:]=>base;[\:[\:[\:$base\:]+0x8\:]+$offset\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]+0x10\:]=>idx;[\:[\:[\:$base+$idx*4\:]+0x08\:]\:]=>idx;[\:$base+$idx*4\:]+0x8=>tmp;[\:$tmp+0x4\:]>0x[!$Val!]=>bool;([\:$tmp\:]+0x[!$Val!])*$bool,4,num,<error>,%d '+' ]/現在値/:calc,_0x3F4=>offset;[:[:0x00767D7C:]+0x1EC:]=>base;[:[:[:$base:]+0x8:]+$offset:]=>idx;[:[:[:$base+$idx*4:]+0x08:]+0x10:]=>idx;[:[:[:$base+$idx*4:]+0x08:]:]=>idx;[:[:$base+$idx*4:]+0x8:]+0x[!$Val!],0,99
+[back]
+[/enabled]
+[/group]
+
+[group]ModeList
+通常
+×２
+×４
+ＳＰ
+[/group]
+
+
+[group]RanceModeLockList
+0
+なし
+あり
+[/group]
+
+[group]RanceModeCharNameList
+0
+ルシアン
+かなみ
+志津香
+チルディ
+戦姫
+ピグ
+ミラクル
+[/group]
+
+[group]強化版List
+0
+★強化版
+[/group]
+
+[group]UpList
+0
+★UP
+[/group]
+
+[group]isOnList
+OFF
+ON
+2
+[/group]
+
+[group]EnName_f
+2001=ヘルマン１軍槍兵
+2002=ヘルマン２軍槍兵
+2003=ヘルマン３軍槍兵
+2004=ヘルマン４軍槍兵
+2005=ヘルマン５軍槍兵
+2011=ヘルマン１軍弓兵
+2012=ヘルマン２軍弓兵
+2013=ヘルマン３軍弓兵
+2014=ヘルマン４軍弓兵
+2015=ヘルマン５軍弓兵
+2021=ヘルマン１軍騎士
+2022=ヘルマン２軍騎士
+2023=ヘルマン３軍騎士
+2024=ヘルマン４軍騎士
+2025=ヘルマン５軍騎士
+2031=ヘルマン１軍騎士(自爆)
+2032=ヘルマン３軍騎士(id2032)
+2041=ヘルマン騎士Ａ
+2042=ヘルマン警備兵
+2043=ヘルマン魔法兵
+2044=ヘルマン魔物使い
+2101=イカマン
+2102=ミートボール
+2103=宝箱団子(チュートリアル)
+2104=賊（レンジャー）
+2105=賊（ガンナー）
+2106=賊（ファイター）
+2107=ヤンキー
+2108=木箱ン
+2109=うっぴー
+2110=アカメ
+2111=宝箱団子
+2121=るろんた
+2122=ねこつぼ
+2123=ソートード
+2124=ドラク
+2131=ぷりょ
+2132=コンタートル
+2133=ガメオベアー
+2134=緑コンタートル
+2141=雷魚
+2142=角くじら
+2143=クロメ
+2144=ナギ
+2145=ナギ
+2151=闇雀
+2152=ゲーリング
+2153=ヒムラー
+2154=ヒトラー
+2171=ピグ・ギリシアム
+2172=ピグ・ギリシアム
+2173=ピグ・ギリシアム
+2174=ピグ・ギリシアム
+2175=闇烏
+2176=ランケン
+2177=ゴースト
+2181=恐竜ヴェロキラプトル
+2182=恐竜プロトケラトプス
+2191=ぶたバンバラ
+2192=ノーススラッグ
+2195=傭兵（レンジャー）
+2196=傭兵（ガンナー）
+2197=傭兵（ファイター）
+2198=アントーン
+2199=おかゆフィーバー
+2201=イカ兵
+2202=ハニー
+2203=グリーンハニー
+2204=ブルーハニー
+2205=レッドハニー
+2206=ブラックハニー
+2207=スーパーハニー
+2211=バーナー
+2212=どぐー
+2213=くつとり女
+2214=機々械々
+2215=魔素漢
+2216=大ぷりょ
+2221=オッズ
+2222=サイクロナイト
+2229=デカント
+2241=人型兵器
+2242=雪うさぎ
+2243=ビッグフット
+2244=るろんた
+2245=お断りマン
+2249=ナイトホラー
+2251=幸福きゃんきゃん
+2252=貯金箱ン
+2253=人型兵器
+2301=クリスタルミネバ
+2302=マジックポーン
+2341=ゴブリン
+2351=クリスタルロボ
+2361=ぷりょ人間
+2362=ぷりょ人間
+2363=ぷりょ人間(青)
+2364=ぷりょ人間(紫)
+2371=歪み
+2401=ブルーワンド
+2402=ヘキサピラー
+2403=ＮＡＳＵ
+2411=テンプルナイト
+2412=鋼箱ン
+2701=アーリゾン・ボトムス
+2702=トリケラくじら
+2703=ザン・ザビス
+2704=ハイム・デベリオン
+2705=サンク・モッテル
+2706=ジャルジャン・オト
+2707=マボ・ヤンボ
+2708=チェコ・チチエンコ
+2709=ホッキ・チョイスキー
+2710=カリオリ・トリモリウリ
+2711=ジロウ・カゲヤマ
+2712=タミ・ジョン
+2713=デュック・トーゴ
+2714=エリッツ・チエン
+2715=モリオ・カラメンコ
+2716=マイテム・ゲットー
+2717=ササ・ドラコ
+2718=硬イカ兵
+2719=雹うさぎ
+2720=ダンコ・バツマル
+2721=ミクラ・グッテンバッハ
+2722=カオガ・ヤオモテ
+2723=ラミ・ジョボッチ
+2724=ガトリグ・バハメール
+2725=タカラ・バコダンゴ
+2726=ニュル・ブルックリンク
+2727=イコマ・ロッコウ
+2728=ショーチュー・ワイリ
+2729=リック・アディスン
+2730=チルディ・シャープ
+2731=チョト・ワルスキー
+2732=カトラ・ケムルールル
+2733=キミ・セコイネン
+2734=チェン・ポチョム
+2735=エレナ
+2801=グナガン
+2802=ドラク
+2803=海一番
+2804=クレイジーキング
+2805=地震蟲
+2806=ナイトオブトライヘッド
+2807=ナインシュタイン
+2808=ミトコンドリア
+2809=デカデカント
+2810=ハート・ブレイク・ホテル
+2811=ハニーキング
+2812=ティラノサウルス
+2813=ミネバ
+2814=闘神ＭＭ
+2815=闘神ＭＭの矛
+2816=闘神ＭＭの盾
+2817=デビルミネバ
+2818=イカマンデビル
+2819=バレンタイン
+2820=大きい歪み
+4001=天然壁
+4002=天然アロエ
+4003=天然キューブ
+[/group]
+
+[group]EnName_ad
+2001
+2002
+2003
+2004
+2005
+2011
+2012
+2013
+2014
+2015
+2021
+2022
+2023
+2024
+2025
+2031
+2032
+2041
+2042
+2043
+2044
+2101
+2102
+2103
+2104
+2105
+2106
+2107
+2108
+2109
+2110
+2111
+2121
+2122
+2123
+2124
+2131
+2132
+2133
+2134
+2141
+2142
+2143
+2144
+2145
+2151
+2152
+2153
+2154
+2171
+2172
+2173
+2174
+2175
+2176
+2177
+2181
+2182
+2191
+2192
+2195
+2196
+2197
+2198
+2199
+2201
+2202
+2203
+2204
+2205
+2206
+2207
+2211
+2212
+2213
+2214
+2215
+2216
+2221
+2222
+2229
+2241
+2242
+2243
+2244
+2245
+2249
+2251
+2252
+2253
+2301
+2302
+2341
+2351
+2361
+2362
+2363
+2364
+2371
+2401
+2402
+2403
+2411
+2412
+2701
+2702
+2703
+2704
+2705
+2706
+2707
+2708
+2709
+2710
+2711
+2712
+2713
+2714
+2715
+2716
+2717
+2718
+2719
+2720
+2721
+2722
+2723
+2724
+2725
+2726
+2727
+2728
+2729
+2730
+2731
+2732
+2733
+2734
+2735
+2801
+2802
+2803
+2804
+2805
+2806
+2807
+2808
+2809
+2810
+2811
+2812
+2813
+2814
+2815
+2816
+2817
+2818
+2819
+2820
+4001
+4002
+4003
+[/group]
+
+[group]EnFlagList_ad
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+[/group]
+
+[group]EnFlagList
+未出現
+出現中
+通過
+最終防衛戦
+4
+5
+6
+7
+8
+逃走した
+[/group]
+
+[group]EnFlagList_f
+0=未出現
+1=□出現
+2=■通過
+3=防衛戦
+4=4
+5=5
+6=6
+7=7
+8=8
+9=×逃走
+[/group]
+
+
+[group]CharNameList_f
+0=<none>
+1001=ランス
+1002=見当　かなみ
+1003=魔想　志津香
+1004=マリア・カスタード
+1005=パットン・ミスナルジ
+1006=ヒューバート・リプトン
+1007=ルシアン・カレット
+1008=マイトレイア・メイシアン
+1009=リック・アディスン
+1010=チルディ・シャープ
+1011=クルックー・モフス
+1012=アルカネーゼ・ライズ
+1013=ピッテン・チャオ
+1014=戦姫
+1015=ミラクル・トー
+1016=真田　透琳
+1017=ピグ・ギリシアム
+1018=フレイア・イズン
+1019=ロレックス・ガドラス
+1020=オルオレ・ザ・サード
+1021=ハンティ・カラー
+[/group]
+
+[group]CharNameList
+<none>
+ランス
+見当　かなみ
+魔想　志津香
+マリア・カスタード
+パットン・ミスナルジ
+ヒューバート・リプトン
+ルシアン・カレット
+マイトレイア・メイシアン
+リック・アディスン
+チルディ・シャープ
+クルックー・モフス
+アルカネーゼ・ライズ
+ピッテン・チャオ
+戦姫
+ミラクル・トー
+真田　透琳
+ピグ・ギリシアム
+フレイア・イズン
+ロレックス・ガドラス
+オルオレ・ザ・サード
+ハンティ・カラー
+[/group]
+
+[group]CharNameList_ad
+0
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+[/group]
+
+[group]CharNoList_f
+0=<none>
+1=ランス
+2=見当　かなみ
+3=魔想　志津香
+4=マリア・カスタード
+5=パットン・ミスナルジ
+6=ヒューバート・リプトン
+7=ルシアン・カレット
+8=マイトレイア・メイシアン
+9=リック・アディスン
+10=チルディ・シャープ
+11=クルックー・モフス
+12=アルカネーゼ・ライズ
+13=ピッテン・チャオ
+14=戦姫
+15=ミラクル・トー
+16=真田　透琳
+17=ピグ・ギリシアム
+18=フレイア・イズン
+19=ロレックス・ガドラス
+20=オルオレ・ザ・サード
+21=ハンティ・カラー
+[/group]
+
+[group]CharNoList_ad
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+[/group]
+
+[group]CharFlagList
+未加入
+加入
+出撃中
+出撃済み3
+出撃済み4
+出撃不可／療養中
+[/group]
+
+[group]CharFlagList_ad
+0
+1
+2
+3
+4
+5
+[/group]
+
+[group]CharFlagList_f
+0=未加入
+1=加入
+2=出撃中
+3=出撃済み3
+4=出撃済み4
+5=出撃不可／療養中
+[/group]
+
+[group]ItemList
+<none>
+まんが肉骨だけ
+まんが肉骨だけ×２
+まんが肉骨だけ×４
+まんが肉骨だけＳＰ
+まんが肉
+まんが肉×２
+まんが肉×４
+まんが肉ＳＰ
+はじめ肉
+はじめ肉×２
+はじめ肉×４
+はじめ肉ＳＰ
+身軽の羽根
+しいたけ
+守りドール
+仁王納豆
+ドラ猫の鈴
+ドラ猫の鈴×２
+ドラ猫の鈴×４
+ドラ猫の鈴ＳＰ
+魔トマト
+魔トマト×２
+魔トマト×４
+魔トマトＳＰ
+素早い変な虫
+素早い変な虫×２
+素早い変な虫×４
+素早い変な虫ＳＰ
+ＧＯＬＤライター
+うさぎ鍋
+うさぎ鍋×２
+うさぎ鍋×４
+うさぎ鍋ＳＰ
+すっぽん天帝
+すっぽん天帝×２
+すっぽん天帝×４
+すっぽん天帝ＳＰ
+避け茶漬け
+まもりのまりも
+バックバク
+ブロブロブロッサム
+純金ベアー
+純金ベアー×２
+純金ベアー×４
+純金ベアーＳＰ
+魔力の杯
+魔力の杯×２
+魔力の杯×４
+魔力の杯ＳＰ
+てかる栗
+てかる栗×２
+てかる栗×４
+てかる栗ＳＰ
+楽馬
+串ピヨ
+串ピヨ×２
+串ピヨ×４
+串ピヨＳＰ
+サイヤ人参
+会心魚
+長髪マネキ猫
+歳暮バリア
+道化マスク
+道化マスク×２
+道化マスク×４
+道化マスクＳＰ
+ハニージッポ
+鐘のなる木
+大金餅
+スーパードリル
+ルンルンバ
+紅葉桜
+ロケットエンジン
+次元帽
+フェアリーランタン
+初夢宝船
+掴み鷲
+トンでもない奴
+ゴーストパイプ
+やらせは扇
+丹下犬
+赤巫女絵馬
+青巫女絵馬
+緑巫女絵馬
+月の意志
+ＭＡＸ隊
+グナガンの宝
+聖魔石
+<装備不可>
+[/group]
+
+[group]ItemList_ad
+0
+5001
+5021
+5041
+5061
+5002
+5022
+5042
+5062
+5003
+5023
+5043
+5063
+5004
+5005
+5006
+5007
+5008
+5028
+5048
+5068
+5009
+5029
+5049
+5069
+5010
+5030
+5050
+5070
+5011
+5101
+5121
+5141
+5161
+5102
+5122
+5142
+5162
+5103
+5104
+5105
+5106
+5107
+5127
+5147
+5167
+5108
+5128
+5148
+5168
+5109
+5129
+5149
+5169
+5110
+5111
+5131
+5151
+5171
+5112
+5113
+5114
+5115
+5116
+5136
+5156
+5176
+5117
+5118
+5119
+5201
+5202
+5203
+5204
+5205
+5206
+5207
+5208
+5209
+5210
+5211
+5212
+5213
+5214
+5215
+5216
+5217
+5299
+5901
+5999
+[/group]
+
+[group]ItemList_f
+0=<none>
+5001=まんが肉骨だけ
+5021=まんが肉骨だけ×２
+5041=まんが肉骨だけ×４
+5061=まんが肉骨だけＳＰ
+5002=まんが肉
+5022=まんが肉×２
+5042=まんが肉×４
+5062=まんが肉ＳＰ
+5003=はじめ肉
+5023=はじめ肉×２
+5043=はじめ肉×４
+5063=はじめ肉ＳＰ
+5004=身軽の羽根
+5005=しいたけ
+5006=守りドール
+5007=仁王納豆
+5008=ドラ猫の鈴
+5028=ドラ猫の鈴×２
+5048=ドラ猫の鈴×４
+5068=ドラ猫の鈴ＳＰ
+5009=魔トマト
+5029=魔トマト×２
+5049=魔トマト×４
+5069=魔トマトＳＰ
+5010=素早い変な虫
+5030=素早い変な虫×２
+5050=素早い変な虫×４
+5070=素早い変な虫ＳＰ
+5011=ＧＯＬＤライター
+5101=うさぎ鍋
+5121=うさぎ鍋×２
+5141=うさぎ鍋×４
+5161=うさぎ鍋ＳＰ
+5102=すっぽん天帝
+5122=すっぽん天帝×２
+5142=すっぽん天帝×４
+5162=すっぽん天帝ＳＰ
+5103=避け茶漬け
+5104=まもりのまりも
+5105=バックバク
+5106=ブロブロブロッサム
+5107=純金ベアー
+5127=純金ベアー×２
+5147=純金ベアー×４
+5167=純金ベアーＳＰ
+5108=魔力の杯
+5128=魔力の杯×２
+5148=魔力の杯×４
+5168=魔力の杯ＳＰ
+5109=てかる栗
+5129=てかる栗×２
+5149=てかる栗×４
+5169=てかる栗ＳＰ
+5110=楽馬
+5111=串ピヨ
+5131=串ピヨ×２
+5151=串ピヨ×４
+5171=串ピヨＳＰ
+5112=サイヤ人参
+5113=会心魚
+5114=長髪マネキ猫
+5115=歳暮バリア
+5116=道化マスク
+5136=道化マスク×２
+5156=道化マスク×４
+5176=道化マスクＳＰ
+5117=ハニージッポ
+5118=鐘のなる木
+5119=大金餅
+5201=スーパードリル
+5202=ルンルンバ
+5203=紅葉桜
+5204=ロケットエンジン
+5205=次元帽
+5206=フェアリーランタン
+5207=初夢宝船
+5208=掴み鷲
+5209=トンでもない奴
+5210=ゴーストパイプ
+5211=やらせは扇
+5212=丹下犬
+5213=赤巫女絵馬
+5214=青巫女絵馬
+5215=緑巫女絵馬
+5216=月の意志
+5217=ＭＡＸ隊
+5299=グナガンの宝
+5901=聖魔石
+5999=<装備不可>
+[/group]
+
+[group]Item所持状態List
+<none>
+所持
+保存庫
+[/group]
+
+[group]Item所持状態List_f
+0=<none>
+1=所持
+2=保存庫
+[/group]
+
+[group]アイテムランクList
+通常
+レア
+激レア
+換金アイテム
+[/group]
+
+[group]アイテムランクList_ad
+1
+2
+3
+5
+[/group]
+
+[group]アイテムランクList_f
+1=通常
+2=○レア
+3=★激レア
+5=換金アイテム
+[/group]
+
+//要塞　書き換えてもあまり意味が無さそうなので放置
+[group]YousaiBlockName
+動力部
+魔砲
+魔壁
+魔手
+魔活
+魔球
+[/group]
+
+[group]YousaiBlockName_ad
+3001
+3002
+3003
+3004
+3005
+3006
+[/group]
+
+[group]YousaiBlockName_f
+3001=動力部
+3002=魔砲
+3003=魔壁
+3004=魔手
+3005=魔活
+3006=魔球
+[/group]
+
+[group]isOnList
+OFF
+ON
+2
+[/group]

@@ -1,0 +1,67 @@
+/*** ボールを表示＆操作 ***/
+
+def loadBall(){
+	// ボールの画像読み込み
+	ball = sdl.Sprite("img/ball.png")
+	ball.soundFlag = false // 効果音を鳴らすフラグ
+	ball.x, ball.y = 320, 410
+	ball.dx, ball.dy = 3, -3
+	
+	// 跳ね返るときの効果音を読み込み
+	ball.sound = sdl.Object->newSound("sound/bound.ogg")
+	if(ball.sound->failed()) error "sound/bound.oggがありません"
+	ball.sound->setVolume(5)
+	
+	// ボールの表示ルーチン
+	sdl.App.routine->append(2, def(){
+		while(true){
+			if(GameState == GAMEPLAY){
+				// GAMEPLAY中のみボールの表示を行う
+				ball->draw()
+				
+				ball.soundFlag = false
+				// ボールの移動
+				ball->move()
+				
+				/* 画面はみ出し処理 */
+				if(ball.x < 0){ // 左端に当たったらx方向の移動速度を反転
+					ball.x = 0
+					ball.dx = -ball.dx
+					ball.soundFlag = true
+				}elseif(ball.x > 640 - ball->width()){ // 右端に当たったらx方向の移動速度を反転
+					ball.x = 640 - ball->width()
+					ball.dx = -ball.dx
+					ball.soundFlag = true
+				}
+				if(ball.y < 0){ // 上端に当たったらy方向の移動速度を反転
+					ball.y = 0
+					ball.dy = -ball.dy
+					ball.soundFlag = true
+				}elseif(ball.y > 480){ // 下にはみ出たらゲームオーバー
+					GameState = GAMEOVER
+				}
+				
+				/* バーとボールの当たり判定 */
+				if(ball->collision(bar)){
+					// バーとボールが当たった！
+					ball.soundFlag = true
+					
+					if(ball.x + ball->width()/2 < bar.x + bar->width()/2*2/3){
+						// ボールがバーの左端に当たったら左方向に飛ばす
+						ball.dx, ball.dy = -math.abs(ball.dx), -ball.dy
+					}elseif(ball.x + ball->width()/2 > bar.x + bar->width()*2/3){
+						// ボールがバーの右端に当たったら右方向に飛ばす
+						ball.dx, ball.dy = math.abs(ball.dx), -ball.dy
+					}else{
+						// ボールがバーの真ん中に当たったらただ反射する
+						ball.dy = -ball.dy
+					}
+				}
+				
+				// 効果音を鳴らす(チャンネル0)
+				if(ball.soundFlag) ball.sound->play(0)
+			}
+			sdl.App.routine->update()
+		}
+	})
+}

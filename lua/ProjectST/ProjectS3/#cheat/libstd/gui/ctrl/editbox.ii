@@ -1,0 +1,133 @@
+// ※EditBoxを使う場合、sdl.App.setting.procNameは
+// 　sdl.guiEventProc(もしくはそれを継承した関数)を指定しなければならない
+
+/*** EditBoxクラス(SingleLine) ***/
+// 直接生成することはない。sdl.EditBox->append, sdl.EditBox->eraseを通して生成・破棄を行う
+local class EditBox(w, h){
+	@.m_width, @.m_height = 0, 0
+	@.m_layer, @.m_id = sdl.Layer(), 0
+	@.m_font, @.m_editFont = sdl.Font(), sdl.Font()
+	@.m_edit = {text = "", cursor = 0, selection = 0}
+	@.m_string = sdl.DecoCharArray()
+	@.m_texMan = sdl.TexManager() // DecoCharArray用テクスチャ管理オブジェクト
+	
+	// コンストラクタ
+	def @->__init__(w, h){
+		if(w && h) @->open(w, h)
+	}
+	
+	def @->open(w, h){
+		@.m_width, @.m_height = w, h
+		
+		@->close()
+		@.m_string->changeDrawType(0)
+		@.m_string->changeColor(Color(0,0,0))
+		@.m_layer->open(w*2, h*2)
+		if(!@.m_font->open(sdl.Font->getFromSystem"msgothic", 14)) error "[EditBox] フォントの作成に失敗"
+		if(!@.m_editFont->open(sdl.Font->getFromSystem"msgothic", 14)) error "[EditBox] フォントの作成に失敗"
+		@.m_editFont->setStyle(FONT_UNDERLINE) // 日本語入力中のフォントにはアンダーライン
+		@.m_id = @.m_layer->handle()
+	}
+	
+	def @->close(){
+		@.m_string->close()
+		@.m_texMan->close()
+		if(@.m_layer) @.m_layer->close()
+		if(@.m_font) @.m_font->close()
+		if(@.m_editFont) @.m_editFont->close()
+	}
+	
+	def @->draw(x, y){
+		if(@.m_layer){
+			sdl.fillRect(x, y, @.m_width, @.m_height, Color(255,255,255))
+			sdl.drawRect(x, y, @.m_width, @.m_height, Color(0,0,0))
+			@.m_layer->draw(x, y, @.m_width, @.m_height, 0, 0, @.m_width, @.m_height)
+			
+			if(@->isActive()){ // アクティブな時の処理
+				if(@.m_edit.text == ""){ // 通常カーソル表示
+					// カーソル移動
+					if(sdl.getInput(KEY_LEFT) == 1 || sdl.getInput(KEY_LEFT) == 3){
+						@.m_string->seek(-1)
+					}elseif(sdl.getInput(KEY_RIGHT) == 1 || sdl.getInput(KEY_RIGHT) == 3){
+						@.m_string->seek(1)
+					}
+					
+					local cur = @.m_string->cur()
+					local px, py = cur? cur.x: 0, cur? cur.y: 0
+					
+					// BackSpace
+					if(sdl.getInput(KEY_BACKSPACE) == 1 || sdl.getInput(KEY_BACKSPACE) == 3){
+						if(cur && cur.index > 0){
+							@.m_string->erase(cur.index-1, 1)
+							// 更新
+							@.m_layer->beginScene()
+							sdl.clearScreen()
+							@.m_string->draw(2, 2)
+							@.m_layer->endScene()
+						}
+					}
+					if(px+2 < @.m_width){ // カーソル表示
+						sdl.drawLine(x+px+2, y+py+2, x+px+2, y+py+15, Color(0,0,100))
+					}
+				}else{ // 日本語編集中の表示
+					local cur, size = @.m_string->cur(), 0
+					local px, py = cur? cur.x: 0, cur? cur.y: 0
+					if(@.m_edit.cursor > 0) size = @.m_font->width(u8substr(@.m_edit.text, 0, @.m_edit.cursor))
+					sdl.fillRect(x+px+2, y+py+2, @.m_font->width(@.m_edit.text), 13, Color(200,200,200))
+					sdl.drawText(x+px+2, y+py+2, @.m_edit.text, Color(0,0,0), @.m_editFont)
+					sdl.drawLine(x+px+2+size, y+py+2, x+px+2+size, y+py+15, Color(0,0,100))
+				}
+			}
+			// マウスクリックによるアクティブ化・非アクティブ化
+			if(sdl.isMouseInRect(x, y, @.m_width, @.m_height)){
+				if(sdl.getInput(MOUSE_LEFT) == 1 || sdl.getInput(MOUSE_RIGHT) == 1){
+					@->activate(true) // アクティブ化
+					// クリック位置までシーク
+					@.m_string->seek(0, SEEK_SET)
+					for(k, v in each(@.m_string->str())){
+						if(math.abs(sdl.Mouse.x-(x+v.x+2)) < 6) break
+						@.m_string->seek(1)
+					}
+				}
+			}else{
+				if(sdl.getInput(MOUSE_LEFT) == 1 || sdl.getInput(MOUSE_RIGHT) == 1){
+					@->activate(false) // 非アクティブ化
+				}
+			}
+		}
+	}
+	
+	/* アクティブ化・非アクティブ化 */
+	// flag=falseで非アクティブ化
+	def @->activate(flag){
+		if(flag){
+			sdl.EditBox.active = @.m_id
+			sdl.startTextInput()
+		}else{
+			if(@->isActive()){
+				sdl.EditBox.active = 0
+				sdl.stopTextInput()
+			}
+		}
+	}
+	
+	def @->isActive() return sdl.EditBox.active == @.m_id
+}
+
+
+/*** EditBox公開関数 ***/
+// EditBoxを生成する
+// 戻り値として得られるオブジェクトをdrawすることでEditBoxの処理を行える
+def sdl.EditBox->append(w, h){
+	local obj = EditBox(w, h)
+	self.objects[obj.m_id] = obj
+	return obj
+}
+
+// EditBoxを破棄する場合、closeメソッドではなく必ずこの関数を使用する
+def sdl.EditBox->erase(obj){
+	if(self.objects[obj.m_id]){
+		self.objects[obj.m_id] = nil
+		obj->close()
+	}
+}

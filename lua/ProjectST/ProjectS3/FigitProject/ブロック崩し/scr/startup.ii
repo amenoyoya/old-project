@@ -1,0 +1,50 @@
+#require "lib/game"
+iirequire "scr/bar"
+iirequire "scr/ball"
+iirequire "scr/block"
+
+/* ゲーム状態 */
+GAMEPLAY  = 0
+GAMEOVER  = 1
+GAMECLEAR = 2
+GameState = GAMEPLAY
+
+~app{
+	def @->main(){
+		// local back = sdl.Image("img/back.jpg")
+		// 「GAME OVER」「GAME CLEAR」表示用にフォントを作成
+		local font = sdl.Object->newFont(sdl.Font->getFromSystem("msgothic"), 50)
+		
+		if(font->failed()) error "フォントの作成に失敗"
+		loadBar()
+		loadBall()
+		loadBlocks()
+		
+		// 背景表示ルーチン
+		~event(0){
+			while(true){
+				back->draw(0, 0)
+				@->update()
+			}
+		}
+		
+		// 全体イベント(一番上に描画)
+		~event(100){
+			while(true){
+				if(GameState == GAMEOVER){
+					// GAMEOVER状態なら「GAME OVER」を表示
+					sdl.drawEdgeText((640-font->width("GAME  OVER"))/2, (480-font->height())/2,
+						"GAME  OVER", Color(255,0,0), Color(0,0,0), font)
+				}elseif(GameState == GAMECLEAR){
+					//GAMECLEAR状態なら「GAME CLEAR」を表示
+					sdl.drawEdgeText((640-font->width("GAME CLEAR !"))/2, (480-font->height())/2,
+						"GAME CLEAR !", Color(0,200,255), Color(0,0,0), font)
+				}
+				
+				//FPS表示
+				sdl.drawEdgeText(5, 5, "FPS: "..@.fpsMan->get(), Color(255,0,0))
+				@->update()
+			}
+		}
+	}
+}

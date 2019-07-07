@@ -1,0 +1,36 @@
+#require "stdlib/game"
+
+local msg = [[
+\c[100,50,200]小夜\c[]
+「こんにちは！私の名前は小夜！！
+　よろしくね\c[255,155,55]❤\c[]」
+]]
+
+local rtn = Routine()
+
+~event(0){
+	local mes = sdl.DecoText(msg)
+	
+	for(k, v in each(mes->str())){
+		rtn->append(k, def(){
+			local alpha = 0
+			
+			while(true){
+				if(alpha < v.color.alpha) alpha = alpha + 10
+				if(alpha > v.color.alpha) alpha = v.color.alpha
+				v->draw(50, 50, alpha)
+				rtn->update()
+			}
+		})
+		~wait(4)
+	}
+}
+
+~event(1){
+	while(true){
+		rtn->run()
+		~update()
+	}
+}
+
+~app

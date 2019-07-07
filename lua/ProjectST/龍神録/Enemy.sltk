@@ -1,0 +1,226 @@
+/*** 敵情報管理テーブル ***/
+//空いている敵番号を検索
+local def searchAvailableEnemy(@){
+	for i = 1, ENEMY_MAX {
+		if @[i] == nil { return i }
+	}
+}
+
+// 敵データの登録
+local def enterEnemy(@){
+	if Game.Boss.flag { return } // ボス戦では雑魚敵を出現させない
+	
+	for i = 1, #@.orders {
+		local order = @.orders[i]
+		
+		if order and order.cnt == Game.stageCount { // 現在の瞬間がオーダーの瞬間なら
+			local e = searchAvailableEnemy(@) // 空いている敵を検索
+			if e {
+				@[e] = :{
+					cnt      = 0, // カウンタ
+					pattern  = order.pattern, // 移動パターン
+					dir      = 1, // 向き
+					kind     = order.kind, // 敵の種類
+					x        = order.x, // x座標
+					y        = order.y, // y座標
+					speed    = order.speed, // スピード
+					shotcnt  = order.shotcnt, // 弾の発射時間
+					shotkind = order.shotkind, // 弾幕の種類
+					blkind   = order.blkind, // 弾の種類
+					blcolor  = order.blcolor, // 弾色
+					bgcolor  = getRandom(1, 4), // 背景色(消滅エフェクト色)
+					HP       = order.HP, // 体力
+					maxHP    = order.HP, // 体力最大値
+					wait     = order.wait, // 停滞時間
+					vx       = 0, // 水平成分の速度
+					vy       = 0, // 鉛直成分の速度
+					angle    = 0, // 角度
+					items    = order.items, // 落とすアイテム
+				}
+			}
+			table.remove(@.orders, i) // 用済みのオーダーを削除
+		}
+	}
+}
+
+// 敵の行動制御
+local def moveEnemy(@){
+	for i = 1, ENEMY_MAX {
+		local enemy = @[i]
+		if enemy { // その敵が存在するなら
+			@.patterns[enemy.pattern](enemy)
+			enemy.x = enemy.x + math.cos(enemy.angle) * enemy.speed
+			enemy.y = enemy.y + math.sin(enemy.angle) * enemy.speed
+			enemy.x = enemy.x + enemy.vx
+			enemy.y = enemy.y + enemy.vy
+			enemy.cnt = enemy.cnt + 1
+			enemy.img = enemy.dir * 3 + toint((enemy.cnt % 18) / 6) + 1
+			// 弾幕登録
+			if enemy.shotcnt == enemy.cnt {
+				Game.Shot->enter(i)
+			}
+			// 敵が画面から外れたら消す
+			if enemy.x < -50 or FIELD_MAX_X + 50 < enemy.x or enemy.y < -50 or FIELD_MAX_Y + 50 < enemy.y {
+				@[i] = nil
+			}
+		}
+	}
+}
+
+
+/* Enemyテーブル */
+Game.Enemy = :{
+	// 初期化
+	initialize = def(@){
+		@.images = SDL.loadDivisionImage("dat/img/enemy/0.png", 3, 3, 32, 32)
+		@.imageHP = SDL.Image"dat/img/enemy/hp.png"
+	},
+	
+	// 敵処理メイン
+	update = def(@){
+		enterEnemy(@)
+		moveEnemy(@)
+	},
+	
+	// 敵描画
+	draw = def(@){
+		for i = 1, ENEMY_MAX {
+			local enemy = @[i]
+			if enemy {
+				Game.Enemy.images[enemy.img]->drawCenter(enemy.x + FIELD_X, enemy.y + FIELD_Y)
+			}
+		}
+	},
+}
+
+/* 敵の行動パターン */
+Game.Enemy.patterns = :{
+	// パターン1: 下がってきて停滞して上がっていく
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 {
+			enemy.vy = 3 // 下がってくる
+		}elif t == 40 {
+			enemy.vy = 0 // 止まる
+		}elif t == 40 + enemy.wait { //登録された時間だけ停滞して上がっていく
+			enemy.vy = -3
+		}
+	},
+	
+	// パターン2: 下がってきて停滞して左下に行く
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 {
+			enemy.vy = 3 // 下がってくる
+		}elif t == 40 {
+			enemy.vy = 0 // 止まる
+		}elif t == 40 + enemy.wait { // 登録された時間だけ停滞して左下へ
+			enemy.vx = -1
+			enemy.vy = 2
+			enemy.dir = 0 // 左向き
+		}
+	},
+	
+	// パターン3: 下がってきて停滞して右下に行く
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 {
+			enemy.vy = 3 // 下がってくる
+		}elif t == 40 {
+			enemy.vy = 0 // 止まる
+		}elif t == 40 + enemy.wait { // 登録された時間だけ停滞して右下へ
+			enemy.vx = 1
+			enemy.vy = 2
+			enemy.dir = 2 // 右向き
+		}
+	},
+	
+	// パターン4: すばやく降りてきて左へ
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 {
+			enemy.vy = 5 // 下がってくる
+		}elif t == 30 { // 途中で左向きに
+			enemy.dir = 0
+		}elif t < 100 {
+			enemy.vx = enemy.vx + 5/100 // 左向き加速
+			enemy.vy = enemy.vy - 5/100 // 減速
+		}
+	},
+	
+	// パターン5: すばやく降りてきて右へ
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 {
+			enemy.vy = 5 // 下がってくる
+		}elif t == 30 { // 途中で右向きに
+			enemy.dir = 2
+		}elif t < 100 {
+			enemy.vx = enemy.vx + 5/100 // 右向き加速
+			enemy.vy = enemy.vy - 5/100 // 減速
+		}
+	},
+	
+	// パターン6: 斜め左下へ
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 {
+			enemy.vx = enemy.vx - 1
+			enemy.vy = 2
+			enemy.dir = 0
+		}
+	},
+	
+	// パターン7: 斜め右下へ
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 {
+			enemy.vx = enemy.vx + 1
+			enemy.vy = 2
+			enemy.dir = 2
+		}
+	},
+	
+	// パターン8: 停滞してそのまま左上に
+	def(enemy){
+		local t = enemy.cnt
+		if t == enemy.wait {
+			enemy.vx = -0.7
+			enemy.vy = -0.3
+			enemy.dir = 0 // 左向き
+		}
+	},
+	
+	// パターン9: 停滞してそのまま右上に
+	def(enemy){
+		local t = enemy.cnt
+		if t == enemy.wait {
+			enemy.vx = 0.7
+			enemy.vy = -0.3
+			enemy.dir = 2 // 右向き
+		}
+	},
+	
+	// パターン10: 停滞してそのまま上に
+	def(enemy){
+		local t = enemy.cnt
+		if t == enemy.wait { enemy.vy = -1 }
+	},
+	
+	// パターン11: 下がってきてウロウロして上がっていく
+	def(enemy){
+		local t = enemy.cnt
+		if t == 0 { enemy.vy = 4 } // 下がってくる
+		elif t == 40 { enemy.vy = 0 } // 止まる
+		elif t >= 40 {
+			if t % 60 == 0 {
+				local r = math.cos(enemy.angle) < 0 and 0 or 1
+				enemy.speed = 6 + getRandomAngle(2)
+				enemy.angle = getRandomAngle(math.pi / 4) + math.pi * r
+				enemy.dir = 2 - 2 * r
+			}
+			enemy.speed = enemy.speed * 0.95
+		}
+		if t >= 40 + enemy.wait { enemy.vy = enemy.vy - 0.05 }
+	},
+}

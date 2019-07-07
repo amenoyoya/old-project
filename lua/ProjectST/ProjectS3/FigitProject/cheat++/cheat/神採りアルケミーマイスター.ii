@@ -1,0 +1,88 @@
+def GET(address) return proc->get(address)
+
+// í“¬ƒp[ƒg‚Å‚Ì“ü—Í’l‚Ì•ÏŠ·
+def battle_val(i){
+	val = i
+	tmp = eval_u"(`val`/0x00000080)|(`val`*0x02000000)"
+	tmp = eval_u"`tmp`^`GET(GET(0x5C9BC8)+0x593AC)`"
+	tmp = eval_u"(`tmp`*0x00200000)|(`tmp`/0x00000800)"
+}
+
+if(input->key(DIK_A) == 1){
+	if(input->key(DIK_LSHIFT) > 0 || input->key(DIK_RSHIFT) > 0){
+		// UŒ‚—Íw’è
+		battle_val(touint(input->getStr()))
+	}else{
+		// UŒ‚—ÍÅ‘å‰»
+		battle_val(900)
+	}
+	proc->set(GET(GET(0x5C9BC8)+0x57F20)+0x3CA730+0x04, tmp)
+	//u8print"UŒ‚—ÍÅ‘å‰»"
+}if(input->key(DIK_D) == 1){
+	if(input->key(DIK_LSHIFT) > 0 || input->key(DIK_RSHIFT) > 0){
+		// –hŒä—Íw’è
+		battle_val(touint(input->getStr()))
+	}else{
+		// –hŒä—ÍÅ‘å‰»
+		battle_val(900)
+	}
+	proc->set(GET(GET(0x5C9BC8)+0x57F20)+0x3CA730+0x0C, tmp)
+	//u8print"–hŒä—ÍÅ‘å‰»"
+}elseif(input->key(DIK_E) == 1){
+	// EXPˆêŠ‡99
+	local offset = GET(GET(0x5C9BC8)+0x57F20)
+	local start = 0x190E48 + offset
+	local fin = 0x190F98 + offset
+	tmp = 0x063
+	tmp = eval_u"(`tmp`/0x00000080)|(`tmp`*0x02000000)"
+	tmp = eval_u"`tmp`^`GET(GET(0x5C9BC8)+0x593AC)`"
+	tmp = eval_u"(`tmp`*0x00200000)|(`tmp`/0x00000800)"
+	for(i = start, fin, 4) proc->set(i, tmp)
+	//u8print"EXPˆêŠ‡99"
+}elseif(input->key(DIK_X) == 1){
+	// EXPˆêŠ‡0
+	local offset = GET(GET(0x5C9BC8)+0x57F20)
+	local start = 0x190E48 + offset
+	local fin = 0x190F98 + offset
+	tmp = 0x000
+	tmp = eval_u"(`tmp`/0x00000080)|(`tmp`*0x02000000)"
+	tmp = eval_u"`tmp`^`GET(GET(0x5C9BC8)+0x593AC)`"
+	tmp = eval_u"(`tmp`*0x00200000)|(`tmp`/0x00000800)"
+	for(i = start, fin, 4) proc->set(i, tmp)
+	//u8print"EXPˆêŠ‡0"
+}elseif(input->key(DIK_M) == 1){
+	// ‘fŞˆêŠ‡Š
+	local start = GET(GET(0x5C9BC8)+0x57F20)+0x1FEBF4
+	local fin = GET(GET(0x5C9BC8)+0x57F20)+0x1FEC50
+	tmp = 0x001
+	tmp = eval_u"(`tmp`/0x00000080)|(`tmp`*0x02000000)"
+	tmp = eval_u"`tmp`^`GET(GET(0x5C9BC8)+0x593AC)`"
+	tmp = eval_u"(`tmp`*0x00200000)|(`tmp`/0x00000800)"
+	for(i = start, fin, 4) proc->set(i, tmp)
+	
+	start = GET(GET(0x5C9BC8)+0x57F20)+0x1FF0D0
+	fin = GET(GET(0x5C9BC8)+0x57F20)+0x1FF74A
+	tmp = 0x001
+	tmp = eval_u"(`tmp`/0x00000080)|(`tmp`*0x02000000)"
+	tmp = eval_u"`tmp`^`GET(GET(0x5C9BC8)+0x593AC)`"
+	tmp = eval_u"(`tmp`*0x00200000)|(`tmp`/0x00000800)"
+	for(i = start, fin, 4) proc->set(i, tmp)
+	
+	start = GET(GET(0x5C9BC8)+0x57F20)+0x1FAD74
+	fin = GET(GET(0x5C9BC8)+0x57F20)+0x1FADD0
+	tmp = 0x00A
+	tmp = eval_u"(`tmp`/0x00000080)|(`tmp`*0x02000000)"
+	tmp = eval_u"`tmp`^`GET(GET(0x5C9BC8)+0x593AC)`"
+	tmp = eval_u"(`tmp`*0x00200000)|(`tmp`/0x00000800)"
+	for(i = start, fin, 4) proc->set(i, tmp)
+	
+	start = GET(GET(0x5C9BC8)+0x57F20)+0x1FB250
+	fin = GET(GET(0x5C9BC8)+0x57F20)+0x1FB8CA
+	tmp = 0x00A
+	tmp = eval_u"(`tmp`/0x00000080)|(`tmp`*0x02000000)"
+	tmp = eval_u"`tmp`^`GET(GET(0x5C9BC8)+0x593AC)`"
+	tmp = eval_u"(`tmp`*0x00200000)|(`tmp`/0x00000800)"
+	for(i = start, fin, 4) proc->set(i, tmp)
+	
+	//u8print"‘fŞˆêŠ‡Š"
+}

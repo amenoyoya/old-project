@@ -1,0 +1,132 @@
+namespace s3{
+	namespace win32{
+		// COMコンポーネント初期化・終了
+		bool com_Init();
+		// void com_Quit(); // luaclose_libwin32_moduleで呼ぶ
+		
+		/* ===== コンソール操作関連 ===== */
+		enum ConsoleColor{
+			L_BLACK,	// 低輝度・黒色
+			L_BLUE,		// 低輝度・青色
+			L_GREEN,	// 低輝度・緑色
+			L_CYAN,		// 低輝度・水色
+			L_RED,		// 低輝度・赤色
+			L_PURPLE,	// 低輝度・紫色
+			L_YELLOW,	// 低輝度・黄色
+			L_WHITE,	// 低輝度・白色
+			
+			H_BLACK,	// 高輝度・黒色
+			H_BLUE,		// 高輝度・青色
+			H_GREEN,	// 高輝度・緑色
+			H_CYAN,		// 高輝度・水色
+			H_RED,		// 高輝度・赤色
+			H_PURPLE,	// 高輝度・紫色
+			H_YELLOW,	// 高輝度・黄色
+			H_WHITE,	// 高輝度・白色
+		};
+		
+		// カレントプロセスのIDを取得
+		u32 getCurrentProcessId();
+		
+		// コンソールウィンドウのハンドルを取得
+		u32 getConsHandle(u32 procID=getCurrentProcessId());
+		
+		// カーソルのサイズと可視性を設定する
+		// 第１引数 : カーソルのサイズ(1 ～ 100 %)
+		// 第２引数 : 可視性(true or false)
+		bool setConsInfo(u32 dwSize=25, bool bVisible=true);
+		
+		// カーソルの位置をセットする
+		// 第１引数 : ｘ座標
+		// 第２引数 : ｙ座標
+		bool setConsPos(s16 shXPos, s16 shYPos);
+		
+		// カーソル位置を取得する
+		bool getConsPos(void *pos);
+		
+		// 前景色・背景色を設定する
+		// 第１引数 : 前景色
+		// 第２引数 : 背景色
+		bool setConsColor(s8 wFore=L_WHITE, s8 wBack=L_BLACK);
+		
+		// 指定色で画面を消去する
+		// 第１引数 : 前景色
+		// 第２引数 : 背景色
+		bool clearCons(s8 wFore=L_WHITE, s8 wBack=L_BLACK);
+		
+		// コンソールウィンドウでのTextOut
+		bool drawConsText(s16 x, s16 y, const char *str,
+			s8 color=L_WHITE, s8 back=L_BLACK);
+		/* ======================================================= */
+		
+		/*** window関連関数 ***/
+		// title or className からウィンドウハンドル探索
+		u32 findWindow(const char *className, const char *title);
+		
+		// Windowクラス名取得
+		string getWindowName(u32 hwnd, u32 max=256);
+		
+		// Windowタイトル設定・取得
+		bool setWindowText(u32 hwnd, const char *text);
+		string getWindowText(u32 hwnd);
+		
+		// Window表示変更
+		bool setWindowPos(u32 hwnd, u32 insertAfter, s32 x, s32 y, s32 w, s32 h, u32 opt);
+		
+		// 非アクティブなウィンドウをフォアグラウンドにする
+		bool setForegroundWindow(u32 hwnd);
+		
+		
+		/*** その他の関数 ***/
+		// ファイル選択ダイアログ
+		string getOpenFile(const char *title=_U8("ファイル選択").c_str(),
+			const char *filter=_U8("文書ファイル/*.txt;*.rtf/全てのファイル/*.*").c_str(),
+			const char *init_dir="", u32 parent=0);
+		
+		// 特殊フォルダ取得
+		string getSysDir(s32 id=CSIDL_PERSONAL, bool current=true);
+		
+		// ユーザー名取得
+		string getUserName();
+		
+		// SID取得(S-1-2-5-**-***)
+		string getUserSID();
+		
+		
+		// カーソル位置取得
+		bool getCursorPos(void *pos);
+		
+		// スクリーンサイズ取得
+		void getScreenSize(void *size);
+		
+		
+		/*** マウス・キー入力エミュレーション ***/
+		// カーソル位置を移動
+		bool warpCursor(u32 x, u32 y);
+		
+		// マウスボタン入力
+		enum MouseAction{
+			MOUSEACT_LEFTDOWN   = 0x0002,
+			MOUSEACT_LEFTUP     = 0x0004,
+			MOUSEACT_RIGHTDOWN  = 0x0008,
+			MOUSEACT_RIGHTUP    = 0x0010,
+			MOUSEACT_MIDDLEDOWN = 0x0020,
+			MOUSEACT_MIDDLEUP   = 0x0040,
+			MOUSEACT_XDOWN      = 0x0080,
+			MOUSEACT_XUP        = 0x0100,
+		};
+		bool sendMouseAction(u32 event);
+		
+		// ホイール回転
+		// 回転量は120の倍数。通常は120か-120でOK
+		bool sendMouseWheel(u32 rot);
+		
+		// キー入力
+		// mode: -1=離す, 0=押して離す, 1=押しっぱなし
+		bool sendKeyAction(u8 vkey, s8 mode=0);
+		
+		// 全角(UTF-8)・半角文字列入力
+		// ファンクションキーやコントロールキーを使わないならこっちのほうが便利
+		bool sendKeyString(const char *keys);
+	}
+}

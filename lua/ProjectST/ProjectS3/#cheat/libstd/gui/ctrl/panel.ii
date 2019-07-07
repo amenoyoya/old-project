@@ -1,0 +1,108 @@
+/*** スクロールパネルクラス ***/
+class sdl.ScrollPanel(w, h){
+	@.m_layer = nil
+	@.m_scrollbarV = sdl.ScrollbarV()
+	@.m_scrollbarH = sdl.ScrollbarH()
+	@.m_vertical, @.m_horizon = false, false // 縦横スクロールバー表示フラグ
+	@.m_width, @.m_height = 0, 0 // パネル表示サイズ
+	@.m_shiftX, @.m_shiftY = 1, 1 // スクロール一回当たりのパネルの移動量(pixel)
+	
+	// コンストラクタ
+	def @->__init__(w, h){
+		if(w && h) @->setSize(w, h)
+	}
+	
+	/* パネル表示サイズ設定 */
+	def @->setSize(w, h){
+		@.m_width, @.m_height = w, h
+		@->setScrollInfo(@.m_shiftX, @.m_shiftY)
+	}
+	
+	/* スクロールバー設定 */
+	// 一度openした後、スクロール量を変更したい時に使う
+	// [x,y]PixelsPerScroll: スクロール一回あたりパネルレイヤーを何ピクセル動かすか
+	def @->setScrollInfo(xPixelsPerScroll, yPixelsPerScroll){
+		if(!@.m_layer) return false
+		
+		local w, h = @.m_layer->width(), @.m_layer->height()
+		// 以前のスクロールバー位置を保存しておく
+		local vpos, hpos = @.m_scrollbarV.m_bar.pos, @.m_scrollbarH.m_bar.pos
+		
+		if(xPixelsPerScroll == nil || xPixelsPerScroll <= 0) xPixelsPerScroll = 1
+		if(yPixelsPerScroll == nil || yPixelsPerScroll <= 0) yPixelsPerScroll = 1
+		@.m_shiftX = (xPixelsPerScroll > w? w: xPixelsPerScroll)
+		@.m_shiftY = (yPixelsPerScroll > h? h: yPixelsPerScroll)
+		
+		// スクロール回数は((レイヤーサイズ-表示サイズ)/pixelsPerScroll)
+		local xScrollNum = (w - @.m_width) / xPixelsPerScroll
+		local yScrollNum = (h - @.m_height) / yPixelsPerScroll
+		
+		// スクロールバーの設定
+		if(xScrollNum > 0 && yScrollNum > 0){
+			@.m_horizon, @.m_vertical = true, true
+			@.m_scrollbarH->open(@.m_width, xScrollNum)
+			@.m_scrollbarV->open(@.m_height, yScrollNum)
+		}elseif(xScrollNum > 0){
+			@.m_horizon, @.m_vertical = true, false
+			@.m_scrollbarH->open(@.m_width, xScrollNum)
+		}elseif(yScrollNum > 0){
+			@.m_horizon, @.m_vertical = false, true
+			@.m_scrollbarV->open(@.m_height, yScrollNum)
+		}else{
+			@.m_horizon, @.m_vertical = false, false
+		}
+		// スクロールバー位置を復元
+		@.m_scrollbarV->scroll(vpos)
+		@.m_scrollbarH->scroll(hpos)
+		return true
+	}
+	
+	
+	/* パネルレイヤー作成 */
+	// w, h: パネルレイヤーのサイズ
+	// [x,y]PixelsPerScroll: スクロール一回あたりパネルレイヤーを何ピクセル動かすか
+	// drawFunc: レイヤーへの描画関数
+	def @->open(w, h, xPixelsPerScroll, yPixelsPerScroll, drawFunc){
+		@->close()
+		@.m_layer = sdl.Layer(w, h)
+		// スクロールバーの設定
+		@->setScrollInfo(xPixelsPerScroll, yPixelsPerScroll)
+		// レイヤーに書き込み
+		if(drawFunc){
+			@.m_layer->beginScene()
+			drawFunc()
+			@.m_layer->endScene()
+		}
+	}
+	
+	/* パネル削除 */
+	def @->close(){
+		if(@.m_layer) @.m_layer->close(); @.m_layer = nil
+	}
+	
+	/* パネル表示 */
+	def @->draw(x, y){
+		if(@.m_layer->handle() != 0){
+			// パネルレイヤー描画
+			@.m_layer->draw(x, y, @.m_width, @.m_height, 
+				@.m_horizon? @.m_scrollbarH.m_bar.pos * @.m_shiftX : 0,
+				@.m_vertical? @.m_scrollbarV.m_bar.pos * @.m_shiftY : 0,
+				@.m_width, @.m_height)
+		}
+		if(@.m_vertical){
+			// 縦スクロールバー描画
+			@.m_scrollbarV->draw(x + @.m_width, y)
+			// マウスホイールでのスクロール
+			if(sdl.isMouseInRect(x, y, @.m_width, @.m_height)) @.m_scrollbarV->scroll(sdl.Mouse.wheelY)
+		}
+		if(@.m_horizon){
+			// 横スクロールバー描画
+			@.m_scrollbarH->draw(x, y + @.m_height)
+			// マウスホイールでのスクロール
+			if(sdl.isMouseInRect(x, y, @.m_width, @.m_height)) @.m_scrollbarV->scroll(sdl.Mouse.wheelX)
+		}
+	}
+	
+	/* レイヤー取得 */
+	def @->layer() return @.m_layer
+}

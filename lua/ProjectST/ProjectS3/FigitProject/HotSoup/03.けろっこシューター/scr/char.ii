@@ -1,0 +1,54 @@
+/*** 主人公オブジェクト ***/
+class Chara{
+	@.m_bullets = {} // 弾丸配列
+	@.m_rensha = 0 // 同時発射を防ぐためのカウンタ
+	@.m_alive = true // 生死
+	@.x, @.y = 240, 160 // 位置
+	
+	// 空き弾丸IDを探索
+	def @->searchBullet(){
+		local id = 0
+		while(@.m_bullets[id]) ++(id)
+		return id
+	}
+	
+	// 弾丸発射
+	def @->shot(){
+		if(@.m_rensha == 0){
+			local id = @->searchBullet()
+			@.m_bullets[id] = {
+				x = @.x + 24, y = @.y + 12
+			}
+			@.m_rensha = 20 // 次の発射まで20フレーム待つ
+		}
+	}
+	
+	// 弾丸描画
+	def @->drawBullets(){
+		for(index, bullet in pairs(@.m_bullets)){
+			+=(bullet.x)(10)
+			sdl.fillRect(bullet.x, bullet.y, 12, 4, Color(0,255,255))
+			for(k, e in each(enemies)){// 敵キャラとの当たり判定
+				if(collision(Rect(bullet.x, bullet.y, 12, 4), Rect(e.x, e.y, 32, 32))){
+					SND.bom->play()
+					@.m_bullets[index], e.m_alive = nil, false
+				}
+			}
+			if(bullet.x > 474) @.m_bullets[index] = nil // 画面端に行ったら弾丸消去
+		}
+		if(@.m_rensha > 0) --(@.m_rensha)
+	}
+	
+	// キャラ移動＆描画メイン
+	def @->draw(){
+		if(sdl.getInput"left" > 0){-=(@.x)(6)}if(@.x < 0){@.x = 0}
+		if(sdl.getInput"right" > 0){+=(@.x)(6)}if(@.x > 448){@.x = 448}
+		if(sdl.getInput"up" > 0){-=(@.y)(6)}if(@.y < 0){@.y = 0}
+		if(sdl.getInput"down" > 0){+=(@.y)(6)}if(@.y > 288){@.y = 288}
+		// ショット
+		if(sdl.getInput"ok" > 0) @->shot()
+		IMG.char->setPos(@.x, @.y)
+		IMG.char->setSource(0, 0, 32, 32); IMG.char->draw() // キャラ描画
+		@->drawBullets() // 弾丸描画
+	}
+};

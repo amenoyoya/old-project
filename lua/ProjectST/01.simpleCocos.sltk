@@ -1,0 +1,5 @@
+require "libutils@cocos2dx"
+
+coco.App.settings.DisplayStates = true // î•ñ•\¦
+
+coco.App->run()

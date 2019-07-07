@@ -1,0 +1,28 @@
+:{
+	cnt = 60, pattern = 10, kind = 1, x = 200, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 1, blcolor = 1, HP = 100, blkind = 8, wait = 120, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 200, pattern = 10, kind = 1, x = 180, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 2, blcolor = 1, HP = 100, blkind = 9, wait = 120, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 340, pattern = 10, kind = 1, x = 200, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 3, blcolor = 1, HP = 100, blkind = 10, wait = 120, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 480, pattern = 10, kind = 1, x = 180, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 4, blcolor = 1, HP = 100, blkind = 1, wait = 120, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 620, pattern = 10, kind = 1, x = 200, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 5, blcolor = 1, HP = 100, blkind = 8, wait = 120, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 760, pattern = 10, kind = 1, x = 180, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 6, blcolor = 1, HP = 100, blkind = 9, wait = 120, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 900, pattern = 10, kind = 1, x = 180, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 7, blcolor = 1, HP = 100, blkind = 9, wait = 120, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 1200, pattern = 10, kind = 1, x = 180, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 8, blcolor = 1, HP = 100, blkind = 8, wait = 200, items = :{1, 0, 0, 0, 0, 0},
+}, :{
+	cnt = 1500, pattern = 10, kind = 1, x = 180, y = 150, speed = 0, shotcnt = 60,
+	shotkind = 9, blcolor = 2, HP = 100, blkind = 8, wait = 1200, items = :{1, 0, 0, 0, 0, 0},
+},
